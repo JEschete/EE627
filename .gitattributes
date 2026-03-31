@@ -1,0 +1,4 @@
+Homework/Homework[[:space:]]4/Data/trainItem2.txt filter=lfs diff=lfs merge=lfs -text
+Lectures/Week06_02-27/Week6.4[[:space:]]trainIdx2_matrix.txt filter=lfs diff=lfs merge=lfs -text
+Homework/Homework[[:space:]]1/higgs-boson/test/test.csv filter=lfs diff=lfs merge=lfs -text
+Homework/Homework[[:space:]]1/higgs-boson/training/training.csv filter=lfs diff=lfs merge=lfs -text
