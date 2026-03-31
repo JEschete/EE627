@@ -11,20 +11,7 @@ EE627A covers foundational and applied topics in large-scale data acquisition an
 
 ---
 
-## Repository Structure
-
-### Homework
-
-| Assignment | Topic | Key Files |
-|---|---|---|
-| **Homework 1** | Higgs Boson Classification (Kaggle) | `Eschete_HW1.tex`, `HiggsBosonCompetition_AMSMetric_rev1.py` |
-| **Homework 2** | Exploratory Data Analysis | `AAI627_HW2_Eschete.py`, `Eschete_HW2.tex` |
-| **Homework 3** | Multi-Part Statistical Analysis | `AAI627_HW3_Eschete.py`, `AAI627_HW3_Eschete.tex` |
-| **Homework 4** | Heuristic & ML Models (Yahoo Music) | `Eschete_HW4_Run_File.py`, `Eschete_HW4_ML_Model.py`, `Eschete_HW4_Heur.py` |
-| **Homework 5** | ROC Curves & Logistic Regression | `AAI627_HW5_Eschete.py`, `HW5_Report_Eschete.tex` |
-| **Midterm** | Heuristic-Based Music Recommendation | `EE627_Midterm.py`, `EE627_Midterm_Eschete.tex` |
-
-### Lectures
+## Lectures
 
 | Week | Date | Topics |
 |---|---|---|
