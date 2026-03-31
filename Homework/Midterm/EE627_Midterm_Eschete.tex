@@ -37,6 +37,7 @@
 % ---- Custom List of Equations ----
 \newcommand{\listequationsname}{List of Equations}
 \newlistof{myequations}{equ}{\listequationsname}
+\renewcommand{\cftequtitlefont}{\Large\bfseries}
 \newcommand{\myequation}[1]{%
 	\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}%
 }
@@ -71,10 +72,11 @@
 % =====================================================================
 \newpage
 \tableofcontents
-
 \newpage
 \listoffigures
+\newpage
 \listoftables
+\newpage
 \listofmyequations
 
 % =====================================================================
@@ -99,7 +101,6 @@ Users rate items across all hierarchy levels on a scale of 0--100. The training 
 
 \begin{table}[H]
 	\centering
-	\caption{Dataset statistics.}\label{tab:dataset}
 	\begin{tabular}{lr}
 		\toprule
 		\textbf{Property} & \textbf{Value} \\
@@ -113,6 +114,7 @@ Users rate items across all hierarchy levels on a scale of 0--100. The training 
 		Total test candidates   & 120,000 \\
 		\bottomrule
 	\end{tabular}
+	\caption{Dataset statistics.}\label{tab:dataset}
 \end{table}
 
 %----------------------------------------------------------------------
@@ -147,7 +149,6 @@ A critical observation is that the training data is sparse at the hierarchy leve
 
 \begin{table}[H]
 	\centering
-	\caption{Feature coverage across all 120,000 test candidates.}\label{tab:sparsity}
 	\begin{tabular}{lrr}
 		\toprule
 		\textbf{Feature} & \textbf{Count Present} & \textbf{Coverage (\%)} \\
@@ -159,6 +160,7 @@ A critical observation is that the training data is sparse at the hierarchy leve
 		Avg.\ genre matches per candidate & \multicolumn{2}{c}{0.70} \\
 		\bottomrule
 	\end{tabular}
+	\caption{Feature coverage across all 120,000 test candidates.}\label{tab:sparsity}
 \end{table}
 
 This sparsity directly influences the strategy design: any heuristic that relies solely on album scores will have no information for 71.4\% of candidates. Artist and genre signals provide broader coverage and are essential for discriminating among candidates.
@@ -167,7 +169,6 @@ This sparsity directly influences the strategy design: any heuristic that relies
 
 \begin{table}[H]
 	\centering
-	\caption{Feature vectors for the first test user (User 199810).}\label{tab:example}
 	\footnotesize
 	\begin{tabular}{r r r r r r r r r r}
 		\toprule
@@ -181,6 +182,7 @@ This sparsity directly influences the strategy design: any heuristic that relies
 		105760 & 93458  & 11616  & 0  & 90 & 2 & 80 & 80 & 80.0 & 0.0  \\
 		\bottomrule
 	\end{tabular}
+	\caption{Feature vectors for the first test user (User 199810).}\label{tab:example}
 \end{table}
 
 For User 199810, only three of six candidates have any training signal. Tracks 74139, 18515, and 105760 have artist and/or genre matches, while the remaining three tracks have no historical evidence. All three strategies correctly recommend the three tracks with non-zero feature values.
@@ -223,7 +225,6 @@ Three heuristic strategies were implemented, each defining a composite score to 
 
 \begin{table}[H]
 	\centering
-	\caption{Pairwise agreement between strategies (out of 120,000 predictions).}\label{tab:agreement}
 	\begin{tabular}{lrr}
 		\toprule
 		\textbf{Comparison} & \textbf{Agreement} & \textbf{Rate} \\
@@ -233,6 +234,7 @@ Three heuristic strategies were implemented, each defining a composite score to 
 		WeightedAvg vs.\ Evidence    & 117,138 & 97.6\% \\
 		\bottomrule
 	\end{tabular}
+	\caption{Pairwise agreement between strategies (out of 120,000 predictions).}\label{tab:agreement}
 \end{table}
 
 The strategies agree on 93--98\% of predictions, indicating that the underlying signals (album, artist, genre) are consistent. The remaining divergence comes from edge cases where sparsity handling or genre aggregation (max vs.\ mean) shifts the ranking of borderline candidates.
@@ -260,7 +262,6 @@ Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\tim
 
 \begin{table}[H]
 	\centering
-	\caption{Part 1 Kaggle AUC-ROC comparison.}\label{tab:part1-kaggle}
 	\begin{tabular}{llc}
 		\toprule
 		\textbf{Strategy} & \textbf{Scoring Rule} & \textbf{AUC-ROC} \\
@@ -270,6 +271,7 @@ Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\tim
 		S3: Evidence-Weighted & $\text{has\_alb} \cdot \text{album} + \text{has\_art} \cdot \text{artist} + \frac{\text{g\_cnt} \cdot \text{g\_mean}}{10}$ & \textbf{0.869} \\
 		\bottomrule
 	\end{tabular}
+	\caption{Part 1 Kaggle AUC-ROC comparison.}\label{tab:part1-kaggle}
 \end{table}
 
 \subsubsection{Part 1 Key Observations}
@@ -278,7 +280,7 @@ Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\tim
 	\item \textbf{Evidence-Weighted wins (AUC = 0.869):} Strategy~3 outperforms the other two by explicitly addressing data sparsity. Rather than assigning a zero to un-rated albums/artists (which drags down scores for tracks the user may actually like), it only counts an item when the user has \emph{actually} rated it. This avoids penalizing tracks with missing data.
 
 	\item \textbf{Weighted Average is a close second (AUC = 0.865):} Balancing album, artist, and mean genre scores is effective. The small gap to S3 suggests that the fixed zero-imputation for missing scores is only mildly harmful when all three hierarchy levels are combined.
-
+	\newpage
 	\item \textbf{Max Genre Score underperforms (AUC = 0.829):} Placing 50\% weight on a single genre's maximum rating is too aggressive. In a sparse dataset where only 48.5\% of candidates have any genre match, the genre\_max signal is zero for half the candidates, reducing discriminative power.
 
 	\item \textbf{Severe data sparsity:} Only 28.6\% of candidates have a direct album rating, 43.3\% have an artist rating, and 48.5\% have at least one genre match. For roughly half of all candidates, the system has zero personalized features---motivating the cold-start strategies in Part~2.
@@ -294,7 +296,6 @@ Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\tim
 Part~1's data sparsity analysis revealed that 71.4\% of candidates lack a direct album rating, 56.7\% lack an artist rating, and 51.5\% have no genre match at all. Part~2 develops fallback strategies for these ``cold start'' scenarios.
 
 %----------------------------------------------------------------------
-\newpage
 \subsection{Part 2.a: The Global Fallback}
 %----------------------------------------------------------------------
 
@@ -314,7 +315,6 @@ This produces a global mean rating and rater count for every track, album, artis
 
 \begin{table}[H]
 	\centering
-	\caption{Album score source breakdown with Global Fallback.}\label{tab:global-src}
 	\begin{tabular}{lrr}
 		\toprule
 		\textbf{Source} & \textbf{Count} & \textbf{Percentage} \\
@@ -324,6 +324,7 @@ This produces a global mean rating and rater count for every track, album, artis
 		None (album ID unknown)     &  8,572  &  7.1\% \\
 		\bottomrule
 	\end{tabular}
+	\caption{Album score source breakdown with Global Fallback.}\label{tab:global-src}
 \end{table}
 
 Global imputation fills album scores for 64.3\% of candidates that had no direct rating. The remaining 7.1\% have an album ID of \texttt{None} in the track metadata, so no imputation is possible.
@@ -377,7 +378,6 @@ The Part~2 Python code---including the album-to-tracks index, global statistics 
 
 \begin{table}[H]
 	\centering
-	\caption{Album score source: Global-only vs.\ full Hierarchical fallback.}\label{tab:source-compare}
 	\begin{tabular}{lrrrr}
 		\toprule
 		\textbf{Source} & \multicolumn{2}{c}{\textbf{Global Only}} & \multicolumn{2}{c}{\textbf{Hierarchical}} \\
@@ -390,6 +390,7 @@ The Part~2 Python code---including the album-to-tracks index, global statistics 
 		None       &  8,572 &  7.1 &  8,572 &  7.1 \\
 		\bottomrule
 	\end{tabular}
+	\caption{Album score source: Global-only vs.\ full Hierarchical fallback.}\label{tab:source-compare}
 \end{table}
 
 The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not rated the album directly but \emph{had} rated sibling tracks in the same album. These candidates shifted from the less-personalized ``Global'' source to the more-personalized ``Dig Deeper'' proxy.
@@ -398,7 +399,6 @@ The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not 
 
 \begin{table}[H]
 	\centering
-	\caption{Prediction changes vs.\ Part 1 baseline (WeightedAvg strategy).}\label{tab:impact}
 	\begin{tabular}{lrr}
 		\toprule
 		\textbf{Comparison} & \textbf{Changed} & \textbf{Rate} \\
@@ -408,6 +408,7 @@ The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not 
 		Global Only vs.\ Hierarchical & 2,374 &  2.0\% \\
 		\bottomrule
 	\end{tabular}
+	\caption{Prediction changes vs.\ Part 1 baseline (WeightedAvg strategy).}\label{tab:impact}
 \end{table}
 
 \subsubsection{Kaggle Leaderboard Results}
@@ -420,7 +421,6 @@ The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not 
 
 \begin{table}[H]
 	\centering
-	\caption{Complete Kaggle AUC-ROC comparison: Part 1 vs.\ Part 2.}\label{tab:all-kaggle}
 	\begin{tabular}{llcc}
 		\toprule
 		\textbf{Part} & \textbf{Strategy} & \textbf{AUC-ROC} & \textbf{$\Delta$ vs.\ Part 1} \\
@@ -437,6 +437,7 @@ The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not 
 		2b & Hier + WeightedAvg       & 0.755 & $-0.110$ \\
 		\bottomrule
 	\end{tabular}
+	\caption{Complete Kaggle AUC-ROC comparison: Part 1 vs.\ Part 2.}\label{tab:all-kaggle}
 \end{table}
 
 \subsubsection{Key Findings --- Why Fallback Scores Decreased}
@@ -452,6 +453,7 @@ A critical and instructive result: the Part~2 cold-start strategies \emph{decrea
 	\item \textbf{Absence-of-evidence $\neq$ evidence-of-absence.}
 	Part~1's Evidence-Weighted strategy (S3, AUC = 0.869) already handled this correctly: it only counts a score when the user \emph{actually} rated that hierarchy item, avoiding the ``zero penalty'' without introducing imputation noise. The Part~2 global fallback effectively undoes this advantage by treating ``not rated'' as ``rated at the global average,'' which is a stronger and less accurate assumption.
 
+	\newpage
 	\item \textbf{Dig Deeper provides a small relative lift within Part~2.}
 	Comparing Part~2a (Global only) to Part~2b (Hierarchical), the Dig Deeper logic does improve scores slightly (e.g., WeightedAvg: 0.747 $\rightarrow$ 0.755, a +0.008 lift). This confirms that when sibling-track evidence exists, it is more predictive than the global average. However, the Dig Deeper rule only triggers for 4.7\% of candidates, so its impact is limited.
 
@@ -469,7 +471,6 @@ A critical and instructive result: the Part~2 cold-start strategies \emph{decrea
 
 \begin{table}[H]
 	\centering
-	\caption{Complete list of Kaggle submission files.}\label{tab:all-subs}
 	\footnotesize
 	\begin{tabular}{lllc}
 		\toprule
@@ -487,6 +488,7 @@ A critical and instructive result: the Part~2 cold-start strategies \emph{decrea
 		2b & Hier + WeightedAvg      & \texttt{submission\_p2b\_hier\_weightedavg.csv}     & 0.755 \\
 		\bottomrule
 	\end{tabular}
+	\caption{Complete list of Kaggle submission files.}\label{tab:all-subs}
 \end{table}
 
 % =====================================================================
@@ -565,6 +567,7 @@ def parse_test(path):
     return test
 \end{lstlisting}
 
+\newpage
 \subsection{Feature Engineering (Part 1)}
 
 \begin{lstlisting}[caption={Feature engineering (Part 1.a).}]
@@ -638,6 +641,7 @@ def strategy_evidence_weighted(features_list):
             for f in features_list]
 \end{lstlisting}
 
+\newpage
 \subsection{Ranking and Submission Pipeline}
 
 \begin{lstlisting}[caption={Ranking and submission pipeline.}]
@@ -672,6 +676,7 @@ def run_strategy(user_ratings, track_meta, test_users,
     return results
 \end{lstlisting}
 
+\newpage
 \subsection{Main Entry Point (Part 1)}
 
 \begin{lstlisting}[caption={Main entry point.}]
@@ -699,6 +704,7 @@ if __name__ == "__main__":
             "submission_strategy3_evidence.csv"))
 \end{lstlisting}
 
+\newpage
 \subsection{Part 2: Cold-Start Extensions}
 
 \begin{lstlisting}[caption={Album-to-tracks index and global statistics (Part 2 setup).}]
@@ -727,6 +733,7 @@ def build_global_stats(user_ratings):
             for iid in item_sum}
 \end{lstlisting}
 
+\newpage
 \begin{lstlisting}[caption={Enhanced feature vector with hierarchical fallback.}]
 def compute_feature_vector_v2(user_ratings, track_meta,
         uid, tid, album_to_tracks, global_stats,
@@ -771,7 +778,6 @@ def compute_feature_vector_v2(user_ratings, track_meta,
             genre_scores.append(ratings[gid])
         elif use_global and gid in global_stats:
             genre_scores.append(global_stats[gid][0])
-
     # ... compute genre stats as in Part 1 ...
 \end{lstlisting}
 
