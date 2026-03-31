@@ -1,0 +1,775 @@
+Preksha Shah
+Preksha Shah
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:00:06
+Okay.
+Let's go start.
+Does anyone have any questions about the homework, or next notes, or anything relevant to this class?
+So, let me first to explain what you will learn in this class.
+So, below is… it's what I will, you know, demonstrate.
+The first one, you know, We were…
+after we make a lot of preparation, right, we make a lot of discussions about the time series.
+AR model, MAR model, ARIMA model, and then we talk about the whole processing. I bet you already learned quite a few different,
+Individual pieces, you know, we want to link everything together.
+So, this is why I were trying to start with the homeless, right?
+I will try to explain the homework straight, and then demonstrate a few examples to let you know where this challenging question comes from.
+And where you differentiate these people's different, you know,
+scientist, data scientist, or data engineer, or, you know, AI architecture, you know, those kind of job roles.
+why they have different levels, so we will talk about that. And then, if we have more time, we will talk about more, you know.
+Fundamental model relevant to the recommender.
+And that's our next step. After we've finished this.
+time series analysis. We will move on to the data science core topic. We talked about the recommender.
+Recommender is the core contents everybody experience every day, every second, because nobody can escape from there.
+Recommender, just like the Corian, you have a head and a tail.
+The head, you can think about it as a recommender.
+The tail is called a search.
+Think about that.
+In the real life, you have two things you can never escape. One is search engine, one is recommended. Search engine, you know, right? Google. Everywhere, you need to use Google. Sometimes, even, it's not Google.
+Whatever you're searching, the back engine is still Google.
+Second, Recommender is invisible.
+Just like you open your cell phone, whatever you say, whatever you experience, is all coming from the recommender.
+You open your TV, you open your browser, you open your YouTube, everything's coming from Recommender.
+Recommenders shape the physical world you can perceive. Recommender can build up what you want to say, or they're trying to cheat what you want to say. For example.
+There's a very fundamental, big news happening. If the recommender doesn't want you to know, They can block you
+They can make you… didn't be aware some big things is happening.
+That's how recommender, on the other hand, is the cash cow. Keep making money. Every physical world is maintained by recommender. If you know how to manipulate recommender, you have the intensive cash flow coming from.
+This is how the business logical behind a lot of software, they are not making money from the software, they're coming from advertisements, they're coming from the recommender. Recommender is almost like the instant cash
+Because when you are working for any company.
+If you want to make money, you still have some step, right?
+Before you can make money.
+You have to plot for pre-steps.
+Conventionally, if you need to, you know, to sell the soybean, you need to wait one year, right? It's a long, long cycle before you can make money.
+Right? That's the yearly cycle. You… because if I want to buy some soybean from you, you cannot just get the soybean instantly. You have to go, oh, wait the next year. I need to buy something, I need to plant, I need to wait, right?
+One year cycle. But for Recommender, milliseconds.
+You clicked something, you view something, I get the money instantly.
+So that's why The current industry
+has a very profound impact now. So, that's why…
+The conversation level in the industry has been divergent.
+You still have some conventional
+regular compensation range. You're working on some regular software development. You also have a higher end that is far away from the regular.
+it's far away from the regular compensation range. They are working on this kind of recommender, they're working on this kind of, you know, AI,
+they are working on this kind of search engine, they are directly controlled cash call, so they are far away from the regular range. So that's why we prefer you understand how the business is maintaining. Think about Facebook, Meta, how to make money.
+They're not just, say, you install this API software, the software make money, no.
+Coming from the recommender.
+They make tons of money, you know.
+So that's why we will use a lot of time in the following weeks to talk about how recommender you change it. Sometimes you have a very strong opinion, because the recommender wants you to do that. The recommender builds up your opinion.
+But you'll not be aware. You only say what you believe, right? You only say what you want to say. So that's exactly what recommended training do for you.
+Recommendeder can also be expanded to the most top, high-technology, bigger, giant companies.
+If you understand this logical, you understand how this bigger company can be Dominantly control the industry.
+And they are using a lot of sophisticated technicals behind.
+I really want you guys to understand, you know, these kind of logicals behind this business.
+Intelligence.
+So, back to the first one. We are trying to finalize the time series. We talk about the AR model, MAA model.
+And, we just explained this, right? But you don't have to derive
+all the regression, you don't have to derive this kind of moving average, just because, based on your understanding, you can call the function. The function will return everything to you. But…
+Before you can run the function, you need to know what you're looking for, right?
+Otherwise, you know, it's funny, you call the function, you have no idea why you called the function, you have no idea what you're looking for, then you'll stop… you will stop here, you know, you can never move further.
+So this is why… We have a very, you know, powerful model, Arima.
+Most, time series, where they come from?
+If they are not stationary, you make some necessary modification. If they are stationary, you can directly apply.
+And, in the following, we explained that last lecture, right, we talked about what does this mean for P, the parameter P, that's the order for autoregressive. What's the Q means? That's the order for moving average.
+D is the, you know, difference order.
+Altogether, you have this arena.
+How to do aroma? You have the function.
+But if you can do a remote… but the question is, you know, in my class, I gave you the data.
+Student 1, you have arrayma 1, you have one model for Arima. Student 2, you have another model for Arima 2. Which one is good?
+That's also your question, right? You run a REMA, but how do you know this is a good one?
+Or how do you know this is the best one?
+That's what we are trying to answer.
+The readings, once you have the observation from the time series, you assume this direma, or whatever model, you have a model, right? If you have a model, you are trying to describe where your observation can be explained by the history observation, can be explained by the history
+noise.
+Something like that, right? And after you make this assumption, you get an estimate of the parameters. After you get the parameters, how do you know this good one, a bad one?
+So, in this model, actually, the model can provide some tool for you.
+Let me explain here.
+When you have this model, right, let's talk about how to make a selection out of the model.
+Because when every model is returned to you, they will also give you some specific number. We call it AAC number. This AAC value
+just like a cost function value. You are using this one to evaluate the performance. A and B both have a different model. Then I would say, what's your AI number?
+Right?
+If you find the one with the maximum value, that's the better one.
+So that's why you have an absolute… you have some, you know, individual.
+variable, which can be used to evaluate the model. You can directly use this number, you just try to try a different model, and you select the one, you get to maximize the value.
+Right? So that's easy to make a comparison.
+And also, when you're trying to run this ARIMA model, the model itself will return you the summary. That means I will tell you everything. For example.
+Most likely, you'll do something like this. I have my data, you see? You just put your data here. That's my time series.
+From my pre-test, right? From my pre-obligation, what do you mean, pre-test?
+in the last lecture, we talked about, right, how to determine this AR model, how to determine this MA model, right?
+We're using ACF, We're using PACF, right?
+to determine this model, right? So that's why we have my impression, probably what's the P should it be, what's the Q should it be, what's the D should it be, right? So I put some few numbers here, I have some input data that's coming, for example, from my homework. Then I run it, I get some model.
+And then, you can also use the summary of the model.
+You want to look at what's the model, because
+The summary of test model will give you, for example, if you are talking about the P equals 3, Q equals 5, they will return you, okay, P equals 3, I will give you 3 different parameters, A1, A2, A3. Q equals 5, right, I will give you the Q1, QQ, Q3, Q4, Q5. I will give you the coefficients for your model.
+So the summary will tell you what's the parameters, the estimate, what's the area, return. The most important thing for the summary of the model is they will give you this.
+the model residuals. So what do you mean, model residuals?
+Let me show you.
+If your boss gives you a data to tell you, I need a forecast.
+Then, what does it mean? You need to find a model for this.
+data, to describe the data, right? I have the XT, okay? Your… your boss says, hey, what's this? Tell me, I need to use this to make a forecasting for the next 30 days, okay? Now you need to use this data to try a rhyme a model to say what's the…
+Is it possible? Let's say, assume you make a judgment that these AR1 model.
+So that means you need to find the coefficients, say, That's T.
+Equals A1, X… T minus 1.
+plus epsilon t.
+So, because A1, right? So, that means this ARIMA model, you have the P equals 1, D equals 0, Q equals 0.
+You have P equals 1, because AR1.
+So… the model summary will tell you, okay, A1 equals 0.3, A 0 equals 0.
+Okay, it's great, you have coefficients, right? So that means you can tell your boss, okay, I think that today always equals
+Yesterday, times the point of three.
+And, plus today's noise. So that's how we describe this.
+Based on this, I can make a forecast step.
+And based on this.
+What do you mean, residual? Residual means because the model tells you A1 is 0.3, and XT today always depends on yesterday times 0.3, right? And the residual part is what? Epsilon t. It's the noise term.
+So, you want to use what you observed XT minus A1, that's from your model.
+Yesterday's, right?
+What do you have? Today, minus 0.3 times yesterday equals what?
+Absolute T, right?
+So this epsilon t water is residual.
+In other words, the test model will automatically apply the estimated parameters to use today's observation subjects
+to get the residual part, that's epsilon t.
+Thus, they will… they will automatically return this secret for you.
+Now, the next question is, okay?
+I know, use ARIMA, I will get the coefficients. I know that the model will give you coefficients, and also return me the residuals.
+But I don't know why I need a radius.
+Why I need a residuals? I already have this A1, right? I already know A1 equals 0.03. Why I need to get some times 3 is ridiculous?
+Now… To answer this question, this is exactly the ultimate goal for time-space analysis.
+The same thing, you know, for any… Financial
+service company, you know. If you are signed some observation with time series XT,
+Now, you have two different teams. So, Team 1, you get the Model 1,
+The Team 2, the Model 2, both are working on the same time tracer.
+For example, the same, you know, SB500 time series. They both use the same data, but they may have a different model, because they're coming from very different organizations. They're using a different model.
+How do you know which model is better?
+Now, this comes to ultimately go, you know. Doesn't matter which model you're using, you always have the model, right? After you have the model, you always have this kind of residuals.
+Residency means that's the portion of your observation which cannot be explained by the deterministic formula.
+That's the only residual part I cannot formulate.
+What I can formulate is 0.3 from yesterday, right? So today, subtract days one, that's the rest. We call it residual, that's the residual part, I cannot formulate.
+If you… Proposed that perfect model.
+If you're proposing a perfect model, your residual
+Should it be a perfect noise sequence?
+Right?
+Why? Let's imagine like this, okay? If I'm the junior person, I will come here, you see?
+I have a new idea. I say today is not equal to 0.3 times yesterday day. My motivation is today.
+X pool, x 0.4 times XT minus 1. That's my observation, that's yesterday.
+plus epsilon and t.
+You see? Now we have two different models, right? Because originally, the model telling me it's 0.3,
+back to minus 1.
+But if someone aggro… they say .4 is the right model, 0.3 is not.
+How do you compare with these two models?
+Now we come with the ultimate rejudger.
+the charge.
+is trying to say, okay, for different model, you should have different residual time series, right? In other words, you know, you have this.
+So they're just trying to compel these two residual times risk.
+Trying to see which residual times 3 is closer to noise.
+If the one who is very close to noise, that means that's the perfect. Why? Because…
+If you have noise, noise cannot be formulated by the Deterministic term.
+The model cannot capture noise.
+So, only for the residual noise.
+you are allowed to leave it alone. For anything else, you have to capture.
+the structure by the model. The model always trying to capture this kind of deterministic portion, and the rest is called a stochastic noise.
+But what happens if I look at your residual, it's obvious, it's not noise, that means your model is better. That's it.
+So, very typical situation is, when you're presenting some model to your boss, the boss will not look at your formula that is 0.4 point and say, no, I have no choice, I look at the individual.
+I look at the residual. If you plot the residual, I found your residual is not a pure noise. It's trash. Your model is trash. Not good.
+I'm looking for a model which is perfectly to leave this kind of residual as the noise. That's a perfect model.
+How do you know this noise? The next question, how do you know this ridiculous noise?
+Because if this is a noise, that means what? They are independent.
+They are identically.
+That's called an IID.
+For noise, that means the variance is always constant, the mean is always zero.
+you're always… Not relevant to each other.
+The coronation, always zero.
+So, if this is noise turn, I need to plot ACF of the residual turn.
+I've looked at the residual, ACF of residual.
+So, the ACF radius should be 1 here. Why 1? Because ACF 0 means what? How today? Similar to today, right? Of course, 100%, right? Because they're the same, exactly the same. How you led yourself, right? 100%, right? How good.
+And one, what does it mean? How yesterday and the day similar to each other, right?
+So, if there's the noise, today and yesterday, there's no similarities.
+If that's the pure noise, you should have one at zero, and 0 everywhere. You should have something like this. You should have ACF like this.
+The same thing for PHF, you also have 00 everywhere.
+That's the perfect noise. So, if you have two models, I only look at the two different noise, or what we call the residual sequence. I look at the residual sequence, I plot the ACF and the PACF, and I see which one is closer to the noise
+PCF, the noise, PACF.
+That's where you make a… judgment. If you get some residual, if you look at the ACF,
+PHF, if they're not negative noise, that means your model not good enough, you still have space to work with.
+Someone who knows how to… Further, improve this.
+You will get your, you know.
+The level in the much senior position.
+That's why you have huge difference. The regular person
+And the… the senior, you should have a huge gap.
+In other words, the huge person always contributed some innovation, provided some business intelligence.
+If you only know to use Arima, you only know to use the model, but you have no other further improvements, then nobody will be interested in, right? Because if you only know quasi function, everybody know
+The robot can call it also, right?
+So that's why this kind of jobs were diminished very soon.
+So, you always think about it.
+If I give you the data, if I run the model with functions, what else I can do?
+If nothing else, then think about it, it's very easily you will be replaced by this kind of AI agent.
+Right? Because you have nothing coming from your knowledge space, you have nothing coming from your…
+you know, Indonesians, you're just doing this kind of, you know.
+Regular, you know, automated function calling, right?
+So, that's where we are trying to emphasize, if you found the residual is not noise, you need to do something else.
+So, let me first stop here. I was trying to, let me see.
+For example, If you have a times risk.
+You believe this is the RM1.
+Right? So that means your delivery today equals yesterday day times A1.
+and plus noise. And A0 is a constant.
+And you just pull this function.
+ARIMA100. 1 means AR1. 0 means no difference. 0 means no moving average.
+So, when you call this function Arima.
+the function will return the coefficients. They were telling you, oh, that's the estimate A0, that's estimate A1. And based on this.
+you get residual. They automatically give you a residual based on your observation, based on your estimated coefficients.
+And if this radiation is a pure noise, that means your model is perfect.
+you need to use the residual to testify, are they really noise? If they're not noise, that means you have some information, you have some information, it still contains in this residual.
+I typically describe this process just like, you know.
+A lot of people like this fruit juice, right?
+you have the orange, the fresh orange, you know, your Chinese squids.
+You get a lot of juicy from the orange, right?
+If you push hard.
+you get more juice, right? So, you're looking for the residual just like, you know, you're trying to push harder as much as you can. You want to squeeze the last drop of juice from the orange.
+Make sure the residual is a pure residual noise.
+No more juice containing.
+If the residual contains anything juicy, that means you're not pushing hard enough. You still have some useful information you're not extracting from the data.
+That's not good. That's a not good model.
+So, the ideal situation is you want to make your digital close to
+random noise. In order to testify if your residual is noise or not, you can call the PACF, and ACF, you should observe these all zeros.
+If you observe this residual times risk with ACF and the PACF all close to zero, that means that's the ideal noise turn. That's the ideal.
+Model.
+And in pricing here.
+In most finance service companies, you have a lot of time series, right? Like, equity.
+Like, a fixed income.
+Like, option. Future.
+They all use the time series. Their dream, the dream of the ideal model is they really want the residual pure noise.
+If the result is not pure noise, that always means your model is not good, or you didn't capture
+the essential information.
+Containing in the time series observations.
+So that's why they frustrate.
+If you can find this kind of model, make the residual the pure noise, you almost get the ideal model. That's almost the best, incredible, perfect model.
+So, let me use some examples to help you to build up some impression about this.
+For example, you know, I will put this homework online, so you will look at the homework. So, for example, you have this…
+You can read this data here, see this CSV file.
+And, you can also…
+take a look at what's the data look like, you see? You get some sequence, right? You only look at the first few, you know, as ahead of the data. You see some data that can be positive, can be inactive, right? Something like that.
+And that you want to see the whole thing.
+I use plot, you see?
+That's a plot, right?
+Look at this plot.
+Do you think at least, stationary?
+Any comments? Do you think it's stationary?
+You can put it in the chart window.
+So, I'm waiting for your input. Do you think they are stationary?
+Okay, thank you.
+Who else?
+Thank you, Rimar. Okay.
+Tejas, okay.
+Yam.
+Thank you.
+Thank you, yeah.
+Why?
+Why do you think these are not stationary?
+Nope.
+First, You know, if you take the mean of the sequence.
+do you take the mean of the sequence? For example, if I take a truncation, right, I take the window here, I take the mean, so most likely the mean will be here, right? You take another window.
+If you look at the mean, very like it here, right? So you compare the mean value. Do you think the mean value is changing, right? That's how you can make an observation if they are stationary or not, right? Station means the mean or variance not changing over time.
+And, I explained, right? If something like this, if time seems like this.
+you obviously can say you have to trend, right? If you have trended, that means it definitely is not stationary, right?
+Let's first look at this one. Do you see any trend? It's going up or going down?
+But relatively speaking, you know, it looks like the mean value is almost like a constant, right?
+But the trouble here is, even the mean is not the same…
+change it much, but the variance is another constant. For example, at this portion, right, the variance is small, and at this portion, variance is big, right? You get a big jumpy, right?
+So, it's most likely the mean value is not changing much, but the variance is changing.
+But, you know, realistically, the variance is changing, not constant, but because it's a variation of the variance is not that significant. There's a forward movement, and it's assuming they're constant.
+Okay?
+I know they're not exactly constant variance, right? But not… not that bad, you know, because if you take a window here, or take another window here, if you imagine the mean and the variance, most likely not big difference, you know, because we have to be realistic. That's number one, okay?
+And based on this one, if I assume this is the stationary, then…
+Probably. If they are stationary, then we can run this kind of ACF and PACF, right? Let's work and get some…
+Sick.
+Okay, now you see it. That's the ACF and the PACF.
+Okay? Look at the left side, your ACF, right?
+PACF.
+So what do you mean ACF? ACF means how today? Similar to today. Today, similar to yesterday day, right? So you have 0, that's today, and today itself, right? Of course, always 1. So this means 1, right? How about the today and yesterday day? So you have negative 0.4.
+How about today, and today before yesterday, right? Two days before, you have minus 0.15, something like this, right?
+Okay.
+And also, you have this kind of dash, blue line, okay? If this dash blue line means, you know, if any value
+within the range.
+Statistically, you think they are close to zero.
+The readings, we always say ACF means spot.
+ACF means how today and end days before they are…
+corny these yards, right? The similarity, dynamic similarities, right? So that's value.
+So that means, you know, after one, two, after two days.
+today and the two days before, almost like, no coronation, right? Because all the coronation factors
+Like, ACF3, 4, 5, 6, 7, 8, 9, 10, so on and so forth, all within the blue range. So that means, statistically, you can think about the small enough, they are zero.
+just like an ordinary life, right? If you have some…
+cash difference is very minor, right? If you're going to shopping, you know, after counting, they say, oh, you need to pay me $100 and one penny. Typically, owners say, oh, come on, one penny, forget about it, just pay me $100, that's good enough, right? You can ignore this one, because relatively so tiny.
+So that's what they said, right? ACF, like this.
+And if you look at this one, that's the PACF. What's PACF?
+PAC means, if you assume this is the AC,
+If this is the ACF, right?
+You need to fund the… The coefficients.
+You need to find the coefficients.
+PHF means if… assume this is a AR1, that's A11 coefficient, right? If this AR2, this A…
+That's the AR2 coefficients, right? If this AR3, that's the A3 coefficient, right? So on and so forth, right? They're trying to find something like this.
+So, based on ACF and PACF observation, the question here is.
+Do you think this is the AR model?
+Or this is the MA model.
+Make a decision, and
+type in the chart window. If you don't know, that's fine, just say, don't know, you know, then I will know how to explain to you.
+You can choose AR or MA, can you? You know… Thank you.
+Or let me try to review ARMH, what should I like, right? Maybe this can help you.
+So if you have AR model, remember?
+For AR model, the ACF, what ACF will be?
+ACF, you know, for example, AR1. Let's use a symbol one. If AR1, what does it mean? Today, similar to yesterday day. Yesterday, similar to the day before yesterday, right? And so, so forth. So that's why
+If you look at the AR model, the ACF will be what?
+Today and yesterday… today and itself is 1. Today and yesterday, similar, right? 0.3, for example. And the day and two days before should be 0.3 square, right? And 3 days before, 0.3, Q, so on and so forth, you get about.
+you get this kind of for experiential decay function, right? That's ACF for AR model, right? Because they are trying to say, you know, today and itself, 1.
+100% similar. Today and yesterday, 0.3, 30% dynamic similarity.
+The day and two days before, 0.3 and 0.3 again, so 0.09.
+And today, and 3 days before, you have 0.3,
+to Q, and so on and so forth, you know. When the T gets longer and longer, just like today and many, many days before, of course, you should be no similarities approaching the zero. So you have this kind of coordination.
+Between today and many days before is gradually… exponentially decreasing to zero.
+you'll see something like this. That's the ACF for… PR model.
+So, what happens for PACF?
+So, for example, if AR1… for PACF means, you know, if Mega…
+make t equals 1, that means you are talking about AR1 model, right? So you should do coefficients.
+2 means you assume this AR2 model, because this… the ground chooses AR1, so for AR2, you get what? 0, right? No coefficients. So you are trying to look at the AR3, you assume this AR3. Again, the ground chooses AR1, so you have no
+coefficient here. The pH of always 0, 0, 0.
+So, when you have an AR model.
+You will observe this kind of cliff.
+I call the cliff, you see?
+Job.
+Like this. That's the AR model at the PH7, because if this AR model at the P, When?
+T greater than P, that means you always get a zero.
+That's how you get the PAC of all zeros.
+Right? Because you say, if this error 1, we try AR1 model, error2 model, AR3 model, but to only choose R1, so only for error 1, you have non-zero coefficients. If more than one.
+All zeros.
+If you argue with, oh, what happens? AR2, not 0, okay? If AR2, you have coefficient here not equal zero, what does it mean? That means this is not AR1, this is AR2, right? The ground chooses this AR1.
+So that's why, if you have an AR model, you always see this kind of cliff.
+Where you get a key if exactly equals P.
+P here is 1, that means T equals 1, you see this clip.
+So that's AR model. What happens with MA model?
+For MA, If you look at the ACF,
+Because ACF is trying to say today, and yesterday, today, and two days before, today, and three days before, how they are coordinated each other, right? But the MA model means what? Today depends on…
+Yesterday's noise, right?
+Today depends on today's noise and yesterday's noise.
+So that's why… For one, definitely just steer some non-zero coordination, right?
+And how about the… AceF2. AceF2 means today and two days before, right?
+And for MA1, because today only depends on today and yesterday there's noise, 2 days before the observation, only have 2 days before noise and three days before noise. So if you look at this correlation between them.
+They don't share in any… They don't share any similar noise turn, so you get a zero.
+So that's why, for ACF, In MA model, you always say CLIF,
+And very similarly, you know, if you look at the PACF,
+For MA, You always have something like this.
+Decation, decaying, decaying, decaying, you know.
+Because MA equals what? MA equals the… A are infinity.
+That's what we learn, right?
+Moving average 1 equals all the regress to infinity, so that's why you say you have infinity decay, so you have non-zero, always decay like this.
+Now, if you look at AR and MA, you can see ACF for AR, you have decaying.
+gradually reduce.
+And PACF, You have this kind of cliff.
+And for MA, you have update.
+For ACF, you have CLIF. And in PACF, you have this conjugation.
+Now, based on those observations, look at this one. Which one you assume? You think it is AR or M8 for this time series?
+Right, yeah, thank you, yeah, right? Because, look at here, you see?
+The left side, you're trying to say, start from this, right? All zeros, this all zeros, right? And here, the non-zero, you have 1, 2, non-zero, just like from here, you drop 2, right? You get cliff, zero, right? You can think about this, you know, cliff, right? 0. And also, from here, you get some occasion, right?
+So, ACF, CHIF, PACF, Decation, so you should have MA.
+Now, for this MA here, you think you should use,
+The order should be MA1 or 2.
+You want to use MA1 or MA2?
+This is non-zero for one, right? 0, 1, 2…
+3, 4, and plot the index, 5, 6, right?
+And 1 is not 0. 2 is also not 0, right? Because 2 is still beyond this kind of blue dash line, right? Outside, right? So that's why.
+I will assume this MA2.
+And increasing here.
+Any questions? Okay. You have no questions, so that's your homework.
+Okay, that's a good question, though. Because from this observation, you say non-zero, non-zero, and here, all zero, right? Do you… you worry about maybe in the future, for example, here, and suddenly non-zero, right?
+That's possible, that's possible, but typically, you know, if we already plotted 20, right? If I didn't say at this range, then we're assuming the following would not
+greater than that, you know. Because for the most typical times race, when this kind of tick getting further and… when they get lag, get further and further, right? Just like how the day and many, many days before, how they are coordinated, right?
+Typically, you know, get longer, you get a much less opportunity, right? So… so that's why we don't worry about the further you suddenly have some…
+You know, chance you'll see some non-zero.
+coordination, right? So that's why if I see a lot of zeros, then I believe in the future it should be also zero. So that's why we choose MA2 here.
+But overall, it's a very good question, no.
+Thank you.
+Any questions? That's your homework, okay? If you're not asked questions here, so now it's your responsibility to… to finish the rest. I will wait for your answer.
+So… Great, good question. Now, if they say, here, you have someone non-zero.
+And here, 0. Then, that's a different story, you know. Then, the model would be MA… None.
+Because you need to look at where the last non-zero, okay? If you stop here, 0, then that's M89.
+That means after 9, you have all zeros. Before, you still have one non-zero here, right?
+So that's that. You always choose the one, the last non-zero.
+Everything within the blue dash, you think is a zero.
+It's above this, then you go down zero.
+Great.
+Now, let's move on.
+Now let's take a look, what's the question straight?
+Okay? You get something like this. You get 1 point something, 1 point something, that's the typical interest rate.
+Okay? The interest rate.
+And,
+It's plotted, okay.
+Let me see, okay…
+Now you see, that's the data stray, okay?
+The first question, again… Can we… can we try ACF and the PACF now?
+Can I use ACF, PACF to look at this order now?
+Remember, right? Before you try any time series analysis, make sure you have, well, the stationary.
+Right? Make sure you have this kind of constant mean.
+constant variance, right? But now you can say you have the trend, right? You have different trend, right?
+if you take the window, mean, of course, they're not as constant. So you cannot run ACF or PSF right now. So, that's always not a rush. If you have time to take a look first.
+Did you see any obvious trend or not?
+this data is coming from the Yahoo Finance data. It's real industry data.
+is not the synthetic data, it's real in the industry data. That's most likely, that's your, you know, if you get a job in the finance company, they will ask you to work on this data.
+So, what are we gonna do? They are not, stationary, right?
+So, this does make sense to run the ACF and PACF of the data itself, just because they're not stationary. So, we can try a rhema.
+Okay.
+Why? Because, you know, we want to see what happens if you are trying some…
+data say the difference between this kind of four index, for example, right? Arima means index.
+The D equals 1 means you take first the difference, First, right?
+I can show you, you know,
+We can first step to… to try to plot it
+Plot this new time series, okay?
+Unless it's say… Let me try and define the new time series.
+Okay, for this one, for example, that's the…
+time series, and I found the length, I found the difference, you see. For the time series, I always use the next one subject to the previous one.
+Then… Maybe try to plot it?
+You see? That's the difference.
+The compel you, the previous one, that's very different than now, right?
+Make sense?
+So region-wide, remember, right? You get some trend, right? But now look at this one.
+So, for the… for the first difference, just use XT minus… XT minus 1, you know, because I'm delta, the delta like this.
+And from the delta, Lower the mean.
+Almost steer, right?
+You see, the mean always zero, so… so you don't have to worry about the mean, right? The mean, like, the constant. The only worry coming from here is…
+Look right here. The variance here, the variance here, of course, you have bigger variance here, small variance here, right? You also have bigger variance in this range, right?
+So, for this new time series.
+The mean? I don't worry, because it's almost crossed zero. The variance is changing over time, so you have the volatility
+Stochastic volatility, you know, you have the time-invariant volatility.
+But let's say, for a moment, let's assume we…
+assume this is stationary, okay? For a moment, forget about the variance, because the mean looks like okay, you know. So we can try, say.
+I can take a first order difference.
+After I take the first order difference, right, I can try, is this AR?
+or MA model, right? We're gonna try if this AR or MA model. The reason is.
+once we get this, the first difference, right? We can try, for example,
+We're gonna try it like this, you see?
+I think that.
+Let me look at the data tree…
+Okay, we can… we can run this AR model, say, does A, does the data 3 is really AR3 or not?
+Okay?
+Okay, looks like this one.
+Anyway, let's switch to Arima, let's do this one. So, for data stray.
+we assume you have first order, we assume AR3 and A2, let's see what happens for this one.
+For this one, we are trying to…
+I need to close this again.
+Now, you say, I have this,
+ARIMA model, I use AR3, MA2, and one first order difference, right? And run this model, I get this residual data. For the residual data, times 3, I try to…
+call the ACF and the PACF, so that's what you have here, you see?
+The residual times 3, when you look at this ACF, Nope.
+You can say.
+0. Today and today's seat itself, of course, you get 1, right? Perfect. Coordinating. And after that, you see almost everywhere 0, right? Almost everywhere within the
+Blue dashed line, so that means
+that this time series only coordinate itself. If you shift 1, no coordination. Shift 2, no coordination. Shift 3, no coordination.
+So that's exactly noise, right? Noise is never coordinated with any shifting, right?
+The only coordinate with it is itself. That's noise.
+So, ACF, perfect noise. How about PACF? PACF, you know.
+Look at here, 0, 0, almost everywhere, right? Except what? The last 30 days, you have some non-zero.
+So, it's not perfect, but at least it's very close to zero, very close to the pure noise, because you see majority of the
+ACF and the PACF are all zero, even this and this is not big enough, you know, it's very similar to zero.
+So, at least, it's not bad, you know, for this aroma, you know, you get a good model because the residual, when you test the residual, the noise is almost negative, the pure noise.
+But if you're not satisfying this, you can change the order. You can change it 1 to 2, 3 to 4, 2 to 3, whatever, you know, you can…
+change this, right? You can tune these parameters, you get a different model.
+And based on different models, you can run this kind of residual ACF, residual PACF again, and see what happens.
+And hopefully, you know, you should get an even better PACF.
+Right? So that's the way how you can testify your model. Of course, you can choose whatever parameters, but once you choose whatever parameters, you choose whatever model, you should have the residual of the model.
+Those residual… how do you know this residual, the pure noise, you try ACF and the PACF. If you say ACF and the PACF with all zeros, that's the idea. Noise residual.
+Any crazy here?
+Okay, let's take a short break, so when we come back, so we'll continue.
+Hello, can you hear me?
+Preksha Shah
+Preksha Shah
+01:17:31
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+01:17:33
+Okay.
+So… Does anyone have any questions? Because that's the, the homeworks, right? You will, received tonight.
+Preksha Shah
+Preksha Shah
+01:17:46
+No questions.
+Rensheng Wang
+Rensheng Wang
+01:17:48
+Okay, thank you.
+So, next, -
+Let me try to make it bigger.
+So, let's move on. Starting from this week, we were talking about the recommender.
+And maybe, you know, when you are using the browser, using the search engine, you have some experience like this, right?
+When you're typing, you know, They say, iPhone case.
+And, when you make an iPhone case, you search. Very likely, you know, you pop up many related,
+advertisements relevant to all the iPhone accessories.
+Just because, you know, this kind of search has been released to the third party. The third party utilizing this one to very precisely to send you
+recommendations. So that's very likely your experience
+when you are using the social media, when you are using the search engine, you're majorly impacted by your history. They call the…
+public profile.
+Because it's very easily in your cell phone, in your desktop, laptop.
+your history can plot which candle for profile you have. Are you…
+male or female? Are you a student, or are you professional, you know? Or are you… you know
+Senior people, or junior, Are you, you know, with any specific personal interest?
+those kind of information can very precisely figure out which kind of recommendation can reach to your area. So, a lot of people using this online e-commerce website, right, doesn't matter, they may come from the conventional Amazon to some
+Many, many, you know, individual, specific,
+areas, like sports, like, digital…
+You know, electronicus, or, like, this kind of,
+fashion, whatever, right? All those kind of shopping experience are builded by the search engine and the recommender.
+So here, we are trying to explain what happens before, behind this. Typically, you know, the recommender from the back engine is a big data processing. How big? Typically, they are using billions. That's the minimum, you know, they are using billions.
+To introduce this.
+They call it a four-stage architecture.
+So, the first one is called the retrieval.
+Okay? They are… have this kind of candidate generation.
+Because, you know, when you're trying to type anything interesting, they are trying to, first, trying to narrow it down from business.
+to various… Narrow, just like, thousands of relevant candidates.
+That comes just like you are going YouTube. If you type any title, they are very quickly from the billions of the possible videos to narrow down to
+Thousands or hundreds of, depends on, you know, which kind of a context.
+Those kind of, you know, retrieval Typically, used in…
+We call the similarity mapping, you know.
+it's very quickly narrowed down, because they know… they don't know which specific you should recommend, right? They're first trying to narrow it down layout by layout.
+Trying to first narrow it down to very, a few.
+And from the first one, they'll make sure it's very fast.
+Then you go to the second level, called the Roth Ranking.
+Or you think about it, the preliminary, okay? It's really still, like, filtering. They haven't decided which should be first, you know?
+You're trying to refine this kind of retrude.
+Because the first level retrieval is very rough.
+You know, as long as you get it quicker, enough, you know, the rest, you know, we make a rough refund again. We are trying to filter it again. You're trying to refine the result, and by taking some special rules. What do you mean, rules, you know? Maybe, you know, they are trying to say some…
+Some of your content's not suitable for you based on your public profile. For example, they recognize you are a teenager.
+And when you search something, boom, I give you a few thousand, but I will have some extra back-end rule or something, you know, they are trying to say, okay, based on your teenager, some of the content is not suitable for you, then automatically remove. So that's… it makes further ranking, right? You're removing, you know, filtering.
+from this kind of thousands to hundreds, just like I said, you know, the rough ranking, you will use a very light ranking. That means you're trying to make another too sophisticated model to determine which kind of small portion you need to remain, which portion you need to remove. The quickest one, just use the rule, you know.
+they can be either because of your age, your area. For example, I know you're in United States, right? Maybe, probably, you know, so some, some, some information outside of your region, maybe not interesting for you. Or.
+Depends on your time, depends on your history, you know, they were trying to make a context.
+Yeah, futuring.
+From the second step, Ralph
+ranking, you know, they're jumping to the final ranking. They… they… now from now, you should have a very precise, you know, model, some sophisticated model to make a…
+Prediction.
+That's gonna rank him.
+You can think about it in this way.
+If you have hundreds of candidates, right?
+Then, you need to form the 100th candidate, you want, for each 100, you want to make a score.
+like this one, the 0.9, 0.7, you know, blah blah blah. You want to map this kind of hundredth…
+contents to one single score, because this one single score can be used to make a sorting ranking to determine what you want to… you want to remain, right? You want to recommend or not.
+So, here, you should make some very precise readments, because in this level, you should…
+exam specific attributes, characteristics of this. If you have the movie, you need to look… you need to check the keywords, you need to check the title, you need to check the contents, blah blah blah, a lot of things, right? To decide if you want to recommend or not. So that's called the fire ranking.
+The last one is the last step before the push
+to make exposure to your iPhone, to your computer, to your, you know, device, whatever.
+That's the final, you need to make a real ranking.
+For this one, you may have a little bit, you know, tricky, because, number one, you want to make some business rules. Why? Because, remember, we have some advertisement, right?
+So you need to think about, you know, do you think I need to put my, you know, advertisement, the sponsor company, to…
+Inside the final
+recommendation or not, right? This comes, you know, when you search something, you will find some of them is really… definitely you're not interested. You may wonder why you put this to my… it's only because this one is coming from our sponsor, they gave me money, they want to get some exposure. I know you don't interested, but I need to push a lot of exposure, right?
+If I didn't put the exposure, you know, I cannot make money from them. That's the only reason I put it here, you know. I know you're not interested, so that's why you need to think about trying to put something from the business, or diversity. Diversity means
+You'll search Deep Learning Tutorial.
+Come on. A lot, okay? You make a ranking, and maybe the top 10 are coming from the OpenAI company. Do you think I need to recommend all 10 from then?
+Right?
+You don't, because you… somehow you want to add a little bit of diversity. You don't want everything from the same author, or everything from the same company.
+Because you want to add a little bit of diversity, even I know, even all of them are very highly coordinated to your
+recommendation. But I still want to add some diversity.
+Those diversity can sometimes purposely to make something a little bit different from what you ask. It's not because I'm stupid, I'm not fully understanding your question. It's really by, you know, some psychology.
+Design.
+For example, if you search swimming, right? I know you search swimming. I will recommend, I will give you exactly what you're looking for. None of them, 8 of them read when you're swimming. I purposely add maybe two as some biking, hiking, or something spots.
+I'm not certain that, right? But I think that relevant to Swimming.
+Most likely, some people, you know, the organization, they intended to search someone swimming
+items, but when they say something different, they say, oh, Haiken, maybe you have some chance, good chance, to trigger people, have some extra interest. So that's why, for recommender.
+you're not too strict to stick to what the users are looking for. Sometimes you are purpose to guide the user to develop some new interest.
+The readings!
+people realize, you know, if you always precisely to return what the user is looking for, you will have some closed space. For example.
+I love… Football. I searched football. You gave me the football video. I watch football. I searched again.
+I get more football video. You gave me more football video. I watch more again. I love it. You search again, right? So on and so forth, you know, you stick with football. You stick with your own word. You never…
+look outside, because you didn't give me a recommendation, right? Why I didn't make an extra recommendation? Because I saw you watch football a lot.
+So that's why you get a dead end.
+So typically, even you love something a lot, people still want to occasionally add some extra stimulating.
+To give some extra exposure, something bes…
+Beyond what you're searching for. Because they are trying to develop some new interests from history.
+So that's why you need to balance
+you cannot say, I searched football, you gave me majority from swimming. No, I would get angry, but if you search football, you gave me one baseball. Well, maybe, maybe someone will be, oh, maybe I also need to watch baseball, you know, since the football is good, maybe I also need to watch, you know? So you are trying to…
+guide the user to develop or something extra interesting. That's how you can make extra money, you know? So that's why you need to think about it.
+So, at the final re-ranking stage, it's not that purely depends on the ranking score, it's really about the sum…
+Trade-off. It's the balance about a lot of things.
+You know.
+And also, maybe, you know, even your search, I'm saying, most relevant.
+if, from the history, from the experience, I know something I already recommended before, do you think I need to recommend the same thing again?
+or I need to remove some of the things you already watched, I want to recommend something new, right? So, those kind of things, it's the chance, I would call to post the ranking. So that's the four states. They are according to different,
+quantitative… quantity level, from millions, billions to thousands, from thousands to hundreds, from hundreds, from thousands, from thousands, finally make a top 10. Because typically, when people look at this kind of recommendation.
+The top 10 is critical. If beyond that, you get much less, dramatically less possibility to get opened.
+Think about it, you know.
+If I recommend something, how likely you will click some link? It's ranking at 200.
+nobody have a patient, right? Browsing from 1, 2, 3, all the way go to 200. You don't have the patient to do that, you know. Most likely, people that look at the top 10, top 20, then stop it.
+No more further. Even I have millions of candidates for you.
+People only care about the top 10.
+That's the reality.
+So, the first idea, right, retrieval, you know, is really how do you generate a candidate?
+But do you know how to do this?
+For example.
+if I say I'm trying to search swimming goggle, so most likely you'll say, oh, you are using keywords matching, right? Not really. You know, a lot of recommendation is not, like, as simple as you say, make keywords matching.
+It's really about the… Laden space mapping.
+So that's its, the joint, you know, portion relevant to, deep Learning, 628.
+Because, you know, if you want to generate a candidate, the best way to make sure they make a hand… shake hands is not from the original domain.
+Instead, you should have what we call the latent space domain. Original domain, just like, you know, for any item, you have the item number, right?
+This swimming goggle item number is K1022339. That's called the original item. And the described by the swimming goggle for junior, color, blue, materials.
+plastic, blah blah blah, right? You have a lot of attributes, something like this.
+Those kind of scenes, It's used to be described as an item.
+But that is not good for the recommendation search.
+In order to do that, you need to convert this one to some new mapping, or embed the vector. We call the latent space vector. The latent space vector is the one to help people understand, to help people find the hands they can shake hands.
+In other words, We have a huge population of items.
+That's the… for women to rate.
+It's… it's… they're… what they are describing, what they're using.
+It's for a human being to read it, to manage it, but it's not for the computer to do it.
+If computer training may make this kind of for
+Recommendation to find this matching is not a good idea, because the computer doesn't know what you mean, goggle.
+They don't know what you mean, color blue. No, I have no idea what you're talking about. They only know you have some strings. They only know some numbers, like item number 10035. What does that mean? I don't know, you know.
+The computer only knows numbers. Anything you write.
+And the storage is a pure number. So that is why, if you want to make a recommendation, you have a lot of intensive work. It's by mapping.
+embedding. You put everything in the latent space, you know, map it to the latent space. In the latent space, what do you mean, latent space? You have a vector, it's all numbers.
+Now, computers get much free, they know what you mean number.
+Now, if you have some… keyword search, and I say ice search, swimming go.
+you know what you're searching, right? The computer doesn't know what swimming goggle means, so your computer will map swimming goggle to a numerical vector. Swimming goggle would be 256 by one vector, or 256 floating numbers.
+When these numbers come in, you use this number to search. The latent space have so many vectors, each vector is mapping to one specific item. We have billions of items there.
+So they're using vector-by-vector comparison.
+To find something similar.
+If you search… swimming go. They will go to the… Library.
+The latent space library, you have so many vectors. Each vector is corresponding to one specific item.
+Those swimming goggles, all the items relevant to the swimming goggles, you should have very similar.
+Vagerspace.
+That means the vector numbers should be very close.
+If you compare these vectors, those vectors are very close to each other.
+So that's why I can very quickly use swimming goggle vector to search all the item vectors.
+They shake hands, they make communications in the latent space, not in the regular
+Spacey, what do we… what a human being can see?
+So, that's the way to make a very fast approximate model to retrieval, you know. How do you make an approximate model? Because if you have two vectors, it's very quick, easy to measure the distance, right?
+Because for computers, they know how to measure two numbers, 0.7, 0.71. They're so close, because the difference is .01. 0.7 and 0.1, relatively big, because 0.7 to 0.1, you have a huge distance called 0.6.
+They… if you have numerical vectors, they know how to match these things. They are using these numbers quickly to identify, oh, you are my neighbor. We should be very similar. That's more likely to be something interesting to your, you know, your search.
+So that's why they typically use embed in base two towers. They all use the encoder models.
+So… all the users.
+All the items, you always use this kind of embed in the vectors, so that means your name is Jason.
+But, based on all your history, I will not use JSON as your ID, I will use the embedded vector. I will use the numerical vectors.
+I will use maybe 9.7, minus 0.3,
+And blah blah blah, and many, many numbers. That means that's the attribute for JSON.
+Instead of adjacent, I will use this vector.
+And… and also I have many, many items. I have swimming go, TV, a lot of things. You also have vectors.
+you have 0.1, minus 0.5, so when you look at these vectors, I can very easily just say which item I need to recommend it to JSON. Why? Because in JSON, it's a vector. The item is a vector. If those two vectors are very similar, that means that's what I need to recommend it to you.
+The idea is so simple, right? So…
+We need to understand this kind of mapping, not in the… Original.
+Script, original natural language space instead, and it's gonna encode that.
+space. In the encoded space, you can find the lot of… you cannot… you can find the lot of…
+Somatic connections, semantic meanings, That's where you can very quickly identify the neighborhood.
+So, let's imagine… We have something like this.
+the circle, right? Okay, each vector… here, you see? Your menu vector, right? That's…
+Each vector is item, like this.
+You know, I have so many Ibinis of vectors like this.
+Now, if I'm saying, I have… I wanted… look a…
+look for swimming goggle, okay? Swimming goggle will be a vector.
+So, vector…
+go to this space. Oh, that's swimming goggle space, right? That's swimming goggle vector here. So based on swimming goggle vector you're looking for, then I was trying to find the neighborhood. I was trying to say, oh, swimming goggle, you see?
+Those… those are close by, right? Because they're near this kind of a, you know, blue vector. So that's the area I'll quickly identify. That's the candidate space, relevant to what you're searching for, swimming go. They are finished in the leading space.
+Okay.
+So, that's very rough, you know, and you may have a lot of specific retrieval technicals.
+based on which kind of context, for example, are you talking about the music streaming? Are you talking about the shopping? Are you talking about the, you know.
+And in social media, you know, based on the context, so the recommendation will be changing, the strategy will be changing. You may have this kind of content-based retrieval. You have collaborative filtering, you have graph-based retrieval, you know, or heuristic, you know.
+So that's, in the future, we are trying to work on. You know, this one, it's simple. You just match the user and IT embeddings. You are using this kind of, for data products, right? You have one vector. Oh, that's from user.
+Every user, you have a vector, right? The numbers, right? 0.1, minus 0.2, blah blah, numerical. You have another item vector.
+0.1, 0.2, blah blah blah, right? So these two vectors multiplied together, if you end with a big number.
+That means they match each other. If you get a very tiny number, that means they're orthogonal to each other, that means they are not matched. So that specific scalar, we call the similarities. You just look at the single number, you know how similar you are. It's small, not similar. Bigger, very similar.
+You know?
+That's collaborative, filtering
+then that's another interesting… that's one we will spend a lot of time in the future, because this is trying to say, given your inaction matrix, what do you mean, inaction? For example, you…
+watch this movie, Titanic. You love it, you put a 5-star, right? 5 star is in action.
+you watch another movie, you hate it, you put a zero star. That means… that's your inaction, right? So based on this kind of inaction, like, the star, the gradient score, right? To express your experience, just like a Best Buy, you buy some TV, if you love this TV, you see a 5 star.
+if you hit all the QA is really defective, you know, you put a one star. So those kind of, you know, review, feedback, inaction, it's called inaction matrix. So that's…
+people using that, okay? So we will use some time to talk about that.
+Another is based on the graph-based retrieval, like this random work on user item graph. So that's the more, advanced, you know, we will talk about in the future.
+The last one, the heuristic, because that's much easier. If the database is relatively small, you know, you can easily just use some pre-calculated statistical, like, popularity, trending.
+or gracing the hot topics, right? Or the point of interest, then, you know, a lot of sense to make some derived decisions there.
+So that's the general K idea, you know, make a retrieval, they convert it quickly to narrow down from a huge, big data database to a very small
+group.
+So that's typically called the first retrieval, you know, candidate generation.
+And this part, we have a lot of, big data strategies we will discuss.
+I will not talk about it too much today, because already, you know, mentioned that this kind of, time series.
+working. So, I will try to stop here, and then we will spend more details next week to address the recommender further. And to start from next week, I will ask you guys to try to prepare for the project.
+So, trying to be prepared, we were trying to, discuss how we can propel this kind of big data, to leverage it by this kind of AI, agent service, you know.
+So… That's all for the day, but I will stay here, you know, I know someone had some,
+questions. They want to ask me, you know, in class, so I will be waiting, here, and, make an individual
+on one session with them, you know. So if you have any questions, you can stay and talk to me, and if you don't have, you know, so you can check this recorded session tomorrow.
+And, I will post the homework straight. And meanwhile, if you found anything you didn't, clear, you didn't feel clear, you know, you can always send me an email. We can try to help you.
+Okay.
+Any, any questions right now?
+Okay, great, I will stay here, but if anyone wants to talk to me, yeah, feel free, you know.
+Thank you, have a nice weekend.
+Thank you, yeah, sure.
+Sure, thank you.
+Preksha Shah
+Preksha Shah
+01:45:43
+Talk to you soon.
+Rensheng Wang
+Rensheng Wang
+01:45:45
+Yep.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:45:53
+Oh, hello, Professor.
+Rensheng Wang
+Rensheng Wang
+01:45:54
+Yes.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:45:55
+For regarding the assignment tool, Sorry, homework 2.
+The first part, the correlation, and that one can be done in Python, or it needs to be done in R?
+Rensheng Wang
+Rensheng Wang
+01:46:10
+Innocent. Innocent.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:46:12
+Any language you feel comfortable, yeah.
+Okay, yeah.
+Rensheng Wang
+Rensheng Wang
+01:46:16
+Anyone, yeah. R, Python, Java, you know.
+Whatever.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:46:22
+Okay, and also in Part 2, we should plot the ECF plots, right?
+Rensheng Wang
+Rensheng Wang
+01:46:28
+Right, yep.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:46:29
+Okay. Okay. And both of them, we should convert it into PDF, and we should… we need to upload in the Canon.
+Rensheng Wang
+Rensheng Wang
+01:46:36
+Right, yeah, either in PDF or just image, you know, that's where I can look, you know. Otherwise, I cannot see it, right?
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:46:44
+Yeah, you're right. Got it, yeah.
+Rensheng Wang
+Rensheng Wang
+01:46:46
+Okay? Yeah, sure.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:46:47
+Thanks. Thanks, Professor.
+Rensheng Wang
+Rensheng Wang
+01:46:48
+Have a nice weekend, okay, take care.
+Liam Guske
+Liam Guske
+01:46:59
+Yes, sir.
+Rensheng Wang
+Rensheng Wang
+01:47:00
+I had a…
+Liam Guske
+Liam Guske
+01:47:02
+I also had a question regarding, Homework 2. Sure. I'm pretty much, like, done with it, but I just wanna, like.
+check the results I'm getting, because I'm plotting for art
+For part one, or sorry, question one, part two, for the four-factor…

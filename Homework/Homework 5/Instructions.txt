@@ -1,0 +1,49 @@
+
+Part 1:  Understanding the ROC curve. 
+ 
+Given below logistic regression probabilities and the ground-truth classifications. Plot the ROC curve via calculating the TruePositive rate vs. FalsePositive rate. 
+
+Probabilities = [ 0.967, 0.448, 0.568, 0.879, 0.015, 0.780, 0.978, 0.004]
+Classifications = [1,  0,  1,  0,   1,  0,  1, 0]
+
+ 
+Part 2: Understanding the logistic regression approach.
+ 
+The data set with format for R is in Week 5.
+EE627A_HW5_DataSet1.csv
+
+ 
+
+Load below data file in Matlab
+dataSet_1.mat
+ 
+Use function glmfit to get the logistic regression coefficients
+Use function glmval to get the logistic regression probability vector
+Use perfcurve to get the ROC curve and AUC value.
+ 
+You can use doc followed by the function name to get the help documents in Matlab
+For example,  type "doc glmfit" , it will show the explanations of the function definition and usage example. 
+ 
+Task 1:  Use predictor and response in the dataSet_1.mat to plot the ROC curve and obtain the AUC value.
+ 
+Sample Code for Task 1:
+ 
+
+clear all
+close all
+
+load dataSet_1.mat
+factors=glmfit(predictor, response, 'binomial');
+prob=glmval(factors, predictor, 'logit');
+[X, Y, thre, AUC]=perfcurve(response, prob,1);
+figure(1)
+plot(X,Y)
+[AUC]
+ 
+ 
+Task 2:  Split predictor and response as two parts:  row 1 to row 3000 are training set data and row 3001 to 4000 are the validation set. 
+Use training set data to apply the logistic regression as task 1.  
+Plot ROC curve with training response and obtain the training AUC value. 
+Apply the logistic regression coefficients in training set data to validation set.  
+Plot ROC curve with validation response and obtain the validation AUC value. 
+What is difference between training AUC value and validation AUC value?

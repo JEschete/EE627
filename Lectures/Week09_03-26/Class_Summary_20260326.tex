@@ -1,0 +1,305 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large March 26, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Midterm Structure and Philosophy}
+%------------------------------------------------------------
+
+\subsection{Format and Timeline}
+\begin{itemize}
+    \item The midterm will be posted by the weekend of March 28--29, 2026.
+    \item Students will have \textbf{more than 7 days} to complete it --- treat it like a regular homework with an extended window.
+    \item \textbf{Missing the deadline results in zero credit.} No exceptions.
+    \item The midterm is \textbf{open-book and AI-assisted}; students are encouraged to use ChatGPT, Google Gemini, GitHub Copilot, etc.
+\end{itemize}
+
+\subsection{Data and Scope}
+The midterm \textbf{reuses the Yahoo Music recommendation dataset} from Homework 4.
+No new data is introduced so students can focus on extending prior work rather than re-learning a new domain.
+
+\subsection{What Is Actually Being Tested}
+The professor explicitly moved away from closed, ground-truth questions (``answer is 2'', ``answer is ABCD'').
+Instead, the midterm tests three compounding skills:
+
+\begin{enumerate}
+    \item \textbf{Conceptual depth} --- Can you understand \emph{why} a method works, not just copy code?
+    \item \textbf{AI collaboration} --- Can you guide an AI tool iteratively, challenge its output, and synthesize a better result?
+    \item \textbf{Analytical initiative} --- Given an open-ended problem, do you expand the solution space or stop at the minimum?
+\end{enumerate}
+
+\textit{Key analogy from lecture:} A junior engineer stops at ``AI gave me an answer.''
+A skilled engineer uses AI as a multiplier --- starting from their own knowledge base and driving the conversation deeper.
+The professor estimated this effect as $1 \times \text{AI} = 10\text{x}$--$100\text{x}$ output quality.
+
+
+%------------------------------------------------------------
+\section{Midterm Part 1 --- Extended Feature Engineering}
+%------------------------------------------------------------
+
+\subsection{Background: Homework 4 Baseline}
+In Homework 4, students built a user--track scoring table with three score dimensions:
+\begin{itemize}
+    \item \textbf{Album (urban) score} --- unique rating for a user--album pair.
+    \item \textbf{Artist score} --- unique rating for a user--artist pair.
+    \item \textbf{Genre score} --- \emph{not} unique; one track can have 3, 5, or 7 genres.
+\end{itemize}
+
+\subsection{Part 1A: Statistical Genre Features}
+Because genre is a multi-valued attribute, a scalar genre score cannot be assigned directly.
+Instead, derive \textbf{summary statistics} across all genres associated with a track:
+
+\[
+\text{Genre features} = \{\mu,\; \sigma,\; \min,\; \max,\; \text{median},\; \text{variance},\; \ldots\}
+\]
+
+This converts the variable-length genre list into a fixed-width feature vector.
+
+\subsection{Part 1B: Decision Logic for Ranking Score (Open-Ended)}
+Given album score, artist score, and genre statistics, students must define their own
+\textbf{composite ranking score}. Possible strategies include:
+
+\begin{itemize}
+    \item Simple sum: $\text{score} = s_\text{album} + s_\text{artist}$
+    \item Maximum: $\text{score} = \max(s_\text{album},\; s_\text{artist})$
+    \item Weighted combination: $\text{score} = w_1 s_\text{album} + w_2 s_\text{artist} + w_3 \bar{s}_\text{genre}$
+    \item Any other defensible aggregation of multiple dimensions.
+\end{itemize}
+
+\textbf{Grading note:} More diversified and justified strategies earn more credit.
+Simply resubmitting Homework 4 results earns near-zero credit.
+
+\subsection{Philosophy: Feature Expansion Before Feature Selection}
+Add \emph{as many measurement dimensions as possible} first.
+Redundant or unhelpful features can always be removed later (see Section~\ref{sec:feature_selection}).
+The reverse --- trying to recover information you never collected --- is impossible.
+
+
+%------------------------------------------------------------
+\section{Midterm Part 2 --- Cold Start Problem}
+%------------------------------------------------------------
+
+\subsection{What Is the Cold Start Problem?}
+A \textbf{cold start} occurs when a test user has no matching history in the training data:
+all album, artist, and genre lookups return empty.
+Without any personalized signal, standard history-based scoring fails entirely.
+
+\subsection{Strategy 2A: Global Popularity Fallback}
+\textbf{Idea:} When user history is absent, fall back to \emph{population-level} statistics.
+
+\begin{enumerate}
+    \item Compute a global average (or rank) score for each track across \emph{all} users and all historical ratings.
+    \item For a cold-start user, rank the candidate tracks by their global popularity score.
+    \item This produces a non-personalized recommendation that is still better than random.
+\end{enumerate}
+
+\textit{Real-world analogy:} When a brand-new Netflix user registers, Netflix recommends its most-watched or highest-rated content globally until it learns the user's preferences.
+
+\subsection{Strategy 2B: Sibling Track Inference}
+\textbf{Idea:} Even if a user has never rated album $A$, they may have rated \emph{other tracks in album $A$}.
+These ``sibling tracks'' provide a proxy signal.
+
+\begin{enumerate}
+    \item For target track $t$ in album $A$, find all other tracks $\{t_1, t_2, \ldots, t_k\}$ in album $A$.
+    \item Check whether the cold-start user has rating history for any $t_i$.
+    \item If ratings exist, compute statistical features:
+    \[
+        \text{sibling features} = \{\mu_\text{sibling},\; \sigma_\text{sibling},\; \min,\; \max,\; \text{etc.}\}
+    \]
+    \item Use these statistics as a surrogate album score to rank track $t$.
+\end{enumerate}
+
+\textit{Real-world analogy (from lecture):} An artist releases an album (e.g., Lady Gaga's \textit{The Fame}).
+If a user has highly rated several songs from \textit{The Fame}, it is reasonable to infer they would also enjoy \textit{Poker Face}, even if they have not explicitly rated it.
+
+\subsection{Implementation Note}
+Both strategies can be implemented without writing code from scratch.
+Providing the data context and strategy description to an AI coding assistant (Gemini, ChatGPT) is sufficient to generate working Python.
+The student's role is to \textbf{design the strategy and evaluate the results}, not to debug syntax.
+
+
+%------------------------------------------------------------
+\section{Feature Selection}
+\label{sec:feature_selection}
+%------------------------------------------------------------
+
+\subsection{Motivation}
+Adding features is cheap; keeping all of them is costly:
+
+\begin{itemize}
+    \item Too many features relative to samples $\Rightarrow$ \textbf{overfitting}.
+    \item Duplicate/correlated features introduce \textbf{noise dimensions} that the model cannot ignore.
+    \item When \#features $>$ \#samples, the model learns noise as signal $\Rightarrow$ \textbf{high variance, low generalization}.
+    \item Parsimony principle: \emph{given equal performance, prefer the simpler model.}
+\end{itemize}
+
+\textbf{``Garbage in, garbage out''} --- feature selection filters uninformative features so only meaningful signal reaches the model.
+
+\subsection{Method 1: Filter-Based Selection}
+\textbf{Evaluate each feature independently} against the target variable.
+
+\begin{enumerate}
+    \item Compute a relevance metric for every feature $x_j$ with respect to $y$ (e.g., Pearson correlation $\rho(x_j, y)$).
+    \item Rank features by their metric score.
+    \item Keep the top-$k$ features; discard the rest.
+\end{enumerate}
+
+\textit{NBA analogy from lecture:} Evaluate each player individually in a tryout; keep the top scorers.
+
+\textbf{Python example:}
+\begin{verbatim}
+import numpy as np
+corr = [np.corrcoef(X[:, j], y)[0, 1] for j in range(X.shape[1])]
+top_k_indices = np.argsort(np.abs(corr))[::-1][:k]
+\end{verbatim}
+
+\subsection{Method 2: Wrapper-Based Selection (Recursive Feature Elimination)}
+
+\subsubsection{Why Individual Ranking Is Insufficient}
+Features interact --- the combined performance of a subset is \emph{not} the sum of individual performances:
+\[
+\text{Benefit}(A + B) \neq \text{Benefit}(A) + \text{Benefit}(B)
+\]
+Therefore, subsets must be evaluated \emph{as units}.
+
+\subsubsection{Forward Selection (Na\"ive --- Not Recommended for Interviews)}
+\begin{enumerate}
+    \item Select the single best feature.
+    \item Greedily add the feature that most improves the subset score.
+    \item Repeat until the desired number of features is reached.
+\end{enumerate}
+
+\subsubsection{Recursive Feature Elimination (RFE) --- Industry Standard}
+\textbf{Preferred by financial firms} (Two Sigma, Goldman Sachs) in pre-screening assessments.
+
+\begin{enumerate}
+    \item Start with all $n$ features.
+    \item For $i = 1$ to $n$: drop feature $i$ temporarily and evaluate model performance on remaining $n-1$ features.
+    \item Permanently drop the feature whose removal had the \emph{least negative impact} (i.e., was most redundant).
+    \item Repeat with $n-1$ features until the desired feature count is reached.
+\end{enumerate}
+
+\textit{Corporate analogy:} A company performing layoffs does not identify the best employee to retain --- it identifies the \emph{lowest performer} each round and eliminates them.
+
+\textbf{Python example (scikit-learn):}
+\begin{verbatim}
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+selector = RFE(model, n_features_to_select=10)
+selector.fit(X_train, y_train)
+X_reduced = selector.transform(X_train)
+\end{verbatim}
+
+\subsection{Method 3: Embedded Selection}
+Feature selection is \textbf{built into the learning algorithm itself} --- no separate step required.
+
+\subsubsection{Random Forest}
+\begin{itemize}
+    \item Each tree is built from a \emph{random subset} of features (e.g., 30\% of columns).
+    \item Features that never improve splits receive zero importance and are implicitly excluded.
+    \item \texttt{feature\_importances\_} attribute ranks features by contribution.
+\end{itemize}
+
+\subsubsection{Lasso Regularization (L1)}
+Lasso adds an L1 penalty to the linear regression loss:
+
+\[
+\mathcal{L}(\mathbf{w}) = \underbrace{\|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2}_{\text{regression loss}}
+    + \lambda \underbrace{\|\mathbf{w}\|_1}_{\text{L1 penalty}}
+\]
+
+\begin{itemize}
+    \item The L1 penalty geometrically encourages solutions where many $w_j = 0$.
+    \item When $w_j = 0$, feature $x_j$ is effectively removed from the model.
+    \item $\lambda$ controls sparsity: larger $\lambda$ $\Rightarrow$ more features zeroed out.
+    \item Unlike Ridge (L2), Lasso produces \emph{exact} zeros, making it a true embedded selector.
+\end{itemize}
+
+\textbf{Python example:}
+\begin{verbatim}
+from sklearn.linear_model import Lasso
+model = Lasso(alpha=0.01)
+model.fit(X_train, y_train)
+selected = np.where(model.coef_ != 0)[0]
+\end{verbatim}
+
+\subsection{Comparison of Feature Selection Methods}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Method}   & \textbf{Evaluation Unit} & \textbf{Complexity} & \textbf{Typical Use Case} \\
+\midrule
+Filter-based      & Individual feature       & Low                 & Quick baseline, EDA       \\
+Wrapper-based (RFE) & Feature subset         & High                & Finance pre-screening, ML interviews \\
+Embedded (Lasso)  & Model weights            & Medium              & Linear models, sparsity   \\
+Embedded (RF)     & Tree splits              & Medium--High        & Non-linear, tabular data  \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%------------------------------------------------------------
+\section{Industry Context: ML Engineers in the AI Era}
+%------------------------------------------------------------
+
+\subsection{Shift in Job Market Demand}
+\begin{itemize}
+    \item Pure software development roles (front-end, back-end) are increasingly automatable by AI.
+    \item \textbf{Machine learning / AI engineer} roles are growing in market share.
+    \item Companies now expect engineers to \emph{direct} AI, not simply write code.
+\end{itemize}
+
+\subsection{New Interview Standard}
+Modern technical interviews (including AI-assisted rounds at major companies) test:
+\begin{enumerate}
+    \item Whether the candidate can \textbf{challenge and refine} AI output rather than accept it blindly.
+    \item Whether the candidate can \textbf{ask the right follow-up questions} to deepen an AI-generated analysis.
+    \item Whether the candidate can make \textbf{strategic judgments} (feature selection, model choice, evaluation criteria) that an AI cannot make without domain guidance.
+\end{enumerate}
+
+\subsection{Practical Takeaway}
+\begin{itemize}
+    \item Use AI for low-level implementation (code generation, error fixing, report formatting).
+    \item Reserve human judgment for high-level strategy: \emph{what features to engineer, which model to select, how to evaluate and iterate}.
+    \item A student who only copies AI output learns nothing and will be screened out in interviews.
+    \item A student who uses AI as a \emph{force multiplier} for their own thinking produces work of dramatically higher quality.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Key Formulas Reference}
+%------------------------------------------------------------
+
+\begin{description}
+    \item[Pearson Correlation (Filter-Based):] \( \rho(X_j, Y) = \dfrac{\text{Cov}(X_j, Y)}{\sigma_{X_j}\,\sigma_Y} \)
+
+    \item[Linear Regression Loss:] \( \mathcal{L} = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 \)
+
+    \item[Lasso (L1) Regularized Loss:] \( \mathcal{L}_\text{Lasso} = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda\|\mathbf{w}\|_1 \)
+
+    \item[Ridge (L2) Regularized Loss (preview):] \( \mathcal{L}_\text{Ridge} = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda\|\mathbf{w}\|_2^2 \)
+\end{description}
+
+
+\end{document}

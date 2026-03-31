@@ -1,0 +1,7 @@
+Problem 1
+============================================================
+(a) FALSE
+For a stationary AR(1): x_t = phi*x_{t-1} + e_t with |phi|<1, the autocorrelation at lag k is rho(k)=phi^k. For k>=2, rho(k) is generally nonzero (unless phi=0), so x(t) and x(t-k) are not uncorrelated in general.
+
+(b) TRUE
+For a stationary MA(1): x_t = e_t + theta*e_{t-1}, the theoretical ACF has nonzero values only at lags 0 and 1. Therefore the ACF cuts off (cliff) for lag l>=2.

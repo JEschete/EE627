@@ -1,0 +1,485 @@
+Okay, everyone… Let's get started.
+So that's the first online session for 627, Big Data Analysis.
+And, this session, I would…
+You know, go over this kind of a syllabus, give you the logistics of the online session.
+of the spring semester. And most importantly, you know, we were trying to describe what's the most important thing, or how we learned this. Because, you know, I were trying to make sure the target of this objective in this class is
+trying to help you for your future career. So…
+when I propel this, I'm always trying to think about what I can utilize this to propel some future, projects in the industry, and how to propel these kind of questions in the real industry interview.
+So, we will cover, some questions that are typical, you know, knowledge space required for this kind of job markets.
+So, that's what we are trying to emphasize. We are trying to make sure we have this kind of hands-on experience. We are trying to make sure you have this kind of, skill sets.
+Those can be utilized for any new data sets, any new questions. In other words, we are trying to think about how to work on different questions.
+We are starting from 1,
+data sets, and trying to expand the discussion for many different data sets. That's how we can, you know, make our studies more efficient and effective.
+during this process, you know, I hope you guys can pop up questions and challenges. You can always ask questions, how to work on your own interested topics?
+So, for example, in this data frame, you know, we were trying to cover a few of the most typical,
+you know, knowledge space. One we are trying to cover is about the bigger data. That means, if you have a small, simple question, how do you scale to the biggest data space?
+This will bring a very important concept in the future, because, you know, you may think about, okay, I know how to do logistic regression, right?
+You have default functions, you have default library packages.
+So, there's nothing I can learn from this, yes, that's true, but think about it, if you really have a big data set, you want to apply the logistic regression.
+How do you apply to even bigger?
+Data space.
+what you can think about. And what's really changing, if you scale this
+From regular dimension to your super high dimension.
+What's the impact?
+That's the critical question, because that can differentiate you from the typical, you know, graduate student or some expert. So that's how you differentiate this kind of compensation range for people in the junior level or in the senior level.
+If you're saying, oh, I use the logistic regression, and how do you use the logistic regression, and then if the interview, trying to expand this question to your more deep level, to ask you, let's say, I give you data, and…
+I have the logistics regression, but the performance is very bad. What I can do next.
+Or I have something The data is super large.
+what they can do is industry-level data. It's not like dummy data, what they can do.
+So, those kind of questions will easily give you some space to express your potentials. If you really think about it in this dimension, you have a lot of it to talk about. If you only say, I only tried this command before, that's it, then you're stopped here. Then people know you have very limited real experience.
+So that's why we are using this course to broaden your view of your knowledge space. Even if you're not working for bigger companies, even if you don't have a long time working experience, but you know what's the right direction you can express your point of view.
+So, that's what we are trying to emphasize. Otherwise, think about, anything I talk about here, you can find in YouTube, you can find it in internet, why you need to take my class?
+So, you can't hear it. The short answer from my side is, number one, I'm lazy. I don't want to read. I don't want to watch. I want to listen to a very effective way, people helping me explain the knowledge space. That's why I'm here. I'm trying to use a different language. I'm trying to use the plain English.
+I don't want you to read hundreds of pages to go through the technical background. We just quickly give you the point of view, very hands-on, very straight, very sharp point. Where do you understand? What's the catch? Utilize the knowledge space.
+So that's number one. Number two, if you have an instructor here, you always have some motivation to push on. If you learn on your own.
+is always have, say, this kind of no peer pressures. It's hard to maintain this kind of learning efficiency.
+Number three, you can leverage this experience from industry. That's why I try to cover as many information I observed, I experienced, my colleague experienced, trying to, you know, merge in this class teaching.
+just like, I will explain why we need to think about this way, because this is the most of the industry people trying to use. That's why industry people trying to interview will ask you the questions.
+I also have some lists from my previous student who got hired in Amazon. They have a list of the knowledge space for the interview questions. There were specifics that we were asked questions in this space, so I'm glad my contents covered up most of the stuff in this
+Cheating shit. Because they are specifically tell people what's the question they are trying to, you know, interview.
+And in terms of the way we are trying to work on, I think this semester, you will have a little bit of difference. The reason is, we were trying to leverage this kind of gen AI.
+So what does it mean? That means, in the past, probably you will take some edge, right? You say, I know how to code it, I know how to use the library to run some machine learning, or I know how to make a data analysis, but what you know actually is very similar to what a charge GPT can show.
+ChargeGPT can never get something wrong for the memory. They can memorize the command even more precisely. So what's the catch from your side?
+Right? A lot of things you can do, ChatGPT can do it better. So the only thing you want to outperform the job market is you know how to make the judgment.
+even… you don't have to be very precise, independent to write the code, but you know what's the right direction. You know how to improve it. This is the more important.
+So, in this class, we always give you the data. We will guide you, start from 0 to 1, from 1 to n, trying to develop this kind of skill sets.
+In other words, we are not trying to say, okay, I have data.
+I just call the function, get the result. If something like this, that's really dumb, right? I have data, use the model, read the data, get the result. That's it? No.
+If everybody can do this, that's not the value of your job. The value is, I'm not satisfied with the existing model. I'm asking you how to improve it. So that means you need to massage the data. You cannot just say, use the raw data.
+I always use the same thing in, like,
+You know, the recipe of kitchen.
+Right? If you're a famous chef, you go to the kitchen, you can never say, oh, I have potato, I threw in the wok, right? Just do it. I didn't do any preparation. I didn't do any pre-preparation. I didn't do any pre-processing. I just used the raw
+Meat, the raw food, right? Cook it!
+If you only do something like that, then that's it. You… you're not on the right track. So, the way you want to show people is.
+I'm giving the potato, I will try to clean it, wash it, clean it, I will slice it, I will use some…
+As such, I will use a lot of, you know, pre-processing, and then I would do the regular.
+operations.
+That's where you can say your creativity. That's where you can say how you understand the questions.
+The same thing comes with metadata.
+You are not expecting… I give you data, I call the function, get a result. No, this data cannot be applied to any function. The data is messy.
+It's 30. You need to do something necessary. This processing is not unique, it's an open question. If this open question really depends on how you motivate it.
+you will have many, many possible directions. You have many, many diversified approach you can work on. That's what we are trying to teach in this class.
+That's how you can differentiate people, right? When people present one data to you, you say, I have multiple possible solutions for you.
+Think about that, the interviewer will get shocked, right? I can work in the number one approach, number two approach, number three approach, you know, number four approach. You can keep talking about this. That's very excellent, you know, behavioral, you know, impression to impress the interview process.
+You cannot say, oh, I have data, just core function, right? So that's why I always emphasize, we are trying to leverage this kind of feature engineering. That's the way you can differentiate your performance with others.
+Because everybody have different processes, and everybody have different directions to massage the data.
+We are trying to definitely explain this more.
+And in this class.
+I were trying to emphasize, you know, we will only have the midterm and the final project. That's the two, we call the major assignment. And also, we will have this kind of weekly assignment.
+So…
+I know some students that don't like this kind of weekly assignment, but the purpose for this is I'm trying to gradually build up your overall grades. You don't have to worry about your overall grades. If you're working
+week by week, and you can monitor your progress. I can monitor your progress, too. I can try to help you.
+So, you don't have to use only one or two assignments to weight it overall, right? If you have many, many multiple assignments, so you have more chance to compensate, you have more chance to boost it overall.
+And in terms of my tentative schedule, you know, if you're thinking about the midterm.
+So, will be the first week of April.
+So, it's, it's most likely, it's week of the March 30th much service to…
+April 6th, so this week will be the midterm.
+And we will have time to discuss the mid-train, so you don't have to worry about that.
+So, let me… In terms of all the…
+homework assignment, the nature assignment, the final project assignment, I will ask you to make a submission with the format either using PDF,
+Or you can use images.
+Or you can use Kaisan.
+Python file, that's fine. But I don't accept this kind of for…
+Python notebook format. I know this is a… it's a very standard one, but if you're using this one, it's okay, you can use it, but you have to export it.
+You can export to as PDF, or you can export as Python, or you can be lazy, you just use a screenshot.
+That means you just print an image. Then I can say exactly what they did, right? You don't have to use this format. You just use screenshot, you get some JPEG, or PNG, whatever format, it's an image format.
+The reason I require you to limit it to this space is commerce doesn't resonate.
+Python notebook. If you upload this file here, they cannot show you. They cannot show this for me. I cannot grade online.
+I have to download this to my local, and then I can only grade it on the local. You cannot say your grades.
+So this is why, when you have the Python notebook, that's perfect. Yeah, you can leverage this one more efficiently, more, you know, straightforward. That's good. But please, export it to PDF, or you take a lazy, just, screenshot.
+just printed this screenshot and upload this image online. That's good enough. I can directly make a mark here, because if you upload a PDF or image like this, right? Then, from my end, I can use the brush pencil, you can… I can separately say, hey, here is wrong.
+And then I make a remarks to tell you what happens.
+Then you can read through, you can review your gradient scores, you know where you got some mistakes.
+So, but if you use some other format, I cannot do anything, I cannot say it.
+Okay? So, for the same reason, now for the same reason, we don't accept any zip file.
+I don't accept anything you want to pack it, you know. One packet, no, don't do that.
+You just upload individual files.
+If you have 7 files, that's fine, you put… upload 7 separated files. If you have 10, upload 7, 5, 10 files, that's fine.
+You don't have to use Zip.
+Okay? So that's how you can help me maintain this, and also how you can quickly get a
+Feedback, how to save these deep files.
+So that's the,
+format for when you have submission. And also, for this kind of weekly assignment, the homework, the midterm or final project, you know, I typically give them multiple days.
+So, you not only gave a few hours, you gave a few days.
+At least 4… 3 or 4 days.
+you will take the time window to work on anytime you want. I am not… I don't care about the world.
+are you? And how you upload your files, as long as I receive your submission, that's good.
+You can stay with Hawaii, you can stay with the Miami, that's fine, you know, as long as you can finish your homework, I am okay. So you don't have to be physically in some space to work on your homework.
+And also, because that's the… Data, bigger data.
+And initicus, right?
+you will have a lot of coding. Why? Because you have data. If you need to take care of the data.
+I'm sure if you use Excel only.
+You have very strict limitation for your future career.
+Because that's not a typical career path for my class.
+I acknowledge it. If you are more interested about the business analysts, you know, that's fine, you know. But for most people, if you're really trying to work in your career path with general AI, artificial intelligence.
+Or this kind of deep learning, or this kind of machine learning, you know, or machine learning engineers, or data scientists.
+Those kind of, you know, this kind of booming industry positions, you have to use coding.
+But if you're saying, Professor, I'm not good at coding, that's fine. It's not about coding, it's about the way to think about coding. Because right now, you will have this kind of form.
+ChatGPT, OpenAI, Gemini, you know, this can look for tools. This can greatly boost. So, in the future, you can imagine, it's not how you compete people directly with coding, it's really compete people about, do you have your own
+idea. Do you have your own judgments? What do you mean, judgments? Because for the right interview, right now, they will give you the data, they give you the tool, they will say, did you say anything? Do you know how to fix the problem? I give you data. From data, what are you going to do next? How to fix this one? How to change it?
+the output.
+If you are not the…
+familiar with this, then that's where you need to be here. We are trying to teach you, work on the data, how to, with different directions, work on different results. That's exactly the new trend for interviews now. The new interview is AI,
+AD coding, so they don't worry about it getting cheating. That's fine. They give you the chart board. You can cheat. But the question is, they give you the data, they say, oh.
+How can I do it? Of course, you can just use the data to run the model to call the function, but that's not… that's only first stage, right? Then, it's not good enough. The next question is, can you improve it?
+So that's… in this whole class, we always ask you the same question. Can you make it even better? What we can do next? What's the…
+Probably.
+To make it even better.
+How do you make this, you know, enhanced? How do you open your mind? Because from interview, the more likely you are showing you have a huge potential. You're not only saying, oh, I only know just regression, nothing else, or I only know random forests, that's it. Anything they ask, oh, use random forests.
+That's the question, B, random forest.
+Quite and say, random forest.
+If that's the case, then people say, okay, I know you only can do this, right? You want to say… you want to show you have very diversified, you know, question-oriented capabilities.
+So that's why we are making some open discussion. We're trying to even make better, more, you know.
+So, in order to do this, we will utilize this kind of cargo platform. So that means you can try to develop your solution, and you post the solution online.
+And the Kaggle webpage, they can provide some real-time feedback. In other words, they will give you a score, give you evaluation to tell you how good, how bad you are.
+So you don't have to wait to say, professor, what's going on with my submission? Is it good or bad? You know, you don't have to wait my judgment. You just make this evaluation online.
+On other words, On the other hand.
+You will change the way to think about these submissions, because there's no way to cheat.
+If you didn't do anything, the cargo platform knows, because you don't log in, because you don't make submission, because they know all the immediate results.
+You can never say, Professor, I tried a lot of things. When I go to the backlog, it just shows you didn't do anything, because you didn't log in.
+Right? It didn't make submissions.
+There's no way to hide. If you do anything, you have the footprint. If you didn't do anything, there's nothing.
+I can very easily say how many times you tried, which kind of data you processed, which kind of approach you tried.
+So they all keep all the fingerprints you've made.
+And also, that's the… that's exactly the way for the future.
+People is trying to work on, trying to help people who can adapt to Why, but coding?
+So, in other words, they prefer some people who has the mindset to make a coding. The coding itself can be executed by
+Charter bought.
+Just like the ChargeGPT Gemini, okay? So, every real person may be around a lot of agents. Each agent have individual coding assignment. That assignment should come from you. You should have a very clear idea. You should have very high-level judgments. You know the output is what you want or not. You know that's the right way to do it or not. You know that's the efficient way to do it or not.
+You want to stop some stupid trials. You are maintaining a team, You have teaming.
+Coding manager to review this.
+So, in the near future, you have to adjust to that. So, coding is not the most critical.
+anymore. Instead, you need to understand your coding.
+You don't have to memorize very specific syntax, but you need to understand why you need to do this.
+So, so that's why in this class, we will have more discussion about that.
+What do you need to make this open discussion get further?
+So, I…
+I'm really trying to encourage you to say how you can push further by utilizing this kind of open source
+ChargeCBT, you know, make your process even more efficient.
+And I would be glad, you know, to hear some story you can share from us, right? Even better one, good one, you know, just share the experience with our class to let us know what you experienced.
+Okay.
+And, I will try to go over next what you would expect, and I will try to explain why you need to work on this, and how you can benefit from this learning.
+So, the first one, lecture, we were trying to talk about is feature engineering and XGBoost.
+And,
+The reason I will put this one there first is, if you are the people who took my class.
+If you are the one taking my class, you always have one natural question.
+you will be assigned some data. You will be assigned some project. And this project…
+And the ultimate goal can be in the general category, right? You have… maybe you have some forecasting.
+Like, regression, or classification, whatever, right?
+And, if you have the data, you have this kind of a typical classification, or… regression models.
+Of course, you can think about, oh, I learned a lot of models from machine learning class, yes.
+And did you ever wonder which one is better? What's your top priority selections?
+My general suggestion is, if you don't have any pre-knowledge, or you don't have any preference, XGBoost is always the one you can try first. Because this one, it currently has been approved, it's the one
+on the top of, okay, unless you have a very special data, unless you really know what's the knowledge space about the data sets. So, XGBoost is always the top
+Israeli contains everything you can possibly think about.
+Because in the real life, Very likely, you will have this kind of structured data.
+For this kind of structured data, actually boost is always when you have no brain to try first.
+Okay.
+So, structured data is what you say, right? If you know Excel, of course, if you… anything can be opened with Excel.
+You see, the first column is the name, it's called ID, right?
+The second column may be called age. The second one may be the salary. The fourth one, education, blah blah blah, right? You get a lot of things, you can header.
+So, that's how industry people are very familiar with this. They open either with a .txt file, open with a .csv file.
+open.pst file, that means the pipe separate, the comments separate, or space separate text, tabs separate text files.
+It's very easy to understand. It's very intuitive, right? I know exactly this is the column H, that means for every single record, what's the number of…
+for age, right? So very easy to understand. This kind of sense, we typically call the structured data. Every single column, you have very specific meaning, you can explain it.
+For this kind of data, whatever you want to make some prediction about the classification, regression, then no brain, use XGBoost.
+It's always overwhelmingly important to do this.
+And we were trying to explain how to do this, and why you need to do this. And the second one is… the next question is, people say, oh, I tried it.
+It's so-so, not good enough?
+Now, that's the parting point. Start from here. You already showed, right, I know how to use XCBoost.
+Then the next, how do you improve it?
+That's the open question, because that's relevant to which kind of data you have. You have to examine the data. You have to understand the data.
+From here, you will think about the feature engineering. So that means you want to derive some new features.
+The quality of new features, I used there.
+green ones, you know, that means that's extra columns from the original red columns. These kind of extra columns can help you to boost
+This kind of information is from your insight, from your domain knowledge, from your observation. That's the open question, that's where you show you have the capability to move from the junior level to the senior level.
+That's what we are trying to emphasize. That's how you make your different from each other.
+In this whole class, I only needed to look at how you make a feature, and then I know the level you rely on.
+If you have no idea how to do this, then you can only use the original one, right? So that means you're very in the very basic.
+You know, fundamental level.
+So that's how we start from the Exit Booster. That's the structured data.
+Okay.
+What happens with unstructured data?
+Unstructed data, typically you have two types. One is called imaging.
+Right?
+you have some array matrix, right, in the image.
+And another way you all have this kind of…
+Natural language processing.
+You will have the streams, text.
+Right? This kind of full article, paper, or sentence, whatever, you know, natural language. Those are two typical unstructured data.
+So, for this unstructed data.
+XGBoost, it typically is not, okay? It's not the selection for this kind of data. This kind of data, you have to use the deep learning neural network.
+Now, if you're staying here, maybe you ask me, Professor, why… for imaging.
+Text magistrates, why you need to use neural network instead of to use the XGBoost?
+Because… Those kind of data imaging, or…
+Natural language, you process the data, they are unstructured data.
+For example.
+There's image, right? The first row, first column, is the first pixel, right? Can you tell me what the first pixel should be?
+That this first pixel means the human eyes, or does this pixel indicate the human nose, or does this pixel indicate some good feature or bad feature?
+No. You have no idea, it can be anything.
+It's not like this structured data, right? The structured data tells you the first column is always ID, the name. The second…
+records, the second column is always age, is a number, numerical numbers. You have very specific meaning, you have very structured data. But here, when you have imaging, the information pixel can be anywhere.
+I can never say, oh, for this… this pixel, this way, that's the good one, a bad one, or this is relevant to you, some good feature, or noise, or background. No, can be anything.
+So, in that situation, you don't have this kind of fault.
+Structured data to implement this kind of trade-based algorithm.
+Okay? So, they scan the four… Processing, you have resolved to neural network.
+So that's another class. We call it deep learning.
+So, for 6 to 8, they're trying to explain the difference. So, if you work on 6 to 7, and then you go back to 6 to 8, now you can realize that how they're different to each other.
+So that's the first I want you guys to cover. The second one is we are trying to cover
+time series.
+For time series, you will learn a very important concept. It's about the coronation.
+Coronation is so fundamental. I think you don't have to use my class to learn this. You may have heard this, or you've been at this for a long time, but this is a very fundamental way to help you to manage this kind of data analysis over time series.
+You may have a few questions here. For example, people say, Professor, my work has nothing to do with the time series. That's fine.
+Time series means you have indexed sequentially over time stamp, right?
+is indexed, so that's why I call it time series. Indexed means what? You cannot randomly swap.
+Today, yesterday, they record, you cannot swap, because once you swap, you mess up the time dependency.
+It's not like the student ID.
+Right? JSON records and Tom's records, doesn't matter you swap, right? You put Tom as the second record, or you want to put a JSON as the second record, doesn't matter, because the position is really about the storage position, doesn't matter. But if you have time series, you can never swap this. So this can be time-dependent
+sequence.
+It's very important when you make an analysis. You can never break this. Your leverage, you're trying to exploit this kind of dependency over time index to help you make a…
+forecasting.
+you know, So, things are very important. For example.
+If you jump to the deep learning, you will have this natural language processing. Natural language processing, you have the sentence. Thank you so much. Thank you so much. You have the index. 1, 2, 3, 4.
+Just like time index.
+T, T plus 1, T plus 3, T plus 4. Here, thank you so much. The first thing is index T. U, thank you, U, T plus 1. So, T plus 2, much, T plus 4, T plus 3.
+you have the same index, right? Thank you so much, you cannot swap the order of the, you know, the token index.
+Very similar to time series.
+And also, you may have this kind of map, geospatial data. For geospatial data, just like Hoboken is close to Jerus City, just like today is close to yesterday.
+So when you're trying to use time series, what do you learn from here? You can always apply it to anything that depends on this kind of index step.
+Data sequence.
+Can be geometric, can be spectral, can be imaging, can be, you know, Sentence in the text message.
+So this kind of time series analysis can be utilized for future, when you have something
+They're not structured, but instead, you have this kind of time.
+somewhat index-dependent, maybe it's not a time index, can be geo-index, can be spectral index, can be, you know, text message index, whatever, right?
+all UTNets are very similar. And also, that's what I was trying to…
+Explain in my 6 to 8.
+If you know time stress, all the regressive models here, now you understand the most,
+popular gen AI, generative AI, for this kind of diffusion model. How, when you type this question, right, is a dog, right, and a tiger.
+Then you can generate a picture. Exactly is a dog, right on the tiger.
+How could you do that?
+This kind of, you know, diffusion model, they are utilizing a very similar
+technical background in time series analysis. If you learn this, you can very quickly say, oh, I know what happens, why this works.
+Because they're using at very fundamental similarities.
+So, Times 3 is always part of the, you know, data science people. Sooner or later, you need to use this one. The same thing.
+for generative AI, for transformer.
+For recommendation system, they all more or less utilize the time series related analysis. So that's why I will try to explain more to help you understand the connections. You learn one, but you can expand this to multiple different areas.
+Never even mentioned about the time series is always the fundamental data source for Financial markets.
+Wall Street.
+You have tons of time series. They're always looking for people who understand the time series.
+If you have very solid knowledge base here, that's very, you know, unique skill set.
+And also, unfortunately, you know, in Stevens, we don't have an individual class to teach time series.
+We don't. Even this very important, it's very dominant in the data space.
+So that's the one we are trying to emphasize. Another one is, I will try to work on it really based on
+You know
+The logistics regression and the linear regression part.
+Because this part is not about how to do linear regression, how to do logistic regression, it's really about how to understand the connections between this kind of linear regression and logic regression. From here, you know where the limitation comes from.
+From the limitation comes from, you will understand why we need to jump from the linear space to non-linear space, why we need to use neural networks.
+Okay, so that's the catch.
+The same thing, when you are trying to work on some data sets, if you are not satisfied with the performance, if you get frustrated.
+Those kind of analysis can help you understand what the potential you can risk from.
+Okay.
+So…
+The most important sense we were trying to focus on, we were spending the most time, would be the recommendation.
+Because the recommendation, we were trying to combine two things. One is feature engineering. Feature engineering is really…
+the topic, you know, I think is the most creative.
+It's very useful for people trying to
+Extract this kind of extra information, extra juicy from the raw data.
+That's how you can make your performance much, much better.
+Okay, so we were really trying to learn something, how to utilize the feature engineering.
+From my experience, Most, pre-screening for candidates
+they were using some feature engineering to test you. For example, if you make a… send a resume to Two Sigma, send a resume to Goldman Sachs, they will say, okay, there's so many overwhelming candidates, I cannot judge that. That's fine, I just send you a link, do something online.
+very likely some questions are coming from feature engineering. Because, just like I said, right, there's the open questions. From these open questions, they're very quickly to say if you have some knowledge, you know, you have some domain knowledge, or you have some sense about this kind of data analysis.
+And from there, they can very quickly cut. More than half of applicants should be filled. Just show me something very quickly. They know you are not on the same page.
+So, the feature engineering is always the part we will discuss most.
+And the topic I'm choosing is recommendation.
+Maybe you're asking, why we use recommendation, right?
+Just think about.
+Which business can make more profit?
+Which business can make more profit instantaneously?
+recommend.
+and search. They have another name people call the search engine, like Google. Because recommendation and search typically just, like, two sides of the coin.
+You flip the recommendation, that's called the search. You flip the search, that's the recommendation. Just think about it.
+Nobody can escape from recommendation and search. In other words, what do you say? What do you feel? What do you experience? It's not objective anymore. It's everything has been penetrated by what? By business advertisements.
+Because what you say is coming from recommendation. Recommendation has been, you know, polluted by business.
+just, like, say, I want you… Search Stevens.
+If I have some bad guys, they put a lot of advertisements. So probably the first thing is not Stevens.
+It's some affixed Stevens.
+Right? The same thing if you want to search some production online, if I have a lot of people make some,
+Bigger money.
+No, because they put big money, so of course, we were trying to make higher ranking to show the result.
+So, maybe the top… Information you say, all coming from
+advertisements, companies, not from the real information you are looking for. So that's why it's so tremendous.
+You know, cash flow for recommendation, and…
+this kind of search engine. If you fully understand that this is really cash cub.
+And those kind of, business model For… profoundly changed the… you know, The payment compensation system.
+before Google, before recommendation and search engine Industries mature, you know.
+We typically have some reasonable tile.
+ranking for… industry.
+Of course, every dividend company, you have different salary, we understand, but they will never have this kind of ridiculous difference, right?
+I know Goldman Sachs may be getting more…
+than other companies. Or I know that some companies… bigger companies get more salary pay than the small company.
+But they're not as dramatic. But nowadays, publicly changed. Why? Because, just like what I mentioned earlier, this kind of social media search engine recommendations, instance, they can bring
+The cash flow significantly and instantaneous.
+So that means, if you are the software engineer, if you can help me to improve the performance, like, 0.001% better.
+It's very tiny, right?
+0.001%. It's very minor improvements, but we have a bigger baseline, because we have a few billion of users. A few billion users multiplied with this kind of tiny, tiny improvements, you will get how many
+Big user, right?
+impact. From this big user impact, you can imagine how much profit you can gain.
+So every single modification multiplied with billions, you will get huge improvements. So that's why we never use the conventional compensation system to evaluate the value.
+They can easily make your salary 10 times higher than the industry.
+But this never happened before.
+people, at most, back to 20 years ago, even your, you know, top company, it's very difficult to say, my salary is my comparator 10 times. But nowadays, very easily.
+If you're working in the core industry.
+areas. 10 times? 20 times? That's fine. How about 50 times more?
+That's fine, you know, as long as I can do some of the core industry work.
+So, this is why they very profoundly changed the way people think about
+So that's why people spend so much time on this.
+You know, industry field. Because anything you get improved, next day you can get a return in the cash. You don't have to wait a long, long time before you get a business return, investment return.
+Nothing can be more… systematically, instantaneously return just by utilizing the search engine recommendations. So that's why
+People still push this, trying to push the envelope, trying to get even better understanding how you can leverage this one to get a better cash return.
+So that's why we always use this one as the example to show how industry people, the most, you know, sophisticated and smart people work on.
+especially when you have the general AI as the second-level helper, they can even make the recommendation even more fundamentally sophisticated now.
+So, we will use some real English data to, at least to give you some impression about how recommendation was thinking about. Because you are the user, right? Every day, nobody can escape from recommendation. You are using Google, you are using Amazon, you are using Facebook, you are using Instagram. Everything you are in the deep.
+experience.
+ecosystem of recommendations. Doesn't matter if you are aware or not. Anything, any decision, any shopping, any experience based on recommendation. If the system
+doesn't recommend the right thing for you, you have no way to reach this kind of information at all.
+Okay? Just like I said, Who is the…
+You know, who is the secretary of the UN?
+It's a very simple question, but if the recommendation doesn't try to give you the right answer, they don't recommend this for you. So you're very likely you get the wrong answer.
+So…
+And also, recommendation is typically big data processing, because if you don't have the big data pool, there's no recommendation at all. If you only have 20%, there's no recommendation at all, you know.
+Two, recommendation, always the place you can try all the cutting-edge technicals. If anything new, anything fancy, anything special, they're always trying to say, can we utilize for recommendation? Because that's where you can
+transform the cutting-edge technologies into cash flow. They want to save the return. They cannot wait to gain more.
+And in this class, we will give you the industry data. We're trying to use the cargo web page to help you to play, to get some feeling about that. That's exactly how industry you say this.
+every time you browse your iPhone, you have so many digital fingerprints. Those kind of fingerprints just, like, streaming, right? Like, the water running into the back end. They're trying to analyze, trying to analyze, trying to guess, trying to recommend.
+trying to understand your potential, trying to guess what's your public profile, what's the Hayden profile, what's the possible behavior next, you know, they're trying to leverage this one. You feel, oh, it's getting so smart, actually, they are trying to get more, get more, to pry your
+Privacy.
+you feel the iPhone, you feel your computer is so, you know, considerate. They know exactly what you do next. They're so… that means they're deeply integrated with your
+Digital fingerprints. They know exactly what you buy, what you sort, what do you say, what do you want.
+So, that's also a recommendation. It's a good example to help you to show exactly how this industry is experienced from one level to another level. From the conventional, you know.
+structured data processing to the unstructed neural network, or from neural network to transformer-based… from transform-based to generate to AI-based recommendation.
+So that's the really good point to help you understand the industry.
+And, when you combine this kind of feature engineering and recommendation, and the last one.
+I was trying to explain it's the ensembleing, so that means
+you may not purely depend on one single sophisticated system. You are trying to leverage, you are trying to combine, you are trying to fusion a lot of different opinions, a lot of different judgments together, and build one.
+So that's the final one we are trying to introduce in this end of a semester.
+And overall, you know, if we have some new stuff.
+If something new, you know, technical, just like a deep-seq, so we're always trying to introduce something in this class and share with you.
+So, that's the most likely the technical syllabus I will try to cover in the whole semester, and I will try to give you some impression, is this what you want, or that this aligns with your future career?
+So, what I experienced, you know, I always try to prepare all my topics by… go through a lot of, you know, industry.
+requirements. For example, just like I said, right, what's the typical industry question? What's the typical industry requirements?
+Use that one to… to build this kind of a knowledge space.
+So, any questions so far?
+And just like I said, you know, you don't have to ask for my permission, just say, can I speak? No, you don't have to ask, just speak out.
+If you have any questions, stop me immediately. Ask. You will ask me to explain again, or add some more details, or get some… any help.
+And if you're someone who is not convenient to speak out, who is shy to speak out, that's fine, you can always utilize the chart window. Send me the text message.
+And I will say, what are you asking for? So that's why I always keep an eye on the chart window to make sure I didn't miss any questions there. And also, once you have the homework, you can also ask for the homework question here.
+Okay.
+A few things I will ask you, okay, to do… I know that's the first session,
+So, number one, Trying to… set up a discount for ChargeGPT,
+Or Gemini, okay?
+Because a lot of simple questions, I don't want to stop here, because if you stop with some simple questions, that means you never utilize the Charity or Gemini.
+they have free versions you can utilize, okay? So make sure you have this one. Because next week, we will have some real data, and we will use two different ways. One way is what I learned in class, right? To talk about the, the general
+philosophy, general ideas. Two, you can also resort to someone, just like some technical consultant from ChartGPT, Gemini, and say, what you did is right or not.
+Because once you have this one, you are trying to find a good way for coding.
+You're just trying to describe the question from class.
+From homework assignment, and ask them to generate a code for you, generate the result for you, and you should be the one to make a judgment.
+So that's the value from you.
+Right? So that's why you need to first understand the question. Second, if they generate some result, you need to know if they're in the right direction or wrong direction, or if that's a good one or a bad one.
+And you can make someone… You know, back-and-forth discussions, and help with this kind of…
+chart board to improve this processing, because this kind of for…
+AI-supported coding can greatly improve the efficiency. Just think about it. I know you're… sooner or later, you will go to the job market, right?
+Your boss doesn't care… doesn't care about if you get this solution on your own, or you get this solution by working together with your…
+you know, the coding chart board, right? As long as you can deliver good results, as long as you can make money, who cares?
+Right? If you can use ChartGPT or Gemini, you can make a trading profit every day, and who will blame you? Nobody will blame you.
+So there's more saying is make sure you do the right thing, make sense, make sure you make sense happen in the right way, right? So that's why…
+Profoundly, you need to change it all the way, because in the queries, you know, if you want to do some coding, you're always struggling, because I'm not good at experienced, right? I didn't do much. I'm also not good at memorized what the syntax I should be. I'm also not good about, you know, this kind of, complicated structure.
+that'll never be a problem now, once you utilize this. So that's why we don't want to use the convention rate work anymore. You don't have to be, you know.
+you know, somehow frustrated by, oh, I may have some technical thing, I don't sure. If you have technical things, not sure, that's how you can leverage the…
+You know, AI, online.
+The only thing they cannot provide is what? It's the analytical scale.
+It's your domain knowledge, it's your judgment, it's the sense to… to feel what's the right direction or not. That's exactly the class we're trying to provide to you. For example, if you have some data, if you have some model, turns out it's not specified.
+you want to improve this model, what you can do next? That's the most important thing.
+That's… we will spend the most time. We are trying to emphasize. I described this one just like… just like what? Just like you want to…
+compress your… Orange.
+You want the squeeze, you are… you're trying to extract this kind of juicy from orange.
+How do you do it? How do you, in the right way, to get more juicy outside? That's what we are trying to work on the feature engineering.
+Because that's the… definitely, it's a little bit, you know, creative, a little bit of innovation behind it.
+That's the one you cannot just directly copy from, the Charge GPT, because that really depends your, you know, your understanding, your domain knowledge, or your, you know, intelligence for business.
+So that's how I can expect in the future, you know, a lot of low-level fundamental data analysis will lose their job, because if you cannot provide something beyond this
+chart GPT, Gemini levels.
+what's the value? Why I need to hire you, right? Why not just use that?
+the online charter board. You must be… providing something
+the AI robot, the AI agent cannot provide.
+So that's why this kind of flexibility, this kind of intelligence, you know, is coming from your brain. That's very valuable.
+Any questions here?
+So, that's for the… prepare for this one, prepare for coding, you try. Third one is… XQ post.
+Okay? So… I will release the…
+the lecture notes today, and you're trying to propel how to play with XGBoost with your Python environment, so that means you need to
+Set up a Python environment.
+Okay? The fourth one is we are trying to ask you to create some cargo account.
+Okay? So, once you create the cargo account, so we will try to guide you for a few things.
+Number one, from Cargo, you will have the platform to validate your data. They get a…
+Instantaneous feedback, if you're submitting some result.
+Number two, from cargo space, they have some open discussion for a lot of existing data, so that's where you can learn from the people who are exactly like you, like everybody around you.
+There are a lot of many junior people. They have a lot of confusion. You feel exactly the same in your mindset, and say how people answer this question. Say how people make discussion over this kind of confusions.
+So that's very valuable. And also, a lot of people, just like open source society, they already post
+solution here.
+So, from cargo, it's also good to look at… look around these kind of peers, how these kind of piers work on. Majority of them, 99.99
+are exactly like you, you know? So you don't need to be scaled, you know, they are not the pure experts. They are a lot… only a small portion are really experts, a lot of people just like you, that are trying to use this platform to train, to learn, to practice. So that's where you can feel you're so comfortable, you know.
+The fifth one, I would ask you to think about GitHub.
+And if you know how to utilize, you know, to explore the GitHub, you know, open source, that's great, but if you're not, that's fine, you know. So we will take some time to talk about this. How do you utilize the GitHub to open your world, you know? The reason is.
+From now, you realize we don't want you to reinvent the wheel.
+So that's why I don't want you to spend some time on some low-quality coding.
+Some students, the professor, I spent the whole weekend how to open a file in Python.
+I said, oh, man, why did you say it this way? If you ask GPT, they only find me is they just give you one line, then you can solve this problem. You don't have to bother, right? You're struggling. They even… how they open the file in the right format, they just spend a few days, you know.
+Those kind of things should be very low-level coding questions. I don't want you guys… because you didn't learn anything, right? If you use the whole semester to learn how to open a file, how to write a file, how to close a file.
+How can you show the people? That's really so low-level experience, right?
+You should put more effort, learning efforts, on how to make your accuracy more advanced, how to enhance the performance, how to make a judgment.
+to… Build this feature engineering.
+So that's where we make more discussion. I hope you can challenge me, you can make more discussion to ask more questions there.
+So, for this first orientation week, you know, you need to be prepared for a few things. Trying to test if you can very, you know.
+easy to utilize the ChartGPT or Gemini, you know, and also, how to…
+get some coding from simple questions, from a part of the scripts. Can you generate a coding? Can you describe your homework question and ask it to generate coding?
+And do you install this kind of food?
+XGBoost in Python. Do you know how to add some library in Python? Okay. And the fourth one is, did you create this kind of for cargo account?
+The last one is, do you know how to access the GitHub to find the resource? So that one can be optional, but the first four, I want to make sure you are good, you are confident.
+Okay.
+Any more questions here?
+Again, just like I mentioned, right?
+It's not about the slides I lecture or post online, because that you can find hundreds of tons of them. I'm more interested about how I experience this.
+In a simple way, how to link all the different knowledge space
+together, to help you confidently merge everything together, right? What's the connection from one to another? That's what I will spend time with you. I'm not trying to read everything for you. I'm trying to explain, use the plain English, trying to use a simple way to help you understand this kind of, you know.
+The highlight, or the plum, the cons, you know, for every single technologies.
+So far, no more questions here.
+So, I appreciate your, you know.
+understanding, no. I… I bet it looks like you… somehow you're already on… on the same page as I described. I hope I answered your most questions, you will be concerned.
+So, so that's all for the first week. So, I will see you next week, and meanwhile, don't forget to work on this few things here.
+And the knee turn, just like homework, you know, everything's online. I will post the homework and the needurn online. You are given a few days to walk, you know, from home and upload the solution online before the deadline. That's good enough.
+Okay.
+Okay, have a nice week, and especially this weekend, you know, and keep warm, okay? I hope you're… enjoy your weekend, okay? Take care, everyone.
+Thank you.
+Ahmad Shah
+Ahmad Shah
+01:04:41
+Excuse me, Professor, I just wanted to ask, are our classes only an hour long?
+Rensheng Wang
+Rensheng Wang
+01:04:47
+That's only for today, okay? Next week, it will be different, because,
+I want you guys to install this a few things next week, so we will talk about that, okay?
+Ahmad Shah
+Ahmad Shah
+01:04:59
+Okay, alright, thank you.
+Rensheng Wang
+Rensheng Wang
+01:05:00
+Good, yeah.
+Ahmad Shah
+Ahmad Shah
+01:05:01
+Good day.
+Rensheng Wang
+Rensheng Wang
+Take care, guys.

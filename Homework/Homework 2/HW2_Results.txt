@@ -1,0 +1,260 @@
+==========================================================================================
+1.1.1  CORRELATION MATRIX (all time series)
+==========================================================================================
+
+Correlation of Four Factors + RF with 30 Industries:
+
+Industry      Mkt-RF       SMB       HML        RF       Mom
+------------------------------------------------------------
+Food          0.8359    0.2017    0.2151    0.0322   -0.2803
+Beer          0.7077    0.3510    0.2150   -0.0113   -0.2001
+Smoke         0.5843    0.1032    0.1718    0.0630   -0.2192
+Games         0.8302    0.4121    0.2504   -0.0250   -0.3570
+Books         0.8301    0.4081    0.2506    0.0092   -0.3064
+Hshld         0.8162    0.2619    0.1074   -0.0242   -0.1997
+Clths         0.7806    0.4601    0.2467   -0.0202   -0.3605
+Hlth          0.8040    0.2089    0.0644    0.0078   -0.2258
+Chems         0.8839    0.2080    0.1924   -0.0339   -0.3012
+Txtls         0.8234    0.4954    0.3475   -0.0357   -0.3711
+Cnstr         0.9136    0.4015    0.2472   -0.0313   -0.3232
+Steel         0.8679    0.3631    0.3437   -0.0488   -0.3945
+FabPr         0.9250    0.4068    0.2603   -0.0567   -0.3724
+ElcEq         0.9041    0.2574    0.2024   -0.0147   -0.3246
+Autos         0.8433    0.2860    0.3028   -0.0599   -0.3893
+Carry         0.8324    0.3626    0.3374   -0.0336   -0.3438
+Mines         0.7062    0.3439    0.2457   -0.0522   -0.2712
+Coal          0.4905    0.2673    0.1722   -0.0296   -0.1371
+Oil           0.7726    0.1377    0.3023   -0.0240   -0.2499
+Util          0.7618    0.1751    0.3547    0.0267   -0.3317
+Telcm         0.7552    0.1606    0.0991    0.0344   -0.2939
+Servs         0.4956    0.2851   -0.0849   -0.0115   -0.0925
+BusEq         0.8426    0.3298   -0.0663   -0.0516   -0.2284
+Paper         0.8691    0.2757    0.1973   -0.0243   -0.3002
+Trans         0.8587    0.3481    0.4305   -0.0179   -0.4232
+Whlsl         0.7960    0.4598    0.2092   -0.0129   -0.2604
+Rtail         0.8587    0.3029    0.1150   -0.0091   -0.3094
+Meals         0.7539    0.3686    0.1636   -0.0230   -0.2508
+Fin           0.9159    0.2826    0.3246   -0.0116   -0.4204
+Other         0.8420    0.4239    0.1651   -0.0357   -0.2903
+
+Inter-factor correlation matrix:
+
+              Mkt-RF       SMB       HML        RF       Mom
+------------------------------------------------------------
+    Mkt-RF    1.0000    0.3269    0.2161   -0.0687   -0.3383
+       SMB    0.3269    1.0000    0.0941   -0.0596   -0.1640
+       HML    0.2161    0.0941    1.0000    0.0121   -0.4006
+        RF   -0.0687   -0.0596    0.0121    1.0000    0.0391
+       Mom   -0.3383   -0.1640   -0.4006    0.0391    1.0000
+
+==========================================================================================
+1.1.2  FACTOR WITH HIGHEST CORRELATION FOR EACH INDUSTRY
+==========================================================================================
+
+Industry     Most Corr. Factor    Correlation
+---------------------------------------------
+Food                    Mkt-RF         0.8359
+Beer                    Mkt-RF         0.7077
+Smoke                   Mkt-RF         0.5843
+Games                   Mkt-RF         0.8302
+Books                   Mkt-RF         0.8301
+Hshld                   Mkt-RF         0.8162
+Clths                   Mkt-RF         0.7806
+Hlth                    Mkt-RF         0.8040
+Chems                   Mkt-RF         0.8839
+Txtls                   Mkt-RF         0.8234
+Cnstr                   Mkt-RF         0.9136
+Steel                   Mkt-RF         0.8679
+FabPr                   Mkt-RF         0.9250
+ElcEq                   Mkt-RF         0.9041
+Autos                   Mkt-RF         0.8433
+Carry                   Mkt-RF         0.8324
+Mines                   Mkt-RF         0.7062
+Coal                    Mkt-RF         0.4905
+Oil                     Mkt-RF         0.7726
+Util                    Mkt-RF         0.7618
+Telcm                   Mkt-RF         0.7552
+Servs                   Mkt-RF         0.4956
+BusEq                   Mkt-RF         0.8426
+Paper                   Mkt-RF         0.8691
+Trans                   Mkt-RF         0.8587
+Whlsl                   Mkt-RF         0.7960
+Rtail                   Mkt-RF         0.8587
+Meals                   Mkt-RF         0.7539
+Fin                     Mkt-RF         0.9159
+Other                   Mkt-RF         0.8420
+
+Summary count of most-correlated factor across 30 industries:
+  Mkt-RF: 30 industries
+
+==========================================================================================
+1.1.3  FACTORS WITH NEGATIVE CORRELATION TO EVERY INDUSTRY  &  RF ANALYSIS
+==========================================================================================
+
+    Mkt-RF: Negative with ALL industries? NO  (negative with 0/30 industries)
+       SMB: Negative with ALL industries? NO  (negative with 0/30 industries)
+       HML: Negative with ALL industries? NO  (negative with 2/30 industries)
+       Mom: Negative with ALL industries? YES  (negative with 30/30 industries)
+
+        RF: Correlation with each industry:
+Industry     Corr with RF
+-------------------------
+Food               0.0322
+Beer              -0.0113
+Smoke              0.0630
+Games             -0.0250
+Books              0.0092
+Hshld             -0.0242
+Clths             -0.0202
+Hlth               0.0078
+Chems             -0.0339
+Txtls             -0.0357
+Cnstr             -0.0313
+Steel             -0.0488
+FabPr             -0.0567
+ElcEq             -0.0147
+Autos             -0.0599
+Carry             -0.0336
+Mines             -0.0522
+Coal              -0.0296
+Oil               -0.0240
+Util               0.0267
+Telcm              0.0344
+Servs             -0.0115
+BusEq             -0.0516
+Paper             -0.0243
+Trans             -0.0179
+Whlsl             -0.0129
+Rtail             -0.0091
+Meals             -0.0230
+Fin               -0.0116
+Other             -0.0357
+
+  RF correlation stats across 30 industries:
+    Mean : -0.0175
+    Min  : -0.0599
+    Max  : 0.0630
+    |corr| > 0.5 for 0 / 30 industries
+    |corr| > 0.3 for 0 / 30 industries
+    Negative with ALL industries? NO
+  => RF does NOT correlate highly with the 30 industry time series.
+
+==========================================================================================
+1.2.1  AUTOCORRELATION FUNCTION (ACF) - LAGS 1 TO 10
+==========================================================================================
+
+Number of observations: 948
+Approximate 95% confidence bound: +/- 0.0637
+
+  Lag      Mkt-RF         SMB         HML         Mom
+-----------------------------------------------------
+    1      0.1072      0.0753      0.1780      0.0578
+    2     -0.0163      0.0592     -0.0133     -0.0774
+    3     -0.1082     -0.0541     -0.0316     -0.0745
+    4      0.0056     -0.0316     -0.0805     -0.0492
+    5      0.0701     -0.0538     -0.0614     -0.0390
+    6     -0.0201      0.0099      0.0078      0.0511
+    7      0.0126      0.0226      0.0645     -0.0362
+    8      0.0367      0.0264     -0.0022     -0.0159
+    9      0.0817      0.0836      0.1149      0.0122
+   10      0.0190      0.0249      0.0261     -0.0441
+
+(Values outside +/- 0.0637 are statistically significant at 95% level)
+
+Significant ACF values (|ACF| > 95% bound):
+  Mkt-RF: lags [1, 3, 5, 9]
+  SMB: lags [1, 9]
+  HML: lags [1, 4, 7, 9]
+  Mom: lags [2, 3]
+
+==========================================================================================
+1.2.2  AR(1) MODEL ASSESSMENT FOR THE FOUR FACTOR TIME SERIES
+==========================================================================================
+
+An AR(1) process: X_t = c + phi * X_{t-1} + epsilon_t
+We fit AR(1) to each factor and check:
+  (a) significance of lag-1 coefficient (phi)
+  (b) Ljung-Box test on residuals for remaining autocorrelation
+
+--- Mkt-RF ---
+  ACF(1)            = 0.1072
+  AR(1) constant    = 0.5752
+  AR(1) phi         = 0.1072  (p-value = 9.0999e-04)
+  phi significant?  YES (at 5% level)
+  Ljung-Box p-values on residuals (lags 1-10):
+    Lag  1: p = 0.9235
+    Lag  2: p = 0.8727
+    Lag  3: p = 0.0085 *
+    Lag  4: p = 0.0190 *
+    Lag  5: p = 0.0047 *
+    Lag  6: p = 0.0070 *
+    Lag  7: p = 0.0127 *
+    Lag  8: p = 0.0174 *
+    Lag  9: p = 0.0038 *
+    Lag 10: p = 0.0064 *
+  Residuals white noise? NO
+  => AR(1) model IS appropriate for Mkt-RF.
+
+--- SMB ---
+  ACF(1)            = 0.0753
+  AR(1) constant    = 0.2283
+  AR(1) phi         = 0.0754  (p-value = 2.0053e-02)
+  phi significant?  YES (at 5% level)
+  Ljung-Box p-values on residuals (lags 1-10):
+    Lag  1: p = 0.9006
+    Lag  2: p = 0.1981
+    Lag  3: p = 0.0975
+    Lag  4: p = 0.1442
+    Lag  5: p = 0.0906
+    Lag  6: p = 0.1404
+    Lag  7: p = 0.1869
+    Lag  8: p = 0.2409
+    Lag  9: p = 0.0553
+    Lag 10: p = 0.0787
+  Residuals white noise? YES
+  => AR(1) model IS appropriate for SMB.
+
+--- HML ---
+  ACF(1)            = 0.1780
+  AR(1) constant    = 0.3323
+  AR(1) phi         = 0.1780  (p-value = 2.5212e-08)
+  phi significant?  YES (at 5% level)
+  Ljung-Box p-values on residuals (lags 1-10):
+    Lag  1: p = 0.8178
+    Lag  2: p = 0.4565
+    Lag  3: p = 0.6063
+    Lag  4: p = 0.1660
+    Lag  5: p = 0.1106
+    Lag  6: p = 0.1724
+    Lag  7: p = 0.0581
+    Lag  8: p = 0.0628
+    Lag  9: p = 0.0008 *
+    Lag 10: p = 0.0014 *
+  Residuals white noise? NO
+  => AR(1) model IS appropriate for HML.
+
+--- Mom ---
+  ACF(1)            = 0.0578
+  AR(1) constant    = 0.7204
+  AR(1) phi         = 0.0578  (p-value = 7.4793e-02)
+  phi significant?  NO (at 5% level)
+  Ljung-Box p-values on residuals (lags 1-10):
+    Lag  1: p = 0.8864
+    Lag  2: p = 0.0594
+    Lag  3: p = 0.0186 *
+    Lag  4: p = 0.0193 *
+    Lag  5: p = 0.0213 *
+    Lag  6: p = 0.0127 *
+    Lag  7: p = 0.0137 *
+    Lag  8: p = 0.0225 *
+    Lag  9: p = 0.0343 *
+    Lag 10: p = 0.0295 *
+  Residuals white noise? NO
+  => AR(1) model is NOT appropriate for Mom.
+
+
+--- AR(1) SUMMARY ---
+    Mkt-RF: phi = 0.1072, p = 9.0999e-04 => AR(1) YES
+       SMB: phi = 0.0754, p = 2.0053e-02 => AR(1) YES
+       HML: phi = 0.1780, p = 2.5212e-08 => AR(1) YES
+       Mom: phi = 0.0578, p = 7.4793e-02 => AR(1) NO

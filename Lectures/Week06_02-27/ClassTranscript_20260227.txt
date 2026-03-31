@@ -1,0 +1,884 @@
+Rensheng Wang
+Rensheng Wang
+To talk about the project, to…
+Preksha Shah
+Preksha Shah
+00:00:04
+parent.
+Rensheng Wang
+Rensheng Wang
+00:00:04
+Build up the system.
+And every week.
+we will make a discussion about the one specific topic relevant to this project, because we cannot just give you data to say, hey, do it. No, we will guide you, we will give you a solution, we will give you a direction, we will tell you what it can do.
+We will provide the sample code, we will provide some ideas.
+you know.
+syllable.
+Preksha Shah
+Preksha Shah
+00:00:31
+young.
+Rensheng Wang
+Rensheng Wang
+00:00:31
+We will start with some sample code, some address.
+And we will have some of… Congo website.
+To help you to validate your performance, if you have any idea.
+Preksha Shah
+Preksha Shah
+00:00:47
+Yum.
+Rensheng Wang
+Rensheng Wang
+00:00:48
+Every week, we will have a specific topic to learn something, and we will require you to use what you learned to apply to the final project.
+So, that's why they said, you know, you have guided the project.
+Preksha Shah
+Preksha Shah
+00:01:06
+Yum.
+Rensheng Wang
+Rensheng Wang
+00:01:07
+So, we introduced one specific approach. I'm asking you to use this approach to
+do the project. I will give you the sample code, even.
+I will then… next week, I will switch to another approach. I will also give you some code, then I will ask you to apply the final project. We will give you some suggestions, guidance, so you will work on the industry project.
+with different approaches.
+Trying to, you know, to manipulate this performance.
+Preksha Shah
+Preksha Shah
+00:01:42
+Yeah, yeah, yeah, I understand. And actually, I have a, took another subject into your same professor, like, of the deep machine learning.
+Yeah, so I understand for the deep machine learning, but the deep machine learning, we don't have a project, right?
+Rensheng Wang
+Rensheng Wang
+00:02:01
+Deep learning will also have a project. That's a different project.
+You know.
+Preksha Shah
+Preksha Shah
+00:02:07
+I see the modules, and I didn't see any, type of the project and all, so, like, I'm just curious.
+Rensheng Wang
+Rensheng Wang
+00:02:15
+For deep learning, the project is not assigned yet. Okay.
+Preksha Shah
+Preksha Shah
+00:02:21
+Yeah, so I just see the syllabus, and I didn't see any, type of the, project, because,
+That's why…
+Rensheng Wang
+Rensheng Wang
+00:02:32
+Yeah. So, even learning, we will talk about that later, okay? So, let's talk about the 627, you know.
+Preksha Shah
+Preksha Shah
+00:02:40
+Okay, and like, the next… next week, we have a midterm for this…
+two subjects, like machine learning, and then, like, data analytics, we have next week exam.
+Rensheng Wang
+Rensheng Wang
+00:02:55
+Nope.
+Preksha Shah
+Preksha Shah
+00:02:57
+No? Nope. Okay.
+I just worry about it, because…
+Rensheng Wang
+Rensheng Wang
+00:03:02
+you… that's why I understand, I understand you, because in my class, in my class, we never have surprise midterm.
+We need to ask a student, are you ready to take the midterm?
+If you're not ready, there's no need to take the midterm.
+Preksha Shah
+Preksha Shah
+00:03:20
+Yeah. I'm sure you're…
+Rensheng Wang
+Rensheng Wang
+00:03:21
+Make sure you are ready, make sure you have time. If you say, next week, I'm not… I'm busy, okay, no next week. Okay, next week, I'm still busy, that's fine, let's the fail.
+Preksha Shah
+Preksha Shah
+00:03:31
+Oh, baby.
+Rensheng Wang
+Rensheng Wang
+00:03:31
+You make sure you're ready. We have time, we have a specific target. It's not like trying to make your guys' hard time, you know.
+Preksha Shah
+Preksha Shah
+00:03:40
+Yeah, I'm very glad about you, and I have another professor, like, of the same, concern, the students and all, I like it, so that's very good.
+Rensheng Wang
+Rensheng Wang
+00:03:52
+Right.
+Preksha Shah
+Preksha Shah
+00:03:52
+And then I am just going for my future in big data. Like, I'm going for the future in data analytics, so I'm learning about the data and analytics in more and more and more. I'm just researching and all, so…
+Rensheng Wang
+Rensheng Wang
+00:04:08
+I'm glad Ian, you know, you're…
+Preksha Shah
+Preksha Shah
+00:04:13
+Yeah, because I see this, like, software… I just think about, I'm going for software developer, but I see that, like, it's a very crowded, and people are very crazy. They're going out the software developer way.
+But it's very competition and all, but I like the data analytics, it's a very good opportunity, and, like, of the… it's good, but I don't know how to learn the coding at all, but I just started for some online courses and all, so…
+Rensheng Wang
+Rensheng Wang
+00:04:42
+Yeah.
+Preksha Shah
+Preksha Shah
+00:04:42
+much, yeah.
+So, can you suggest for some,
+Courses for the online, in, like, of the data analytics regarding.
+Rensheng Wang
+Rensheng Wang
+00:04:54
+Sorry, what, what's Quincy?
+Preksha Shah
+Preksha Shah
+00:04:56
+Any course for the online? Can you recommend for some course in data analytics?
+Rensheng Wang
+Rensheng Wang
+00:05:02
+Or you were asking for some recommendation for reported, right?
+Preksha Shah
+Preksha Shah
+00:05:07
+Yeah.
+Rensheng Wang
+Rensheng Wang
+00:05:09
+It is hard to say, you know, because unfortunately, you know, I only know what I'm teaching.
+Preksha Shah
+Preksha Shah
+00:05:15
+Okay.
+Rensheng Wang
+Rensheng Wang
+00:05:16
+So, because they are independent instructor, you know, so that's hard to say, yeah, and also depends on what you're looking for, right?
+Preksha Shah
+Preksha Shah
+00:05:25
+Yeah, yeah, yeah, yeah, I got it. Thank you.
+Rensheng Wang
+Rensheng Wang
+00:05:27
+I feel, you know, it's a revolution change, the way how you, you know.
+How you grab the knowledge space, how to develop your skill sets, it will be…
+Preksha Shah
+Preksha Shah
+00:05:44
+I'm very quick… Oh, maybe they're exchanging.
+Rensheng Wang
+Rensheng Wang
+00:05:46
+Because that's what I always emphasize. Number one, you know, sometimes you don't have to listen to your instructor's course. Why? Because you can find tons of video online. You can find tons of websites online, right? You can learn on yourself.
+If the professor is just trying to give you very… shallow.
+explanations, though, probably you don't have to. That's my point, you know.
+Preksha Shah
+Preksha Shah
+00:06:14
+Yeah, yeah.
+Rensheng Wang
+Rensheng Wang
+00:06:14
+The professor, the only way you take my course, I think what I can do is…
+Number one, you are on the trending loop, because you will have pressure, right? You need to follow my…
+You know, asylum menda.
+teaching session, so this will give you some, you know, guided peer pressures to work on something. If you have no pressure, so it's very easy, you lose the tension, right? Because
+on your own, then that's very different than efficiency, right? Very easy, you know, you say, if there's no homework, no mentor, no professor, you learn on your own. That's a very different story, right? It's very easy to lose your focus, lose your interest.
+So, if you're in my class, you're forced to take the homework assignment, you're forced to take the projects, those can be used to guide your interest in.
+Number two, in terms of professor teaching, you know, we prefer to teach you something that's, you know, a little bit higher level. When I say higher level, it means, you know, you can explain something in the plain English.
+Not just by reading through the textbook.
+Because typically, people will not memorize those kind of complicated, abstract formulas.
+It's hard for you to memorize the duration, right? Why are you getting this from here to here to here, right?
+You can memorize those, but it's easy to know why you do something. You know the higher philosophy. For example, you know why you choose A and not B. You know why this is the suitable to use.
+logic regression, or this is suitable to use random forest, or this is better to use the neural network. Those kind of things can give you more sense.
+Also, your coming here is not trying to memorize something, it's trying to learn something.
+If you have something brand new, you are something… it's not relevant to your textbook, what you can do.
+If a textbook tells you process images.
+The question is, what happens if in my job, my work, my daily is not imagined? Can I still use the strategy?
+Right? That's what you want to learn. That's what.
+Preksha Shah
+Preksha Shah
+00:08:33
+Yeah, yeah.
+Rensheng Wang
+Rensheng Wang
+00:08:34
+If you have something I explained in…
+The class, you always ask, you know, what happens if my data is not like what you said?
+Because there's no way you would do exactly what I showed you, right?
+In the real.
+Preksha Shah
+Preksha Shah
+00:08:47
+Good luck.
+Rensheng Wang
+Rensheng Wang
+00:08:48
+When you go to your job career, you always have something that is out of my scope. So what we are trying to do is we are trying to expand our discussion to make sure you understand. If you are something different, what you can do.
+For example, for the time series, right, I always emphasize, you know.
+you will never have so much clean data. You can never come here, okay, just run one command, you get it. No, no way. You always get something… it's not standard, it's not beautiful, it's not smooth, it's always ugly, strange, dirty.
+you don't satisfy the assumption, what are you gonna do? So that's what you want to learn.
+That's why I emphasize
+The code, how you run Arma, Arima, that's very creepy, because it's very easy to find the command duty.
+That's not the key point. The key point is how to
+Work on something which is not standard data.
+Word, how do you think about this in terms of, you know, validating your data? How do you improve your data?
+So that's where we have a lot of discussion. The same thing for your final project. We have open discussion, because the data is coming from industry. You will learn how industry people think about this one. It's not some dummy, you know.
+data set. It's real industry data. That's exactly how people from this kind of company, they think about the question, how they develop the solution.
+So you will make your hands dirty, you know the way how people think about it. That's more important.
+And also, that's why I encourage you to ask questions.
+Right? If I'm teaching A, you can always say, what happens is it not A? Right? That's a very good question.
+Because you don't have standards like this, right? I told you.
+Preksha Shah
+Preksha Shah
+00:10:39
+Are you…
+Rensheng Wang
+Rensheng Wang
+00:10:40
+A, then you can do it. What happens? Not A? Does this mean I cannot do anything? Right? You always ask a question like that.
+Preksha Shah
+Preksha Shah
+00:10:49
+I got it. I understand.
+Rensheng Wang
+Rensheng Wang
+00:10:51
+So, another way is, we were trying to give the students, landscaper.
+Because I know some students, they don't have some intensive experience in this field. That's because a lot of students are fresh.
+You know Graduate students, they don't have much experience, so…
+That's why I will try to give you some landscape. I will tell you what's industry interest, why you have those… which one is more prominent, which one technically is more dominant, and which technical is not a…
+you know, promise it anymore. And why?
+So that's the information I've tried to discuss more.
+That's why, you know, a lot of things, if you're taking the class, I hope you can pay attention to what I described, how this question, you know, is formulated, how this, you know, higher philosophy is developed.
+So this kind of landscaper tells you what industry is happening, so a lot of discussion I'm talking about here is coming from the industry interview. Let me say it this way.
+Because I know they will ask you the same interview question, like this.
+So, in other words, every year, when I try to
+polish my syllabus. What I add, what I deleted, is based on the industry.
+questions. I know what they're looking for. They are looking for, you know, data scientists.
+applied scientists, data analyst, whatever, you know, those kind of job roles, they have very specific requirements, sample questions. I know what they will ask, so that's why I will put everything in the lecture notes.
+So, you know, what I select is not a… it's not by… I just copied something from some textbook. No, it's not like that. I… I only choose something I think
+Those kind of…
+technology companies are currently care about. They are using this in the interview space, because that industry… interview itself comes just like a… just like a separate industry now.
+In other words, if you want to go to some,
+companies, you have to learn something. It's very strict. You cannot just jump to Google, Apple, just by chance. No chance. Everything is very standardized. If you know A, B, C, D, then you are qualified to take this. You have to follow this.
+they have very strict training process. If you want to get these companies, they have some very, just like,
+process and flowchart, you know. They were trying to test the behavioral questions, system designs, coding, you know, individual, this kind of technology, you know.
+the tips…
+Whatever, you know, those kind of things have been very, very standardized. So that's why, for our training, we can know exactly what we need to do. We don't have to randomly to learn this or that, you know.
+Preksha Shah
+Preksha Shah
+00:14:09
+Yeah, right.
+Rensheng Wang
+Rensheng Wang
+00:14:12
+So, that's the reality, you know, it's not like many years ago, every company, you have very…
+diversified that just by chance, you get an interview, or you get a note or not, you know. But nowadays.
+everything just, like, standard. You, you even have some,
+train your manual, you know, just try to train you. If you want to get this company, what do you need to learn? What do you need to prepare? Something like that.
+You can be very highly, you know, organized.
+Preksha Shah
+Preksha Shah
+00:14:44
+Yeah, I see… I see so many companies they're putting in the… Job details and,
+Discussions, what type of they need and everything.
+Rensheng Wang
+Rensheng Wang
+00:14:55
+Right. It has been just like industry, you know, it has been a new industry, it's called the interview industry.
+So, so everything's standard. The interview, you know, if you want to get this job, you have the Bible to… to learn.
+You can see, if you want to get the company A, you have the paper for this company. You have the… you know…
+You have a very specific developer for this kind of technical training.
+That's what we, you know, need to organize everything.
+Yep.
+Preksha Shah
+Preksha Shah
+00:15:30
+Yeah. Thank you, Professor.
+Rensheng Wang
+Rensheng Wang
+00:15:32
+Yo.
+Any more questions?
+Preksha Shah
+Preksha Shah
+00:15:37
+No, no, no, I have done.
+Rensheng Wang
+Rensheng Wang
+00:15:39
+Anybody else? You know?
+So…
+when you are attending this kind of online web campus class, right? So, my suggestion is you're always trying to be picky.
+trying to be critical. You always ask your questions, ask questions…
+By yourself, as a person to the Professor.
+Because that's the best way to learn.
+Right? In other words, you are trying to be aggressive to grab some analogy. That's the best way to learn.
+If you never ask questions, if you never ask questions, even in your mindset, then I bet you will not know much.
+If you.
+Preksha Shah
+Preksha Shah
+00:16:21
+do you want.
+Rensheng Wang
+Rensheng Wang
+00:16:21
+earn something, you better to ask yourself, does this make sense? Does this satisfy myself? You can also ask questions with the professor, right?
+So, there's two directions. You challenge yourself. You challenge your professor. That's the best way you learn something which can be applied to your future career.
+Preksha Shah
+Preksha Shah
+00:16:43
+Yes, right, right.
+Rensheng Wang
+Rensheng Wang
+00:16:45
+Yeah.
+So that's why I reunites the…
+The industry is developing so fast.
+So that's why a lot of the contents are developed, you know, so quickly.
+Even this class.
+some years ago, we don't have this class at all, because I'm coming from industry. I realize that this is getting more and more, you know,
+Challenge.
+So, we don't have some… any course to teach this. We are still using, like, 20 years, 50 years ago, textbook to teach the student, year by year, the same thing.
+But back to some years ago, we get bigger data.
+We… we give these deep learning ideas, but we don't have specific…
+course, so that's why I launched this class. I'm the one trying to organize all the information together.
+I wrote everything on my own.
+I proposed the syllabus.
+I proposed all the contents. I assembled everything in one course frame.
+You know, so that's why it's not just by, you know, any one single textbook. It's really collecting, assembling from industry experience. It's from industry trend.
+I realized that the industry is coming so dramatically, so I really realized the student has to
+capture what happens in the industry. I already explained in the last lecture, right? The number one is
+The industry compensation range dramatically changed.
+back to 20 years ago, everybody knows, you know, even you, we don't know your conversation, but I know the range cannot be critical, but nowadays.
+Depends how ambitious you are, how aggressive you are.
+those… Compensation range can be dramatically large.
+If you really wanted to come in, depends on how big you want it to be.
+So it's not like… think about it, if you're back to 20 years ago, if you're telling me, oh, you're a 25-year-old, so what's your salary, your rent, you'll expect? If I'm telling you I wanted $1 million, people say, come on, you're a joke, right? That's impossible.
+Preksha Shah
+Preksha Shah
+00:19:13
+Thank you.
+Rensheng Wang
+Rensheng Wang
+00:19:14
+But now there's, yes, that's possible, very likely.
+there, if you think about the bigger, the top technical companies, 1 million is a base, okay? Your company is 10 million.
+a lot of people work on the general AI field, you know, they directly give you the
+you know, conversation range from a few minutes to 10 minutes. That's very possible.
+Even for regular people, you know, the starting conversation can be very… dynamic.
+Why? That's exactly what happens for now, right? For Charity, you know, they are changing the possible productivities. You cannot think about it in a conventional way, you know.
+In the old days.
+One people, you're strong, but how strong? At most, you can be as 2 or 3 times compared to the regular, right?
+Preksha Shah
+Preksha Shah
+00:20:08
+No.
+Rensheng Wang
+Rensheng Wang
+00:20:08
+industry is, no, if you are used the right way, you know how smart you work on leverage the AI, you can be 10 times productivities. So that's why it depends on who is really leverage AI enough, who is not. So you will have 10 times
+difference for your future career. Think about it, that's very…
+it's very scary, but you know, because nobody wants to be the bottom, right? Everybody want to go to the top.
+So, depends on how you can realize this.
+they're rich.
+the AI.
+So that's why I was still, I think at the school,
+the department, we are still thinking about how to adapt to this kind of trend. People get a… frustrating.
+Because, you know, something is changing. A big sense is changing.
+how, you know, people even worry about how we define the software engineer, how we change the work pattern style. That's very likely, you know.
+And just like, people ask me, I don't know how to make a coding, does this make a difference? It's hard to say, you know, but at least, we need to do something. For example, if you're not good at coding, maybe now this is a good time, because now it's revolutionary to change.
+Because the coding itself is maybe not, like.
+important as before. It's more like, do you know how to think about a crisis?
+Because… if I know…
+from A to B, you need three steps. I don't know how to write the code, but if you know how to do this.
+in the higher level, that's okay, you know, you just ask the AI to generate the intermediate result for you. You need to have a good judgment.
+You need to know the higher level.
+So, that's… that's really happening, you know, every day, people trying to learn in this way. We are not starting with, right, some code, no. We're starting with some planning.
+proper engineering.
+The specific coding part.
+will be generated by AI.
+So that's why I will ask you guys to more or less to utilize something like that in my project.
+I will provide the input, I will tell you the higher-level philosophy, I will tell you what you need to do. You only need the describer, you only need to ask the AI to implement the idea, and try something, okay? I can even give you some sample code. If you're lazy, that's fine, I give you the code, just write, and ask the AI to do something.
+So that's why we need to change the way to learn this.
+But, again, if someone still wants to use convention, we do it, that's fine. I have no intention to blame you, you know?
+just say something's happening, it's changing, so that's why we need to adapt to this. The same thing for interview, because we used to ask everybody to have a whiteboard to write some code, to show me how to find the largest
+you know, the element in the matrix, for example, I'm asking, make a certainty, show me the code, number 9, explain to me.
+I have a very, very specific… but nowadays, that's very standard, right? You don't have to memorize this, you know, you just ask the computer to do it, they can do a very good one. You don't have to memorize this. In all of this, you have to memorize, but nowadays, you don't have to.
+That's a very different philosophy.
+So, in this class, pay attention more about how I describe the question, how I implement the question, instead of details, right? What's the command? What's the syntax? What's the language I'm using, right? That's not the key point.
+So, for example, why I talk about this? Because…
+for ECE, we don't have any course to talk about the recommender. I know we have a machine learning course, but we don't have any recommender-related course. But the recommender, just like what I explained, right? Recommender is the other side of a search engine.
+Search, recommender, just like the head and the tail of the coin.
+Recommended, just like search, search it like a recommender.
+You know Google, the most profitable business if you have a search engine and recommender.
+If you understand this, why people put this, right?
+So that's the… the major… interview.
+Preksha Shah
+Preksha Shah
+00:25:01
+Market.
+Rensheng Wang
+Rensheng Wang
+00:25:03
+If you know Recommender.
+you will have one specific category to help you, because most of the bigger companies, they more or less, they have to use the recommender, because that's where you get the cash call.
+So that's why I emphasize, you know, if you know something here, I hope you can take some edge.
+When you're trying to compete with other candidates.
+You don't know how… because if nobody…
+can just claim, oh, I know machine learning. So what? So many people know machine learning.
+Right?
+If you really want to differentiate this, you want to say recommender, because recommender is most companies rely on.
+This can also integrate the most cutting-edge technicals in this field. Because anything, if you're promising, they were using it for the recommender.
+So, I will try to talk about this, because you are using this, you're experiencing this, but you never be aware of this, right? Everything, your cell phone, you keep getting this recommendation from your email, from your YouTube, from your social media.
+From your iPhone, from your gaming.
+From your shopping, from everything, you get a recommendation. You just don't know what… how this happens, right? You know everything, every time you get a recommender.
+So I'm trying to tell you, you have some engineering behind it.
+If you can work on this one.
+You will get some instantaneous profit.
+So nothing can be more profit than recommender.
+You don't have to wait, because it's not like I… for example, I'm the one who have the TV factory.
+I produce a lot of TV, but before I get a profit, I need to wait a few months to a few years, right? Because I need to sell to…
+customer. It's long supply chain.
+Before I can get the money back, right?
+But recommended means what? Over one day, one second, you already got money.
+You don't have to wait.
+Because I have millions of users, every second, if I improve this recommendation, I will get more people involved, I will get more advertisement, I will get more feedback, I will get more money instantaneously.
+The quickest money you can get is from Recommender.
+That's why, if you work in this industry, people Can pay you much, much… Diversify the compensation range.
+Compared to any industry. Any industry cannot compete with them.
+So, they are doing something like this. You have the first week called the retrieval. They have millions, billions of the options behind them, but they are using the first, it's called the retrieval to isolate it, to take a subset
+Just like you go to Amazon, you search, right? Amazon have billions of items.
+As long as you type one keywords, they will very quickly narrowed down to thousands of candidates.
+From billions to thousands, that's the first retrieval.
+They have this kind of, you know, Either they can use the… user, I think, embedding.
+Or you can use collaborative future. That's what we are trying to explain in the future course. That's what you are using as for your final project.
+Okay?
+So… This kind of retrieval typically is coming from the two-tower air recommendation system.
+That's how… You know, the company can make money.
+The idea is very simple.
+In this field, you only have two cents. Typically, you have user.
+you have item.
+In the scenario about the YouTube, I think it's what we do, right?
+In the scenario about the… Amazon. The item is what? It's a shopping item, right?
+In social media, the idea is what?
+For example, Instagram, the item may be the folder.
+In Facebook, maybe the identity is about the post.
+So, item can be anything.
+User, of course, we know user, right?
+So, the recommender is trying to identify for a specific user which kind of item you should be linked to this user, right? So, for the two towers.
+recommendation system.
+We are trying to, for each user, You find some embedding system.
+What do you mean, embedded? That means, big user, I called, oh, my name is Jason.
+My membership ID is 12700… A D dash Y, you see? That's user. Name is Jason.
+membership ID, right? That's it. But those kind of information, computer doesn't know how to do it. Computer can never take advantage of that. Those doesn't make sense. For those things, we have used embedding. That means I need to assign whatever you call it, JSON, Amini.
+Alex, whatever, you know, I need a map to some numerical number, numerical vectors.
+This numerical… Typically, it's a flex… float number, like a .3, minus 0.4…
+minus 0.1, blah blah blah, okay? You have many, many numbers.
+Those numbers will be assigned to JSON.
+Those numbers… you have another number will be assigned to
+this member ID. So whatever, any user-related information will be mapped to our embedded vector. So those embedded vectors is a numerical vector. Numerical vector means you have some numbers there.
+Okay? Why? The reason is, if you want to ask the computer to understand the JSON to understand your
+you know, member ID, you understand your address, whatever.
+they only understand the number. They have no idea about the streams. You have to map to some numerical numbers.
+The same saint.
+For item.
+For example, for video, right? You have video 1, video 2, right? You may have a gaming video, you have some movie, you may have a music video, whatever. You also need that what?
+embed, embedding.
+So that means I also need a sign and some vector.
+vector.
+Depends on the video title, depends on the video…
+Contents depend on videos, you know, author, whatever, you know, you need to map to this kind of numerical vectors.
+That's called the embedding.
+Because they're two separate, right? One from user, one from item, so that's why people call it two towers.
+Now, this comes with a very important sense, because for computer, for computer.
+If you have one vector, you have another vector. The best way to find the recommendation between two vectors
+It's very simple.
+make a product.
+For example, let me use the example. If I have the user embed vector like this, 0.1, minus 42.
+Okay? I just used a very dumb example. Only two numbers, right?
+That's for user. I have another vector coming from minus the 2… minus 0.3.
+This from item, okay? So, what… what the recommendation will do is, they will use this one multiplied with this vector. So that ends with what?
+0.1… times 22, Pass.
+minus 0.2… Times.
+minus 0.3.
+Right?
+What do you get?
+Right? Get the number.
+Okay? So, those two vectors multiplied together the number. So, just like here, right? So, every user, you have an embedded vector. Every item, you have an embedded vector. So these two vectors multiplied together, you should get a scalar number, right?
+Now, for this specific user, if you ask me to make a recommendation for items.
+the philosophy is so simple. You just use this vector to multiply with all the candidate vectors, right? Because you have many, many different items, you have many, many different vectors, right? You multiply together, you only find that when you multiply together, the product, it hires the top one. That's your recommendation, candidates.
+Any pricing here?
+Think about it, that will be the… the interview will ask you, what do you mean? Two towers recommended? How…
+How does it work?
+Right? You have user, you have item, everything you need to map to…
+a numerical vector. Those two numerical vectors multiplied together, you should get the number. Once you have a single number, computer know how to make a sorting, right? Ranking, right? They only take its top ranking, top values as the candidate you want to keep.
+If they are multiplied together, they get a small number. What does it mean?
+This user and this side are not irrelevant.
+This philosophy, you can be used for many, many instincts.
+We will keep repeating the same thing.
+The same thing for deep learning, the same thing for recommender, the same thing for metrics regularization, the same thing for collective filtering.
+So, for any big company, they will have a bigger database. They're trying to collect in this kind of embedding vectors. They're trying to collect in
+the item embedding vectors. You have two towers. They are trying to tune this system, make sure the embedding vectors is more accurate.
+So, when you say, what do you mean, more accurate? Because, you know, every day, we know how the user make interaction with audience, right?
+For example, for user.
+I recommend a 10.
+And, the user will click that 3 out of 10, right? For example, just like you'll watch the…
+YouTube, I recommend 10 videos, you click 3 of them, right? So that means for these 3, the embedded vector and the user vector, when you multiply together, those 3 should be top. If they're not top, you need to tune the embedded vector. To make sure you tune this embedded vector
+From user and item, make sure after you tune, you will make a user and item multiplied together. For these 3, you should get the top.
+That's what I mean, tune, right?
+You're trying to use…
+what do you… whatever you observed in action between user and item, just like that, I try to understand why user watch this movie, watch this video, watch that video, right? If they watched more video, I will try to use those videos to make some similar embedding to the user.
+Does that make sense?
+Because the philosophy, trying to understand it like this, if a user watched a lot of… for example, if I'm the user, I've watched a lot of deep learning.
+video. So that means that those kind of deep learning vector should be very similar to my user
+embedded vector. Or my user embedded vector should be close to this kind of a
+Deep learning video embed vector.
+Because that's how you explain why I clicked so many deep learning videos.
+If you watch more, they believe the elder and hydrogen should share the same…
+embedding vectors. They share the same Representation in the embedded space.
+Those embedded space people, sometimes it's called a hidden space.
+the Hayden, the meeting Hayden here, because it's hard to ask me, if you ask me, Professor, what do you mean 0.7? What do you mean minus 0.4? I can tell you, I don't know.
+Because it's not expandable, you cannot expand this 0.7 minus 0.4, what does it mean? But overall, I can only say that this vector can be best to describe the users in terms of numbers.
+In the embedded numbers.
+So, how do you build these kind of embedded vectors? The idea is very simple. Orientally, every user, you just assign the random vectors. You just use the random function, you generate the random numbers.
+Of course, you have a random embedded vector. You also have randomly embedded items. When you multiply it together, it's totally messy, right? Not relevant. That's fine, you know, because we know which user
+Interact with which item?
+just like, I know you bought this item, right? For Amazon. I know you watched this video for Google. I know you interact with this article with Facebook. I know you
+click this photo in Instagram. So every company know how you user make an interaction with items.
+Of course, items will be different definition in different scenarios.
+In Amazon, item means shopping item.
+In… YouTube. That means the videos.
+In Instagram, either maybe the photo.
+in, you know, Facebook, maybe you're talking about the…
+Social interaction, blah blah. You know, you are very, very different.
+But whatever, they are trying to use this in actions to refine the representation, to refine the embedded vectors here and embedded vectors here. You have two separate embedded systems, right? They're trying to make these two separate embedded
+systems to synchronize. When I say synchronize, that means
+If user and item with a very similar vector, you should have more inactions, you should have higher inactions.
+If you have a movie, And you have users with very high…
+Similarities, that means, that's what you need to recommend.
+That's exactly simple philosophy for Amazon. If I know your… Embed your vector.
+Of course, I know what's the item, shopping item I should recommend to you, right? Because I just searched around. All the vectors is close to you.
+What do you mean, close?
+just multiply it together, if you get a bigger number, that means I'm close, right?
+So the way to say close, or the way to say how they are similar, just multiply together.
+Use a vector multiple ways, and that's a vector, you get a single number. The single number is a very…
+strong indicator to say, oh, do you think I recommend this or not?
+Any pricing here?
+So that's the first step. You can have a two…
+Power. Recommended. Each user, you have a… each user, you have a vector, right?
+And you have another… this is from the user tower.
+You also have the Eiden Tower, right? You have many, many vectors.
+So you just multiply this user, specific user, to so many items, vectors.
+then you can quickly select a very small portion with the best similarities. Just like, say, you have the highest…
+product, right? Vector products.
+That's how you select this. That's why you get some candies added here.
+you have many, many different ways, right? The one way would do…
+In this class, we will learn this kind of matrix fabrication, because I will ask you guys to make your hands dirty. That means you know exactly how you write the code. I will give you the code. You run the code, you know how this kind of for…
+user item.
+making the actions, you know, how to make a recommendation? How precise your recommendation?
+It's according to your embedded vectors.
+So that's the first step. But still thousand candidates, still too many, right? You cannot just recommend a thousand items, shopping items, to the user.
+But now you make a second step, you make a rough ranking.
+You make a filtering.
+This filtering, just like you explained, right, you can use the…
+reasons, availability, or content safety, right? For example, even…
+it's very close, maybe something you think is not… for security reasons, or for the, I guess, restrictions, right? For example, if this is the teenager, you think this kind of maybe is not the prop to present, okay? Or maybe this…
+content is very similar, but it's, it's many years ago, it's very outdated, so maybe, right?
+So, you want to choose a more recent, something like that, you know, you can filter out, you can make rough ranking, you can…
+Grady… refund this, you make an even smaller candidates. You just…
+That's exactly just like how Google will hire people, right? I will send a thousandth email invitation by rough
+By the first retrieval, you know, I found many candidates, they say, hey, I invited you to have some interview. And then I will make the second ranking. I will very quickly, you know, remove something.
+by this or that, right, you get to shrink down… shrink it down to some small groups. You gradually reduce the candidate pool size.
+So, this one is very…
+rough, and also, you can think about the perimeter, you know, just like a filtering, you have to define some criterion to make it further purified.
+to get a small data set. The third one is the fine ranking. Now, this is the sophisticated, advanced.
+So that means now, because you already have
+For example, you already have a user, right? That's a user ID. Now, I already give you the, like, 200.
+items.
+Okay? For this portion, now you can use the model to…
+maximize rich features. That means you're trying to derive this kind of machine learning models, because what you are trying to do is, you want to decide
+Okay? For… each item
+you have… you're trying to say, for this specific item, what's the engagement metrics? Because for each item, right? For example, this first item, you have a vector. For this vector, you also have some associated data. Like, for example.
+how many people clicked this video, right? How much time they watched, and how much, you know, how many users sum up
+How many users make, sharing this link?
+How many users saved it?
+Right? Those kind of engagement metrics can help you make a sorting ranking understand this, right? And based on this, you can differentiate this 200, which are few is more, even more.
+In other words, Beyond this kind of embedded vector, we have some features
+What do you mean, features? Because if you have some metrics trendy describes, right? This is a feature, right?
+Click through, rate. Watch time, right?
+Just, like, how likely you'll make some,
+It's sum up, right? You like?
+This kind of sense, you call the features, because you have some quantitative measurements. You can… once you have this one, you can use conventional… you can use very conventional
+Machine learning.
+whatever, you can use logistics regression, XGBoost, whatever, right? You can do that.
+So, that's the final, we call the final ranking. Depends on your scenario, you can make your…
+Description is very…
+you know, sophisticated. But why? The reason is, you have a very small audience space, right? After the first one, the first two, the candidate space can be much, much smaller.
+For those small.
+group of set data. Of course, you can make very sophisticated accuracy, right? But if you have a billion
+offload items, no, that's too much, you cannot do anything like this, right? Only when you have very small, for example, you only have this many items, of course, you can do very, very sophisticated, very detailed.
+the feature. You can run this.
+This one, the first one, I already explained the last time, you know.
+Here, the final, that's the ranking before you post.
+Right?
+Now, here you have a few, you know, things you need to worry about. Because, for example, you need to think about diversity.
+diverse, that's exactly… you think about it in the real life, right? When you watch YouTube, for example, you search deep learning.
+They may come with odd…
+top recommendation coming from the one channel, right? But if all top 10 come from the same channel, then they will say, oh, come on, it's not diversified, right? I know the top 10 are the most relevant, but still, I don't want to make it all comes from the same channel, right? So maybe you will add a
+Two or three from other channels, because you're trying the exposure, more diversify the resource.
+And also, you want to make adjustments by, you know, some business reasons.
+You understand, right? Because…
+Recommender, never be the pure recommender. It's always have some business. Just like, for example, you have some…
+advertisement, right? Some sponsorship behind. So people really prefer to recommend it. Even, I know this is not the best quality product, because you paid me, so I always try to put something within the top rank.
+Just like, like, think about Amazon.
+You search something, none of them are really top line. You have one of them, it's not by the…
+top ranking is really by the business advertisement, because you pay me, right? You want to get more exposure, then that's why I put you as the top. It's really not about your quality, it's really about what you pay me, so that's why I add your exposure. So you may… you will mix your summer…
+High ranking with some high business sponsorship advertisements, yeah.
+And also, you may have some suggestions, like, you know.
+You don't want to make a user restricted to… The dead loop
+What do you mean, dead loop?
+For example, I like a gaming video, right? So you recommend gaming radio. I watch gaming radio. Because I watch gaming video, you recommend more gaming video, I watch more gaming video, you recommend more gaming video, then I watch more, right? It's like a… it's a dead loop, right?
+That's not good.
+Even I like gaming video. If you keep it recommend a gaming video, that's really called that group, right? So, I want your exposure more, because
+I never tried something else, but as recommended, you cannot just, based on all your history, you want to say, even you only watch the game video, maybe I will give you some sports video.
+Because I don't know, right? Maybe… I…
+Extendedly add one or two spots Video…
+mixtured with this kind of game video, maybe someone will click. When you click, maybe this can grow your interesting. You will open a new door. You will grow in your interest, right? You'll spark your interest, and now you start to pay more interest about this kind of sports video.
+So that's why, for this kind of post-ranking, you're always trying to make some extra exposure to some future potentials.
+That's why we make a search. For example, with Amazon, you search.
+Swimmy go.
+Of course, they will give you some swim gun. You were funneled? Come on, I searched swim gun, why are you giving me something else?
+Something else is not because I'm stupid. No, I'm really just saying, maybe I will recommend some other sports items, maybe you will get some… you will grow up some interest, right? You still have some chance.
+So…
+But it's a trade-off. You can never pop up too many, but you're always trying to put maybe, like, 10%. Some items is outside of your scope, you're searching.
+they are on purpose to do that, because very likely, when you extend it, you say something, it's not what you want, but that still interests you, you may be clicked. That's possible.
+So, it's a trade-off.
+So, that's why, for the post ranking, you will have some
+You know, long pew feature-based ranking.
+you need to have some, content, context. For example, you need to think about, oh, Today's a…
+special day. If you look at the timestamp, because this time stamp, so maybe I need to recommend something relevant to this time. For example, today, it's, like, Thanksgiving, so I said, okay, even you are not… even you are searching this kind of swimming go, I still want to recommend some holiday gifts.
+Right? So that's why I purposely added some holiday gifts, because it's relevant to this timestamp, it's relevant to the festival, it's relevant to the context.
+So those kind of adjustment is something beyond technical.
+That's called re-runken. That's exactly your say.
+Abbott.
+from the users.
+site. Use the end. That's what you will see. Because right now, you will only show the top 10, or top 6.
+So you have to be careful how to arrange the ranking order, how to mixture the business, how to mixture this kind of potential
+Grow up interest.
+But, those kind of adjustments, It's very interesting, it's, if you tune a little bit.
+How do you know it's a good one, a bad one? Very easy, I can imagine, right?
+if I make this adjustment, does this increase my revenue or not?
+That this increase the customer?
+involvement or not? What do you mean, involvement? For example, I changed this strategy, right?
+user used to… average user will spend 5 minutes with Amazon after I make this adjustment.
+Just by changing one parameter, for example, the parameter from 4 to 5,
+If the user… I found that they get not 5, instead you have 6 average user… usage for user.
+then that means I will have at least 10% more, or 20% more revenue profit. So, based on this one, because Amazon has a billions of users, this kind of… a few percent increase, you will get millions
+between millions and billions of profit. So that's why, for this kind of big company, they don't care about giving huge compensation, because you can magnify the impact significantly.
+They never use some conventional market value to evaluate your compensation.
+They only evaluate how important the business you're doing. So that's why I always recommend people to pay attention to which business is most profit. That's the area you really need to put the most efforts on. Because most cutting-edge technical always putting on those kind of areas.
+So that's the four stages you have here.
+Now you can see here, right?
+That was the training system for two towers.
+You have customer. You have item.
+you need two separate towers to get this embedded vector. Those embedded vectors multiplied together is what you want to recommend.
+Right? So, you want to change, you want to tune the embedded vectors to make sure the user and item exactly get a higher chance to click.
+To get a higher chance to buy.
+Right? For example, I found this customer embedded vector and the item embedded vector with higher similarities, but I found that nobody buys it. What does it mean? I need to change it, right? That means I need to make the item, it should be with delta change.
+Because then nobody buying it, nobody linked it. On the other hand, if we found the user an item, we have a lot of users buying a lot of items, so those items and user should be getting more similar, get closer and closer, because that's how you get in actions, right?
+So you have two separate towers trying to tune.
+So, these two towers, it's very simple philosophy. That accounts everything.
+the basic reason to use this, just like I explained, right? The computer only knows calculation.
+They don't understand these constraints. You can never tell me I'm Jason. No, instead of telling me my name is Jason, just tell me what's the sequential of numbers, embedded numbers.
+It's much better for that. So every user, you just, from the encoder, you just get some…
+Embedded the numerical vectors.
+The same thing, every item, even you have very specific physical meaning, I still want to map you to another embedded vector. Those embedded vectors and this embedd vector, they should be in the same space. What do you mean, same space? Because those two vectors, if they're very similar, that means the user will love this item.
+You will have higher… inactions.
+That's where you make a recommendation.
+And here, you know, we are trying to say, if you're Pinteresting, you know, those kind of embedded training typically is offline.
+Because offline… because the embedding itself, you know, how to train this embedding, right? How do you adjust the embedding? It's very intensive.
+You cannot make real time, you know. But for the online pipeline, what does it mean? So that means, if a gaming user come in, I need to very quickly
+almost… almost instantaneous, I need to identify which kind of set of items you should be…
+For the potential candidates, right?
+When every user logs in to Amazon, instantaneously, I know which kind of subset I need to pull out to fill your interest. That's called online.
+For this online pipeline, you cannot make any embedding tuning again, because that's too slow.
+So, for that range, I assume the customer query and the item
+embedded vector, they're already well done, so I directed it to fetch Fitch.
+But during the… after midnight, everybody rests, right? Then I will use whatever happens for the daily transactions.
+To go back, you have this kind of offline training. So, you only offline train this model every day, so that means every early morning, I will refresh the system to get the new embedded vector for user, the new embedded vector for the system, but this only
+Update once a week, or once a day, something like that.
+That's called offline. But online, you should be very instantaneous, okay?
+When users come in, you know exactly which kind of subset item vectors you need to fetch.
+So that's the… the fourth stage.
+And let's take a short break, then we come back. If you have any questions, please leave your questions in the chat window.
+Hello, can you hear me?
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:17:46
+Yes, sir.
+Rensheng Wang
+Rensheng Wang
+01:17:48
+Okay, great.
+So… For example, I explained this four-stage architecture, right?
+For most companies, if they are trying to test, if you understand this kind of a recommender, so what they are trying to ask is, you are required to draw this kind of diagram to show this kind of a pipeline.
+That's how you test it.
+Of course, they cannot ask you to write some code to one recommender, but they will ask you to draw something like this. For example, they want to ask you to draw this new tower.
+like this, or draw something like this, to explain the online, offline process, to explain this. You draw something, you type some words, explain this flow chart.
+So that's the interview question.
+So…
+make sure you understand the philosophy, then you can make a, you know, explanation why we need this, what we are doing here, and what stage, and why, you know, and how you improve. So that's typical, you know, to testify if you really understand this.
+Citizen or not.
+Any questions so far?
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:19:15
+No, Professor.
+Rensheng Wang
+Rensheng Wang
+01:19:17
+Good.
+So, in the following, we are trying to explain, right? The first stage is the processing the large element.
+to retrieval subsets. So, the typical way People utilize this like this.
+you know, you have a vector, right? That's your refrain vector here, like this.
+You also have a candidate vector space.
+So, candidate vector space is just something like this.
+You see, you have many, many candidates, right?
+Your many, many vectors.
+You can sing about it this way.
+So if that's the vector here.
+You want to fetch the subset, right?
+So, for example, If that's the…
+user vector here. So you're trying to find the user vector here.
+And very likely, you will slice this portion of the data. That's the subspace you want to take.
+Why? Because, you see, if that's the vector you have, right, those nearby vectors await the smallest distance. You see, all the other vectors get far away, right? Get a much higher distance. So that's very easy to identify the subset.
+just like, think about the pie, right? You find the vector, Then you find the nearby, readings.
+That's how you subset, very quickly get a subset. Think about it, you may have billions of records, right? How you get a few thousand?
+from the billions of records. So that's how you can take the first stage, we call the retrieval.
+Second stage, We have this kind of different filters.
+Okay? For the different filters, I already explained, right? And then the last stage, the stage 3, then that's where you can explain how you can utilize this
+For this kind of… for machine learning strategies you have utilized before.
+Because that's where you can testify if you know how to maximize the feature space.
+Right? Because if you want to use some machine learning, the very shallow machine learning, then you have to describe which kind of feature you want to capture. For example, if we talk about the shopping, right?
+For the shopping scenario, Which kind of feature you want to capture.
+And from the user, from the user.
+as vector. You can have what? You can have the user ID.
+Right?
+You can have the login time.
+What do you mean, log in time? Because every day you have 24 hours, right? Are you logged in 6 a.m. or 6 p.m? Different time slot can give you some information, right? Are you logged in in early morning, midnight, right? Those kind of…
+Time index can also give you some
+information. For example, if you're logging in the 7th, AM.
+Because that's early morning, right?
+or 10 p.m, they're different.
+AM and PM, because they're in a different time slot. So you can use this kind of one-hot coding.
+To convert this kind of timestamp to a numerical vector, right?
+The one hard coding.
+Blogging time, also region.
+What do you mean, region? Because, for example, from the IP, I know you're logging from New Jersey.
+Then, that means that's the local region, right? So based on the local region, I need to recommend something that should be around you, especially for social media.
+You are using… Social media, and it's…
+the app, from the back end, they know you are logging from New Jersey, so they're trying to…
+grab something relevant to your location to make a recommendation based on that, right? That's very interesting.
+You may… if you're in New Jersey, of course, if there are some,
+local news happens around New Jersey, you might be interested, right? But if you're not from New Jersey, if I recommend some local news to you, then you'll feel weird, you know? I'm not living here, why I need to look at this, right? So that's why we're…
+And also, language.
+Because they're trying to… To say which kind of language you're using, right?
+Are you? Because from this language, they can somehow infer which kind of nationality.
+Are you a native speaker, or you're a foreign speaker?
+Right? So that's a language you can easily identify.
+And also, from your setting.
+Your cell phone setting.
+And also, from your history, that's, that's most likely, that's most interesting either for history.
+Which kind of scents you buy.
+Which consensus…
+You view which kind of item you browse, which kind of video you saw, which kind of audio you stream.
+Those kind of history can be very intensive.
+But how do you formulate history into features?
+Again, just like I said, right? The computer only understands these numerical things, so everything in history you have to summarize in terms of quantitative numbers.
+You can say, in the past one week.
+how you describe the statistical behaviors, right? For one week, for example, how many shopping you have, right? You make 9 shopping, right? For this 9 shopping.
+which category you have, right? All 9 belongs to electronics, or belongs to fashion, or belongs to, what else, right? Sports.
+So, from this line, you can separate a few different categories. Every category, you have some numbers, right? Like, 3 here, 4 here, 2 here, something like this, right? So, in other words, you need to… trying to formulate the history in terms of what?
+Numerical descriptions, statistical numerical descriptions. Those kind of numerical numbers you'd call the features, based on these kind of features.
+You will use this one to help you, Further, narrow down your candidate.
+So that's how you can use this strategy to refine the Stages 3. Stage 3 is really trying to utilize some of
+quantitative features.
+It's called a Sophisticated Feature Engineering Stage.
+The last stage.
+It's trying to refund, make re… you know… reorganization.
+That's the… The final ranking. And this one, it's…
+is relevant to your final evaluation. What do you mean, final evaluation? For example.
+you search some video, I recommend the… when you search some video, I recommend the one… Cube?
+3, 4, to 10, right? I recommend a 10.
+So, what does that mean? That means, from my side, I think it.
+That's the top one priority, that's two, right? That's… I get a score like this.
+But the user may not agree with your ranking.
+The user may say, okay, you missed the 10 possible video, I watched the 3, I watched 2, and I didn't watch one. Then, that's a good time for you to refine your model. Why? You think that's the top one, but instead, the user didn't click one at all.
+Right? That's where you need to refine your model. You need to refine your…
+Users embedded vectors, or you need to refine the item vectors, embedded vectors.
+Because from the inaction, it looks like, you know, the one you think won is another one, is another top one.
+Right? So you can refund… let's can use that to refund, your embedded vector for these two tower systems.
+So, I think that's the… Framework for recommendation.
+I think you should have a general idea how this kind of data flow is coming, right? When user clicks your interface, you trigger this pre-trained two-tower embedding systems. From the two-tower embedding systems, you are trying to
+Pop up the final recommendation.
+Okay, so that's the four-stage architecture.
+And,
+That's all for the day, but I will stay here. I'll leave some time with you guys if any questions.
+So, very soon, so we will start your final project. We'll talk about how you applied
+recommendation for some real industry data. How you can make your hands dirty to massage data to get some insight about user behaviors.
+Endomoquizing here?
+Okay, thank you, everyone. I will see you next week.
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+01:30:36
+Thank you, Professor.
+Rensheng Wang
+Rensheng Wang
+01:30:37
+Sure, okay. Take care, everyone. Have a nice weekend.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:30:57
+Oh, Professor?
+When would be the… when would be our midterm exam?
+Rensheng Wang
+Rensheng Wang
+01:31:05
+Not decided yet. So, relax, okay, no worries.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:31:10
+Oh, okay.
+Rensheng Wang
+Rensheng Wang
+01:31:11
+I just wanted to recheck. Sure.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:31:14
+Yeah, thank you, Trump.
+Professor, have a good weekend.
+Rensheng Wang
+Rensheng Wang
+01:31:18
+Yeah, have a nice weekend, okay? Take care.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:31:20
+They cannot lie.

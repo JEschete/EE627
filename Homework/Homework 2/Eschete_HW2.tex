@@ -1,0 +1,268 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\footnotesize,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b,
+	keywordstyle=\color{blue!70},
+	stringstyle=\color{red!60},
+	commentstyle=\color{green!50!black},
+	morekeywords={as, True, False, None}
+}
+
+\title{\textbf{AAI 627 Homework 2\\Factor Model \& Time Series Analysis}}
+\author{\textbf{Jude Eschete}}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	\newpage
+	
+	%======================================================================
+	\section{Part I: Factor and Industry Return Analysis}
+	%======================================================================
+	
+	The dataset \texttt{EE627A\_HW1\_Data.csv} contains 948 monthly observations (January 1927 -- December 2005) of returns on 30 industry portfolios and five factor series: Market excess return (Mkt-RF), SMB, HML, the risk-free rate (RF), and Momentum (Mom).
+	
+	%----------------------------------------------------------------------
+	\subsection{1.1.1 \ Correlation Matrix}
+	%----------------------------------------------------------------------
+	
+	Table~\ref{tab:corr_industry} presents the correlation of each industry return with the four-factor model variables and RF. Table~\ref{tab:corr_factor} shows the inter-factor correlation matrix.
+	
+	\begin{table}[H]
+		\centering
+		\caption{Correlation of Four Factors + RF with 30 Industry Portfolios}
+		\label{tab:corr_industry}
+		\footnotesize
+		\begin{tabular}{l r r r r r}
+			\toprule
+			\textbf{Industry} & \textbf{Mkt-RF} & \textbf{SMB} & \textbf{HML} & \textbf{RF} & \textbf{Mom} \\
+			\midrule
+			Food  &  0.8359 &  0.2017 &  0.2151 &  0.0322 & $-$0.2803 \\
+			Beer  &  0.7077 &  0.3510 &  0.2150 & $-$0.0113 & $-$0.2001 \\
+			Smoke &  0.5843 &  0.1032 &  0.1718 &  0.0630 & $-$0.2192 \\
+			Games &  0.8302 &  0.4121 &  0.2504 & $-$0.0250 & $-$0.3570 \\
+			Books &  0.8301 &  0.4081 &  0.2506 &  0.0092 & $-$0.3064 \\
+			Hshld &  0.8162 &  0.2619 &  0.1074 & $-$0.0242 & $-$0.1997 \\
+			Clths &  0.7806 &  0.4601 &  0.2467 & $-$0.0202 & $-$0.3605 \\
+			Hlth  &  0.8040 &  0.2089 &  0.0644 &  0.0078 & $-$0.2258 \\
+			Chems &  0.8839 &  0.2080 &  0.1924 & $-$0.0339 & $-$0.3012 \\
+			Txtls &  0.8234 &  0.4954 &  0.3475 & $-$0.0357 & $-$0.3711 \\
+			Cnstr &  0.9136 &  0.4015 &  0.2472 & $-$0.0313 & $-$0.3232 \\
+			Steel &  0.8679 &  0.3631 &  0.3437 & $-$0.0488 & $-$0.3945 \\
+			FabPr &  0.9250 &  0.4068 &  0.2603 & $-$0.0567 & $-$0.3724 \\
+			ElcEq &  0.9041 &  0.2574 &  0.2024 & $-$0.0147 & $-$0.3246 \\
+			Autos &  0.8433 &  0.2860 &  0.3028 & $-$0.0599 & $-$0.3893 \\
+			Carry &  0.8324 &  0.3626 &  0.3374 & $-$0.0336 & $-$0.3438 \\
+			Mines &  0.7062 &  0.3439 &  0.2457 & $-$0.0522 & $-$0.2712 \\
+			Coal  &  0.4905 &  0.2673 &  0.1722 & $-$0.0296 & $-$0.1371 \\
+			Oil   &  0.7726 &  0.1377 &  0.3023 & $-$0.0240 & $-$0.2499 \\
+			Util  &  0.7618 &  0.1751 &  0.3547 &  0.0267 & $-$0.3317 \\
+			Telcm &  0.7552 &  0.1606 &  0.0991 &  0.0344 & $-$0.2939 \\
+			Servs &  0.4956 &  0.2851 & $-$0.0849 & $-$0.0115 & $-$0.0925 \\
+			BusEq &  0.8426 &  0.3298 & $-$0.0663 & $-$0.0516 & $-$0.2284 \\
+			Paper &  0.8691 &  0.2757 &  0.1973 & $-$0.0243 & $-$0.3002 \\
+			Trans &  0.8587 &  0.3481 &  0.4305 & $-$0.0179 & $-$0.4232 \\
+			Whlsl &  0.7960 &  0.4598 &  0.2092 & $-$0.0129 & $-$0.2604 \\
+			Rtail &  0.8587 &  0.3029 &  0.1150 & $-$0.0091 & $-$0.3094 \\
+			Meals &  0.7539 &  0.3686 &  0.1636 & $-$0.0230 & $-$0.2508 \\
+			Fin   &  0.9159 &  0.2826 &  0.3246 & $-$0.0116 & $-$0.4204 \\
+			Other &  0.8420 &  0.4239 &  0.1651 & $-$0.0357 & $-$0.2903 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Inter-Factor Correlation Matrix}
+		\label{tab:corr_factor}
+		\begin{tabular}{l r r r r r}
+			\toprule
+			& \textbf{Mkt-RF} & \textbf{SMB} & \textbf{HML} & \textbf{RF} & \textbf{Mom} \\
+			\midrule
+			Mkt-RF &  1.0000 &  0.3269 &  0.2161 & $-$0.0687 & $-$0.3383 \\
+			SMB    &  0.3269 &  1.0000 &  0.0941 & $-$0.0596 & $-$0.1640 \\
+			HML    &  0.2161 &  0.0941 &  1.0000 &  0.0121 & $-$0.4006 \\
+			RF     & $-$0.0687 & $-$0.0596 &  0.0121 &  1.0000 &  0.0391 \\
+			Mom    & $-$0.3383 & $-$0.1640 & $-$0.4006 &  0.0391 &  1.0000 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	%----------------------------------------------------------------------
+	\subsection{1.1.2 \ Most Highly Correlated Factor per Industry}
+	%----------------------------------------------------------------------
+	
+	Among the four factors (Mkt-RF, SMB, HML, and Momentum), the \textbf{market excess return (Mkt-RF)} correlates most highly with \emph{every} one of the 30 industry portfolios. The correlations range from 0.4905 (Coal) to 0.9250 (Fabricated Products), with the vast majority exceeding 0.75. This is consistent with the Capital Asset Pricing Model (CAPM): the market factor is the dominant driver of systematic risk across all industries.
+	
+	%----------------------------------------------------------------------
+	\subsection{1.1.3 \ Negative Correlations \& RF Analysis}
+	%----------------------------------------------------------------------
+	
+	\paragraph{Factor with negative correlation to every industry.}
+	\textbf{Momentum (Mom)} is the only factor that is negatively correlated with all 30 industry portfolios (correlations ranging from $-0.0925$ for Services to $-0.4232$ for Transportation). The remaining factors --- Mkt-RF, SMB, and HML --- are positively correlated with all or nearly all industries (HML is slightly negative for Services and Business Equipment only).
+	
+	\paragraph{Does RF correlate highly with the 30 industry time series?}
+	No. The risk-free rate (RF) exhibits extremely weak correlations with all 30 industries: the absolute correlations range from 0.0078 to 0.0630, with a mean of $-0.0175$. None of the absolute correlations exceed 0.10, let alone the 0.30 or 0.50 thresholds typically considered ``moderate'' or ``strong.'' This indicates that the risk-free rate has essentially \textbf{no linear relationship} with industry returns.
+	
+	\newpage
+	%----------------------------------------------------------------------
+	\subsection{1.2.1 \ Autocorrelation Function (ACF), Lags 1--10}
+	%----------------------------------------------------------------------
+	
+	The ACF values for the four-factor time series are computed for lags 1 through 10. With $n = 948$ observations, the approximate 95\% confidence bound is $\pm 1.96 / \sqrt{948} \approx \pm 0.0637$.
+	
+		\begin{table}[H]
+			\centering
+			\caption{Autocorrelation Function (ACF) for Four Factors, Lags 1--10}
+	\label{tab:acf}
+		\begin{tabular}{c r r r r}
+			\toprule
+			\textbf{Lag} & \textbf{Mkt-RF} & \textbf{SMB} & \textbf{HML} & \textbf{Mom} \\
+			\midrule
+			 1 &  0.1072\textsuperscript{*} &  0.0753\textsuperscript{*} &  0.1780\textsuperscript{*} &  0.0578 \\
+			 2 & $-$0.0163 &  0.0592 & $-$0.0133 & $-$0.0774\textsuperscript{*} \\
+			 3 & $-$0.1082\textsuperscript{*} & $-$0.0541 & $-$0.0316 & $-$0.0745\textsuperscript{*} \\
+			 4 &  0.0056 & $-$0.0316 & $-$0.0805\textsuperscript{*} & $-$0.0492 \\
+			 5 &  0.0701\textsuperscript{*} & $-$0.0538 & $-$0.0614 & $-$0.0390 \\
+			 6 & $-$0.0201 &  0.0099 &  0.0078 &  0.0511 \\
+			 7 &  0.0126 &  0.0226 &  0.0645\textsuperscript{*} & $-$0.0362 \\
+			 8 &  0.0367 &  0.0264 & $-$0.0022 & $-$0.0159 \\
+			 9 &  0.0817\textsuperscript{*} &  0.0836\textsuperscript{*} &  0.1149\textsuperscript{*} &  0.0122 \\
+			10 &  0.0190 &  0.0249 &  0.0261 & $-$0.0441 \\
+			\bottomrule
+		\end{tabular}
+		\\[4pt]
+		\footnotesize \textsuperscript{*} Significant at 95\% level ($|$ACF$| > 0.0637$).
+	\end{table}
+	
+	%----------------------------------------------------------------------
+	\subsection{1.2.2 \ AR(1) Model Assessment}
+	%----------------------------------------------------------------------
+	
+	An AR(1) model posits $X_t = c + \phi \, X_{t-1} + \varepsilon_t$. Table~\ref{tab:ar1} summarizes the fitted AR(1) coefficients for each factor series and whether the lag-1 coefficient $\phi$ is statistically significant. The Ljung-Box test on residuals checks whether the AR(1) specification adequately captures the serial dependence.
+	
+	\begin{table}[H]
+		\centering
+		\caption{AR(1) Model Results for Four Factors}
+		\label{tab:ar1}
+		\begin{tabular}{l r r c c}
+			\toprule
+			\textbf{Factor} & $\hat{\phi}$ & \textbf{p-value} & $\phi$ \textbf{Significant?} & \textbf{Residuals WN?} \\
+			\midrule
+			Mkt-RF & 0.1072 & $9.10 \times 10^{-4}$ & Yes & No \\
+			SMB    & 0.0754 & $2.01 \times 10^{-2}$ & Yes & Yes \\
+			HML    & 0.1780 & $2.52 \times 10^{-8}$ & Yes & No \\
+			Mom    & 0.0578 & $7.48 \times 10^{-2}$ & No  & No \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\newpage
+	\paragraph{Observations.}
+	\begin{itemize}
+		\item \textbf{Mkt-RF:} The lag-1 coefficient $\hat\phi = 0.1072$ is statistically significant ($p < 0.001$), indicating mild positive autocorrelation. However, the Ljung-Box test rejects white noise for the residuals at several lags, meaning a simple AR(1) captures some but not all of the serial structure. An AR(1) is a reasonable starting model, but higher-order terms may improve the fit.
+		
+		\item \textbf{SMB:} The lag-1 coefficient $\hat\phi = 0.0754$ is significant at the 5\% level ($p = 0.020$), and the Ljung-Box residual test shows no significant autocorrelation at any lag. This makes SMB the \textbf{best candidate for an AR(1) model} among the four factors --- the AR(1) adequately captures all serial dependence.
+		
+		\item \textbf{HML:} The lag-1 coefficient $\hat\phi = 0.1780$ is highly significant ($p < 10^{-7}$), the strongest first-order autocorrelation of any factor. However, the residuals exhibit significant autocorrelation at lags 9--10, so the AR(1) model leaves some serial structure unaccounted for. A longer AR or ARMA model may be needed.
+		
+		\item \textbf{Momentum (Mom):} The lag-1 coefficient $\hat\phi = 0.0578$ is \emph{not} significant at the 5\% level ($p = 0.075$), suggesting that this series does not exhibit meaningful first-order autocorrelation. Additionally, the Ljung-Box test indicates residual autocorrelation at higher lags. Therefore, an AR(1) model is \textbf{not appropriate} for the Momentum factor.
+	\end{itemize}
+	
+	\paragraph{Summary.}
+	Three of the four factor series (Mkt-RF, SMB, HML) have statistically significant lag-1 autocorrelation, supporting some degree of AR(1) behavior. However, only \textbf{SMB} is fully and cleanly described by an AR(1) model (significant $\phi$ with white-noise residuals). For Mkt-RF and HML, additional lags or more complex ARMA structures would better capture the remaining serial dependence. Momentum shows no significant AR(1) structure.
+	
+	\newpage
+	%======================================================================
+	\section{Part II: Time Series Model Calculations}
+	%======================================================================
+	
+	Given
+	\[
+	X_t = 0.01 + 0.2X_{t-2} + a_t,
+	\]
+	where $a_t \sim WN(0,0.02)$.
+	
+	\subsection{2.1 Mean and Variance of $X_t$}
+	For a stationary process, let $\mu = E[X_t]$. Taking expectation:
+	\[
+	\mu = 0.01 + 0.2\mu \quad \Rightarrow \quad \mu = \frac{0.01}{1-0.2} = 0.0125.
+	\]
+	
+	Define $Y_t = X_t - \mu$. Then
+	\[
+	Y_t = 0.2Y_{t-2} + a_t.
+	\]
+	Let $\gamma_k = \text{Cov}(Y_t, Y_{t-k})$ and $\sigma_a^2 = 0.02$. Yule-Walker equations give:
+	\[
+	\gamma_1 = 0, \qquad \gamma_2 = 0.2\gamma_0,
+	\]
+	\[
+	\gamma_0 = 0.2\gamma_2 + \sigma_a^2 = 0.2(0.2\gamma_0)+0.02.
+	\]
+	So
+	\[
+	0.96\gamma_0 = 0.02 \Rightarrow \gamma_0 = \frac{0.02}{0.96}=0.0208333.
+	\]
+	Hence
+	\[
+	E[X_t]=0.0125, \qquad \mathrm{Var}(X_t)=0.0208333.
+	\]
+	
+	\subsection{2.2 Lag-1 and Lag-2 Autocorrelations}
+	By definition $\rho_k = \gamma_k/\gamma_0$:
+	\[
+	\rho_1 = \frac{\gamma_1}{\gamma_0} = 0,
+	\qquad
+	\rho_2 = \frac{\gamma_2}{\gamma_0} = 0.2.
+	\]
+	
+	\subsection{2.3 One- and Two-Step Forecasts at $t=100$}
+	Given $X_{100}=-0.01$ and $X_{99}=0.02$:
+	\[
+	\hat X_{101|100} = E[X_{101}\mid \mathcal F_{100}] = 0.01 + 0.2X_{99}
+	=0.01+0.2(0.02)=0.014.
+	\]
+	\[
+	\hat X_{102|100} = E[X_{102}\mid \mathcal F_{100}] = 0.01 + 0.2X_{100}
+	=0.01+0.2(-0.01)=0.008.
+	\]
+	
+	Therefore, the forecasts are:
+	\[
+	\hat X_{101|100}=0.014, \qquad \hat X_{102|100}=0.008.
+	\]
+	
+	\newpage
+	%======================================================================
+	\section{Appendix: Python Code}
+	%======================================================================
+	
+	\lstinputlisting[caption={AAI627\_HW2\_Eschete.py},label={lst:code}]{AAI627_HW2_Eschete.py}
+	
+\end{document}

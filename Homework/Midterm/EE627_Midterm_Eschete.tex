@@ -1,0 +1,470 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\footnotesize,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b,
+	keywordstyle=\color{blue!70},
+	stringstyle=\color{red!60},
+	commentstyle=\color{green!50!black},
+	morekeywords={as, True, False, None}
+}
+
+\title{\textbf{EE627A Midterm\\ Heuristic-Based Music Recommendation}}
+\author{\textbf{Jude Eschete}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------
+\newpage
+\section{Part 1: Heuristic-Based Music Recommendation}
+%----------------------------------------------------------------------
+
+\subsection{Objective}
+
+The goal is to develop a rule-based recommendation system for the Yahoo Music dataset. For each of 20,000 test users, the system is given six candidate tracks and must label exactly three as ``1'' (Recommend) and three as ``0'' (Do Not Recommend). The system is evaluated by AUC-ROC on the Kaggle leaderboard.
+
+\subsection{Dataset Overview}
+
+The Yahoo Music dataset stores music data in a hierarchical structure:
+
+\begin{center}
+\textbf{Track} $\rightarrow$ \textbf{Album} $\rightarrow$ \textbf{Artist} $\rightarrow$ \textbf{Genre(s)}
+\end{center}
+
+Users rate items across all hierarchy levels on a scale of 0--100. The training set contains ratings for tracks, albums, artists, and genres in a single flat ID space.
+
+\begin{table}[H]
+	\centering
+	\caption{Dataset statistics.}\label{tab:dataset}
+	\begin{tabular}{lr}
+		\toprule
+		\textbf{Property} & \textbf{Value} \\
+		\midrule
+		Training users          & 49,204 \\
+		Total ratings           & 12,403,575 \\
+		Tracks in metadata      & 224,041 \\
+		Albums in metadata      & 52,829 \\
+		Test users              & 20,000 \\
+		Candidates per user     & 6 \\
+		Total test candidates   & 120,000 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+\newpage
+\section{Part 1.a: Feature Engineering \& Statistical Aggregation}
+%----------------------------------------------------------------------
+
+\subsection{Methodology}
+
+For each candidate track, the system looks up the track's hierarchy (Album ID, Artist ID, and Genre IDs) from \texttt{trackData2.txt}, then searches the test user's training history for direct ratings of those hierarchy items.
+
+The resulting feature vector for each (user, candidate-track) pair contains:
+
+\begin{itemize}
+	\item \textbf{Album Score}: The user's historical rating for the track's album (0 if not rated).
+	\item \textbf{Artist Score}: The user's historical rating for the track's artist (0 if not rated).
+	\item \textbf{Genre Statistics}: Computed over all of the track's genres that the user has rated:
+	\begin{itemize}
+		\item \textbf{Count}: Number of the track's genres rated by the user.
+		\item \textbf{Maximum}: Highest rating among matched genres.
+		\item \textbf{Minimum}: Lowest rating among matched genres.
+		\item \textbf{Mean}: Average rating across matched genres.
+		\item \textbf{Variance}: Variance of ratings across matched genres.
+		\item \textbf{Sum}: Total of ratings across matched genres.
+	\end{itemize}
+	\item \textbf{Has Album / Has Artist}: Binary flags indicating whether the user has rated the album or artist at all.
+\end{itemize}
+
+\subsection{Data Sparsity Analysis}
+
+A critical observation is that the training data is sparse at the hierarchy level. Not every user has rated the album, artist, or genres of every candidate track.
+
+\begin{table}[H]
+	\centering
+	\caption{Feature coverage across all 120,000 test candidates.}\label{tab:sparsity}
+	\begin{tabular}{lrr}
+		\toprule
+		\textbf{Feature} & \textbf{Count Present} & \textbf{Coverage (\%)} \\
+		\midrule
+		Album rating     & 34,264  & 28.6\% \\
+		Artist rating    & 51,904  & 43.3\% \\
+		$\geq$1 Genre rating & 58,223 & 48.5\% \\
+		\midrule
+		Avg.\ genre matches per candidate & \multicolumn{2}{c}{0.70} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+This sparsity directly influences the strategy design: any heuristic that relies solely on album scores will have no information for 71.4\% of candidates. Artist and genre signals provide broader coverage and are essential for discriminating among candidates.
+
+\subsection{Feature Vector Example -- User 199810}
+
+\begin{table}[H]
+	\centering
+	\caption{Feature vectors for the first test user (User 199810).}\label{tab:example}
+	\footnotesize
+	\begin{tabular}{r r r r r r r r r r}
+		\toprule
+		\textbf{TrackID} & \textbf{AlbumID} & \textbf{ArtistID} & \textbf{AlbScr} & \textbf{ArtScr} & \textbf{G\_Cnt} & \textbf{G\_Max} & \textbf{G\_Min} & \textbf{G\_Mean} & \textbf{G\_Var} \\
+		\midrule
+		208019 & 209288 & None & 0  & 0  & 0 & 0  & 0  & 0.0  & 0.0  \\
+		74139  & 277282 & 271146 & 0  & 0  & 1 & 80 & 80 & 80.0 & 0.0  \\
+		9903   & None   & None   & 0  & 0  & 0 & 0  & 0  & 0.0  & 0.0  \\
+		242681 & 190640 & 244574 & 0  & 0  & 0 & 0  & 0  & 0.0  & 0.0  \\
+		18515  & 146344 & 33168  & 0  & 70 & 0 & 0  & 0  & 0.0  & 0.0  \\
+		105760 & 93458  & 11616  & 0  & 90 & 2 & 80 & 80 & 80.0 & 0.0  \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+For User 199810, only three of six candidates have any training signal. Tracks 74139, 18515, and 105760 have artist and/or genre matches, while the remaining three tracks have no historical evidence. All three strategies correctly recommend the three tracks with non-zero feature values.
+
+%----------------------------------------------------------------------
+\newpage
+\section{Part 1.b: Decision Logic \& Rule Definition}
+%----------------------------------------------------------------------
+
+Three heuristic strategies were implemented, each defining a composite score to rank the six candidates. The top three by score are recommended.
+
+\subsection{Strategy 1: Maximum Genre Score}
+
+\begin{equation}
+	\text{Score} = 0.30 \times \text{AlbumScore} + 0.20 \times \text{ArtistScore} + 0.50 \times \text{GenreMax}
+\end{equation}
+
+\textbf{Rationale:} Genre preference is a fundamental taste indicator. If a user gives a high rating to \emph{any} genre associated with a track, the track is likely to resonate with that user. The maximum (rather than mean) captures the ``best-case'' genre alignment and avoids dilution from low-rated secondary genres. Album and artist scores provide additional specificity.
+
+\subsection{Strategy 2: Weighted Average}
+
+\begin{equation}
+	\text{Score} = 0.40 \times \text{AlbumScore} + 0.35 \times \text{ArtistScore} + 0.25 \times \text{GenreMean}
+\end{equation}
+
+\textbf{Rationale:} This strategy balances all three hierarchy levels with the strongest weight on the album (the most granular personalized signal, since the same album implies high content similarity), followed by artist affinity, and complemented by the user's average genre preference across all of the track's genres.
+
+\subsection{Strategy 3: Evidence-Weighted Composite}
+
+\begin{equation}
+	\text{Score} = \text{HasAlbum} \times \text{AlbumScore} + \text{HasArtist} \times \text{ArtistScore} + \frac{\text{GenreCount} \times \text{GenreMean}}{10}
+\end{equation}
+
+\textbf{Rationale:} This strategy explicitly addresses data sparsity. A zero album score for an un-rated album is absence-of-evidence, not evidence-of-absence. The binary flags (\texttt{HasAlbum}, \texttt{HasArtist}) ensure that only \emph{actually rated} hierarchy items contribute to the score. Genre breadth (count $\times$ mean) rewards tracks where the user has interacted with many of the track's genres, providing stronger cumulative evidence.
+
+\subsection{Cross-Strategy Agreement}
+
+\begin{table}[H]
+	\centering
+	\caption{Pairwise agreement between strategies (out of 120,000 predictions).}\label{tab:agreement}
+	\begin{tabular}{lrr}
+		\toprule
+		\textbf{Comparison} & \textbf{Agreement} & \textbf{Rate} \\
+		\midrule
+		MaxGenre vs.\ WeightedAvg    & 113,428 & 94.5\% \\
+		MaxGenre vs.\ Evidence       & 111,722 & 93.1\% \\
+		WeightedAvg vs.\ Evidence    & 117,138 & 97.6\% \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+The strategies agree on 93--98\% of predictions, indicating that the underlying signals (album, artist, genre) are consistent. The remaining divergence comes from edge cases where sparsity handling or genre aggregation (max vs.\ mean) shifts the ranking of borderline candidates.
+
+%----------------------------------------------------------------------
+\newpage
+\section{Python Implementation}
+%----------------------------------------------------------------------
+
+The complete Python code is presented below. The script reads the Yahoo Music dataset from the \texttt{Data/} directory, computes feature vectors for all 120,000 test candidates, applies the three heuristic strategies, and writes Kaggle-format submission CSVs.
+
+\begin{lstlisting}[caption={Data parsing functions.}]
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "..", "Homework 4", "Data")
+TRAIN_FILE = os.path.join(DATA_DIR, "trainItem2.txt")
+TEST_FILE  = os.path.join(DATA_DIR, "testItem2.txt")
+TRACK_FILE = os.path.join(DATA_DIR, "trackData2.txt")
+ALBUM_FILE = os.path.join(DATA_DIR, "albumData2.txt")
+OUTPUT_DIR = SCRIPT_DIR
+
+
+def parse_training(path):
+    """Parse training file into {user_id: {item_id: rating}}.
+    Format: UserID|NumItems header, then ItemID<TAB>Rating lines.
+    Items can be tracks, albums, artists, or genres."""
+    users = {}
+    with open(path, "r") as f:
+        uid = None
+        for line in f:
+            line = line.strip()
+            if "|" in line:
+                uid = int(line.split("|")[0])
+                users[uid] = {}
+            elif "\t" in line and uid is not None:
+                parts = line.split("\t")
+                users[uid][int(parts[0])] = int(parts[1])
+    return users
+
+
+def parse_tracks(path):
+    """Parse trackData2.txt -> {tid: (album, artist, [genres])}."""
+    tracks = {}
+    with open(path, "r") as f:
+        for line in f:
+            parts = line.strip().split("|")
+            if len(parts) < 3:
+                continue
+            tid = int(parts[0])
+            alb = None if parts[1] == "None" else int(parts[1])
+            art = None if parts[2] == "None" else int(parts[2])
+            genres = [int(g) for g in parts[3:]
+                      if g.strip() and g != "None"]
+            tracks[tid] = (alb, art, genres)
+    return tracks
+
+
+def parse_test(path):
+    """Parse testItem2.txt -> [(user_id, [track_ids])]."""
+    test = []
+    with open(path, "r") as f:
+        uid, tids = None, []
+        for line in f:
+            line = line.strip()
+            if "|" in line:
+                if uid is not None:
+                    test.append((uid, tids))
+                uid = int(line.split("|")[0])
+                tids = []
+            elif line:
+                tids.append(int(line))
+        if uid is not None:
+            test.append((uid, tids))
+    return test
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Feature engineering (Part 1.a).}]
+def compute_feature_vector(user_ratings, track_meta, uid, tid):
+    """Build feature vector for one (user, track) pair."""
+    ratings = user_ratings.get(uid, {})
+    alb_id, art_id, genre_ids = track_meta.get(
+        tid, (None, None, []))
+
+    # Album score
+    if alb_id is not None and alb_id in ratings:
+        album_score, has_album = ratings[alb_id], 1
+    else:
+        album_score, has_album = 0, 0
+
+    # Artist score
+    if art_id is not None and art_id in ratings:
+        artist_score, has_artist = ratings[art_id], 1
+    else:
+        artist_score, has_artist = 0, 0
+
+    # Genre statistics
+    genre_scores = [ratings[g] for g in genre_ids
+                    if g in ratings]
+    n = len(genre_scores)
+    if n > 0:
+        g_max  = max(genre_scores)
+        g_min  = min(genre_scores)
+        g_mean = sum(genre_scores) / n
+        g_var  = sum((s - g_mean)**2 for s in genre_scores) / n
+        g_sum  = sum(genre_scores)
+    else:
+        g_max = g_min = g_sum = 0
+        g_mean = g_var = 0.0
+
+    return {
+        "album_score": album_score,
+        "artist_score": artist_score,
+        "has_album": has_album,    "has_artist": has_artist,
+        "genre_count": n,          "genre_max": g_max,
+        "genre_min": g_min,        "genre_mean": g_mean,
+        "genre_var": g_var,        "genre_sum": g_sum,
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Heuristic strategies (Part 1.b).}]
+def strategy_max_genre(features_list):
+    """Strategy 1: 0.30*album + 0.20*artist + 0.50*genre_max"""
+    return [0.30 * f["album_score"]
+            + 0.20 * f["artist_score"]
+            + 0.50 * f["genre_max"]
+            for f in features_list]
+
+
+def strategy_weighted_avg(features_list):
+    """Strategy 2: 0.40*album + 0.35*artist + 0.25*genre_mean"""
+    return [0.40 * f["album_score"]
+            + 0.35 * f["artist_score"]
+            + 0.25 * f["genre_mean"]
+            for f in features_list]
+
+
+def strategy_evidence_weighted(features_list):
+    """Strategy 3: has_album*album + has_artist*artist
+       + genre_count*genre_mean/10"""
+    return [f["has_album"] * f["album_score"]
+            + f["has_artist"] * f["artist_score"]
+            + f["genre_count"] * f["genre_mean"] / 10.0
+            for f in features_list]
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Ranking and submission pipeline.}]
+def rank_top3(scores, track_ids):
+    """Pick top-3 scored tracks as '1', rest as '0'."""
+    paired = sorted(zip(scores, track_ids),
+                    key=lambda x: x[0], reverse=True)
+    top3 = set(tid for _, tid in paired[:3])
+    return {tid: (1 if tid in top3 else 0)
+            for tid in track_ids}
+
+
+def write_submission(results, path):
+    with open(path, "w") as f:
+        f.write("TrackID,Predictor\n")
+        for key, label in results:
+            f.write(f"{key},{label}\n")
+
+
+def run_strategy(user_ratings, track_meta, test_users,
+                 strategy_fn, out_path):
+    results = []
+    for uid, candidates in test_users:
+        feats  = [compute_feature_vector(
+                      user_ratings, track_meta, uid, tid)
+                  for tid in candidates]
+        scores = strategy_fn(feats)
+        recs   = rank_top3(scores, candidates)
+        for tid in candidates:
+            results.append((f"{uid}_{tid}", recs[tid]))
+    write_submission(results, out_path)
+    return results
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Main entry point.}]
+if __name__ == "__main__":
+    user_ratings = parse_training(TRAIN_FILE)
+    track_meta   = parse_tracks(TRACK_FILE)
+    test_users   = parse_test(TEST_FILE)
+
+    # Strategy 1: Max Genre Score
+    run_strategy(user_ratings, track_meta, test_users,
+        strategy_max_genre,
+        os.path.join(OUTPUT_DIR,
+            "submission_strategy1_maxgenre.csv"))
+
+    # Strategy 2: Weighted Average
+    run_strategy(user_ratings, track_meta, test_users,
+        strategy_weighted_avg,
+        os.path.join(OUTPUT_DIR,
+            "submission_strategy2_weightedavg.csv"))
+
+    # Strategy 3: Evidence-Weighted
+    run_strategy(user_ratings, track_meta, test_users,
+        strategy_evidence_weighted,
+        os.path.join(OUTPUT_DIR,
+            "submission_strategy3_evidence.csv"))
+\end{lstlisting}
+
+%----------------------------------------------------------------------
+\newpage
+\section{Results Summary}
+%----------------------------------------------------------------------
+
+\subsection{Submission Output}
+
+Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\times$ 6 candidates). Exactly 60,000 predictions are labeled ``1'' (recommend) and 60,000 labeled ``0'' (do not recommend), satisfying the constraint of 3 recommendations per user.
+
+\begin{table}[H]
+	\centering
+	\caption{Summary of generated submission files.}\label{tab:submissions}
+	\begin{tabular}{llcc}
+		\toprule
+		\textbf{Strategy} & \textbf{File} & \textbf{Recommend} & \textbf{Do Not} \\
+		\midrule
+		1: Max Genre Score    & \texttt{submission\_strategy1\_maxgenre.csv}     & 60,000 & 60,000 \\
+		2: Weighted Average   & \texttt{submission\_strategy2\_weightedavg.csv}  & 60,000 & 60,000 \\
+		3: Evidence-Weighted  & \texttt{submission\_strategy3\_evidence.csv}     & 60,000 & 60,000 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Kaggle Leaderboard Scores}
+
+\textit{(Insert Kaggle leaderboard screenshots here after submitting each strategy's CSV.)}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{kaggle_strategy1.png}
+%     \caption{Kaggle score for Strategy 1 (Max Genre Score).}
+% \end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{kaggle_strategy2.png}
+%     \caption{Kaggle score for Strategy 2 (Weighted Average).}
+% \end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{kaggle_strategy3.png}
+%     \caption{Kaggle score for Strategy 3 (Evidence-Weighted).}
+% \end{figure}
+
+% \begin{table}[H]
+%     \centering
+%     \caption{Kaggle score comparison across strategies.}
+%     \begin{tabular}{lc}
+%         \toprule
+%         \textbf{Strategy} & \textbf{AUC-ROC} \\
+%         \midrule
+%         1: Max Genre Score    & TBD \\
+%         2: Weighted Average   & TBD \\
+%         3: Evidence-Weighted  & TBD \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+
+\subsection{Key Observations}
+
+\begin{enumerate}
+	\item \textbf{High cross-strategy agreement (93--98\%):} The three strategies agree on the vast majority of predictions. This indicates that the underlying album, artist, and genre signals are consistent and that the heuristics are capturing the same core user preferences.
+
+	\item \textbf{Severe data sparsity:} Only 28.6\% of candidates have a direct album rating, 43.3\% have an artist rating, and 48.5\% have at least one genre match. This means that for roughly half of all candidates, the system has zero personalized features---motivating the cold-start strategies addressed in Part~2.
+
+	\item \textbf{Genre provides the broadest signal:} With 48.5\% coverage (vs.\ 28.6\% for albums), genre ratings are the most frequently available feature. This supports Strategy~1's emphasis on the maximum genre score as a primary discriminator.
+
+	\item \textbf{Artist rating is more common than album:} At 43.3\% vs.\ 28.6\%, users are more likely to have rated an artist than a specific album. This validates Strategy~2's assignment of a substantial weight (0.35) to artist scores.
+\end{enumerate}
+
+\end{document}

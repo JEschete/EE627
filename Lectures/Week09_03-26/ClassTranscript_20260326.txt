@@ -1,0 +1,583 @@
+So, let me try to clarify a few things, okay? Starting from next week.
+We will have the midterm.
+So, this is why, I was trying to release the midterm earlier, you know, by the
+Tomorrow, I will try to release the midterm, and you will give more than a week to work on the midterm.
+Let me… share you.
+Again, you know, let me try to experience the background.
+Because from this year, more or less, you know, you realize that the industry is undergoing some significant revolutionary change, because AI has been speak…
+speed up. You know, a lot of conventional interview test has been switched to AI-supported.
+interview. So that means a lot for…
+you know, fundamental knowledge test based on, like, memorize something, or based on some strict coding questions, had been greatly replaced by the AI. So, in that situation.
+people, you really want to testify if you… capability, right? So they don't have to use the conventional, for example, even if they are using the lead code, they are not using the conventional way to test your coding probability, because the coding part can be…
+part replaced by AI. Just like, say, I want to do test A, then originally you maybe have to write the right command, you have to write the syntax, you have to write the logical flow chart.
+To implement it in the right way, and it will take some time, you know, sometimes if you are nervous, you know, you will mess up a little bit.
+But nowadays, this is the… not the most important,
+component. They're still testing your coding capability, they're still testing your knowledge base, but they are more care about how you can make interactions with AI.
+So what do you mean? That means, you know, we give you a question. They allow you to use AI. Of course, AI will quickly give some initial answer based on your initial questions. Now, that's the catch. Start from here.
+what's your feedback? How you can back to…
+You push back to the AI to ask further questions, to deep the conversation, to challenge the AI, to make a judgment, to make connections, to make a, you know, even give some guidance.
+That's how you test. If you are in a very, very fundamental junior level, you will say, oh, AI, I don't think it's good. Wonderful.
+That's it. You stop here, because you see, AI, what AI did is much better than I can do. I have no comments, no extra comments. If that's the way you respond, then…
+I think you stopped here, because…
+A lot of companies, they want to say how you can leverage AI, not just to fully trust AI.
+Okay, so that's why, in our course, we were trying to adapt this trend. We were trying to give you knowledge like before. I give you some questions, you have some solid ground truth answer. Sometimes you just copy it, sometimes you just ask friends, or sometimes you just ask Google, you get answers, that's it. So it's very difficult to testify your real level.
+Or sometimes it really doesn't help you to gain the knowledge for the job market.
+So, from now, I'm trying to make a little more open question.
+Just like a project. I give you the real data, give you the real crisis.
+I don't expect that you can get a fully answer from AI, from online. So that's exactly… I would say, this kind of a partial, open question to differentiate the students' efforts. Whoever spend more time, spend more effort, spend more vision to guide this
+you will attract more credit. Someone is lazy, they say, oh, I just ask AI, they give me the answer, then I copy it, that's fine, at least it doesn't…
+There's nothing wrong, but that's very ordinary. That means you didn't learn anything, right? You just copied something from AI, so that's…
+Not what we want.
+So, in our… the midterm, we were trying to do something like this.
+I don't want to give you some new data, new project, then you'll say, oh, professor, I need to take some time to understand your question, then how can I finish it in one week, right? So what I would do is, I would use something you have finished in the past. That means
+You don't have to restart everything. You already have some results, you already have some… impression
+the same data, but I will make the question a little bit different.
+So you're using the older data with some new questions. The new question is a little bit of open pricing. So that will make you… it's more to think about, if you are the one to do this project, what you can do?
+Okay?
+So, freedom, let me first to switch to our… let me… Second
+And now that's what I share with you. Can you see it?
+Preksha Shah
+Preksha Shah
+00:06:00
+No, Professor.
+Rensheng Wang
+Rensheng Wang
+00:06:04
+Let me see… Oh.
+Let me restart this, okay?
+How about this? Can you say again?
+Preksha Shah
+Preksha Shah
+00:06:30
+Yes.
+Yes.
+Rensheng Wang
+Rensheng Wang
+00:06:33
+Okay.
+Now, you see, right? You have this,
+final project question, right? We have this,
+Yahoo Music recommendation data, you already finished the homework before, you know, you already make some assignment, okay? You have the knowledge, what we need, and you already did some initial work, right? What I'm trying to ask you to do is, you know, because for this urban score for each track with each user, right, you try and define the
+history. Does this user have some, Reading score for this one.
+If yes, what score? If not, right? Empty. The same thing for artists. The only thing is for genre, just like I expect, right? Because genre, you have some variant lens, because some user, some track you have associated with many, many genres, maybe 3, or 5, or 7,
+you don't have a unique value here, so that's why you need to get a general statistics. I put this one here, I put a dot dot here, then that's exactly… I'm trying to test you. What's next you can do, what you can do for this.
+If you stop here, that's fine. You get some regular score. If you expanded this one, that's how I can differentiate how much actual credit you should get.
+Make sense here?
+Any pricing here?
+So, for the journals, statistically, you should get a multiple, right?
+Once you get this one, You want to derive this decision logicus.
+Just like I said, right, I can use the… I just use the RB score plus RD score as the sorting score. Yeah, that's fine.
+Right?
+I can use the maximum score between urban and artisan. That's fine, you have not won.
+And then now if you have the journal statistics, then you have many, many, right, you have 1, 2, 3, 4, 5, 6, 7, blah, blah, blah, you have multiple…
+scores, and based on this one, what's your… Strategist.
+That's an open question.
+you can derive what do you want, you know? You can derive what do you want.
+You can even make some weighted scores.
+So that's why I said that this,
+decision logic, and rule definition. It's an open question. It depends on you. That's how I can easily define, you know, the students, how you can,
+Think about this.
+How you can make this more diversified, how you can think it is more, you know.
+Capable to capture all the information.
+If I'm the interviewer, I want to learn from you is what I… why I do some of this? Because I'm trying to expand the different measurements with different dimensions. If I measured more, I should have a better
+Assessment about the user's performances, recommendations.
+At the mall, it's always better.
+I get more features, just like… because I… I never know. Maybe you can argue with the professor, this doesn't help. How do you know it doesn't help? Before I know, this doesn't help. It doesn't matter, I just append more and more measurement features, right?
+It's just… can't anymore. I don't worry about that there are use or useiness. I'm more worried about you don't have enough features.
+So, you get more features, you should have more strategies.
+And you can make submissions. From the submission, you get some impression, right? Oh, this doesn't help. Oh, this boosts a lot, right?
+So that's where you can show me. If you only… if you only copy something from what you did in homework before, I bet you will get a…
+Almost zero credit.
+Let me say it this way, okay? So that's the midterm. You have to do something more. But if I say, professor, I don't know how to get the general statistics, well…
+Well, that's very fair, you know, you can say, I don't know how they technically do this.
+Do you remember we have Co-Pilot? Do you remember we have the Gemini? You just go to Google, you tell Google what the data you have, what do you want to do. They will very quickly give you the solution, then you can incorporate it to get what you have, right? You can even ask Google what you can do.
+So, on the second-handed wave, you want to testify how AI can help you.
+Okay? So that's the best example to incorporate your open mind and Google Gemini or,
+ChatGPT, Copilot, these kind of AI tools capabilities. You will boost, you will boost your analytical skill to a new level.
+I look at our homework 4. If there's homework 4, if that's the one to submit for the job interview.
+I really suspect, you know, not many students will get their attention at all.
+A lot of students were even not getting no attention at all.
+you have the capability with AI, you have the data, but you even don't think about it, right? You just, like, say, whatever, I get some result, that's it.
+So, starting from here, we are trying to expand our scope, because AI can greatly
+expand. You used to be 1. If you use AI, you get times 10, 20, 100, depends on how large you can open your mindset.
+You use CB1, multiply it with AI, you get 100. You get 1,000. That's… that's how incredible powerful you can be.
+So, that's the example I want you to test. You test more, you play with more, I believe you will find more treasures.
+You'll find a lot of interesting findings. You'll not stick with one single submission, that's it. That's homework 4. No? That's 4.
+midterm, I expect you have so many diversified submissions, because AI can aid you to do something. There's no complaint to say, oh, professor, I don't know how to implement this. I don't know what I can do for multiple strategies. Ask! If you don't know, just ask.
+Because you already have very concrete data, very concrete environment, very concrete context. If you're not open-minded, ask AI to help you open-mind.
+Based on AI feedback, you can further make a discussion even deeper, right? So this kind of back and forth, back and forth, you make a bigger and a bigger picture for your discussion.
+Any questions here?
+Preksha Shah
+Preksha Shah
+00:14:00
+No, Professor.
+Rensheng Wang
+Rensheng Wang
+00:14:02
+Great. Just let me know, okay, because, like I said, right, it is not a closed book.
+It's open book.
+Open your mind test.
+It's not that I say you have to work on your own. No, you can ask AI. AI has millions of experts to bring. They can help you. But if you don't want to use it, you don't want to leverage, right, then you lose the opportunity.
+Because sooner or later, when you go to the job market, if you tell your boss, so, I don't want to use anyone's help from AI, I just want to use my brain, well, very limited, right? You're limited to your scope, that's the question. You're trying to expand your scope.
+So that's the 1B. I already explained why, right? Because if you look at the artist score, you only have unique score. You have artist score, unit score, but from general, this can be 1, can be 0, can be 2, whatever, right?
+Because, for example, I get a 2. What I can do? That's a sequence, right? For these two, you will have the maximum, minimum, average, invariance, standard deviation, blah blah blah. You have a lot of things.
+So that's why you need the statistics.
+That's the right way to form this.
+That's how you expand your features.
+Now the part two, because part one is just, like, you get to refund your homework for. Now for part two.
+I'm trying to address the cold start problem, you know, because you may have some,
+For example, if this student is searched here, what turns out empty, empty, empty, empty, empty everywhere?
+That's the good example. This one is very lucky you found urban school, art school, general scores. What happens? You search some student, you just find one number, and everywhere it's zero.
+If you have so many zeros, there's no information, right? If there's no information, how can you make a judgment that just tell me which straight you want, you recommend that which straight you don't want?
+So, this is the… typically, people call the cold startup.
+That's… that exists for our testing data. You may have some user, you searched the training data, you found nothing, didn't match anything.
+So, now you have two strategies. The one strategy is the global fallback. The global fallback like this, right? If someone, they say, you are the new registered user, okay, I registered Netflix.
+Netherlands, oh, who are you? I'm the new one.
+since you're the newbie, so they said, oh, what I need to recommend to you? I have no idea who you are, what's your flavor, right?
+You have no history, you just register.
+5 minutes ago. Then what are they gonna do?
+the best way I can guess, I can recommend the most popular. I can use the global popularities, right? I just recommend…
+because I have no idea who you are, so what I can do is I just use global, non-personalized rankings.
+I can say what's the most popular video I recommend to you? What's the most recent I can recommend to you? What's the most relevant to your location video? Because maybe you're living in New Jersey, maybe you care about some video relevant to New Jersey, right? Something like that.
+So, you will have this kind of for global average.
+to…
+recommend to you. So, based on that, if you have 6 tracks for the test user, you're trying to say, for these 6
+On average, which it's the more popular, right? You have 6 track, right? 6 track. Overall, You know that.
+The feedback scores, right, from
+all the users, all the histories. So based on that, you should have the general ranking. So that general ranking is called global popularity. This can help you define the first strategy.
+Does this make sense? This just excel, right? Because if you don't have history for yourself, then I will use the other people's history.
+popularity, take an average to help you make a judgment. Do you think I need a recommendation for you or not?
+Right?
+Any question for 2A?
+Yes?
+Tejasa.
+Any ques in here?
+Guyana.
+Any questions? Okay, thank you.
+So, that's one, right? You know how to implement, right?
+The next strategy is you're trying to dig deeper, you know?
+So, for example, For this arbor.
+for this track, this track belongs to this urban, right? And the user never have any rating score for this urban, so I have no idea that this user loved this arbor or not, that this user loved this artist or not. No, I have not. There's no record to indicate anything.
+So you can do something like this, because I know for this arm brand.
+this contains multiple tracks, right? Not only this one, not only 467, for 205719. So, for 205719, I checked the training data, I know
+there are so many other tracks belongs to this, you know, to this album, right? So, for those other tracks.
+Does this guy, this user, used to have any historic reading scores for them?
+Right? One urban contains multiple tracks. If I ever have someone reading with other urban, what's the score, right?
+Again, in that scenario, you may have… because one urban contains multiple Trucks.
+So you need to check multiple…
+Trucks. So they may have one, two, or more than one.
+track reading scores. That, if that's the case, again, you need to take this kind of track score statisticals.
+Right? So this kind of statistical score over all the tracks in the same urban for the same user.
+Then, this can help you make someone…
+decisions. For example, this is the topographies, as it's called the…
+Alvin calls it the fame. The fame contains
+Poker Face, and many other songs. If the user used to say, I love some songs in the urban theme, great, what's the score? If I have scores, then you gave me more confidence. I should recommend this Poker Face, right?
+Because you have many other sibling trucks in the same urban, the guy used to love it.
+Then, of course, this track I need to recommend.
+Something like that, right?
+But for those kind of… for sibling trucks.
+You need to have the statistical measurements, because you may have one rated, you may have no rating, you may have two ratings.
+So you also need some statistical
+statistical score measurements. So that is corresponding to the strategy design to be…
+Again, I'm trying to ask you, do you…
+Are you comfortable with the QB?
+Any quasi here?
+Okay, if node, I assume you're good, right? So…
+You were making implementation, you were making impact analysis, okay?
+You want to make submissions online, and you can measure your feedback and say how's good, okay?
+Then you need to make a very simple PDF.
+Hmm.
+And very similarly, right, if you have the AI, you can even ask AI to generate this. You just give your whatever you have, right?
+You just write this one, and ask AI to generate some
+paragraphs, even PDF or Word documents for you, you know? You just describe what you did. Because during this process.
+you can give some sequential guidance what you did, right? They were based on what you did, and also you have the files. They can very quickly read the files to help you to form the summary report.
+Any crazy here?
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:23:56
+No professional.
+Rensheng Wang
+Rensheng Wang
+00:23:58
+Great. Okay.
+Just like here, right?
+You see, I have a… So it's 5…
+Which, right? Heather, blah blah blah, you just explain, and what do you want, right? You just stay here and turn it, they will give you the result, give you the code, give you everything, right? The same thing, you know, I have tried…
+a few… Measures.
+And, please… summary report, right? Include the
+blah blah blah blah, you just tell you what, one, you need what? Two, you need one, right? You have a few requirements, you just put it here, quickly get someone for you. So, the scope is…
+Always make this kind of labor, boring, computation-heavy work for AI. You are the one to send the command. You are the one to coordinate that.
+the procedures.
+So that's why you have no complaint, you say, oh, professor, I don't know how to rate the data. Oh, professor, I don't know how to separate these commas.
+That's not that big issue, because you can ask AI, they can very quickly resolve your
+technical questions. Oh, I… Perfect, I get an error. When I run this Python file, it doesn't work.
+Then just pop the arrow to…
+Gemini. Gemini will tell you what happens. They will automatically fix your code in your Python script.
+I know a lot of students, they really want to do a good job, but because of some technical experience, they are not rich.
+So they stopped. But nowadays, for this AI, it can help you a lot.
+Because you don't want to repeat these kind of low-quality efforts. You want to make your quality of your project has been leveraged by multiplied with 10, hundreds, thousands, you'll get much, much better. That's how you compete with your peers. When you send your resume to the job market.
+If you have nothing about this kind of real AI-supported interactions.
+You can very easily cut it down from the market.
+Even you get the interview when people ask you what they can say, right? You don't want to repeat something, it's very theoretical. You don't have some hands-on experience. Use AI, making actions to develop your solution.
+To guide the AI to do something for you.
+So that's the purpose for this, the midterm. It's not that, like, I have some ground truth value.
+Pricing 1, the answer is 2. Pricing 2, the answer is ABCD.
+Those kind of things had passed. We don't want to get something like that, because that very easily, if you end with something, you don't have to use your brain. If you know the answer, you just copy it.
+You didn't learn from these kind of questions now.
+Any questions here?
+you can put this question in the chart window, then I definitely can address.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+00:27:34
+Profsa, do we need to use the same data that is there?
+In the kennel.
+For this midterm as well?
+Rensheng Wang
+Rensheng Wang
+00:28:03
+Sorry, I didn't hear you. Can you repeat the question again? Sorry.
+So what did you say? Let me show… yeah.
+Yeah, exactly. You have the same thing like your homework, you just use the same data at the cargo.
+So that's why… because we don't have only one more week, right? You don't have too much time. So I want you very quickly to get some idea to implement.
+Otherwise, I give you new data, I get some new questions, then you need to take a week to get familiar with these requirements, then you don't have enough time to work on. Because what I'm assigning with you, the mid-term, is what you exactly finished in the homework for.
+then you should have the same data, everything the same.
+Yes, you can run the code.
+And, you… you have the… once you have the submission file, right, you submit the… on cargo, the cargo will give you the score.
+And for the data, if you don't know where to start with, we have the sample code.
+If the sample code doesn't work, I think that Gemini, we can very quickly fix you. Also, you can go to use ChartGPT. ChartGPT can also quickly fix your… some minor
+Some of mine are, you know, format issues, or some technical issues, you know.
+The most important thing is, you only need to know the idea. You don't have to write the specific code. How do 9x9 do search?
+How do 9x9 match? How did 9x9 together this kind of a statistical measurement? You just say something, they will do everything for you.
+And if you don't have an idea, you can ask it.
+AI, just say, give me some ideas, what I can do, because the professor asked me to provide some solutions.
+Right? They will provide some…
+Ideas. So you are the one to make a judgment. Some idea is good or bad. Some idea you want to implement or you don't want to implement.
+So, I will post it this weekend, okay, so you will say this, you will have more than 7 days, you just treat it like your regular
+Homework.
+With a little bit longer time window, but you have a very strict, very strict
+Deadline. If you miss deadline, you don't get any credit for the midterm.
+Now, let me switch to our electronos now.
+Can you say… Let me see…
+Do you see? I post?
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:32:09
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:32:11
+Great, okay.
+Remember, in the midterm, in the past, we always say you need a statistical measurement for something, right? And I encourage you to add more and more, like the maximum, minimum, median, average, sland deviation, variance, blah blah blah, right? You get a lot.
+someone will argue, Professor, maybe some of them doesn't work. It's a waste. No, don't worry, you know.
+If you have too many features, too many information, don't worry, we can always cut it down, we can always fill it out.
+But if you don't have enough features, that's the trouble, right?
+just like I said, you know, I'm the company.
+I'm gonna hire a company from Google. I'm trying to hire people.
+So I first, I was trying to collect in as many candidates in my pool, then I would use some filtering candidates to filter out.
+Right? I don't have to worry about that. At first, I have all the candidates, then I'll try to gradually use some procedure to filter out. That's the same thing here for feature selections. If you have enough feature.
+If you write together enough, Measurement in different dimensions over this kind of form.
+Questions.
+Make sure you expand the enough feature first, then you can do some features and actions.
+There are two reasons for feature cynics. One reason is You may have
+You may don't have enough features, so that's why you have to expand more. Two, when you expand more, more or less, you add some nonsense features, because before you make your assessment, you don't know some feature is useful, some feature is not useful.
+Some of them, why they're not useful? Because you have duplicate
+duplicate information features, but you are not aware of that. So you have feature A, you have feature B. That happens to the similar, or even identical, but they're coming from different procedures.
+If something's almost similar, that means you get what? You get redundancy. That means you have noise space. Once you have noise space, you get overfitting.
+Overfitting, you can imagine like this, you have more pollens than the number of rows. So that means the number of features is more the number of the samples you can support.
+So that's why you cannot generalize that Statistical generalized solution.
+In other words, you have a more… Variables, then…
+you have less observations. Of course, your data cannot support that complicated model.
+And in that situation, your model
+Your data will contain the model and the noise.
+So this kind of noise feature
+will be dominating this learning. Because when you learn.
+the model doesn't know which should be learned, which not. They will learn both signal and the noise. If they learn
+Noise.
+you will have an overfeeding. You will make a performance with high variance.
+So that's why you get a very low, you know, Performance in your model training.
+Another explanation is, when you have a feature selection is.
+You're always trying to, if possible, you're always trying to use simple.
+to use… if you have the same.
+Performance in terms of two models.
+One model complicates more variables, one model is simplified, next variables, and both have the similar performance, then always choose the simple one.
+Because when you have more, typically you will lose this kind of expandable.
+Another reason is garbage in, garbage out, okay?
+So you're only trying to keep some useful features.
+This is just like, when students submit your applications, you report everything.
+But sometimes some information is strategically by the school.
+Because they are trying to hide which they care more. They're asking, do you submit the 10, Requirement.
+documentations, but maybe only 5 of them is critical. Not 5, actually, they never sought.
+But how do you know which is more important than others? So that's why we need to use the features and actions.
+Feature synaptions is the most fundamental way for people to help you understand
+how you refine the model performance. The same thing for our final project, for our midterm. Think about it. You keep adding more and more measurements for
+each track, right? You have urban score, artist score, statistical, general score, statistical sibling.
+Track score, and you will have more in the future.
+We get more and more, but your data sample is fixed, right? You're not trying to get more samples, you're not getting more users.
+But you keep adding more features, then that's where you need to definitely need to think about it. Do you need some features and actions?
+That means some of them you want to keep, some of them you don't want to keep.
+Why? Because some of the features, maybe they are exactly overlapped, duplicated. When you have duplicated.
+That means you have this noise space. This noise space will bring some trouble.
+Big variants for you.
+So how to remove some of the features?
+Those questions is a typical, it's online assessment for the pre-screening. For example, if you apply these kind of financial companies to Sigma, if you apply some financial company, Goldman Sachs, they will say, okay, before I send you the invitation for interview, let's do something online.
+Typically, they have some questions like this. You have the features and actions. They give you some data, they tell you some features, they ask you how do you filter out some features.
+Here, we discuss the three types of
+categories. One is called a filter base, so that means you define some metrics criteria.
+Let's make a very simple way. Let's say, how about coordination? Because in this class, right, we'll talk about the coronation at the very beginning.
+And see…
+you have… 100 measurements.
+You have the predicted matrix.
+What happens?
+Can you see what I draw here?
+Hmm, that's weird.
+Let me change the color and say, to this way?
+Let me stop sharing, let me share again.
+Let's say you have this kind of predictive matrix here, many, many columns.
+You have the response vector.
+So, for this future-based, for example, what you can do is… so, for this, you have S1, first column, S2, second column. So, you have Y, it's response. So you're trying to say coronation
+S1?
+What?
+So, you have another coronation about S2, And the wipe.
+So on and so forth, right? You get the numbers.
+If you have 100, So you shouldn't have 100 numbers.
+So based on these 100 numbers, you… it can make a threshold.
+That's how you help you make selections, right? Let's say you only take the…
+Top 50, right? So let me…
+you compel these coronation factors. Get higher, you keep it lower, you throw away. You only take the top 50 highest cornation values to decide which 50 points you want to keep, right? So that's filter-based.
+Any pricing here for the future-based?
+The second one, wrapper-based.
+And for most, financial company
+Online assessment, typically they are… prefer you using router-based.
+Okay.
+The rubber base, they know, they are trying to make a search
+Based on a set of features.
+This philosophy like this, because for future-based, the philosophy is trying to say we evaluate every single one, right? We only keep trying to say every single one.
+If you're high, you keep it. If you're low, It's Ruby, right?
+So, let me make an example, just help me understand what that means. Do you know NBA Draft?
+Let me see…
+So, for NBA Draft, right, you have two different ways. One way is you say, everyone, come here, show me your performance, right?
+Then, I have a score for you.
+So, let's say you have 100 candidates, everyone just come here, you make some, you play, you know, make a play session, and then I make a score for you. Based on the score, I only keep the top 10, or others start with. That's called a fielder base, right? But they also have another robber base, because that means
+You will have some ensemble.
+Teams.
+Because they are not only trying to select the individual person, they're trying to choose subset of them. You can think about it as a team. They're trying to find the sub-teams. The reason is, they realize that
+For a lot of teamwork players, You're not trying to…
+to get one single person, you're really trying to get a team, because they are trying to evaluate that, but not based on a single one, it's based on the team. In other words, if you look at that, the player A
+Look at the player, B8?
+Player B, you know.
+If you player A and player B together.
+if put it together, they were much… you will get some much benefit from Play A, individually.
+You know, plus.
+So, let me…
+So, let me… I think today you got some trouble, you know. So, benefit.
+A, you get player A and B together, it's… is bigger than benefit A individually, plus Benefated. P.
+So that's the point. So they are not trying to evaluate by innovator A and B, they are trying to evaluate these kind of combinations, subset. So that's why they are trying to select a subset, because subset, when they add together, they will get something different. In other words.
+The performance is not evaluated by linearly all this kind of individual contributors together.
+So, for example, I have to select that.
+If I need to select the 5 from the 100 candidate, right?
+Let's say you have 100 candidates.
+And it still cannot work.
+So, for example, you have 100 Candidates.
+I needed to… It's a net.
+Top 5.
+So, the first impression, oh, that's… you should do something like this, right? You're a 100 candidate.
+So you need to make a score.
+Over 100.
+100 candidates, right?
+And take the 5 tops, the top 5, right? That's what you select, right?
+That's totally wrong.
+That's not the case. The reason is, the benefit…
+Of the top 5 is not equal to the top individual 5 added together.
+So, for example, you have some situation like this. You have player A,
+You get the score, equals 10, You get a player, B…
+equals 10, also. But if player A plus B together, you only get 15.
+You see? So that's why…
+you cannot just by evaluating the individual player's score and add it together, take the five… top five as the selection. No, you have to put the five together and say what's the score.
+So if that suggestion, you will find, you know, you select a 5 over 100, you need to search hundreds of thousands possible suggestions.
+That's the overwhelming large.
+So that's the suggestion you want to make a wrapper. You want to select a subset, right?
+If you want to extinct subset of them.
+One way, just so that I get…
+Explain. You may do something like this.
+And say, you have 100 candidates.
+You want to take a fight.
+You can do something like this. It's the first step.
+Take the top one.
+What do you mean, take the top one? Because for 100, right, if you only select one, you evaluate every single one.
+you want to take the first one. You can take the top one, right? The highest one as top one.
+So, the second one, For the rest, 99.
+You make a soldier again.
+Okay? How do you make a sorting?
+You want your consultants like this?
+from top one, Plus, any… One out of the rest 99.
+And they evaluate this.
+You see? You take the top one, right? You have the rest, the 99. For this rest, 99. So you have…
+The top one, for the rest 99, you have combined together, you have 99 combinations. For this number, 99 combinations, you want to evaluate this combination.
+let's say if the top one is called JSON, so you have JSON plus
+Dave, Jason plus Jeff. Jason plus
+Tom, so on and so forth. So you have JSON plus all the 99 together. For this combination, you want to evaluate this total score. That's how you… you sort it, okay? You get this top one.
+Then you get another top one. Oh, sorry, you get another top two.
+Right? Because from step one, you test all the rest 99. For these 99 combinations, you find the highest one. Then that's how you get the…
+You have the top two now.
+Right? So you have, for the rest.
+for the rest, 98. So you have to do something like this.
+Top two?
+plus 1.
+Out of the rest, Then 8. So how many? So you should have, in total, Then 8, combinations.
+Then you need to evaluate it.
+evaluated.
+Then?
+And, choose the… The highest… As the top 3.
+Selection, right? That's how you get top three selections.
+So, this can… so on and so forth.
+So that's kind of recursively add, add, add, keep adding.
+Enterprising here?
+Preksha Shah
+Preksha Shah
+00:53:18
+No profit.
+Rensheng Wang
+Rensheng Wang
+00:53:21
+Right But, this one…
+If you're using this one to work as your interview for Two Sigma and Goldman Sachs.
+You'll get a field.
+That's not what you want.
+Okay? Let me tell you, that's not the one you want, okay? What they are looking for is, they prefer to use the reverse, they call it reverse feature in eliminations.
+You would do something like this, not, like, one by one to add in. Where's the first one, top one, where's the first two, don't edit the top 10. No. 1, 0 trying to fulfill like this.
+You have 100… Candidate.
+So… You start from… eliminate.
+One.
+out of… 100 candidates.
+Okay, so what do you mean? You need the one out of counties. So is there two assumptions like this?
+for… I equals 1, to 100.
+So each time, you know, You drop one, feature.
+Out of those 100, And you just evaluate.
+The rest… 99.
+Right? Because 100, you drop the 1, you get 99. So you evaluate the rest 99, performance.
+you have a score. So if you could repeat this 100 times, right, you should have 100 score. For those that
+100 scores, You take the… least score, right? The least one. Then, that's when you need to drop.
+you have 100 score, right? Based on 100, they're dropping, you know.
+For the one.
+You have the least impact, you drop this one.
+Then you have only what?
+You have a 99, remaining.
+Right?
+Then you want to repeat this again. For this run, 99 remaining for I…
+Equals 1 to 99, you know.
+And the job one, Out of… Those 99 features.
+and evaluate.
+their performance.
+Right? From 91, you drop the one, you only have remaining 98, right?
+Then you should have this,
+99 scores. For these 99 scores, You take the least one, And drop it.
+And so on and so forth. That's how you congratulate. In other words, the strategy is always…
+threw away the worst one. That's very, like, the…
+The company to trying to lay off people, right?
+We have 100 employees. I want to keep the most, smart people. What is your deal?
+They have two different ways. They said, oh, who is the best company performance? Okay, UKBD. Then the last one, they say, who is the next best performer UK, right? They… no, they don't use something like this, right? What they would do is, like, algebra. They say, okay, over the 100, people, they say, who is the worst performer? Oh, you. Okay, get out.
+you get the 99 remaining, right? For the 99, you evaluate, like, who is the worst performer? Okay, you, get out. Right? That's how you gradually…
+kick out.
+That's how you can keep this. It's pretty much like the features and actions. That's how people get some, you know, layoff, right? Very similar, like this. So that's the router-based. Why this is important? Because this is based on the overall subset, overall performance. You're not individually evaluated.
+That's the most typical
+interview questions. When people are trying to test it, if you are trying to work on this kind of machine learning engineers.
+Why? The readings!
+The current industry trend is the pew, the pew, software developer, it gets smaller, Smaller market share.
+The machine learning engineer, you got the bigger Portion of the share.
+So, in other words, you get the less and the less, the pew, developer.
+If… because the developer can be very easily replaced by the AI,
+Right? Okay, I need to make some front-end UI
+You don't need any person. AI can do perfect.
+You want to get some, back-end supported user AI can do perfect.
+But for machine learning and engineering part, because that's relevant to what? Relevant to the learning, judgment, taste.
+You need human in that economic model fully depends on
+AI. So that's why machine learning engineer, you get more. Sometimes people call the AI engineer, sometimes people call machine learning engineer. So this position, you get more and more dominant. If you say, I have no idea about machine learning, I don't care about the machine learning, I only know how to make a codeine, then you need to rethink about it.
+Because that's… this part used to be very dominant in the…
+software engineer category, but now you get the NES. People require you to know a little bit of coding, but they need to know more about the learning.
+How to make an assessment, how to make a judgment, how to fund the right decisions. This part, you have to use the booming in the actions.
+So that's why, for example, you want to make a feature selection, right? I already described the two for you.
+you have to help AI to understand which is better. If AI has no idea, you need to make a decision, because either way should be fine, you know, backward, forward, right?
+From AI, maybe they don't treat much different, but from you, you know what's different.
+That's the…
+difference between these first two. The third one is embedded. So this one is a really useful algorithm. You have built-in features, just like a,
+Random forest, right? Or that's all.
+So, for rendering Forest, for example.
+what they're doing is that you have 100 features, they take a subset of features to construct a tree. They are making many, many subsets that are choosing the best that will keep it.
+This process is not by you to do it. They already embedded by the everything. Just call this function, they will automatically do this kind of features and action for you.
+So that's why I have embedded wrapper-based, filter-based, those three.
+Any pricing here?
+So, in other words, that's exactly what you will experience in the future work.
+You don't have to rush to make a coding, because the coding part, it can be well taken care of by the agent.
+You are more responsible to make judgment, to tell them what you need to do next.
+So, for example, Pearson pronation, right, is the typical filter-based
+That's the sample code that you can experience, you know. That's a recursive feature elimination, because that is the more conceptual way. I'm not trying to select who is the best one. Instead, I'm trying to… who is the worst one.
+I always kick out the one who has the least impact, right? So that's… you are redundant, because you have the least impact. That means you are redundant, you are negligible, because you don't have much impact.
+I can very easily to piggy out.
+That's the example how to implement this. You just call the function IEF.
+recursively, feature elimination.
+And Lasso, you know.
+for the Lasso, you know, for re…
+Random Forest, it's really embedded, that feature, you know.
+Because those connections is by search, high-dimensional space, trying to
+use the recognizer to find where you can keep some
+feature selection variable equals 0. 0 means you will drop this, right? And meanwhile, you can make, recognize the penalty of this waste.
+this, Lasso, regularization will be explained more in the 6 to 8, because that's where you can make an evaluation about the
+Recognize that you want to avoid this kind of for, overfitting.
+In other words.
+how do you determine some feature you need to keep, some feature you need to delete, you know? Lasso will use the recognizer to help you to penalize.
+They are trying… if you're using… let's so, you know, because of the L1, though it's very easy to… if possible, they are trying to push some features equal zero. That means you don't have to take it.
+So that's the, formula.
+For example, for linear regression model.
+you have X as predictor, Y is the response vector. So you are trying to make a linear combination of X1, X2, blah blah blah together, and close to Y hat, right? So you want to make Y and Y hat should get as small as the distance.
+So, that's how you make a regular, linear regression.
+But on the other hand, if you're trying to make a lesser organization, so that means you are trying to add some extra nambda.
+Absolute value of the waste.
+The impact that without this one.
+This part is a regular linear regression. Once you add this one, they are trying to say, not only make this
+linear regression as small as possible. We're also trying to say, if possible, can you just use less weight?
+Right? You're trying to say you have a lot of weights here, right? So you want to say, if it's possible, can you use less weights? What do you mean, it's less weights? Because you want to push weights, right? This W, you're trying to make this smaller absolute value. What's the smallest absolute value?
+0, right? Cannes be less than zero. So, if possible, they're always trying to push the WJ equals 0. If we make a WJ equals zero, what does that mean?
+some features, because WJ is 0, then that's XJ. This column, J, is gone, right? So that J does make sense. It's, like, a feature eliminated, right?
+Because the way is equal to zero… the way is equal to zero means you're trying to remove something.
+So once you add this Lassore recognization.
+you are trying to, if possible, I'm not sure everyone, some of them, if possible, when you're trying to search, you're trying to push the weights equal to zero. If you make waist equal 0, this corresponding feature disappeared.
+Okay? So that's why you'd call the, embedded.
+So, that's the code.
+Sambo code.
+That's the trade-based step.
+also from the model, you know, that's the random forest.
+you have 100 features, you assign the percentage at 30%, so they were only randomly sending 30 out of 100 columns to form the tree to make the random forest search.
+So that's assembled code.
+So, any quasi here?
+So, let me give you one more…
+Background experience about the features and actions.
+features and actions sometimes is relevant to this kind of data mining. Mining, you know, right? Mining means you want to
+Field out the gold from the regular cents, right?
+It's very much like the feature selections.
+I keep generating new features.
+Why? Because I don't know which feature will help, which not, right? But it doesn't matter, because it doesn't hurt, right? You get more features.
+Hopefully, some new features contain some useful information. Maybe that's called a gold.
+You keep adding more cents. Maybe inside of cents, some of the cents is actually, indeed, it's a gold.
+That's like this, okay? So, there's one way in…
+machine learning engineers. If you are a machine learning engineer, if you're not AI, so you need to tell the AI to keep generating the new, meaningful features.
+Even for the new features, maybe 99% are trash.
+That's fun. Don't forget about you still one remaining, right? One remaining maybe is very helpful. They are gold. They're useful features.
+Doesn't matter, right? You keep the 100 new features, 99 bad ones, okay, remove it, keep the one, as long as this one helps you. That's great! That's the benefit, right? Unless you have 100% appeal trash.
+Then you need water bottle.
+So you'll keep generating the new features.
+From the new features, you always keep the part of the meaningful, useful, so that's why you need the features and actions. You want to control the feature space.
+The featured space you want to keep are more meaningful, more… Informative, and more representative.
+Of the signal space.
+So that's why… that's the motivation people trying to work on, feature selections.
+Any more questions here?
+Do you need more explanation or examples?
+And if there's no more questions here, so that's all for today.
+And I can stay a while for your question about the mid-term or anything else, if you have questions, yeah.
+Great, okay. Thank you, I will stay here if you need to talk to me.
+Thank you, take care.
+Great, okay. Take care, everyone. Bye.
+Gyana Sai Adusumilli
+Gyana Sai Adusumilli
+01:10:09
+Oh, Professor?
+Hello.

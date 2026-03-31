@@ -1,0 +1,607 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large January 30, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{XGBoost: What It Is and Why It Matters}
+%------------------------------------------------------------
+
+\subsection{Definition}
+\textbf{XGBoost} (eXtreme Gradient Boosting) is a decision-tree-based \emph{ensemble} machine
+learning algorithm that uses a gradient boosting framework.
+
+\begin{itemize}
+    \item Open-source; core implemented in C++, with R/Python/Julia interfaces.
+    \item Cloud-ready: supports AWS, Azure, Yarn; integrates with Flink and Spark.
+    \item \textbf{The winning model for numerous Kaggle competitions.}
+\end{itemize}
+
+\subsection{When to Use It}
+\begin{itemize}
+    \item \textbf{Structured (tabular) data} --- CSV, TSV, SQL tables with named columns.
+      XGBoost is the \emph{first model to try} when you have no strong prior.
+    \item \textbf{Not for unstructured data} (images, text). Those require deep learning
+      (neural networks, transformers) because pixel or token positions carry no fixed
+      semantic meaning that a tree can split on.
+\end{itemize}
+
+\subsection{Why This Is an Interview Topic}
+XGBoost is a high-frequency data engineering interview question because:
+\begin{enumerate}
+    \item It is not a yes/no question --- it invites extended discussion.
+    \item Explaining \emph{why} it works shows system-level understanding, not just API familiarity.
+    \item Knowing its limits (when \emph{not} to use it) signals senior-level thinking.
+\end{enumerate}
+
+\newpage
+%------------------------------------------------------------
+\section{The Hiring Manager Analogy: Decision Tree to XGBoost}
+%------------------------------------------------------------
+
+The evolution of tree-based algorithms can be understood entirely through the lens of
+an iterative interview process.
+
+\subsection{Decision Tree --- One Interviewer}
+A single hiring manager applies their own set of criteria: education level, years of
+experience, coding ability, communication. Each criterion is a \emph{split} in the tree.
+Easy to visualize and explain (interpretable), but \textbf{biased} toward one person's
+perspective.
+
+\subsection{Bagging (Bootstrap Aggregating) --- Interview Panel}
+Replace the single interviewer with a \textbf{committee}. Each member votes independently.
+The final decision aggregates all votes democratically.
+\begin{itemize}
+    \item Reduces individual bias.
+    \item Majority vote $\Rightarrow$ more robust, statistically reliable outcome.
+    \item If 9 of 10 panelists approve: strong positive signal. Mixed votes: doubt.
+\end{itemize}
+
+\subsection{Random Forest --- Randomized Panel}
+Bagging, but each panelist only tests the candidate on a \emph{randomly chosen subset}
+of criteria (e.g., one tests coding, another tests system design, another tests
+behavioral). This randomness:
+\begin{itemize}
+    \item Prevents any single feature from dominating.
+    \item Helps the ensemble generalize to new data (avoids overfitting).
+    \item A few bad random subsets are harmless when many subsets are sampled.
+\end{itemize}
+
+\subsection{Boosting --- Sequential Interviews with Feedback}
+Interviewers run sequentially. Before each session, the next interviewer receives
+\textbf{feedback from the previous one} and sharpens their questions accordingly.
+Each round focuses on the \emph{residual gap} --- the parts the previous round did
+not resolve.
+\begin{itemize}
+    \item Feedback loop $\Rightarrow$ progressively more targeted evaluation.
+    \item The model ``learns from its mistakes'' round by round.
+\end{itemize}
+
+\subsection{Gradient Boosting --- Measure the Gap with Calculus}
+Boosting, but each round measures the residual gap using the \textbf{gradient} of the
+loss function --- i.e., how far the current prediction is from the target, and in
+which direction to push.
+
+\textit{Analogy from lecture:} A candidate is great at communication but terrible at
+coding. The gradient tells you exactly \emph{how large} that coding gap is. The next
+interview round focuses precisely there.
+
+\subsection{XGBoost --- Gradient Boosting on Steroids}
+XGBoost improves on gradient boosting by also measuring the \textbf{Hessian} --- the
+second derivative of the loss --- telling the model \emph{how quickly the gradient
+itself is changing}.
+
+\begin{itemize}
+    \item First derivative (gradient $g_i$): how far off the prediction is.
+    \item Second derivative (Hessian $h_i$): how fast that error is changing --- how
+      aggressively to step toward the minimum.
+    \item Combined, these enable fewer iterations and faster convergence than standard
+      gradient boosting.
+\end{itemize}
+
+This is combined with state-of-the-art software and hardware optimizations (see
+Section~\ref{sec:why_xgb_performs}).
+
+\newpage
+%------------------------------------------------------------
+\section{Why XGBoost Performs So Well}
+\label{sec:why_xgb_performs}
+%------------------------------------------------------------
+
+XGBoost improves on standard Gradient Boosting Machines (GBMs) through
+\textbf{system optimizations} and \textbf{algorithmic enhancements}.
+
+\subsection{System Optimizations}
+
+\subsubsection{Parallelization}
+Standard tree building is sequential (outer loop over leaf nodes, inner loop over
+features). XGBoost swaps this loop order, enabling features to be evaluated
+simultaneously across parallel threads.
+
+\textit{Why it matters:} From 100 features, choosing a random subset of 20 yields
+a combination space larger than $10^{15}$. Sequential evaluation would be
+computationally infeasible. Parallelization makes it tractable.
+
+\subsubsection{Tree Pruning (Depth-First)}
+Standard GBMs use a greedy stopping criterion: stop splitting when the split would
+be negative. This is ``short-sighted'' --- a seemingly bad split now might enable a
+much better split one level deeper.
+
+XGBoost uses \texttt{max\_depth} and grows trees \textbf{depth-first}, then
+\emph{prunes backward}. This finds globally better tree structures.
+
+\subsubsection{Hardware Optimization (Cache Awareness)}
+Each thread allocates an internal buffer to store gradient statistics locally. This
+avoids redundant memory accesses --- values computed once are cached and reused.
+
+\textit{Connection:} The same cache-awareness principle drives the key-value (KV)
+cache in Transformer models, where intermediate attention computations are stored
+and reused rather than recalculated.
+
+\subsection{Algorithmic Enhancements}
+
+\subsubsection{Regularization (Built-In L1 + L2)}
+XGBoost's objective penalizes model complexity with \emph{both} L1 (Lasso) and L2
+(Ridge) regularization simultaneously:
+\[
+\mathcal{L}(\phi) = \sum_i l(\hat{y}_i,\, y_i) + \sum_k \Omega(f_k),
+\quad \Omega(f) = \gamma T + \tfrac{1}{2}\lambda\|w\|^2
+\]
+where $T$ is the number of leaves and $w$ are the leaf weights. You do \emph{not}
+need to add a regularizer manually --- it is baked in.
+
+\textbf{L1 vs.\ L2 (a frequent interview question):}
+\begin{itemize}
+    \item \textbf{L1 (Lasso, \texttt{alpha}):} penalizes $|w_j|$.
+      Geometrically, the constraint region has corners, which forces many weights
+      to exactly zero $\Rightarrow$ \textbf{fast, aggressive feature elimination}.
+      Use when you want dimension reduction.
+    \item \textbf{L2 (Ridge, \texttt{lambda}):} penalizes $w_j^2$.
+      Constraint region is smooth; weights shrink toward zero but rarely hit it
+      exactly $\Rightarrow$ \textbf{slower, gentler shrinkage}. Keeps all features.
+\end{itemize}
+
+\subsubsection{Sparsity Awareness (Missing Value Handling)}
+When a value is missing in the feature matrix, XGBoost learns the optimal
+\emph{default direction} (left or right branch) from the training data itself.
+The algorithm tries both directions and keeps whichever yields better performance.
+
+\textbf{Practical result:} You do \emph{not} need to impute missing values before
+running XGBoost. The model handles them natively and intelligently.
+
+\textit{Contrast with legacy tools:} MATLAB and older Python libraries returned
+errors on missing data, forcing analysts to delete rows or manually impute values
+(mean, zero, or custom). Both choices introduce bias. XGBoost eliminates this pain.
+
+\subsubsection{Weighted Quantile Sketch}
+Before building any tree, XGBoost pre-scans the data to compute \emph{percentile
+breakpoints} (quantiles) for each feature. Tree splits are proposed only at these
+breakpoints, not at arbitrary values.
+
+\textit{Why:} A split at age $= 10$ is meaningless if everyone in the dataset is
+over 18. By understanding the data distribution first, every proposed split is
+statistically defensible and the same quantile information can be reused across
+multiple trees without recomputation.
+
+\subsubsection{Built-In Cross-Validation}
+XGBoost performs internal train/validation splitting at each boosting iteration.
+You do not need to manually code a 70/30 split or $k$-fold cross-validation ---
+it is already happening inside the model.
+
+\newpage
+%------------------------------------------------------------
+\section{Benchmark: Where Is the Proof?}
+%------------------------------------------------------------
+
+Using scikit-learn's \texttt{Make\_Classification} dataset (1 million points, 20
+features, 5-fold CV):
+
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Algorithm}   & \textbf{AUROC} & \textbf{Training Time (s)} \\
+\midrule
+XGBoost              & 0.9662         & \textbf{24}               \\
+Gradient Boosting    & 0.9661         & 2{,}069                   \\
+Random Forest        & 0.9542         & 424                       \\
+Logistic Regression  & 0.9373         & 17                        \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+XGBoost matches the best accuracy while being \textbf{86$\times$ faster} than
+standard Gradient Boosting.
+
+\newpage
+%------------------------------------------------------------
+\section{The ``No Free Lunch'' Caveat}
+%------------------------------------------------------------
+
+XGBoost is the default starting point, not a guaranteed winner. Real practice
+requires:
+
+\begin{enumerate}
+    \item Testing multiple algorithms on your specific data.
+    \item \textbf{Hyperparameter tuning} --- a model with default settings is never
+      fully optimized.
+    \item Considering computational complexity, explainability requirements, and
+      ease of deployment.
+\end{enumerate}
+
+\textit{From the slides:} ``This is exactly the point where Machine Learning starts
+drifting away from science towards art --- but honestly, that's where the magic
+happens.''
+
+\subsection{Key Hyperparameters to Know}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Parameter}       & \textbf{Controls}                              & \textbf{Typical Range} \\
+\midrule
+\texttt{learning\_rate}  & Step size per boosting round                   & 0.01 -- 0.3            \\
+\texttt{n\_estimators}   & Number of boosting rounds (trees)              & 100 -- 1{,}000         \\
+\texttt{max\_depth}      & Maximum depth of each tree                     & 3 -- 10                \\
+\texttt{min\_child\_weight} & Min sum of instance weight to split further & 1 -- 10                \\
+\texttt{subsample}       & Fraction of rows sampled per tree              & 0.5 -- 1.0             \\
+\texttt{colsample\_bytree} & Fraction of columns sampled per tree         & 0.5 -- 1.0             \\
+\texttt{lambda}          & L2 regularization weight                       & 0 -- 10                \\
+\texttt{alpha}           & L1 regularization weight (Lasso)               & 0 -- 1                 \\
+\texttt{gamma}           & Min loss reduction required to make a split    & 0 -- 5                 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Practical advice from lecture:} Most parameters will show little sensitivity
+on a given dataset. The value of tuning is to \emph{find the one or two that are
+sensitive} --- those are the parameters that reveal the structure of your specific
+data.
+
+\subsection{Python Code}
+
+\begin{verbatim}
+# Regression
+from xgboost import XGBRegressor
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(
+    XGBRegressor(objective='reg:squarederror'),
+    X, y, scoring='neg_mean_squared_error')
+
+# Classification
+from xgboost import XGBClassifier
+cross_val_score(XGBClassifier(), X, y)
+\end{verbatim}
+
+\newpage
+%------------------------------------------------------------
+\section{XGBoost vs.\ LightGBM}
+%------------------------------------------------------------
+
+\subsection{What Is LightGBM?}
+Microsoft's \textbf{LightGBM} (Light Gradient Boosting Machine) is a more efficient
+variant of gradient boosting, now preferred by many Kagglers.
+
+\begin{itemize}
+    \item Up to $\mathbf{6\times}$ faster than XGBoost.
+    \item Lower memory usage.
+    \item Supports parallel and GPU learning.
+    \item Capable of handling very large-scale data.
+\end{itemize}
+
+\subsection{The Core Difference: Leaf-Wise vs.\ Level-Wise Tree Growth}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Property}       & \textbf{XGBoost (Level-Wise)} & \textbf{LightGBM (Leaf-Wise)} \\
+\midrule
+Growth strategy         & Scan level by level (BFS)     & Always expand highest-loss leaf (DFS) \\
+Speed                   & Slower                        & Faster                                 \\
+Accuracy (small trees)  & Comparable                    & Often better                           \\
+Accuracy (full tree)    & Same (converge to same tree)  & Same                                   \\
+Monotonic constraints   & Supported                     & Not supported                          \\
+Interpretability        & Easier                        & Slightly harder                        \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Key insight:} Leaf-wise growth chooses splits based on their contribution to
+\emph{global} loss, not just the loss along one branch. For a fixed node budget, it
+often produces lower-error trees than level-wise growth.
+
+\subsection{LightGBM Novel Techniques}
+\begin{itemize}
+    \item \textbf{GOSS (Gradient-based One-Side Sampling):} Drops data instances
+      with small gradients (they are already well-predicted). Keeps large-gradient
+      instances and a random sample of small-gradient ones. Accurate information
+      gain estimate at a fraction of the data size.
+    \item \textbf{EFB (Exclusive Feature Bundling):} Bundles mutually exclusive
+      features (features that are rarely non-zero simultaneously) into a single
+      feature. Reduces the effective number of features, speeding up split finding.
+\end{itemize}
+
+\subsection{LightGBM Python Code}
+
+\begin{verbatim}
+from sklearn.model_selection import train_test_split
+import lightgbm as lgb
+
+X_train, X_test, y_train, y_test = \
+    train_test_split(X, y, test_size=0.3, random_state=0)
+
+clf = lgb.LGBMClassifier()
+clf.fit(X_train, y_train)
+\end{verbatim}
+
+\subsection{Current Status}
+XGBoost developers later added \texttt{grow\_policy='lossguide'} to match
+LightGBM's leaf-wise behavior. Even so, LightGBM remains approximately
+$1.3\times$--$1.5\times$ faster than XGBoost. Both are viable; XGBoost's
+monotonic constraint support can be valuable when model interpretability is a
+business requirement.
+
+\newpage
+%------------------------------------------------------------
+\section{Correlation: The Foundation of Time Series}
+\label{sec:correlation}
+%------------------------------------------------------------
+
+\subsection{Why Correlation?}
+Correlation is the most fundamental measurement used throughout time series analysis.
+Its applications are:
+\begin{itemize}
+    \item \textbf{Prediction:} if $X$ and $Y$ are correlated, knowing one lets you
+      predict the other.
+    \item \textbf{Feature selection:} highly correlated features are redundant;
+      low-correlation features with the target are uninformative.
+    \item \textbf{Reliability / validity:} measuring whether two instruments or
+      raters agree.
+\end{itemize}
+
+\subsection{Pearson Correlation Coefficient}
+
+The correlation coefficient between $X$ and $Y$ is:
+\[
+r_{x,y} = \frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\,\text{Var}(Y)}}
+         = \frac{E[(X-\mu_x)(Y-\mu_y)]}{\sqrt{E(X-\mu_x)^2\,E(Y-\mu_y)^2}}
+\]
+
+\begin{itemize}
+    \item $-1 \leq r_{x,y} \leq 1$ always.
+    \item $r \approx +1$: strong positive linear relationship.
+    \item $r \approx -1$: strong negative linear relationship.
+    \item $r \approx 0$: little or no \emph{linear} association.
+\end{itemize}
+
+\textbf{Critical subtlety:} $r = 0$ means \emph{uncorrelated}, \textbf{not}
+\emph{independent}. Two variables can have a strong non-linear relationship
+(e.g., $Y = X^2$) and still have $r = 0$.
+
+\subsection{Computing Correlation in Python / MATLAB / R}
+
+\begin{verbatim}
+# Python (NumPy)
+import numpy as np
+r = np.corrcoef(x, y)[0, 1]
+
+# MATLAB
+r = corrcoef(A)          % correlation matrix of all columns
+
+% R
+cor(x, y)                # scalar; cor(A) gives full matrix
+\end{verbatim}
+
+\newpage
+%------------------------------------------------------------
+\section{Time Series Analysis: Stationarity}
+%------------------------------------------------------------
+
+\subsection{What Is a Time Series?}
+A time series is data indexed by a sequential, \textbf{non-swappable} time index.
+Order matters: shuffling destroys the dependency structure.
+
+The same logic applies to any ordered sequence:
+\begin{itemize}
+    \item Financial prices (daily/hourly returns)
+    \item Text tokens (word order in a sentence)
+    \item Geospatial measurements (neighboring locations)
+    \item Audio/spectral data (frequency bins)
+\end{itemize}
+This is why understanding time series transfers directly to understanding
+language models and diffusion models.
+
+\subsection{Stationarity}
+The foundation of time series analysis. We need the process to be
+\emph{stable over time} so that past observations predict future ones.
+
+\textbf{Strict stationarity:} The joint distribution of $\{X_{t_1},\ldots,X_{t_k}\}$
+is identical to that of $\{X_{t_1+l},\ldots,X_{t_k+l}\}$ for all $l$. Rarely
+verified in practice.
+
+\textbf{Weak (2nd-order) stationarity:} The practical version. $\{X_t\}$ is weakly
+stationary if both:
+\begin{itemize}
+    \item The mean $E(X_t) = \mu$ is constant (does not depend on $t$).
+    \item The covariance $\text{Cov}(X_t, X_{t-l}) = v_l$ depends only on the
+      \emph{lag} $l$, not on $t$.
+\end{itemize}
+
+\textbf{Examples of non-stationary processes:}
+\begin{itemize}
+    \item \textbf{Structural break:} the mean shifts at some time $k$
+      (e.g., $y_t = \beta + e_t$ for $t \leq k$, $y_t = \beta + \lambda + e_t$
+      for $t > k$).
+    \item \textbf{Random walk (unit root):} $y_t = y_{t-1} + e_t$.
+      Variance grows without bound: $\text{Var}(y_t) > \text{Var}(y_{t-1})$,
+      so it is not stationary.
+\end{itemize}
+
+\newpage
+%------------------------------------------------------------
+\section{Auto-Correlation and the AR Model}
+%------------------------------------------------------------
+
+\subsection{From Correlation to Auto-Correlation}
+Apply the correlation formula with $X \to X_t$ and $Y \to X_{t-l}$ (the same series
+shifted by lag $l$). The result is \textbf{auto-correlation}.
+
+Define the auto-covariance at lag $l$:
+\[
+v_l = \text{Cov}(X_t,\, X_{t-l}) = E[(X_t - \mu)(X_{t-l} - \mu)]
+\]
+
+The \textbf{auto-correlation function (ACF)} is the normalized version:
+\[
+r_l = \frac{v_l}{v_0}, \quad r_0 = 1,\quad |r_l| \leq 1,\quad r_l = r_{-l}
+\]
+
+where $v_0 = \text{Var}(X_t)$.
+
+\textbf{What $r_l$ means:} The correlation $r_l$ between $X_t$ and $X_{t-l}$
+quantifies how much knowing $X_{t-l}$ reduces uncertainty about $X_t$, without
+any other information. The best linear predictor of $X_t$ from $X_{t-l}$ is:
+\[
+X_t - \mu \;\approx\; r_l\,(X_{t-l} - \mu)
+\]
+
+\textbf{Practical formula for a time series of length $N$:}
+\[
+\text{ACF}[l] = \frac{1}{N - l}\sum_{k=1}^{N-l}(x[k]-m)(x[k+l]-m)
+\]
+Note the denominator is $N - l$ (not $N$) because only $N - l$ overlapping
+samples exist after shifting by $l$.
+
+\subsection{The Auto-Regressive (AR) Model}
+If a stationary time series can be explained as a linear combination of its own past
+values plus noise, it is called an \textbf{autoregressive model of order $p$},
+written AR($p$):
+\[
+X_t = a_0 + a_1 X_{t-1} + a_2 X_{t-2} + \cdots + a_p X_{t-p} + \varepsilon_t
+\]
+where $\varepsilon_t$ is a zero-mean random noise term and $a_i$ are coefficients.
+
+\subsection{Properties of the AR(1) Model}
+The simplest case, AR(1): $X_t = a_0 + a_1 X_{t-1} + \varepsilon_t$.
+
+\begin{itemize}
+    \item \textbf{Mean:} $E(X_t) = \mu = \dfrac{a_0}{1 - a_1}$
+      (exists only when $a_1 \neq 1$).
+    \item \textbf{Variance:} $\text{Var}(X_t) = v_0 = \dfrac{\sigma_\varepsilon^2}{1 - a_1^2}$
+    \item \textbf{Stationarity condition:} $|a_1| < 1$.
+      If $|a_1| \geq 1$, the variance is infinite or negative --- the series
+      explodes or is undefined.
+    \item \textbf{ACF decay:} $r_l = a_1^l$. The autocorrelation of a stationary
+      AR(1) series decays \textbf{exponentially} with rate $a_1$.
+\end{itemize}
+
+\textit{Intuition:} If $a_1 = 0.9$, yesterday's value explains 90\% of today's
+fluctuation around the mean. If $a_1 = 0.1$, the series is nearly memoryless
+--- past values barely matter.
+
+\subsection{Properties of the AR(2) Model}
+AR(2): $X_t = a_0 + a_1 X_{t-1} + a_2 X_{t-2} + \varepsilon_t$.
+
+\begin{itemize}
+    \item \textbf{Mean:} $\mu = \dfrac{a_0}{1 - a_1 - a_2}$
+      (requires $a_1 + a_2 \neq 1$).
+    \item \textbf{ACF recursion:} $r_l = a_1 r_{l-1} + a_2 r_{l-2}$ for $l \geq 2$.
+    \item \textbf{Lag-1 ACF:} $r_1 = \dfrac{a_1}{1 - a_2}$
+    \item The ACF of a stationary AR(2) satisfies the second-order difference equation
+      $(1 - a_1 B - a_2 B^2)\,r_l = 0$, where $B$ is the back-shift operator
+      ($B r_l = r_{l-1}$).
+\end{itemize}
+
+\subsection{The Lag Operator and ARMA (Reference)}
+The \textbf{lag operator} $L$ is defined by $L X_t = X_{t-1}$. Using it, AR($p$)
+becomes $a(L) X_t = \varepsilon_t$ where $a(L) = 1 - a_1 L - \cdots - a_p L^p$.
+
+An \textbf{ARMA($p,q$)} model combines autoregressive and moving-average terms:
+\[
+a(L)\,y_t = b(L)\,e_t
+\]
+where $b(L) = 1 + \theta_1 L + \cdots + \theta_q L^q$.
+This framework unifies AR and MA models and forms the backbone of classical
+time series forecasting.
+
+\newpage
+%------------------------------------------------------------
+\section{Missing Data: A Preview for Next Session}
+%------------------------------------------------------------
+
+The transcript closed with a preview of the \emph{missing data} discussion coming
+next week. The key point is that the right answer is always \textbf{``it depends''},
+not a single prescribed action. The questions to ask are:
+
+\begin{enumerate}
+    \item \textbf{What fraction is missing?} --- 0.1\% vs.\ 30\% call for very
+      different treatments.
+    \item \textbf{Which variables are missing?} --- Categorical or continuous?
+      High-importance or low-importance features?
+    \item \textbf{How are they missing?} --- Missing in a contiguous range? Missing
+      correlated with another variable? Independently at random?
+\end{enumerate}
+
+Giving this structured answer in an interview signals that you understand data
+qualitatively, not just algorithmically. XGBoost handles missing values natively
+(Section~\ref{sec:why_xgb_performs}), but understanding \emph{why} the data is
+missing is still the analyst's job.
+
+\newpage
+%------------------------------------------------------------
+\section{Key Formulas Reference}
+%------------------------------------------------------------
+
+\begin{description}
+    \item[Pearson Correlation:]
+    $r_{x,y} = \dfrac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\,\text{Var}(Y)}}$,
+    \quad $-1 \leq r \leq 1$
+
+    \item[Auto-Covariance (lag $l$, length $N$):]
+    $\text{ACF}[l] = \dfrac{1}{N-l}\displaystyle\sum_{k=1}^{N-l}(x[k]-m)(x[k+l]-m)$
+
+    \item[Auto-Correlation:]
+    $r[l] = \dfrac{\text{ACF}[l]}{\text{ACF}[0]}$,
+    \quad $r[0]=1$, \quad $|r[l]|\leq 1$
+
+    \item[AR($p$) Model:]
+    $X_t = a_0 + a_1 X_{t-1} + \cdots + a_p X_{t-p} + \varepsilon_t$
+
+    \item[AR(1) Mean:]
+    $\mu = \dfrac{a_0}{1-a_1}$
+
+    \item[AR(1) Variance:]
+    $\text{Var}(X_t) = \dfrac{\sigma_\varepsilon^2}{1-a_1^2}$, \quad requires $|a_1|<1$
+
+    \item[AR(1) ACF Decay:]
+    $r_l = a_1^l$ \quad (exponential decay)
+
+    \item[XGBoost Objective:]
+    $\mathcal{L}(\phi) = \displaystyle\sum_i l(\hat{y}_i, y_i) + \sum_k \Omega(f_k)$,
+    \quad $\Omega(f) = \gamma T + \tfrac{1}{2}\lambda\|w\|^2$
+
+    \item[Gradient Tree Boosting (2nd-order approximation):]
+    $\mathcal{L}^{(t)} \approx \displaystyle\sum_{i=1}^n
+    \!\left[g_i f_t(\mathbf{x}_i) + \tfrac{1}{2}h_i f_t^2(\mathbf{x}_i)\right]
+    + \Omega(f_t)$
+    where $g_i = \partial_{\hat{y}^{(t-1)}} l(y_i, \hat{y}^{(t-1)})$
+    and $h_i = \partial^2_{\hat{y}^{(t-1)}} l(y_i, \hat{y}^{(t-1)})$
+\end{description}
+
+\end{document}

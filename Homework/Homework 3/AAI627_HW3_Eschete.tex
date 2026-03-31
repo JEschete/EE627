@@ -1,0 +1,93 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\footnotesize,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b,
+	keywordstyle=\color{blue!70},
+	stringstyle=\color{red!60},
+	commentstyle=\color{green!50!black},
+	morekeywords={as, True, False, None}
+}
+
+\title{\textbf{AAI 627 Homework 3\\Time Series Analysis}}
+\author{\textbf{Jude Eschete}}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+
+	%======================================================================
+	\section{Problem 1: True/False Justification}
+	%======================================================================
+
+	\textbf{(a) Statement:} ``For a stationary AR(1) time series $x(t)$, $x(t)$ is uncorrelated to $x(t-l)$ for $l\geq 2$.''
+
+	\textbf{Answer: FALSE.} For AR(1), the theoretical autocorrelation is
+	\[
+	\rho(l)=\phi^l,\qquad l\geq 0.
+	\]
+	In general, this is nonzero for $l\geq 2$ when $\phi\neq 0$, so the values are not uncorrelated.
+
+	\vspace{0.75em}
+	\textbf{(b) Statement:} ``For a stationary MA(1) time series $x(t)$, you will observe the ACF values cliff after time lag $l\geq 2$ in the ACF plot.''
+
+	\textbf{Answer: TRUE.} For MA(1), the ACF cuts off after lag 1, so for $l\geq2$ the theoretical autocorrelation is 0.
+
+	\newpage
+	%======================================================================
+	\section{Problem 2: Best Predictive Model (Q2 Data)}
+	%======================================================================
+
+	Using stationarity testing (ADF) and ARIMA model selection by minimum AIC over candidate $(p,d,q)$ values, the best model for Q2 is:
+	\[
+	\boxed{\text{ARIMA}(0,0,3)}
+	\]
+	with AIC $=977.0179$.
+
+	\lstinputlisting[caption={Problem 2 output},label={lst:q2out}]{HW3_Q2_output.txt}
+	
+	\newpage
+	%======================================================================
+	\section{Problem 3: Best Predictive Model (Q3 Data)}
+	%======================================================================
+
+	Using the same procedure, the best model for Q3 is:
+	\[
+	\boxed{\text{ARIMA}(4,1,4)}
+	\]
+	with AIC $=-15655.8206$.
+
+	\lstinputlisting[caption={Problem 3 output},label={lst:q3out}]{HW3_Q3_output.txt}
+
+	\newpage
+	%======================================================================
+	\section{Appendix: Python Code}
+	%======================================================================
+	
+	\lstinputlisting[caption={AAI627\_HW3\_Eschete.py},label={lst:code}]{AAI627_HW3_Eschete.py}
+	
+\end{document}

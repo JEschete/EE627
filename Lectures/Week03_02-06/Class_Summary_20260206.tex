@@ -1,0 +1,687 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large February 6, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{AI Usage Policy Clarification}
+%------------------------------------------------------------
+
+A student Q\&A at the start of class clarified the course's stance on AI tools.
+The key points are worth recording as they reflect the professor's broader philosophy.
+
+\begin{itemize}
+    \item \textbf{AI use is encouraged} --- it is the industry trend and will be
+      universal in future careers.
+    \item \textbf{The line between acceptable and unacceptable:} copy, then
+      \emph{think}. Read the AI output, evaluate it, tune parameters, catch
+      mistakes, and note what you learned. Simple copy-paste with no reflection
+      is what should be avoided.
+    \item \textbf{How grading works:} assignments require sequential, multi-step
+      tasks. Even with AI, most students cannot finish them without understanding
+      what they are asking for. The sequential guidance itself is the demonstration
+      of capability.
+    \item \textbf{The career analogy:} In the near future you will be a
+      \emph{manager of AI agents}. You do not write the code --- you give clear
+      commands and judge whether the output is correct and useful. That judgment
+      is what this class trains.
+    \item \textbf{Internet analogy from lecture:} When the professor first arrived
+      in the US, he went to a travel agent in person to buy a plane ticket --- even
+      though the internet already existed. The lesson: having a powerful tool does
+      not automatically change how you think. You have to consciously learn to
+      leverage it.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Correlation: Motivation and Intuition}
+%------------------------------------------------------------
+
+\subsection{Why Correlation?}
+Correlation is the \textbf{starting point} for nearly all time series analysis, and
+a fundamental diagnostic tool in industry data work. The professor's framing:
+
+\begin{itemize}
+    \item Given any dataset, your boss asks: \textit{``Help me identify why this
+      is happening.''}
+    \item Step one is always: compute correlations between candidate explanatory
+      variables and the outcome.
+    \item \textbf{High positive correlation} $\Rightarrow$ likely root cause
+      (e.g., CPU utilization correlates with server downtime).
+    \item \textbf{High negative correlation} $\Rightarrow$ likely mitigation lever.
+    \item About 80\% of root-cause identification can be done this way before
+      reaching for more complex models.
+\end{itemize}
+
+\subsection{Why You Remove the Mean First}
+The correlation formula subtracts the mean from both variables before forming the
+cross-product. This is not a technicality --- it has a direct interpretation.
+
+\begin{itemize}
+    \item The mean is a fixed baseline. What we care about is
+      \emph{fluctuation around the mean} --- the dynamic, stochastic movement.
+    \item A large mean says nothing about predictability. A tiny mean with huge
+      variance is actually very informative.
+    \item After mean-removal, the expected value of each term is zero. The
+      cross-product then purely measures whether $X$ and $Y$ \emph{move together}:
+      when $(X - \mu_X) > 0$ and $(Y - \mu_Y) > 0$, or both negative, you get
+      a positive product --- coordinated movement.
+    \item If they are uncorrelated: positives and negatives cancel on average
+      $\Rightarrow$ cross-product averages to zero.
+\end{itemize}
+
+\subsection{Why Normalize by the Standard Deviations?}
+Dividing by $\sigma_X \sigma_Y$ produces a \textbf{dimensionless} number between
+$-1$ and $+1$.
+
+Without normalization, the raw covariance is hard to interpret: is a covariance of
+200 large or small? It depends entirely on the scale of the variables.
+Normalization gives a universal flag:
+
+\begin{center}
+\begin{tabular}{@{}cl@{}}
+\toprule
+\textbf{Value of $r$} & \textbf{Interpretation} \\
+\midrule
+$r \approx +1$        & Strong positive: $X$ up $\Rightarrow$ $Y$ up \\
+$r \approx -1$        & Strong negative: $X$ up $\Rightarrow$ $Y$ down \\
+$r \approx 0$         & No linear relationship; knowing $X$ tells you nothing about $Y$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Correlation Is Not Causation}
+\textit{Classic example from lecture:} In summer, both ice cream sales and reported
+crime events are high. They are correlated. But buying ice cream does not cause
+crime. The hidden driver is \emph{temperature}: it causes both, independently.
+
+The correct interpretation of correlation:
+\begin{itemize}
+    \item Correlation gives you a \textbf{candidate pool} of causes.
+    \item Dependence (causation) implies high correlation, but high correlation
+      does not imply dependence.
+    \item Use correlation to identify \emph{possible} root causes --- then
+      investigate the mechanism.
+\end{itemize}
+
+\textit{Other examples from lecture:} smoking and cancer (high correlation used
+to guide medical advice); real estate prices rising (correlated with other
+investment opportunities); war breaking out (correlated with oil, grocery, and
+bond prices).
+
+
+%------------------------------------------------------------
+\section{Stationarity: The Prerequisite for Time Series Modeling}
+%------------------------------------------------------------
+
+\subsection{Why Stationarity Matters}
+Time series analysis is ultimately about \textbf{forecasting}: learning patterns
+from the past to predict the future. For that to be possible, the statistical
+properties of the series must be stable over time --- otherwise what you learned
+from the past is irrelevant to the future.
+
+\subsection{Strict vs.\ Weak Stationarity}
+\textbf{Strict stationarity:} all statistical moments (mean, variance, skewness,
+kurtosis, \ldots) are time-invariant. Formally: the joint distribution of
+$\{X_{t_1}, \ldots, X_{t_k}\}$ is identical to that of any time-shifted window.
+
+\textbf{Weak (2nd-order) stationarity} --- what is used in practice:
+\begin{itemize}
+    \item Mean $E(X_t) = \mu$ is constant.
+    \item Covariance $\text{Cov}(X_t, X_{t-l}) = v_l$ depends only on lag $l$,
+      not on $t$.
+\end{itemize}
+
+\textit{Intuition from lecture:} Penn Station foot traffic, measured week by week,
+shows nearly identical patterns (Monday rush, weekend dip). That regularity is
+stationarity. Stock prices, by contrast, can trend, crash, or spike --- clearly
+not stationary in their raw form.
+
+\subsection{What to Do When Data Is Not Stationary}
+Raw financial time series almost never satisfy stationarity. The answer is
+\textbf{preprocessing before modeling}:
+\begin{itemize}
+    \item Take \emph{returns} (differences or log-differences) instead of raw
+      prices --- this removes the trending mean.
+    \item Use rolling standardization to stabilize variance.
+\end{itemize}
+This is why the class starts with stationarity: it is the necessary condition
+before any of the models that follow can be applied.
+
+
+%------------------------------------------------------------
+\section{Auto-Correlation}
+%------------------------------------------------------------
+
+\subsection{From Correlation to Auto-Correlation}
+Standard correlation measures the relationship between \emph{two different}
+variables $X$ and $Y$.
+
+\textbf{Auto-correlation} asks the same question about \emph{one variable with
+itself, shifted in time}: how correlated is today's value $X_t$ with the value
+$l$ days ago, $X_{t-l}$?
+
+Formally, setting $X \to X_t$ and $Y \to X_{t-l}$ in the correlation formula:
+\[
+r_l = \frac{\text{Cov}(X_t,\, X_{t-l})}{\text{Var}(X_t)}
+    = \frac{v_l}{v_0}, \qquad
+v_l = E[(X_t - \mu)(X_{t-l} - \mu)]
+\]
+Properties: $r_0 = 1$,\; $|r_l| \leq 1$,\; $r_l = r_{-l}$.
+
+\subsection{What Auto-Correlation Means Practically}
+
+\textit{From the lecture:} If you know the stock price $l$ days ago, $r_l$ tells
+you what fraction of that deviation from the mean carries forward to today.
+
+The best linear predictor of $X_t$ given $X_{t-l}$ is:
+\[
+X_t - \mu \;\approx\; r_l\,(X_{t-l} - \mu)
+\]
+
+\begin{itemize}
+    \item If $r_l = 0$: yesterday tells you nothing; your best forecast is simply
+      the mean $\mu$.
+    \item If $r_l > 0$: yesterday above average $\Rightarrow$ today probably above
+      average.
+    \item If $r_l < 0$: yesterday above average $\Rightarrow$ today probably below
+      average (mean-reverting behavior).
+\end{itemize}
+
+\subsection{Recursive Forecasting}
+Auto-correlation enables a chain of predictions:
+\begin{enumerate}
+    \item Know yesterday $X_{t-1}$ $\Rightarrow$ predict today $\hat{X}_t$.
+    \item Use $\hat{X}_t$ $\Rightarrow$ predict tomorrow $\hat{X}_{t+1}$.
+    \item Repeat for any horizon.
+\end{enumerate}
+
+This recursive structure is the foundation for financial derivatives pricing,
+bond valuation, and options pricing --- all of which require forecasting future
+values from current ones.
+
+
+%------------------------------------------------------------
+\section{The Auto-Regressive (AR) Model}
+%------------------------------------------------------------
+
+\subsection{Definition}
+An \textbf{AR($p$)} model states that today's value is a linear combination of
+the past $p$ days' values, plus random noise:
+\[
+X_t = a_0 + a_1 X_{t-1} + a_2 X_{t-2} + \cdots + a_p X_{t-p} + \varepsilon_t
+\]
+
+\begin{itemize}
+    \item \textbf{``Auto'':} the predictor and the predicted variable are the
+      \emph{same} series (Apple stock predicting Apple stock).
+    \item \textbf{``Regressive'':} history is used to predict the present/future.
+    \item $\varepsilon_t$: zero-mean random noise capturing whatever is unexplained
+      by history.
+\end{itemize}
+
+\subsection{AR(1): Properties}
+AR(1) model: $X_t = a_0 + a_1 X_{t-1} + \varepsilon_t$.
+
+\subsubsection{Mean}
+Taking expectations of both sides, using stationarity ($E(X_t) = E(X_{t-1}) = \mu$):
+\[
+\mu = a_0 + a_1 \mu \quad\Rightarrow\quad \mu = \frac{a_0}{1 - a_1}
+\]
+\textbf{Requirement:} $a_1 \neq 1$. If $a_1 = 1$ (random walk: today = yesterday
++ noise), the mean is infinite and the series is \emph{non-stationary}.
+
+\subsubsection{Variance}
+\[
+\text{Var}(X_t) = \frac{\sigma_\varepsilon^2}{1 - a_1^2}
+\]
+\textbf{Requirement:} $a_1^2 < 1$, i.e., $|a_1| < 1$, so variance is
+non-negative and finite. This is the \textbf{stationarity condition} for AR(1).
+
+\subsubsection{ACF Decay (Key Result)}
+The autocorrelation of an AR(1) series decays \textbf{exponentially}:
+\[
+r_l = a_1^l
+\]
+
+\textit{Intuition from lecture:} If $a_1 = 0.5$, today and yesterday are 50\%
+correlated. Today and 10 days ago: $(0.5)^{10} \approx 0.001$ --- essentially
+no correlation. The further back you look, the less history matters.
+
+\subsubsection{Stationarity Condition Summary}
+\[
+|a_1| < 1
+\]
+If $a_1 = 1$: random walk --- variance grows without bound.\\
+If $|a_1| > 1$: explosive --- variance grows to infinity.\\
+Only $|a_1| < 1$ gives a well-behaved, mean-reverting, stationary process.
+
+\subsection{AR(1) ACF Interpretation}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{$a_1$} & \textbf{ACF behavior} & \textbf{Series character} \\
+\midrule
+$a_1 = 0.9$    & Slow exponential decay & Very persistent (yesterday predicts today well) \\
+$a_1 = 0.5$    & Moderate decay          & Semi-persistent \\
+$a_1 = 0.1$    & Fast decay to zero      & Nearly memoryless \\
+$a_1 = -0.5$   & Alternating decay       & Mean-reverting (oscillates around mean) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%------------------------------------------------------------
+\section{Selecting the AR Order $p$: PACF}
+%------------------------------------------------------------
+
+\subsection{The Problem}
+In practice the order $p$ of an AR model is unknown. You cannot just guess.
+Two principled approaches exist:
+\begin{enumerate}
+    \item \textbf{Partial Autocorrelation Function (PACF)} --- the primary tool.
+    \item \textbf{Information criteria} (AIC, BIC) --- covered later.
+\end{enumerate}
+
+\subsection{What Is the PACF?}
+The PACF answers: \textit{``What is the direct contribution of $X_{t-l}$ to $X_t$,
+after removing the influence of all intermediate lags?''}
+
+Consider fitting AR models of increasing order:
+\begin{align*}
+X_t &= a_{0,1} + a_{1,1}X_{t-1} + \varepsilon_{1t}                                      & \text{AR(1)}\\
+X_t &= a_{0,2} + a_{1,2}X_{t-1} + a_{2,2}X_{t-2} + \varepsilon_{2t}                     & \text{AR(2)}\\
+X_t &= a_{0,3} + a_{1,3}X_{t-1} + a_{2,3}X_{t-2} + a_{3,3}X_{t-3} + \varepsilon_{3t}   & \text{AR(3)}\\
+&\vdots
+\end{align*}
+
+The \textbf{lag-$l$ sample PACF} is the coefficient $\hat{a}_{l,l}$ from the
+AR($l$) regression --- the coefficient on the \emph{last added lag} in each model.
+
+\begin{itemize}
+    \item Lag-1 PACF $= \hat{a}_{1,1}$: direct effect of $X_{t-1}$ on $X_t$.
+    \item Lag-2 PACF $= \hat{a}_{2,2}$: \emph{added} contribution of $X_{t-2}$
+      beyond what AR(1) already explains.
+    \item Lag-3 PACF $= \hat{a}_{3,3}$: added contribution of $X_{t-3}$ beyond
+      AR(2), and so on.
+\end{itemize}
+
+Each model is estimated by ordinary least-squares (multiple linear regression).
+
+\subsection{Using PACF to Determine $p$}
+Key property for a stationary Gaussian AR($p$) model:
+\begin{itemize}
+    \item $\hat{a}_{p,p}$ converges to the true $a_p$ as sample size $T
+      \to \infty$.
+    \item $\hat{a}_{l,l} \to 0$ for all $l > p$ --- lags beyond $p$ add nothing.
+    \item Asymptotic variance of $\hat{a}_{l,l}$ is $1/T$ for $l > p$.
+\end{itemize}
+
+\textbf{Decision rule:} The standard error of the sample PACF is $\approx
+\sqrt{1/T}$. Any lag $l$ whose PACF satisfies $|\hat{a}_{l,l}| > 2/\sqrt{T}$
+(95\% significance) is a statistically meaningful contributor. The last such lag
+is your estimate of $p$.
+
+\subsection{Worked Example}
+A time series of length $T = 996$. Standard error $= \sqrt{1/996} \approx 0.032$.
+The 95\% significance threshold is $\approx 2 \times 0.032 = 0.064$.
+
+\begin{center}
+\begin{tabular}{@{}lrrrrrrrrrrrr@{}}
+\toprule
+\textbf{Lag}  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+\midrule
+\textbf{PACF} & 0.115 & 0.030 & 0.102 & 0.033 & 0.062 & $-$0.050
+              & 0.031 & 0.052 & 0.063 & 0.005 & 0.005 & 0.011 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Lags exceeding the threshold ($>0.064$): lags 1, 3, and 9.
+\begin{itemize}
+    \item At the \textbf{5\% level}: AR(3) or AR(9) are both candidates.
+    \item At the \textbf{1\% level} (threshold $\approx 0.081$): only lag 1 clearly
+      stands out $\Rightarrow$ specify \textbf{AR(3)}.
+\end{itemize}
+
+In practice, prefer the simpler model unless there is a strong theoretical reason
+to include the higher-order lag.
+
+
+%------------------------------------------------------------
+\section{AR($p$) Stationarity: Characteristic Equation}
+%------------------------------------------------------------
+
+\subsection{The Characteristic Equation}
+The stationarity of an AR($p$) model is determined by the roots of its
+\textbf{characteristic equation}. Starting from:
+\[
+X_t = a_1 X_{t-1} + a_2 X_{t-2} + \cdots + a_p X_{t-p} + \varepsilon_t
+\]
+the associated characteristic polynomial is:
+\[
+z^p - a_1 z^{p-1} - a_2 z^{p-2} - \cdots - a_p = 0
+\]
+
+\textbf{Stationarity condition:} all $p$ roots of this equation must lie
+\emph{inside} the complex unit circle, i.e., $|z_i| < 1$ for every root $z_i$.
+
+\textit{Intuition:} this is a generalization of the AR(1) condition $|a_1| < 1$.
+For AR(1), the characteristic equation is $z - a_1 = 0 \Rightarrow z = a_1$,
+and $|z| < 1$ reduces immediately to $|a_1| < 1$.
+
+\subsection{AR(1) as a Markov Process}
+AR(1) has a special structural property: $X_t$ depends on history \emph{only}
+through $X_{t-1}$. Given $X_{t-1}$, the earlier values $X_{t-2}, X_{t-3}, \ldots$
+carry no additional information about $X_t$. This is the \textbf{Markov property}.
+
+\begin{itemize}
+    \item An AR(1) is a \textbf{first-order Markov process}: $P(X_t \mid X_{t-1},
+      X_{t-2}, \ldots) = P(X_t \mid X_{t-1})$.
+    \item More generally, an AR($p$) can always be rewritten as a $p$-dimensional
+      AR(1) process (the \textit{companion form}) by stacking the last $p$ lags
+      into a state vector.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Yule-Walker Equations: Estimating AR Coefficients from ACF}
+%------------------------------------------------------------
+
+\subsection{Derivation}
+Multiply both sides of the AR($p$) equation by $X_{t-k}$ and take expectations.
+Using stationarity, the covariance $v(k) = E[(X_t - \mu)(X_{t-k} - \mu)]$ satisfies
+a system of equations for $k = 1, 2, \ldots, p$:
+\[
+r(k) = a_1 r(k-1) + a_2 r(k-2) + \cdots + a_p r(k-p), \qquad k = 1, \ldots, p
+\]
+where $r(k) = v(k)/v(0)$ is the lag-$k$ autocorrelation.
+
+\subsection{Matrix Form}
+Writing all $p$ equations simultaneously:
+\[
+\begin{pmatrix} r(1) \\ r(2) \\ \vdots \\ r(p) \end{pmatrix}
+=
+\begin{pmatrix}
+  r(0)   & r(1)   & \cdots & r(p-1) \\
+  r(1)   & r(0)   & \cdots & r(p-2) \\
+  \vdots & \vdots & \ddots & \vdots \\
+  r(p-1) & r(p-2) & \cdots & r(0)
+\end{pmatrix}
+\begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_p \end{pmatrix}
+\]
+
+This is a \textbf{linear system} --- given the sample ACF values $\hat{r}(0),
+\hat{r}(1), \ldots, \hat{r}(p)$, the AR coefficients $a_1, \ldots, a_p$ can be
+solved directly (Toeplitz matrix, efficient inversion algorithms exist).
+
+\textit{Practical value:} You can estimate AR coefficients using only the
+correlogram (ACF plot) without fitting the model by OLS. Both approaches
+should give similar results for large samples.
+
+
+%------------------------------------------------------------
+\section{MA($q$) Processes}
+%------------------------------------------------------------
+
+\subsection{Definition}
+A \textbf{Moving Average of order $q$}, MA($q$), expresses $X_t$ as a weighted
+sum of \emph{current and past noise terms}:
+\[
+X_t = \mu + \varepsilon_t + b_1 \varepsilon_{t-1} + b_2 \varepsilon_{t-2}
+      + \cdots + b_q \varepsilon_{t-q}
+\]
+where $\varepsilon_t \sim \text{WN}(0, \sigma^2)$ (white noise: i.i.d., zero mean,
+constant variance).
+
+\subsection{ACF of an MA($q$)}
+The ACF of an MA($q$) is \textbf{finite}: it cuts off sharply to zero after
+lag $q$:
+\[
+r(k) = 0 \quad \text{for all } k > q
+\]
+This is the key diagnostic: a sharp ACF cutoff identifies MA order directly,
+whereas AR produces gradually decaying ACF.
+
+\subsection{Invertibility}
+An MA($q$) process is \textbf{invertible} if it can be written as an AR($\infty$)
+process with summable coefficients. The invertibility condition mirrors the AR
+stationarity condition: the roots of the MA characteristic equation
+$1 + b_1 z + b_2 z^2 + \cdots + b_q z^q = 0$ must lie \emph{outside} the unit
+circle.
+
+\textit{Why it matters:} Non-invertible MA processes lead to non-unique
+parameter estimates. Invertibility is the condition that ensures the model can
+actually be identified and estimated from data.
+
+
+%------------------------------------------------------------
+\section{ARMA($p$,$q$) and ARIMA($p$,$d$,$q$) Models}
+%------------------------------------------------------------
+
+\subsection{ARMA($p$,$q$): Combining AR and MA}
+An AR($p$) model uses only past $X$ values; an MA($q$) model uses only past
+noise values. An \textbf{ARMA($p$,$q$)} uses both:
+\[
+X_t = a_1 X_{t-1} + \cdots + a_p X_{t-p}
+    + \varepsilon_t + b_1 \varepsilon_{t-1} + \cdots + b_q \varepsilon_{t-q}
+\]
+
+\textbf{Backward operator notation.} Define the lag operator $B$ by
+$B^j X_t = X_{t-j}$. Then:
+\begin{align*}
+A(B) &= 1 - a_1 B - a_2 B^2 - \cdots - a_p B^p  \quad\text{(AR polynomial)} \\
+C(B) &= 1 + b_1 B + b_2 B^2 + \cdots + b_q B^q  \quad\text{(MA polynomial)}
+\end{align*}
+The ARMA model becomes the compact expression $A(B)X_t = C(B)\varepsilon_t$.
+
+\subsection{ARIMA($p$,$d$,$q$): Handling Non-Stationarity}
+Real-world series (prices, GDP, cumulative counts) often have a trending mean
+--- they are \emph{not} stationary. The solution is \textbf{differencing}.
+
+\begin{itemize}
+    \item \textbf{First difference} ($d = 1$): replace $X_t$ with
+      $\Delta X_t = X_t - X_{t-1}$. This removes a linear trend.
+    \item \textbf{Second difference} ($d = 2$): difference again to remove
+      quadratic drift. Rarely needed beyond $d = 2$ in practice.
+\end{itemize}
+
+An \textbf{ARIMA($p$,$d$,$q$)} model fits an ARMA($p$,$q$) to the
+$d$-times-differenced series. Using the backward operator, differencing is
+$(1 - B)^d$, giving:
+\[
+A(B)(1-B)^d X_t = C(B)\varepsilon_t
+\]
+
+\subsection{Wold's Decomposition Theorem}
+Any zero-mean covariance-stationary process can be written as:
+\[
+X_t = \sum_{j=0}^{\infty} \psi_j \varepsilon_{t-j} + \kappa_t, \quad
+\psi_0 = 1,\quad \sum_{j=0}^{\infty} \psi_j^2 < \infty
+\]
+where $\varepsilon_t$ is white noise and $\kappa_t$ is a perfectly predictable
+deterministic component.
+
+\textit{Practical implication:} Every stationary process is \emph{in principle}
+an MA($\infty$). ARMA models are \textbf{parsimonious approximations} to this
+infinite representation --- using a small number of AR and MA coefficients
+to capture the same dynamics.
+
+
+%------------------------------------------------------------
+\section{Box-Jenkins Methodology: Systematic Model Selection}
+%------------------------------------------------------------
+
+The Box-Jenkins framework is the standard workflow for fitting ARIMA models.
+It has three steps:
+
+\begin{enumerate}
+    \item \textbf{Transform to stationarity.}
+    \begin{itemize}
+        \item Check for trends and non-constant variance visually or via a
+          unit root test (e.g., Augmented Dickey-Fuller).
+        \item Difference until the series looks stationary ($d$ = number of
+          differences).
+        \item Apply log or square-root transformation to stabilize variance
+          if needed.
+    \end{itemize}
+
+    \item \textbf{Estimate ARMA on the stationary series.}
+    \begin{itemize}
+        \item Inspect the ACF (identifies MA order $q$: sharp cutoff at lag $q$).
+        \item Inspect the PACF (identifies AR order $p$: sharp cutoff at lag $p$).
+        \item Fit candidate ARMA($p$, $q$) models; compare with AIC/BIC to
+          balance fit against model complexity.
+    \end{itemize}
+
+    \item \textbf{Diagnose residuals (model checking).}
+    \begin{itemize}
+        \item Compute the ACF of the residuals.
+        \item Apply the Ljung-Box test: residuals should be \textbf{white
+          noise} (no remaining autocorrelation).
+        \item A significant Ljung-Box $p$-value means the model is
+          \emph{inadequate} --- return to step 2 and revise.
+        \item An insignificant $p$-value (large $p$) means the model
+          captures all the structure; residuals are unpredictable noise.
+    \end{itemize}
+\end{enumerate}
+
+
+%------------------------------------------------------------
+\section{White Noise Testing: The Ljung-Box Statistic}
+%------------------------------------------------------------
+
+\subsection{Motivation}
+After fitting an AR/ARMA/ARIMA model, you test whether the residuals are
+\emph{white noise}. If autocorrelation remains, the model missed something.
+
+\subsection{The Statistic}
+Let $\hat{r}_k$ be the sample autocorrelation of the residuals at lag $k$,
+computed from a series of length $T$. The \textbf{Ljung-Box} statistic is:
+\[
+LB = T(T+2) \sum_{k=1}^{p} \frac{\hat{r}_k^2}{T - k}
+\]
+
+Under the null hypothesis that the residuals are white noise, $LB$ follows a
+\textbf{chi-squared distribution} with $p$ degrees of freedom:
+\[
+LB \;\sim\; \chi^2(p)
+\]
+
+\begin{itemize}
+    \item \textbf{Large $LB$} (small $p$-value): reject white noise hypothesis
+      --- residuals still contain structure. The model needs improvement.
+    \item \textbf{Small $LB$} (large $p$-value): fail to reject --- residuals
+      look like white noise. The model is adequate.
+\end{itemize}
+
+The significance threshold $p = 0.05$ is the typical cutoff.
+
+
+%------------------------------------------------------------
+\section{Worked Example: Fitting AR(2) to AAA Bond Yield}
+%------------------------------------------------------------
+
+\subsection{Series and Identification}
+The series is the \textbf{Moody's AAA corporate bond yield} (monthly data).
+After inspecting the ACF and PACF, the analyst identifies an \textbf{AR(2)}
+as the candidate model.
+
+\subsection{Estimated Model}
+After estimation, the fitted AR(2) is:
+\[
+X_t = c + 1.337606\, X_{t-1} - 0.383890\, X_{t-2} + \varepsilon_t
+\]
+
+\subsection{Stationarity Check via Characteristic Roots}
+The characteristic equation $z^2 - 1.337606\,z + 0.383890 = 0$ has roots:
+\[
+z_1 \approx -0.417, \qquad z_2 \approx -0.920
+\]
+Both satisfy $|z_i| < 1$ (inside the unit circle), so the fitted model is
+\textbf{stationary}.
+
+\subsection{Residual Diagnostics}
+Applying the Ljung-Box test to the residuals (with $p = 18$ lags):
+\[
+LB = 6.79, \qquad p\text{-value} = 96.3\%
+\]
+The $p$-value is very large --- we \textbf{fail to reject} the null of white
+noise. Conclusion: the AR(2) residuals contain no detectable remaining structure.
+The model is adequate.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Step} & \textbf{Result} \\
+\midrule
+Model         & AR(2): $X_t = c + 1.3376 X_{t-1} - 0.3839 X_{t-2} + \varepsilon_t$ \\
+Char.\ roots  & $-0.417,\; -0.920$ (both $< 1$) $\Rightarrow$ stationary \\
+Ljung-Box     & $LB = 6.79$, $p = 96.3\%$ $\Rightarrow$ residuals are white noise \\
+Verdict       & Model is adequate; no further iteration needed \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%------------------------------------------------------------
+\section{Missing Data: Strategies (Preview / HW Discussion)}
+%------------------------------------------------------------
+
+A student question during HW1 discussion prompted this in-class treatment.
+When data has missing values (coded as $-999$ or blank), the right answer is always
+\textbf{``it depends.''} The questions to ask first:
+
+\begin{enumerate}
+    \item \textbf{What fraction is missing?} --- 1\% vs.\ 50\% require completely
+      different responses.
+    \item \textbf{Which variables are missing?} --- High-importance features need
+      more careful treatment than low-importance ones.
+    \item \textbf{How are they missing?} --- Randomly distributed across the
+      dataset (easier to handle) vs.\ concentrated in a specific range or
+      correlated with another variable (more serious).
+\end{enumerate}
+
+\textbf{Strategy options} (in rough order of sophistication):
+
+\begin{itemize}
+    \item \textbf{Delete rows:} Appropriate only when missing fraction is very
+      small (e.g., $<5\%$). Deleting a majority of data destroys information.
+    \item \textbf{Mean imputation:} Replace missing values with the column average.
+      Simple, better than nothing, but introduces bias toward the center.
+    \item \textbf{XGBoost sparsity awareness:} Let XGBoost handle missing values
+      natively by learning the optimal default direction. Converts missing
+      indicators to empty rather than $-999$ (which XGBoost treats as a real
+      value).
+    \item \textbf{Conditional imputation (posterior estimate):} For each record,
+      use all available features to estimate the missing value --- the most
+      principled approach, but most complex.
+    \item \textbf{Synthetic data augmentation:} When data is \emph{scarce} (not
+      just missing), generate synthetic samples or apply data augmentation to
+      increase effective training size.
+\end{itemize}
+
+\textit{For imbalanced data} (small signal, large background): Addressed next
+week in detail. Options include resampling the minority class, adjusting class
+weights, or using evaluation metrics (AUC, F1) that are robust to imbalance
+rather than raw accuracy.
+
+\end{document}

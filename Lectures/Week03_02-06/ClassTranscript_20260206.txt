@@ -1,0 +1,1341 @@
+Rensheng Wang
+Rensheng Wang
+I bet we will have more coming, so why not just charge a little bit?
+Does anyone have any questions, or anything you want me address during this podcast?
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:00:13
+Yes. Can I ask one of my questions now?
+Rensheng Wang
+Rensheng Wang
+00:00:16
+Great, great, go ahead, yeah.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:00:18
+So for the assignments in this class.
+I don't know if you talked about the policy of being able to use, like, AI or internet for the homeworks. The reason why I'm asking is because I'm not coming in with, a CS or
+like, any type of really coding background, so it would be a lot harder for me to do, like, the coding aspects, because when I was doing, like, this assignment, it's, like, the coding parts, I was kind of confused on that.
+So…
+Rensheng Wang
+Rensheng Wang
+00:00:52
+I think, you know, in this class.
+We encourage you to use AI.
+You know, because, number one, it's the trend.
+sooner or later, everybody has to restart your AI. Doesn't matter, say, if you didn't use AI, that looks like good, right? So, you're independently, you know, use all efforts on your own, you know.
+But in the long term, everybody has to use AI, because AI is just like a benchmark to help you understand the level you have achieved. Also, AI can help you understand that don't reinvent the wheel.
+Maybe, you know, you struggled a lot of time, you…
+you know, very diligently develop some results. That's great, but something…
+You know, it's not on the right track, maybe you have much better. You know, the only thing I really want you to avoid is, you know.
+Not just a simple copy, it's better to copy and think, and tune, and write down what you learned from that.
+Because this is a very subtle difference.
+typically, when you copy something, you don't want to waste your brain to think about it. Because I already have a solution, I already have the result, right? If in terms of this one, looks like, you know, you are cheating me, you just copy something from the AI, you got it. But…
+The long-term goal is, I really want you to first the copy, and then to learn, and say words that gap.
+When you copy this solution, right, I want you to say, wow!
+Right? Something much simpler, much easier than what I thought.
+Then, that's Denonia.
+And if you can catch something, feel uncomfortable, maybe you can tune some parameters. If you can catch up some mistakes, that's even better.
+So, in other words, the learning is not about the copy. Copy is only beginning. You copy something.
+Can you just read through? Can you use a little bit of time to think about it, to review it, to make a judgment? Just make a coach work?
+I know it's hard for me to guide you, it's hard for me to… to watch out if you really make some thinking or anything beyond copy, right? But that's the only way we have to do it. Because maybe in the near term, you know.
+It's very likely you will be replaced by the AI.
+If you don't want to bother to think about it.
+it's very likely you will be replaced by AI, right? If you… if your work is just… just think about it, in the office, if your work is… use AI, copy it.
+Then, if that's your work, then very likely you will be replaced.
+your boss, it's very easy to judge, you know, you… I know everybody uses AI. If you use AISA, that's what you get.
+And what else? If your boss asks you, I said, you know, I look at the AI result, I feel they missed something, I feel I have some better things, I feel I can do something, or I do something else to modify, to guide this AI to change this plan to do better, right? That's what your future career were like.
+The same thing we are practicing in this class.
+What… that's why I emphasize, right? What I'm trying to teach them is always trying to synchronize the job market. All the questions I keep asking, trying to explain, they are from the real company, interview questions.
+The contents I'm selecting is also from what the job market is looking for. If the job market is not
+in the flavor of something, then I will lower the priority.
+So that's why, instead of just reading through my next note, right? Oh, I always try to explain why, think about this, what you will need in the future, right?
+So, back to your question, you know, start from this lecture, I don't mind you utilize or leverage the AI, but always make critical thinking, because very likely in the future, you are the one
+To work with AI, or to guide AI, you need to aspire AI to make a critical, creative, innovative thinking.
+And the only thing you can skip is some very deterministic, very boring technical work. For example, I want to collect data. I know I… if I spend time, I know how to collect data, why I need to write the code. I will ask AI to do this for me, right?
+Without AI, you may… sooner or later, you may one day, two days, you may take many hours to manage it to do something. Even you know what you need to do, but it will take some time, right? That's why you ask AI. But AI has some,
+you know, absence of the knowledge space, have some personalized point of view, right? This cannot be replaced by you.
+So, the same theme here.
+I really want to hear your feedback. I really want you to follow the industry trend. I don't know how quickly, how revolutionary this AI will change the way we are teaching, how we learn, you know, because a lot of potentials have been magnified by these AI tools.
+I just feel it's so tremendous. The industry is knowing something bigger is happening. I don't know how this job market will be changing. So that's why you need to be very…
+you know.
+I mean, you have to be very actively thinking about what the, you know, the industry are looking for, what's the future you want to be.
+So that's why I hope you can challenge me, I can help you, you know, to, gradually shape your future in the career path.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:06:42
+I have a follow-up question.
+Rensheng Wang
+Rensheng Wang
+00:06:44
+Sure.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:06:45
+So…
+As you said with, you know, using AI, but obviously just not copying it and looking at it, thinking about it.
+Rensheng Wang
+Rensheng Wang
+00:06:54
+Right.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:06:55
+But I don't have…
+the problem that I have as well is if I don't have as much of a coding background, how do I look at the AI and the answers that it's giving me, and know if that's right or not, if I just don't have that experience?
+like, obviously I can, you know, compare it to the lecture notes and see if there's any differences.
+Rensheng Wang
+Rensheng Wang
+00:07:18
+Right?
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:07:19
+At a certain point.
+I feel like I just don't have the knowledge base to know if the AI is giving me the right answer or not, or if there's something else that I should be doing.
+Rensheng Wang
+Rensheng Wang
+00:07:30
+Right, right. That's the… that's a bigger question. And, that's why you need to, you know,
+follow up the lecture teaching, right? Because in their class, I will try to
+emphasize what you learned, right? For example, in the last lecture, we talked about the XGBoost. So, for this XGBoost, we know the strengths, we know why it works, why it's outperformed, right? So, you need to think about it. Does this data really contains anything that XGBoost can take care of?
+Or, if you are not comfortable, do you want to compare this XGBoost with some analogous regression, or something else you feel comfortable, right?
+And,
+Because when you start for any questions, you always have some target. What do you want to get, right? You want to evaluate this performance, or you want to evaluate the efficiency, or you want to do whatever, right? You have some target, right? And the XG post for the homework one, because that's our beginning.
+homework. It's really trying to make you feel familiar with the machine learning, field.
+In other words.
+We cannot teach all the individual questions, but we are trying to teach some general pattern. When you have some questions which can be applied to the big data processing, machine learning, deep learning, what's your thinking point?
+How do you think about this? If you have any observation, if you have any trouble, how to avoid, how to make a diagonals? For example.
+you work… most likely, you will work either classification or regression. If the…
+classification performance is bad. Let's say you want to predict, right, 1 or 0, and you only get, like, a 70% accuracy. Start from there.
+How do you improve? Right?
+it's easier to cop something to do something, but what's next? How do you improve, right? How to take care of this observation? How to take care of the gap? How to get a better enhancement?
+Then that's the… somehow it's a more open question, so that's what we are trying to teach in class.
+And if you're talking about any other domain knowledge, then that's another level question, right? That depends on how you can result to some extra,
+reference.
+So…
+I'm not sure if I answered your question, is what you're looking for? I have… I have one more.
+Sure.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:10:11
+What would you say would be the limits in the class of using AI? So.
+Like, you said that we can use it, but…
+Obviously, using it, you can have, like, a right way to do it and a wrong way to do it. Where would you, as a professor or grading assignments, draw the line where, you know, like, I'll give this person credit, and I'm not going to give credit for this, because I feel like that's not super clear.
+Rensheng Wang
+Rensheng Wang
+00:10:37
+Yeah, that's a very good question, you know. That's also challenging for me, you know. I would use something like this, you know. Number one, I would try to say if you can talk about something beyond modern.
+AI can tell you.
+Okay? So that's why I prefer not just by copy, I'm always trying to say some of…
+personalized from your observation, your thinking, your observation, right? I can easily identify if it's coming from you or not, because I don't want some beautiful, standard answer.
+Number two, we always have some challenges, right? We always try to make the question with some open questions. That means you will never get some perfect answer from AI. You have to think about, you have to address something.
+So that's why I like this open question can help me identify if you really
+you know, work with AI, or you just listen to AI, copy AI, you know? So that's… that's what I thought.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:11:45
+Okay, thank you. I think that's all the questions I have.
+Rensheng Wang
+Rensheng Wang
+00:11:48
+Yeah.
+Especially for, for the final project,
+I would really want you guys to use AI, because, you know, when you use AI, that can really improve your performance in the next level. In the past, a lot of students remain in the very lower level. When I say lower level, for example.
+the student will say, you know what, I'm not good at the coding. Even, Professor, you described very clear what I need to do, 1, 2, 3. It's beyond my capability. For example, you are telling me, okay, search this data to find the record, find the related connection actions, find the related calculations.
+That's too complicated!
+But nowadays, you use AI, it's not. It's just a, if you know how to say it, just describe it. AI will do this boring coding for you. You just quickly get what you got. And start from here, you can very easily to implement my ideas.
+For example, in the past, I typically proposed a lot of ideas. You can do idea 1, Idea 2, Idea 3, Idea 4. We have many discussions, but a student typically stop with idea 1. Why? Because from idea 1 to Idea 2, you need to make a further coding.
+A lot of students are not good at coding.
+just like I say, oh, I have 2 files, three files, how to read from one to another to another, and mapping.
+With all the AI, I know it's very complicated for you with all experience, but with AI, it's a piece of cake. You just say it, right? I want to read something just like a professor told me, you know, read something from File A, and reference file B, and the reference file A, and make some collections, Google By, blah blah blah, you know.
+A gratitude for you, you just got this result.
+Then you can very easily testify ideal 2, 3, 4, 5.
+In the past, typically students will stop one or two, because they know a little bit… even if it increased the coding capability
+student will stop there. But with AI, you know this should not never be an excuse, because AI can very easily, to you, maintain the data. Just tell me how to do it, right? They will know how to efficiently do this for you.
+So, I will try to make sure our homework assignment question is not a simple AI copy, you know. You have to do something on your own. You have to make organized
+to ask AI to do some sequential, you know, assignment. This is where you show your efforts.
+Because it's not that simple, you still see something, I generate something, you copy it, that's it. You have to guide the AI to do a sequential tasks. So this kind of guidance is already showing you capability, is already good enough. That's… that will be the… I can say it's the… the temperature for the future work.
+That's also a part of, synchronizing to this wiper coating, you know.
+You will be a manager of multiple agent, or multiple AI robbers.
+Think about it. You are the manager. You don't have to do the labor, boring work. You have a lot of contractors, you know, they can do very efficiently to you.
+But you need to give me the command, right? You need to give me the clear idea, roll the past.
+So, that's what you're trying to learn.
+It is clear.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:15:33
+I actually have another question.
+Sorry. When you're grading assignments, what are you grading the assignments on? Because
+obviously, anybody can use AI, and, like, the AI can give you an answer, and then you said, you know, you're writing the observations, but
+what… as I said, kind of, like, before.
+how do you know somebody's gonna get, like, a good or a bad grade on the assignment? Like, what is it mostly based off of the observations?
+Or not putting in crazy stuff that doesn't make any sense.
+Rensheng Wang
+Rensheng Wang
+00:16:10
+Yeah, that, you know, in my assignment, for example, it's much easier for me to identify if you…
+Read them through my instruction, right? There's no easy job. In other words, it's not, like, simply say something, AI will generate something. You will have many sequential steps.
+As long as you can ask AI to do sequential tasks, that's good enough. Most of the students were even… cannot finish this.
+you said it's very simple, right? You thought that, oh, maybe you can use AI, they do everything very simple. No. A lot of students, even given AI, you cannot finish this. So that's… I don't worry about you, use AI.
+My concern is, you cannot finish this with AI.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:17:00
+Okay, thank you.
+Rensheng Wang
+Rensheng Wang
+00:17:02
+Yeah, so that's really… I think the last semester, I really started to train this, even to provide some guidance. The students are still not easy to switch to use AI to guide this. They are still…
+Hesitated to do this.
+they're still staying with the original coding level. That's why I was surprised, you know. We understand that nobody is a well-experienced, you know, developer or, you know, software engineer.
+But you really have to make sure, you know, where you get a barrier to stop you to make it further. Even you have AI, you are so powerful tool with you, why you still stop here?
+You know, at least for the caring movement, you know, I really feel you need to release your huge potentials by leveraging this AI. As long as you copy it, if you know how to copy from step to step, that's already delivered this huge, you know, project.
+Ahmad Shah
+Ahmad Shah
+00:18:04
+Professor, I actually had a few questions, regarding the homework, specifically the AMS script.
+Rensheng Wang
+Rensheng Wang
+00:18:10
+Could I talk to you about that, after the class, or…
+Yeah, sure, of course, yeah. I think typically I will leave some time, you know, at the end of class, you know, if you can stay, you can always make an individual discussion, you know, no problem, no.
+Ahmad Shah
+Ahmad Shah
+00:18:22
+Okay, thank you.
+Rensheng Wang
+Rensheng Wang
+00:18:24
+Yeah. You know, I'm really glad everybody in this society, in this past, you know, we are learning, we are trying to leverage. I think the most…
+Crisis. Nobody can think big.
+Nobody. Why? Because this has been conventionally for long history. I don't have this ambition.
+In the past, because I can never… because that's impossible. Even now, you gave a lot of potential with AI, but you still use the…
+you know, conventional thinking, because that's… in the old days, you think it's huge ambitions, it's impossible, it's a mission impossible.
+So that's why, even now, I give you this, you still feel you cannot do it.
+Let me give you one concrete example. Many years ago, when I first touched internet.
+I know internet can bring something, but I can still not… Stop thinking about something.
+you know, not fully used as the internet. For example, when I first come to the United States, I want to book an air ticket.
+I saw the travel agent just downstairs.
+I was so excited, I went there, I said, can you give me the ticket, air ticket, you know, to, you know, to Los Angeles? The agent said, of course, yeah. They asked, then they said, okay, I can give you this, but you have to pay me $1.99 for the, you know, processing fee. I said, why?
+They said, you know, you walk to my office, you sit in front of my desk, you walk with me, so I have to charge you.
+Then I said, if I don't use you, if I go online, then you will waive me this. Yes! They said, if you go online, you do this, I will not charge you.
+You know, back to Zen, I was dumb.
+I didn't realize the internet is the one you should fully utilize, right? Why you need to go bother to travel, go to the travel agency, and ask someone to give you the air ticket, instead of to use the internet to do it?
+Even I used the internet for some years, I still forget about this principle.
+So, I use this example trying to tell you, when you have AI, the big problem is you…
+You're afraid your Singapore is big.
+You always use a very conventional, say, you know what, I'm weak.
+I'm small, I cannot do big projects, I cannot do big impact.
+That's the way to make a lot of people stay… as before.
+you need to take some time to gradually learn how to leverage this kind of AI capabilities.
+But that will take time, you know. Not you. Myself, I'm also learning in this way. I'm trying to magnify the potentials by leveraging AI.
+I used to have some big ambitions, just because I know my boundary for my capability, right? So I always think about that, I cannot do it, because of ABC, I don't have this capability.
+But when AI comes out.
+I have to really seriously think about how big a potential is growing, because it's never ending. Year by year, it's growing, growing, you know, the potential.
+And I'm not…
+I would be not surprised, maybe next year, you know, you don't have to even open your computer, you just sit here, you know, use your mouse, say something, they will finish homework for you. You just take a look, you know, they will send it. You don't have to open your netbook at all.
+You can say that in Miami Beach, you can just use iPhone to make some command, or you just say something, then they will automatically do something for you. That's possible.
+So that's why…
+think big. Always try to challenge yourself, always challenge you… try to challenge your professor, you know. That's how you can learn quick to adjust to the, the job market.
+I think… thank you, Judy. Judy, you know, I saw you just, you know, post this, yeah. It's really rapid prototyping, you know.
+Any more questions?
+And just because of this, right, I gradually keep… you know…
+to replace the conventional, the midterm final, this kind of a paper-based, you know, writing, derived derivations, I don't use anything like this. I would just replace by
+summer project, to give you some real questions, real challenges, I would say, how you can do it. I know you will use AI, I don't mind, you know, I just want to… how you use AI, how far you can push this, use AI.
+Right? That's fair, right? Everybody uses AI, but it depends how you can far use AI, right? That's what we will compare with.
+When you're compared with your, you know, classmates.
+And the same thing, you maybe noticed, right, in my class, I'm not that, you know, concentrated on these formulas. I more care about the very intuitive thinking behind it.
+I have the same idea always, you know, I said, you know.
+forget about the formula, because I know after this class, you will forget about everything on my paper, you know. You only memorize some very interesting, very deep understanding in your brain, right? If you need some formula, you can always go to textbook, you can always go to online to find this one, but
+If you learn something from me, it must be something… how I describe the questions, how I describe this kind of higher-level thinking, that's more important.
+Any more pricing here?
+Great. So…
+I welcome everybody, you know, just pop up anything in the chart window, or just speak out, okay? Because that's how you make our learnings more effective, you know. I will first just start with the concept about the time series analysis.
+You need to understand the chemistry's analysis.
+For a few reasons. Because I don't want you to learn something you feel Why?
+I think it's useless, right? If you think about it this way, you know, that means you didn't fully understand the motivation here.
+you may always argue that, you know, I don't use time series. That's fine, you know, but it's not about the time series, it's really about the strategy, the tools, and the way you handle the data analysis. That can benefit for many expanded areas.
+So, for example.
+What do we learn from the time series? You are trying to learn something with time index.
+Right? What do you mean, time index? That means today, yesterday, and tomorrow, you have the very strict order. You can never say, oh, doesn't matter, you put today as tomorrow, tomorrow as future.
+That's really make a difference?
+every time index, the order, you make very different. The same strategy, you can be utilized to generative AI.
+So if you fully understand the time series.
+when you take care of this kind of general AI,
+For this large language modeling, you have the very similar strategy behind it, and you will fully understand why people use this, you know, transformer design.
+Because we have a sentence, right? Typically, you don't swap the order.
+Thank you so much. Nobody will say thank you much so. That's weird, because nobody was saying this way.
+Just like the time series, right? Today, yesterday, right? The day before yesterday, you have the order. Nobody will change this one. This index makes sense.
+And second, when you are learning time series, you will have a very strong tool we call the coronation. So that's the fundamental tool we are trying to describe.
+Coronation is the most simple, but very powerful tool when you're trying to derive the higher order, you know, statistical model. For example, if you're in the finance.
+service company, if you have very advanced model, right? You know, coordination is always the, you know, the baseline. No, even if you're not directly using it, but
+A lot of models have… Some, you know, assumptions based on the coronations.
+So that's how you use coordination step-by-step to derive some inference conclusions.
+Let's start from a very simple example, you know, because coronation is very easy to mix with this kind of causal inference.
+Because coronation is really trying to say, when you have one observation dynamics, how this dynamic observation is…
+Can be utilized to predict another dynamic predictions.
+You know? So, for example, if you have X, yeah, Y. Generally speaking, I can say when X is getting bigger, you see Y also is getting bigger, right? That's in statistical, it's not by single one. That's… that's why we have coordination definitions.
+This kind of statistical relationship
+can be utilized to make a forecasting, can be utilized as a cost inference, just like I said, right? I already say something, for example, I saw this candle for real estate, the price is going up. What's your conclusion? What you can utilize this to buy stock, to hedge this stock?
+To think about the investment.
+If you have nothing, that means you didn't learn from this, because you didn't find this kind of correlation from what you observed. The real estate price is going up. The housing, it gets more and more expensive. So, what else you learn from this, from this one?
+Right? So that's coronation. Very easy to tell you something's happening.
+some other things also happening. If you can be aware of this, that's how, you know, this kind of portfolio managers and people, these kind of investors, they're really trying to
+To capture this kind of trend, to find these hidden behaviors, these kind of hidden opportunities.
+Coordination from the… Formula, it's very simple.
+One thing I can emphasize, right? When you say coordination, make sure you have a statistical measurement. When I say statistical measurement, it's not one single number. It's not just by observing one number that you want to make some coordination. No, that's not. You need a lot. You need a statistical dimension.
+That's because you have statistical measurement, right? So you need to find the statistical movements. You need to have the mean, variance. For example, you have two separate
+X on Y, space, right? You get the mean, you get the variance.
+And once you have the mean and the variance here, you know, you are trying to subject me.
+subdividing from Y, and make a cross product, you know, X and Y, but not directly multiply X with Y, you need to remove the… remove the mean.
+My general question here is, why you need to remove me? Does anyone have a…
+Jenna, answer why you need to remove Ming here?
+Matthew Feroz
+Matthew Feroz
+00:30:46
+Maybe because the mean… there's, like, values that are way too high or way too low, and it could affect the way that the mean looks?
+Rensheng Wang
+Rensheng Wang
+00:30:54
+Yeah, yeah, exactly, yeah. You know, because, remember, when we use coordination, what we can use for? Coronation is used for what? For this kind of dynamic prediction, right?
+If something is not dynamic, it's a stick, it's still, it's never changed, right? Like, constant. There's no meaning, right? Think about it. If something never changed.
+That means you don't have much information. That means you don't have some opportunity to make money, right?
+Think about it all. In the real life, anything can never change, then you don't have much sense to…
+To make an investment, you know. Only when something keeps changing, right, you want to capture the dynamic. When I say dynamic, it means how much you are fluctuating over the average, right?
+That's number one. That's why you need to remove the mean. Because the mean can be large, can be small. But what we really care is not about the absolute value of this mean, it's really care about how much variation around this mean, right? You can have a very big mean.
+But a very tiny fractionation, right? If I have a very tiny fractionation, that's what I care about, right? Or you may have a very small mean, you may have huge mean.
+diversify the variance, right? Dynamicus. Then, that huge dynamic or volatility is what I care about. So that's why you always remove the mean.
+Another reason, mathematic reading is, you know, after you remove the mean, now for this new term, if you take an estimate, you take expectation, you take average, is what, zero.
+And the same thing here. If this one, you take an average of Y sub to the mean, this one should be also 0. So you have 2…
+With zero mean, random variable, when you make a cross product.
+This measurement can really give you some meaningful result. If these two multiply together, what does it mean?
+that means X and Y, they're uncoordinated, because something… sometimes X is high, Y is low, sometimes X is positive, Y is negative, so when you multiply together, you get a positive, negative, and average together get zero.
+So only when you have subtraction over mean, you can measure this kind of how they are coordinated, or how they are uncoordinated to each other.
+With mean, you will get some perturbation, you will get misleading information, because the mean can be huge, can be small, right? This mean can give you some wrong interpretation about how X and Y make interactions. After you remove the mean.
+This explanation about X subjugate mean times Y subgroup mean.
+you exactly catch up the inactions between when I cut up. Are you up? Are you down, right? When Y is going up, are you up and down, right? They will exactly match these kind of inactions. You have a positive and negative, positive neck, right? They have an equal chance
+So, this is why you get a covariant, this kind of cross product is the numerator.
+The same thing, right? After removing mean, you can get the variance, because the variances only care about the fraction along this kind of absolute values. If something without mean, think about it.
+Sorry, if something without a variance, what does it mean? There's a constant, right?
+If it is a constant, you have the no volatility, you have no stochastic changing, so what's the point, right? You only get something already fixed, right? So you don't have much, you know, opportunity.
+So that's the one. And also, by this formula, you know, this numerator is the inaction between X and Y, and normalized by the fractionation from X, fractionation from Y, individually, right? That's the variance.
+X variance Y, you take absolute value, so that's why inaction between X and Y, how the dynamic and scaled by the standard deviation from X and Y
+Mathematically, I guarantee this one should be between minus 1 to 1. It's a normalized factor.
+Why…
+Because if it's normalized, then we can always use this one as the indicator, it's a flag, to tell me impression, right? If something is not normalized.
+It's hard to say, right? When I say, oh, you know what? Today's stock, Apple price is $200.
+Do you mean 200 is too large or too small? I don't know. Depends on who you are compared with, right?
+if I only give an absolute value, you know, people… it's not easy to get some idea. But when you have this kind of relatively normalized value, that typically gives you some, you know, very quick interpretation. For example, if you have
+Rx equals 0. What does that mean?
+Excellent, right? Uncorated, right? I still don't know what you mean, you know, what do you mean, uncollinated?
+Let's put it in plain English. When this uncurrently, what does that mean? If you learn, if you observe the X,
+If you observe X, and you know X and Y are uncoordinated.
+Then, that means, I have no idea.
+to predict why. Because…
+the information you gave me about X has no help to helping me to predict the Y.
+On the other hand, if X and Y is highly coordinated, let's say, as close to 1,
+What does it mean? They're highly coordinated. What do you mean, highly coordinated?
+For example, if I observed Google get the stock price
+much higher. I have no idea, I don't know, because I didn't look at the stock price about the apple, then I say, oh, Apple price also must be very high, also rise up. Why? Because Apple and the…
+Google, they're so similar. They're both technology companies that are competitors.
+So, they have highly coordination. So, when Apple, something stock price going up, up, up, then your property, you can say, oh, I expect that
+Apple also going up, because Google going up, going up, Apple going up, so that's the coordination means. That's… when you say one, you can use information from one to predict another one.
+So, this had been…
+largely using as the, for example, for NYC, right, New York City. And, for this government, you know, they're trying to measure this kind of correlations between, for example.
+How much you're charged to fee, and
+how the index, the cleanest index? Does this mean if I charge you more, I will make sure, you know, the Manhattan gets a cleaner, more beautiful, or I charge it less, I get better, you know, if they found some coronation, they always use this coronation to indicate what's the possible policy, you know,
+Actions, you know, procedures to relieve this problem.
+So that's why coordination is very widely utilized indicator, and also it's much easier to help me understand, right? You only need to say some number to help people say, oh.
+from one indicator, I know what happens to other, because you are trying to… more or less, you're trying to use this one as the causal inference, right?
+Not the example, just like, you know, typically, you know, smoking and non-cancer, you have a high coronation. So people are trying to say, oh, if you smoke more, you get more chance to non-cancer. So that's how people, you know, to… that's how doctor to pervades the patients, right? You say, you know what?
+Don't smoke, okay? Stop smoking. You know what? You have high coronation. Do you want to get cancer?
+If you smoke more, you get more likely. I know this is a statistic, right? But, just like I said, you get more chance, so you have to be thinking about it twice, right? So that's the medical coordination can also be utilized for, this kind of causal.
+And in some situations, you know, if, say, I'm the mayor of the New York City, if someone tells me, you know,
+In Manhattan, this kind of criminal rate is highly coordinated with blah blah blah observations. They never say, oh, in order to relieve this kind of criminal events, I need to do something to fix something, right? Maybe that, because I saw this, they're coordinated, right?
+Maybe or may not, but at least you gave me some,
+indicator, right? It's a possible candidate, possible solution.
+So that's Coronation.
+Then, this comes with the one very important concept. Coronation is very easy to give you some impression
+Because X and Y, they're highly coordinated, so does this mean X is the cost to make Y higher, or X is the reason to make Y is lower, right? You cannot help think about this way. Let's make you a very funny story, you know.
+In the summer, let's measure, you know, this kind of temperature.
+With the temperature going higher, you get a… you just compel the, the temperature sequence and this kind of ice cream sales sequence.
+you will say when the temperature gets higher, you get more ice cream sale, right? Makes sense. That's very fundamental, right? It's so dumb, right?
+And also, you have another coronation, you know, when…
+The temperature gets higher, that means in the summer. Typically, you get more…
+Criminal Sexual Criminal Events Report.
+You know? So, does this mean, because of the high temperature.
+Or, the high ice cream sales will increase the number of criminal events.
+Right? You said, oh, because I say high correlation between the number of ice cream sales and the number of the, the Kramer event reports.
+So, does this mean you get more ice cream consumed, you get more criminal events reported, right? So, in order to reduce the criminal events, I need the purpose to reduce the number of ice cream sales, right? That's really ridiculous. The reason is.
+Ice cream get a higher sales, because the temperature is higher. Temperature get higher, you get more people out the door, right? Outside to play, you get a lot of public party events, you get more chance, exposure, you get more likely people get this kind of, you know, creamery events happening.
+So, coronation is not the causal.
+It only states are not corneal.
+It's not explained that they're independent or dependent. You can never say coordination to tell you how likely X is dependent on Y, or something like that. So that's very different.
+But maybe you're saying, okay, since coronation may or may not be relevant to dependent or independent, why people use coronation? Because as long as you have this kind of dependent or independent relationship, the coronation must be
+Must be high.
+So that's why coordination gives you the candidate pool, but it's not a guarantee, it's the dependent or independent conclusions.
+Any question here?
+Ahmad Shah
+Ahmad Shah
+00:42:33
+I actually do have a question about this.
+I don't understand the… the…
+I guess the purpose of using the correlation coefficient when we can use the covariance? Like, what extra information does…
+Removing the… like, getting the magnitude rather than the units help us when it's applied to one specific problem.
+Rensheng Wang
+Rensheng Wang
+00:42:53
+Right.
+So, what's your question?
+Ahmad Shah
+Ahmad Shah
+00:42:57
+what does correlation coefficient give us over the covariance? Because, I mean, the covariance tells you the direction that it goes in relation to, as well.
+Rensheng Wang
+Rensheng Wang
+00:43:07
+Right. This covariance is a cross product between X and Y, right? It's trying to imagine how X and Y dynamically in action, right?
+And this kind of inaction is trying to say how likely, when X is going up, if X is going to positively.
+How Y is also be positive, how X is negative, how Y is also an active? So this kind of RXY can give you the probability, chance, how X is changing relative to Y is changing.
+Right?
+For example, if this is a positive view.
+They say, the numerator is a positive, okay? If the numerator is a positive, how do you get a positive? The only way you get a positive is, well, this one is a positive, and this one is a positive, right? So that means both are positive, right? That means both are above this mean, right? You see, when X is above mean, Y is also above mean. That's how you get a positive R, right?
+And also, if X is negative, if X is less than mu, Y is less than mu? Because both are negative. When you multiply together, it still gets a positive, right?
+So when you get the positive correlation factors, you can say X and Y, most likely they were moving in the same direction, have the same dynamic trend.
+So that's what they interpreted.
+correlation factors.
+Okay. If you get a positive, that means X and Y, they're moving in the same direction. If you get an active, it means X and Y are in the opposite direction.
+If X… if a coordination crosses zero, that means… who cares? X and Y had no relationship, you know. I don't see how they are coordinating each other yet.
+Did I answer your question? Yes.
+Ahmad Shah
+Ahmad Shah
+00:44:54
+Thank you.
+Rensheng Wang
+Rensheng Wang
+00:44:55
+Sure.
+So that's the… what I said, right? How do you interpret this?
+Coronation, or… So, most of… You know, company can start from the coronation, because the coronation is typically
+it's very…
+Very, very fundamental, you know, starting point. You have some data, you have some event, you have some result, your boss asks you, hey, help me identify why this happens. For example, if you're working for Google.
+your boss tell you, okay, I… I always find some server down.
+Tell me, what's the rule of course?
+Right? So your obligations, the survey is done. Of course, you will… the customer, the clients were very crazy. They were criticized, they were trying to, you know, cancel the…
+the service. And your boss say, oh, help me identify the root cause, because my observations, I get the server done. Then, go back to check. You will say, okay, I will try to say, what's the server, CPU, utilization, the memories, right? Temperature.
+offload, blah blah blah, right? You find a lot of sense. And you can use very simple correlation to measure. If you say, oh, when the survey is done.
+I saw this… is highly coordinated with the CPU utilization.
+measurement. Then, that's a very strong signal. You can say.
+Hey, boss, very likely just because high CPU utilization get this kind of server done.
+You can very easily identify those potentials, because the high coordination means very likely they are the root cause, right?
+That's the beginning. What happens if none of them
+If not all of them with the high correlation, what are they gonna do?
+You must have something, right? Because you have some backhaul.
+to support the service, you have some event that happens, the server is done. You must have something.
+Then, that's what we learned in this class. If you have some individual one, none of them has highly correlation.
+But overall, you have high-need coronation. Then how do you find the synthetic overall coronation factors?
+Okay? But we start from the very simple one, right? We just say, okay, you have individual measurement. Let's say, first, use individual measurement to say how they are coordinated to
+your response vector, okay?
+And typically, you know, 80% can be very easily identified just by calculated coronation.
+You get a high coronation means, very likely that's the root cause. You get an active coronation, that means, very likely, that's the way you want to…
+To help you to mitigate this trouble.
+Right?
+Positive root cause. Negative solution.
+You know, it's very easy, right? By interpreting this kind of coordination factors.
+So, what you can do with coordination, right? One is prediction, right? Just like I said, right? When you say something high, or say something low, you know A and B, they are coordinated. Then, that's how you can make a prediction, right?
+Because they have very high coronation. Just like I said, you know, when there's some… some place, you know, suddenly burned this kind of for the war, right? Two countries to fight each other, you get a war. And, you know.
+Typically, the war, and another index had high near coordination, then, you know, something else happens, right?
+For example, maybe the gasoline price were going up, or maybe, you know, you know, the grocery store price were going up.
+Or maybe some, you know, the real estate, the price will be going down, right? That's your prediction.
+Just be from the coronation.
+Factors, you must… you must have some future predictions.
+Or inflation, right?
+And also, validation.
+Because you want to make this concurrent validation, you know.
+that's a lot of A-B tests you're trying to utilize. That's easily, to work with this big tech company.
+And this kind of, you know, reliability theory verification, that's very common, you know, for you to use this kind of for, correlation coefficients, especially for this magical,
+Tests, you know.
+So that's the start from here, and again, just like I said, right?
+In the next, I will try to introduce some model. This model has been intensively utilized this kind of coordination measurements, but they can make this model as complicated as you… you can understand, you know. It's very complicated.
+And that's very powerful cue.
+utilized for the time series forecasting. And the very important is that this one is also relevant to
+generative AI, this kind of diffuse your model. So that's why when you do this kind of for…
+generative AI, when you have this kind of, you know,
+For example, this imaging, synthetic imaging creations.
+When people get really lost for this kind of diffusion models, for this kind of noise, you know.
+you guys should be very clear. You know why? You know, because you learned in this class, you know exactly the mechanism behind. So that's exactly what we are trying to expand. So I will open another file I called all the regressive Model. Can you say this?
+One second.
+I need to share again, I guess, yeah.
+Did you see this?
+So, just like I said, right, for time series analysis, you start with the very fundamental
+concept, coronation. Once you know how to make a coronation, then all the following will be easy to derive, okay?
+Before we do something for time series, you may need to make sure we have a very fundamental assumption, it's station narrative.
+Stationarity from the term, you know, right? You assume something is not changing, right? Something is not changing, that's why I call it stationarity, right? Otherwise, you will see volatility or something else, right? Or stochastic, you know, something, you know.
+Generally speaking, you know, if you want to derive some strict stationary, you always say you have some observation, you say times 3, from T1 to TK, that means a K observation, right?
+And this observation is identical to another observation. That means you take another time window. Just like I said, you know, let's make it K equals 7. For example, let's say, hey, in the past week, I have 7 days observation, right? That's the time window, 7 days.
+And let's wait 1 month, 2 months, or whatever time period, then you make another one-week observation.
+If you find this one-week observation and another ob…
+week of the vision. You know, this kind of statistical distribution are the same, so that means they are stationary.
+For example, if you're trying to measure the Penn Station, the number of the customer
+in Penn Station, because if you take one week as the measurement.
+You will see wig by wig, almost identical.
+every day, Monday, every Tuesday, every Friday, every Saturday, you have almost identical pattern. You'll say very similar things up and down, right? Even from the morning to noon, late afternoon, midnight, you know, so on and so forth. You will say something changing.
+at the 7 days time series window, and the next week, right, almost similar. So if that's the case, you think about this kind of is stationary, because that means in the whole time window, statistically, this pattern is not changing over time. So that's the stationary means.
+And… If you really wonder why or how can you deny this for time series analysis, Because…
+time series, the ultimate goal is what? It's not about to look at what happens now, it's for what? It's trying to interpret what will be happening next, right, for the future. That's that key point, right? The same thing. Go to Wall Street, people…
+Keep an eye on the stock price, how this is changing, right?
+If something already changed, what it can do? It can never change it back, right? The price is already going down or going up.
+Why didn't look at this stock price? Because you're trying to learn from the past stock price movement. You are trying to make a future forecast. You want to make a future prediction, right? You want to learn from the history observations.
+Then, that comes with a bigger assumption, stationarity.
+So, let's take a short break, we come back. How we can take care of this? How we can take care of it? What if? If stationarity doesn't hold, right? That's a very natural question. So let's take a short break, we come back.
+And meanwhile, if you have any questions, you can, you know, type your questions in the chart window. I will try to address.
+Hello.
+It's back, okay?
+Now let's look at this definition, stationarity, okay?
+strictly speaking, you know, you need to make sure all the statistical measurements, the first order means, second order, variances, third order, screenings.
+It's a force… Fifth, sixth, you know, all this should be…
+identical. That means when you slide in the time window.
+This kind of statistical distribution will not change it over time shifting.
+That's the very strong condition, you know, but in reality, we only have this weekly stationary. That means you only make sure the mean and the covariance between our time and variant.
+make sure L is in up to the integer, okay?
+So, most likely, what do you want to say
+Time series should be like this.
+Why? You know… Because if you look at this time series.
+If you take any time window here.
+Or you take a time window here, you will say…
+the mean here and mean here are the same, right? The variance here and the variance here are the same. So that's most likely… it should be a stationary times series.
+But my question is, in reality, how could?
+for example, if you go to stock market, right, the stock price movement can never be like this. The stock market price can be very dramatic, different, right? Can be something up, down, down, down, down, up, up, all right? Can be very dramatic. How good can be UT for this, right? This stationary, that definitely doesn't…
+Makes sense, right?
+Now, if in the real life.
+the time series observation never have this stationary property, right? You have the mean not changing, the variance not changing. Come on, the variance is changing almost every second, if you look at the stock market in Wall Street, right?
+it's almost impossible to satisfy this strict condition. Then the point is, what's the point if we look at this ideal situation?
+In the real case, if it doesn't work, what do you do?
+The answer is, that's exactly we need to take this class, right? In other words, we never expect the raw… the original time series can be utilized for this stationarity.
+You don't expect that this kind of, for example, the stock move… the stock price can be applied for stationery. You need to do some unnecessary pre…
+Processing.
+Before you can apply this kind of stationarity.
+So that's why we were starting with that concept.
+Auto Chronation.
+Coronation, we already experienced, right? We know X and Y, how they are…
+similar… similarity between this kind of dynamic in the actions. When one variable is keeping up and down, how likely another observation is also keeping up and down, right? How likely the moving trend, it's…
+accordingly matched from another observation, so that's coronation. Now, if we add all the coronation, that means I'm not talking about from X and Y, I'm talking about the same X, you see? It's from different time shifting. So instead of two.
+separate distinctive variable X and Y, and use one single variable, XT, you shift a little bit with different time duration.
+So this is trying to measure How?
+XT?
+coordinated to XT minus L.
+What does that mean? That means if I know the history Observation of the stock price.
+Can I?
+learn from that to help me make a prediction about XT. Just like I said, if I make L equals 1, XT minus 1, and Xt, right? So what I'm trying to do is
+XT-1 is yesterday's price. XT is today's price. Can I learn from yesterday's price to help me understand today's price, right? So that is the meaning about the order coronation.
+Of course, if you have L equals 2, that means XT minus 2. That means you want to utilize two days before stock price to help you understand the correlation.
+For today's stock price, right? So that's the auto-correlation means. And this autocorrelation can be normalized by the variance of XT itself, because whatever XT and XT minus L, they're coming from same times risk, right? Just by shifting a little bit.
+If the time series is stationary, that means the variance will be not changing. So, The variants would be…
+unique.
+constant.
+for… that's why numerator will be V0. The numer… the denominator will be V0, denominator will be L, right? If you refill to this kind of a coordination definition.
+And again, you know, when you look at this one, that's very similar to our previous coordination factor, right? Here is all the coordination. So that factor also have absolute value
+between 0 and 1. In other words, it's from minus 1 to 1, right? That's the value here. And also, it's very easy to say RL and R minus L, they are the same, right? Because RL is trying to say, how about
+XT and XT minus L.
+coordinate, or X minus L means XT and XT plus L, right?
+So, whatever XT and XT minus L, or XT and XT plus L, you are trying to look at the 2 times 3s, they have shifting with L, that they're essentially the same, you know.
+Now, what's the meaning about the order coronation? Because we know coordination in the previous discussion, right?
+we are trying to say… correlation is trying to say, given one observation, how to predict another one. Now, all the correlation means, for the same observation, same time series, given the observation in the history, can you help me understand how likely in the future
+That's XT and XT minus L means, right?
+You have much learned from the history, XT minus L, you want to know what happens for XT.
+If you get a high order correlation, that means if…
+for XT minus L, you get the stock price going up.
+That means XT is also very likely going to gain up.
+If XT minus L going down, XT is also going down, so that means positive auto-coonation.
+And if I'm negative, all the correlation means you have opposite impact, right? One going up, and that's going down.
+So, here we are trying to mathematically explain that this kind of uncertainty can be, explained by these coordination factors.
+So that's the mess. So this is not the most important thing, you know, because this is a trend to say.
+If you have
+L days before observation, right? I first subtract the mean.
+And because L days before and today, you have the coronation RL, then that means, based on the L days before observation, I can predict that most likely it's today's. Because from the L days before, I multiply this
+Coronation factors, that's what you expect.
+for today.
+Any pricing here?
+Preksha Shah
+Preksha Shah
+01:17:54
+No profession.
+Rensheng Wang
+Rensheng Wang
+01:17:56
+So that's… that's exactly how you apply it, right? If you have this kind of autoprene, it always can use it as a history to help you make a prediction for the future, but make sure you subject the mean.
+So that's why, if you write like this, you know, you will get today, equals… The mean value plus
+It's a history of the mission.
+Minus, to me?
+times our L.
+Right? So…
+Let's imagine, if you have a coordination equals zero, what does that mean? So, your prediction for today is what? Mu.
+your prediction is what? It's the average value, right? So that means you didn't learn anything from this, right? Because you get zero.
+you still use the mean value to predict, because mean is the most neutral prediction, right? Not too high, not too low, you just say, oh, average value, that's mean. But if this is not zero, then that means you have some offset from the mean, right? If this is the
+Positively.
+If this is a positive, and this is a bit above mu, so that means this is also positive, right? So over O, you also have XT is a positive.
+If XT minus L greater than mu, and you have positive coronation, then your prediction is very likely
+Today, the stock price is always above the mean value, right? In the history, above mean, now today is also above mean, so that's your prediction.
+Now we… Which comes with this auto correlation function to all the regression model.
+The idea is very simple.
+Because of the day and the history, you're coordinated, right, each other, because you want to use, like, coordinated the…
+factors to help you predict the future, right? If the day can be utilized from history, and also tomorrow it can all be utilized from today's prediction, right? So you can make this kind of full recursive prediction.
+Let me… let me put one example. Let's… let's make a simple discussion here. Let's say… L equals 1,
+So that means, I know yesterday's, right?
+From yesterday, from… Coronation factors.
+So, I will predict XT. That means I can predict it today, right? Because I already predicted it today.
+I can repeat this prediction again, based on today's prediction. I can make a further prediction.
+I bought XT plus 1.
+I'm using head here, that means estimate is not a real value. This is the observation. I know yesterday, based on all the coronation, right, I can use yesterday, predict today. Based on today's prediction, I can predict tomorrow. Based on tomorrow's prediction, I can make a prediction about the day after tomorrow.
+And so on, and so forth, right? Keep a prediction. That's exactly how people make a prediction in the future, and when you make a prediction over future, then based on the future prediction, you can make a future pricing.
+You can make some derivative of product, you make some number. That's how much you want to sell.
+For example, bonds, right? You have the bonds, or you have some future, your options, these kind of, you know, finance, you know, productions.
+Now, back to the idea here, because you can use history to predict the future. Now, we are trying to make a model to describe the relationship. We are trying to say how likely today can be expanded by the history. For example.
+today can be described by the past PDAS observation, making a linear combination.
+Right? Just linear combined. There's history, P days.
+that will be close to today. If they're not exactly the same, you need to add some constant. You still have some residue, right? We explained this difference. Residual difference is coming from random noise. So, this is trying to say how today can be explained by the past PDay's observations. So, that's why we called
+ARP. P is coming from the P day's history. Why is it called AR? Because A is called auto.
+are called regressive. Why is it called auto? Because I'm using…
+Apple price to predict the Apple price, right? I'm using Apple stock price in the future, in the past, to predict the Apple price in today and in the future.
+That's why I call it Auto, right? I mean, use Apple.
+predict Apple. I'm using Google predict the Google, so that's called auto. Regressive means, you know, I'm using history to predict the today and the future.
+And of course, just like we know, right, the real observation can be
+very volatility can be very stochastic, so that's why you have some residual error. I think it's coming from noise, you know, absolute.
+So that's how you explain it, right? You don't have to memorize the formula, you can think about, you know, how can you explain today's observation by history?
+combinations.
+If something cannot be explained, It's from the absolute T. It's the… You know, difference, noise.
+Let's make a simple discussion. AR1. Let's say how today, relevant to yesterday, we're trying to say, today, stock price equals yesterday the stock price multiply with a constant, and shift a little bit.
+in the, you know, the constant BIOS, and then the rest is coming from random noise. That's what they observed. Because in most of the financial…
+market, this time series, you will say this kind of for stochastic movement, right? Just like a brand new motion, you know, so that's why you are trying to use the residual, absolute T to explain the difference.
+And if you have this kind of assumption today, depending on yesterday, multiply with a constant, then you know how to get the mean, right? Because you can take an expectation at both sides.
+So when you take evolution over all… both sides, that means you just, like, take average, right, of your observations.
+XT and XT-1.
+you get the explanation over EXT, explanation about EXT minus 1.
+Remember, we assume all the time series, they are stationary.
+Right? They're stationary. So the mean is not changing. The variance is not changing. So XT and XT-1 bother, you shift, right? When you shift, does this change the mean? No, because of station, right? So this one and this one shift the same.
+both equals mu. So you have left side mu, right side A1 mu, so the mu equals A0 divided by 1 minus A1.
+So this formula gives you some interpretation. Number one, A1?
+Not 0, okay? Another one.
+You can never say it today, Today, Ecos… Yesterday, Plus some constant, plus noise.
+Nope, that's wrong, because if that's the case, that definitely is not stationary time series. You can never use something like that.
+Why? Because look at here, you see, if A1 is 1, you get the denominator, you get 0,
+you get what? You get mu, you get infinity. That's exactly like this. If today's observation always equals yesterday, plus something, plus something, you will find XT is explosion.
+you keep growing. The variants keep growing, growing, growing, you know.
+You've got the infinity.
+So that's definitely… it's not stationary.
+And also, you can say, if the mean equals 0, you must have, what, A0 equals 0, right?
+If the day only equals yesterday times A1, without
+constant shift, that means the mu must be zero. The mu must be zero.
+After we examined this mean, that we look at the variance.
+So now, I don't want you to struggle with how to derive this, I only ask you to memorize how to do this.
+what's the conclusion result, okay? So we can directly jump to here.
+For the X1, for AR1,
+all the regress one model, that means today equals yesterday times a constant, plus some shifting, plus some random noise, right? Perturbations. If that situation, the variance of the time series
+equals the noise variance divided by 1 minus A1 squared. Again, right, because
+The variance can never be negative. You must have denominator positively. Then, A1 squared should be less than 1. So that's, again, right, A1 definitely is not equals 1. You can never say today equals yesterday plus something. No, in that case, it's not stationary. If in that case, you will say sometimes it's like this.
+You've got the infinity.
+Ignore stationery.
+This is the mass proof, you can show this.
+This numeratories, what do you mean? That's the noise, right? The noise has some of, the variance noise, right? Additive noise variance.
+So, you need to memorize this formula.
+For AR1,
+The mean value equals A0 divided by 1 minus A1. The variance equals the noise variance divided by 1 minus A1 squared, so that's the variance.
+And based on this, you know, you were…
+inference this A1 must be between minus 1 and 1, right? So that's how an A1 absolute value less than 1.
+And now we are trying to see what's the auto coordination
+of AR1 model. What does this mean? This means, you know, we know you have observation XT,
+If you know XT, it always can be described as yesterday times something. For example.
+XT equals A0 plus yesterday times A1.
+plus epsilon T, right? There's another noise. So that's the XT in AR1. If that's the case, how likely today and yesterday they caught each other?
+That's the order coordination function means. For AR1 model, because AR1 model means today always can be expanded by yesterday times A1 plus A0 plus epsilon t.
+So we are trying to say, how did they coordinate yesterday, how did they coordinate it 2 days before, how did they coordinate 3 days before, so on and so forth, right? That's called all the coordination functions.
+So, for example, if today and the L days before, today, XT, L days before, I want to know how they coordinate each other, right? So you get some results like this, say.
+you will… you will see this kind of cross-product, you have A1, VL minus 1. That means today.
+and L dis before cross product equals today, and L minus 1 disk pronation multiplies A1.
+And you can skip this one.
+you will end with some of all the correlation functions like this. That's the conclusion. That's the formula you have to memorize.
+You see?
+L days before coronation equals L minus 1 days before coronation times A1.
+And, we know it's R0 is 1, right? What's R0? That means today and today, right?
+Because R… Zero means how, today, And zeroed this before, right?
+T minus 0. Today and 0 this before, that means today and today, right? How today and today, according to each other, right, that's called R0.
+Of course, at the end of the day, you deserve 100% similar, right? So that's why you get the 1.
+So, this can reduce to what? Get A1 to L times 1.
+Or you can make a simple interpretation Like this.
+If you have AR1 model.
+Today and yesterday, that means L equals 1, right? So that means today and, yesterday, the coordination would be A1.
+That's exactly similar to the formula, right? That's not surprising, because we know XT
+equals A1, XT minus 1, right?
+plus absolute t. You see, how today equals yesterday times A1. So, if I'm asking, how's the coordination between today and yesterday? The answer is A1.
+R1 equals A1. R1 is a measure of how today and yesterday, similar, right? R2 means how today and two days before.
+pronation. The answer is simple. A1 square.
+How did they illustrate this before? How they correlate to each other? It's A1Q.
+If you have today and the L days before, you have what? You have A1 to L.
+Why? Because… Today equals yesterday times A1, so today and yesterday to coordinate A1.
+Yesterday and the day before yesterday, you have the coronation A1 again, right? So you have this accumulated coronation A1 times A1 times A1. So if you have 3 days before, you should have the coronation A1 to Q. If you have 10 days before, the coronation will be A1 to 10th order.
+And, let me remind you, what's A1?
+A1 is how today and yesterday is similar, right? And A1 with absolute value, less than 1, right? So when you have longer and longer, like today, and 10 days before today, and 20 days before today, and 100 days before.
+That means you get A1 to the 100th power, right? So you're getting… when this… the time gap gets larger, this value gets, what, close to zero, right?
+Because this A1 itself is something between 0 and 1, we multiply this many, many times.
+is crossing zero. What does it mean? Today, similar to yesterday, if you keep this similar inference.
+Today and the 100 before, there's no similarity. It's so tiny, right? Today and yesterday, they say.
+A1 equals 0.5, so today equals yesterday times half.
+Plus noise, that's what they observe, right?
+And today, and 10 days before, that means you get one half, take a tenth order, you get a tiny, tiny, almost zero, right? Yeah, 20 days before, you can think about it today, and the 20 days before is nothing, zero.
+Right? So, this ACF is trying to calculate the coronation, how this all the coronation is changing over time. That's also consistent to our
+common sense in each, right? Typically, today is more similar to yesterday. You get less similar to 2 days, right? You get even less to 3 days before, right? Even get the tiny, tiny coordinated to many, many days before, right? Get a longer time period, you get the less and less smaller and smaller coordination factors.
+When I say correlation factor, what does it mean? Coronation factor means how likely, when those time gap observation observed, how you predict next, right? Just like I said.
+A1… today and the 10 days before coronation, what does it mean? If today and the 10 days before coronation is 0.1, then it means if you know the 10 days before time…
+Time series is moving up, then that means today you will have a 10% chance, you will bet today's stock price will also go in.
+going up, you know, 10%. So that's all the correlation means.
+So, I would emphasize.
+the mass is not important, you only have to memorize that few concepts, just like what's AR model, right? AR model trying to say how the day is reformulated to a few days before. If AR1 means how today is represented by yesterday times a constant, that's AR1.
+If you gave an AR model, let's say you gave an AR1 model, how likely today and many days before, like, a few days before, what's the coordination factors? The answer is very simple, because this AR1 model, right? Just take A1 to piece order. If you have today, two days before, A1, take a second order, square.
+If today and the 5 days before, A1 go to 5, you know, fixed power.
+So on and so forth.
+So that's what we will stop here, and I will leave some time for you guys to ask questions, and, you know.
+Anything you want to ask, talk?
+Ahmad Shah
+Ahmad Shah
+01:37:00
+In regards to the lecture, or can we ask about the homework as well?
+Rensheng Wang
+Rensheng Wang
+01:37:05
+Yeah, anything, you can ask, you know.
+Ahmad Shah
+Ahmad Shah
+01:37:07
+For the homework, give me one second, sorry.
+For the AMS script, I noticed that… So the way I was going about it was I trained the model, got the accuracy, I trained it on accuracy, and then I wanted to verify it with the AMS script rather than training it
+with the AMS script, because it wasn't really compatible. It was written in Python 2.
+Rensheng Wang
+Rensheng Wang
+01:37:33
+Is I…
+Ahmad Shah
+Ahmad Shah
+01:37:34
+Just wanted to put that out. I just used AI to just restructure all of the library calls back into a Python 3 version, and then I called upon it.
+But then I came up with this issue where
+the test set that they provided didn't have any… they didn't publish the solutions for it, and I couldn't find any of the documentation. They just completely hidden it. So, I ended up taking the original training dataset, split it 80 for the training and validation, and then 20 for the testing.
+So I trained it with… using the AMS script evaluation that they provided.
+And I was getting results with it until I…
+realized that I'm not sure if my model is good or not, because most of that
+last 20% section was mostly background noise, not signal, so my model was more strict
+against predicting signals and was predicting backgrounds correctly, and because the dataset was so small, I couldn't really evaluate it well, and even if I stratified it before splitting it, I don't think it'd make much of a difference. So I don't know what… how to go about it correctly.
+Rensheng Wang
+Rensheng Wang
+01:38:48
+Did you…
+you know, shruff the data, you know, to resample this again, you know, you keep doing this, right? You can…
+Ahmad Shah
+Ahmad Shah
+01:38:57
+I mean, I use cross, valid, cross.
+Rensheng Wang
+Rensheng Wang
+01:39:00
+Okay, okay, you use cross variations, okay.
+Ahmad Shah
+Ahmad Shah
+01:39:02
+Yeah, use that for the training, yeah.
+Rensheng Wang
+Rensheng Wang
+01:39:05
+If you have the small data sets, you know, that's typically the big trouble, you know, that's… because the root course is not about you, it's really about, you know, you don't have enough information to help you identify. What I can do is the best, based on the limited information.
+You know, that's that invitation. You don't have much to do that. Or…
+If you really only have limited… you only have two ways, right? Two directions. One is, can you get some synthetic data to expand your training space, right?
+Two, can you reduce the model complexity to make the model less complexed.
+Right? In other words, you are trying to reduce the model dimension, because the data is fixed, right? The only ways you make the model is simple, then the data can take care of the, generalize the model.
+That's why, typically, two directions. One, you make more data, for example, like, synthetic data, right? Two, you make a model simple.
+For example, synthetic data means, you know.
+You can either use it as the current data, make some manipulation with some augmented data.
+Another one, you just use a very similar…
+structure, you can synthetically create some new, all the generated image and data, or whatever data, you know, right, that can make your population bigger, your data sample size even bigger.
+Ahmad Shah
+Ahmad Shah
+01:40:33
+Hmm.
+I mean, but, I mean, I'm not putting too much…
+Transformations on it for, like.
+it to matter? I don't know, I'm not doing too much to the original dataset.
+The only other thing I did do, I don't know if this was the right way to go about it.
+But in the, documentation, they stated that any values that have negative 999 are just immeasurable, so I thought of two ways… well, my first thought went to removing that entire row, because if I didn't want it, the model, to…
+the automatic, sorry if I can't remember the name of it.
+Rensheng Wang
+Rensheng Wang
+01:41:17
+So that's the… that's the very good question, you know, because that's the… what I will address, you know. Typically, you will have the interview question about the missing data and the imbalanced data. For the missing data, right, for example, you… you get something,
+whatever reason, right? It's empty or it's not, you know, you want to delete the whole row, right? Because that's… it's not easy to manage it, right? For this kind of… you can think about the missing data, you know.
+So this kind of data, again, you know, you have a lot of different,
+strategy to do that, you know. Number one, What's the percentage?
+you want to remove this number of rows, the percentage. 1%, 5%, 20%.
+Ahmad Shah
+Ahmad Shah
+01:42:06
+Oh, of the total?
+So, yeah, that's the problem I came into. So I thought the best way to go about it was just to remove the entire row, because I didn't want the model.
+Rensheng Wang
+Rensheng Wang
+01:42:14
+And no, how many you remove, you know? For example, you may have one minute, you want to remove 1,000, right? That means.
+Ahmad Shah
+Ahmad Shah
+01:42:21
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:42:21
+What percentage? What's the percentage you want to remove?
+Ahmad Shah
+Ahmad Shah
+01:42:25
+I wanted to remove… I want to drop all the invalids.
+Rensheng Wang
+Rensheng Wang
+01:42:29
+Yeah, all you matter that account to how many percentage overall.
+Ahmad Shah
+Ahmad Shah
+01:42:34
+I don't know the percentage, but it's 180,000… 181,000.
+Rensheng Wang
+Rensheng Wang
+01:42:39
+That's fine, it's a lot, a lot smaller, it's a big or a small.
+Ahmad Shah
+Ahmad Shah
+01:42:42
+It's a very big percentage. It's a very big percentage.
+Rensheng Wang
+Rensheng Wang
+01:42:45
+It's a very big percentage?
+Ahmad Shah
+Ahmad Shah
+01:42:46
+Yeah, it's a majority of the data set.
+Rensheng Wang
+Rensheng Wang
+01:42:49
+Also, this kind of invalid data happens which a few specific fields or… Renting it everywhere.
+Ahmad Shah
+Ahmad Shah
+01:42:58
+It's distributed evenly, from what I can see. Like, it's just random, just no package.
+Rensheng Wang
+Rensheng Wang
+01:43:03
+That's even better, if that's random, you know, you have a few things you can do, right? One thing, you can use the…
+Very dumb, you just use the average.
+for each field, you can use average, that's the best guess, right?
+I know that Stephanie's…
+Ahmad Shah
+Ahmad Shah
+01:43:22
+I just left it… I just… wherever it said negative 999, I just made it empty, and then I thought XGBoost would use sparcity awareness to just fill it in automatically.
+Rensheng Wang
+Rensheng Wang
+01:43:33
+Right.
+And,
+You, you can either unite, if you want, you know, you can either unionize the XG plus there, take care, or you can do something else, you know, you can make a conditional fit.
+In other words, you know, for example, for one record, right?
+Yeah, some invalid value there is missing.
+And based on all the other information, what's the best guess? You have the, you know, poster… poster, you know, probability guess.
+In other words, Just like you have
+20 measurements, right? You have one measurement missing, and then based on the 19 residual measurements, the quantity value categories, what's your best guess? Should it be the value?
+Right? You can do something like that. That's how you can fit in there. So that means you can use this kind of joint distribution, help you to input some missing, invalid values there to help you improve a little bit.
+Ahmad Shah
+Ahmad Shah
+01:44:34
+In regards to, like, the filling values, I have another question of, like, what you think would be better? Would it be better to take them, like, say, in one, column.
+a single value there is, like, gone. Would it be better to just average all the values on that column and place it in there, or would it be better to look at the other columns to find a similar…
+Rensheng Wang
+Rensheng Wang
+01:44:57
+Always look at other components. You want to use this kind of for conditional predictions. That means, based on all the other observations, what's your best guess, right? Something like that.
+Ahmad Shah
+Ahmad Shah
+01:45:08
+How could I make that conditional, though?
+Rensheng Wang
+Rensheng Wang
+01:45:11
+That's a great… that's a, you know… let me show you, okay?
+For example, for this corner, right? Yo, this value is missing, right?
+Okay, now you are… you can look at the… at the EC or something here, right?
+Something… You have these two, not missing, right? Only missing this one, right?
+Ahmad Shah
+Ahmad Shah
+01:45:34
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:45:35
+Okay, now you're trying to find all the other rows which has very close to this measurement here, and close this measurement here. For example, let's even make it more concrete, okay?
+Ahmad Shah
+Ahmad Shah
+01:45:56
+I understand what you're saying, I just don't know how I would program it to do that, to, like… because if I'm imagining, let's say, not just for this, maybe this we can, like, hard parse through every single one, but let's say you have a million data values. How would you, like, effectively fill in that value without having to look over all the different past values?
+Rensheng Wang
+Rensheng Wang
+01:46:15
+Yeah, that's very simple, you know, just like I said, you know, you first find the corresponding value here. For example, you have one tube for this mission, right? So every mission, you find what's the joint value here and here, right?
+say, here, for this missing one, you have joined the values 1 and 2, and for this given 1 and 2, you find all the record here with the neighborhood. For example, I want all the rows with this column close to 1, this column close to 2, so you can make a boundary negative step from
+For all the measurements from point 8, to 1.2.
+That's why I get a lot of records closely won, right?
+Ahmad Shah
+Ahmad Shah
+01:46:57
+Okay.
+Rensheng Wang
+Rensheng Wang
+01:46:58
+Way 2, okay, way 3. I want to select all the subsets that make way 2 in this range, and weight 3 in…
+1.6 to 2.4, right?
+Make sense?
+Ahmad Shah
+Ahmad Shah
+01:47:12
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:47:13
+For this subset, I should have some non-zero value in V1, right?
+Right?
+Ahmad Shah
+Ahmad Shah
+01:47:22
+Sorry?
+Rensheng Wang
+Rensheng Wang
+01:47:24
+I need to find all the subsets where we queue in this range, we straight in this range, right? I need to find.
+Ahmad Shah
+Ahmad Shah
+01:47:30
+Yes, yes.
+Rensheng Wang
+Rensheng Wang
+01:47:31
+For this subset, I need to make the measurement of absolute value of the mean… the average value of V1, right?
+Ahmad Shah
+Ahmad Shah
+01:47:39
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:47:40
+Then, that's where you can replace gear, right?
+Ahmad Shah
+Ahmad Shah
+01:47:44
+Okay. And would, and would we average… like, so would we need to take several samples of different…
+So, like, when I'm trying to, like…
+let's say V2 and V3, it can range between those two ranges you provided.
+Would it… would we just choose the first one that we see that is close to that, and then just…
+Rensheng Wang
+Rensheng Wang
+01:48:09
+put it in that number for V1 and just copy it, or… You can do that, you can do that, you know, because you only use this one, it's statistically close to this one, right?
+Ahmad Shah
+Ahmad Shah
+01:48:18
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:48:20
+Yeah, you can always make this even smaller, or you can make it exactly matching, that's fine, you know, if you can find more, it's just like, say, okay, I will find way 2 exactly equals 1, way 3 exactly equals 2. That's okay. If you can find the many, okay, that's fine, you know.
+My suggestion is, if you cannot find many, you can use a little bit of range, right? That's what they said, right?
+If you can find a lot of records, multiple records, with V2 equals 1, V3 equals 2,
+Right? You can find the multiple records, then for the multiple records, you just take average to replace with one missing here, right?
+Ahmad Shah
+Ahmad Shah
+01:48:54
+Okay, alright.
+Rensheng Wang
+Rensheng Wang
+01:48:56
+Or you can reflex it by range, right? You can get even more. Then you take average, then it's more statistically, you allow, you have some little bit of perturbation. You don't have the exact match, right?
+So that's the meaning behind, yeah. You can write some, you know, formula. You don't have to… you can write the formula to replace all the…
+you know, you just described this idea to AI, they will write this formula for you, you know.
+You don't have to manually do this, they will automatically, you know, to replace this machine.
+Ahmad Shah
+Ahmad Shah
+01:49:30
+Gotcha. Okay, no, yeah, I get that.
+I don't want to… if anyone else has any questions, you can go ahead, because I do have a few more.
+Rensheng Wang
+Rensheng Wang
+01:49:39
+Sure, go ahead, Leah.
+Ahmad Shah
+Ahmad Shah
+01:49:41
+So another thing is, when I was running it.
+when I was testing it on my test set, and I was making predictions, and then I was getting the probability that the model thought, I set thresholds, and I tested which one worked best, which one was more accurate, like, if it's above 50%, sure, then yes, or 60%.
+Rensheng Wang
+Rensheng Wang
+01:50:02
+Right.
+Ahmad Shah
+Ahmad Shah
+01:50:03
+Sorry?
+Oh, my question is, just like how you can use, grid search to, like, parse through parameters and then find the best ones, is there another, like, similar or better way where it can test different thresholds and find, like, the most optimal one?
+Rensheng Wang
+Rensheng Wang
+01:50:23
+You can, you can, you can try to search around, you know. We definitely have a lot of, existing library to do this.
+But I don't trust any one of the, you know, I… because I'm experienced, so I typically… I will do on my own, because…
+all the existing one, at least, they can give you something if you don't want to waste your time, right? Just use some software, you know, existing software. They are taking care of this, what you mentioned, this kind of missing values, or evaluations, you know, you have some library, right?
+the…
+It's hard to, for me, give you the number, but you can try different, say, and the words, they make a difference.
+Okay, so you… you care about the… your question is more care about the… how to take a threshold, or how you make a selection of the best solution, or…
+Ahmad Shah
+Ahmad Shah
+01:51:13
+Kind of… a little bit both, mainly, like, the thresholds, like…
+just, like, most optimal. Instead of, like, you manually testing 0.5, 0.7, 0.9, and then, you know, you find a range that works, 0.7 and 0.9, and then you zero in on that to 0.75, like, is there one that will go through and, like.
+Find the most optimal one on, like, a trend?
+Rensheng Wang
+Rensheng Wang
+01:51:41
+It's possible to…
+to try all different thresholds, you plot that curve, and from the curve, you can see what's the magic point, you know, where you get the dynamic impact that you can stop to choose the optimize, right? Threshold.
+Ahmad Shah
+Ahmad Shah
+01:51:59
+Yeah, okay, I mean…
+Rensheng Wang
+Rensheng Wang
+01:52:00
+That's the… that's a typical… when do this kind of deep learning, how do you make a difference… optimize the threshold? You know, you always do this kind of multiple, you know, curves, you know, each time, you know, you run different, number of options, right? You're trying to find the maximum options value there.
+Ahmad Shah
+Ahmad Shah
+01:52:21
+Gotcha, yeah.
+Rensheng Wang
+Rensheng Wang
+01:52:28
+Okay, if no more questions, so I wish everyone has a great weekend, okay? Thank you.
+Ahmad Shah
+Ahmad Shah
+01:52:33
+Thank you, Professor.
+Rensheng Wang
+Rensheng Wang
+01:52:34
+Yeah, I will stay here, okay, if I have any questions, yeah. Okay, take care.
+Ahmad Shah
+Ahmad Shah
+01:52:52
+I also, just wanted to ask if I can get some clarification on some of the parameters for the XGB model?
+Rensheng Wang
+Rensheng Wang
+01:53:00
+For which model?
+Ahmad Shah
+Ahmad Shah
+01:53:01
+The XGB, classifier.
+Rensheng Wang
+Rensheng Wang
+01:53:03
+Yeah, okay, Stevie, yeah, right.
+Ahmad Shah
+Ahmad Shah
+01:53:05
+I couldn't quite understand, like, the difference between column sample by tree, node, and
+And I can't remember the last one.
+But, like, what's the… what's the difference between them?
+Rensheng Wang
+Rensheng Wang
+01:53:21
+Which one you want to ask? I'm…
+Ahmad Shah
+Ahmad Shah
+01:53:24
+column sample by tree?
+Rensheng Wang
+Rensheng Wang
+01:53:29
+Oh, common sample, because you have many, many features, right? When you…
+construct the tree, you can randomly choose a few subsets from the columns, right?
+Ahmad Shah
+Ahmad Shah
+01:53:41
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:53:41
+So that's the… you want to… you don't want to make it too small, you don't want to be too large. When you're too large, you make it too complicated. It's always a trade-off. For example, you have this number of features in your predicted matrix, you have 100, right?
+If you make 10, that means you randomly select 10 from then to construct one tree. Then you randomly choose another 10, you get another tree, you know, the number of columns depends on how you select the subset from the total candidate columns.
+Ahmad Shah
+Ahmad Shah
+01:54:13
+So is that, like, horizontally scaling? Like, one feature, one tree?
+Rensheng Wang
+Rensheng Wang
+01:54:18
+I'm sorry, what'd you say?
+Ahmad Shah
+Ahmad Shah
+01:54:19
+Is it… does it, like, horizontally scale, or does it vertically scale? Like, is it just creating…
+Rensheng Wang
+Rensheng Wang
+01:54:25
+It's, it's a… horizontal… Select, you know, for example, right, you have the V1, V2, V100, right?
+They just randomly select the temp from these 100 columns.
+Ahmad Shah
+Ahmad Shah
+01:54:42
+Wait…
+Rensheng Wang
+Rensheng Wang
+01:54:43
+Yeah, maybe they say that we won with 5, we're 20, with 100, then next we switch to week 3,
+With 7, blah, blah, blah, you know, the randomly selected field.
+Ahmad Shah
+Ahmad Shah
+01:54:54
+Oh, so it's like a… it just… how many does it do per tree, or is it just automatic?
+Rensheng Wang
+Rensheng Wang
+01:55:00
+Yeah, that's the number, right? 10 is the, for example, you… the number of columns, right, synecd, right? That's 10, that means you connect 10 out of 100 columns, right?
+Ahmad Shah
+Ahmad Shah
+01:55:10
+Gotcha.
+Rensheng Wang
+Rensheng Wang
+01:55:11
+That's the tend to construct this tree.
+Ahmad Shah
+Ahmad Shah
+01:55:14
+But you can also pass, like, 0.5 as a parameter, so what would that mean?
+Rensheng Wang
+Rensheng Wang
+01:55:20
+Oh… 0.5 as parameter, not any percentage, or…
+Ahmad Shah
+Ahmad Shah
+01:55:27
+Like, as for the parameters, I'm not too sure, because in the… In the…
+Rensheng Wang
+Rensheng Wang
+01:55:34
+Oh, that'.
+Ahmad Shah
+Ahmad Shah
+01:55:35
+Slide.
+Rensheng Wang
+Rensheng Wang
+01:55:35
+It's the percentage, right? But whatever, you know, the number of callings connected for construction trees, like, a selected subset of them to construct the tree.
+Ahmad Shah
+Ahmad Shah
+01:55:46
+Plus, like.5 would be 50% of all the.
+Rensheng Wang
+Rensheng Wang
+01:55:49
+Yeah, yeah, 95%, that's, you know…
+Ahmad Shah
+Ahmad Shah
+01:55:53
+And if we have… so we only have 30 columns, so would it be a good idea to have fewer column samples by tree? So, like, 0.2? So then…
+Rensheng Wang
+Rensheng Wang
+01:56:03
+That's a good question. Really depends on the data itself, right? Which kind of data connections, so that will determine what the size should be suitable. Because if your feature, you really have a very…
+dense, inactive, in the living, between this, in actions, right? So maybe you are trying to take the next more, you know.
+If you have small, you want to pick a bigger. So… so that depends on your data, right?
+So that's why you have to tune. It's not the…
+fix that, optimize the number, you know? You have to tune. That's really data-dependent, you know.
+Ahmad Shah
+Ahmad Shah
+01:56:42
+Okay. And if, if I,
+So, like, I understand, like, it's randomly sampling the columns and making those trees, but wouldn't it make more sensible sense to… more sense to group
+correlated items within the same tree? Like, for the dataset that…
+Rensheng Wang
+Rensheng Wang
+01:57:04
+Greetings, because… statistics, right?
+you don't have to worry, you know. The good ones always stand out, the bad ones automatically to diminish the impact, right? So, because the way they're doing this is…
+I don't want to exam manually, one by one, you know. I would prefer to use the machine to randomly assemble. That means your swipe…
+You swipe all the possible combinations, all the possible…
+impact the subspace, right? I don't know which one is the best combination, I just asked you to randomly do this. So that's… can you… can you use the avoided over fading, right?
+Ahmad Shah
+Ahmad Shah
+01:57:46
+Yeah. Yeah, that makes sense to not prevent overfitting. But what if, let's say for my specific problem, I know for a fact that these features… so, in the…
+in the test set that they gave us, they have columns marked DER and, DER and…
+Rensheng Wang
+Rensheng Wang
+01:58:09
+Dirt and pry for different, like, particles.
+Ahmad Shah
+Ahmad Shah
+01:58:12
+like, the Higgs boson, and then.
+Rensheng Wang
+Rensheng Wang
+01:58:13
+Doesn't matter, right? Because you have good selection, you have better selections. The good selection, you will get the higher weight, right? Yeah. So you don't have to worry about enough. You know, even, you know, the machine will test this for you, they will make selection for you.
+Right? They know which one's good, which one's bad, right? They were automatically to make this kind of weight.
+Ahmad Shah
+Ahmad Shah
+01:58:35
+Okay, oh, and then it'll, like, automatically prune the bad ones, I guess.
+Rensheng Wang
+Rensheng Wang
+01:58:39
+They automatically make this kind of cross-validation, automatically, you know, make these selections, so that's why they're very efficient.
+It's almost like, you know, you don't have to…
+use much your, domain knowledge, you know? That's almost like a very,
+dumb, automated method. That's why XBoost is almost like the top. If you don't have any preference on any… or any, you know, domain knowledge, you know, so you prefer to use this one as the first.
+Ahmad Shah
+Ahmad Shah
+01:59:18
+Okay, I think I understand that, thank you. But then, okay, so I have two more. The columns by… column samples by level. Like, I understand what, like, they mean in the…
+slides that you gave, but, like, I just can't visually understand the importance, or the difference between them. Like, the columns sample by level, for example.
+Rensheng Wang
+Rensheng Wang
+01:59:38
+Yeah, because you don't have to make it all good, right? So, yeah, a lot of nonsense, a lot of bad, that's great, because in…
+By doing this, they can very easily filter out some subset that is really bad, right? You can make some… because you have making comparisons, right? You know which make a more dominant impacts, right?
+you tried all the possible combinations, right? They automatically, by this kind of random sampling, they make a selection, make the right selection, make the optimized selection, right?
+So this is similar to, like, the deep learning. In deep learning, you don't have to tell me which feature is more important, or which area is more dominant. I just randomly try a lot, and sooner or later, I will know which
+Which filter or which feature will make more dominant the impact?
+Ahmad Shah
+Ahmad Shah
+02:00:29
+So, the column sample by tree just randomly chooses different.
+Rensheng Wang
+Rensheng Wang
+02:00:33
+They will make a lot of comparisons. They were filled out. They will find what's the best. Because if you're good, you get a higher weight. If you're bad, you get a lower weight.
+Ahmad Shah
+Ahmad Shah
+02:00:45
+And then, I'm guessing column sample by level is…
+I'm thinking of it like depth for search, like, it goes to the best route and then just removes the unneeded trees.
+Is that, like, kind of what it is?
+Rensheng Wang
+Rensheng Wang
+02:00:59
+Can you repeat it? You are trying to make sample over levels, right?
+Ahmad Shah
+Ahmad Shah
+02:01:04
+So, I'm… the way I am understanding it is the column sample by trees initiates the first
+like, the horizontal initial, like, columns of the trees, the column sample by level goes down, all the trees, find the most optimal one, deleting the ones that don't.
+aren't good. Right, right. And then, what would column sample by node be?
+Rensheng Wang
+Rensheng Wang
+02:01:31
+So, you've… let me… I think I don't have the extra notes here, so it's, hard to…
+Ahmad Shah
+Ahmad Shah
+02:01:39
+I can read… it says, column sample by node is random subsample of columns based on every split, left or right.
+That's all it says.
+I'm so sorry.
+Rensheng Wang
+Rensheng Wang
+02:02:07
+Amy, I'm trying to find the document, yeah, let me…
+Which page you're talking about?
+Ahmad Shah
+Ahmad Shah
+02:02:18
+It's one of the last few pages.
+I don't have… I have, like, I screenshotted the slides and I saved them.
+Rensheng Wang
+Rensheng Wang
+02:02:26
+That's right, I have this, slides here.
+Ahmad Shah
+Ahmad Shah
+02:02:36
+Yeah.
+Rensheng Wang
+Rensheng Wang
+02:02:56
+So what's the question?
+Ahmad Shah
+Ahmad Shah
+02:02:57
+Right there, the column sample by node.
+That third one.
+Rensheng Wang
+Rensheng Wang
+02:03:24
+Oh.
+So this one is just like a split, right? You make one split, you know, then you decide left or right, then from the left side, you can make random samples, okay? Just like I said, you know, for example, you start from
+Men or women?
+you want to make left or right, right? If you choose men, more likely, right? From men, you have more…
+sub-colins, right? Based on man, all the sub-colins, you can make random samples, sub-samples, right?
+That's how you can split all different methods, something like that, you know.
+Ahmad Shah
+Ahmad Shah
+02:03:59
+Gotcha.
+So then increasing… Increasing the number would make it take longer, because you're making more trees?
+Rensheng Wang
+Rensheng Wang
+02:04:12
+Yeah, you could rent it, you get the larger, you get the more selections, right?
+Ahmad Shah
+Ahmad Shah
+02:04:18
+Okay.
+Okay, I think I understand that now. Thank you very much.
+Rensheng Wang
+Rensheng Wang
+02:04:23
+Sure. But that's… you need to get empirical experience, you know, you want to play, and you feel that if that really changed or not, you know. I think they provide a lot of potentials, yeah.
+Ahmad Shah
+Ahmad Shah
+02:04:34
+Yeah, I was trying to, but every time I ran it, it would take, like, 3-4 minutes to finish.
+Rensheng Wang
+Rensheng Wang
+02:04:39
+Yeah. But that's how you learn, right? You really get some feeling about that, you know.
+Ahmad Shah
+Ahmad Shah
+02:04:44
+Yeah, yeah.
+Rensheng Wang
+Rensheng Wang
+02:04:46
+Okay.
+Okay, who else? I think there's someone also questions waiting for, yeah.
+Oh, she left. She was waiting for us. Okay, anyone else?
+Ahmad Shah
+Ahmad Shah
+02:05:12
+Alright, thank you, Professor. Have a good night.
+Rensheng Wang
+Rensheng Wang
+02:05:14
+See you next week, okay. Have a nice weekend, okay. Take care. You too.
+Preksha Shah
+Preksha Shah
+02:05:25
+Thank you, Professor. Have a nice…
+Rensheng Wang
+Rensheng Wang
+02:05:28
+Sure.

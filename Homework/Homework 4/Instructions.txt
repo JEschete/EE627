@@ -1,0 +1,61 @@
+1. Log in to the Kaggle website below and register for an account.
+
+https://www.kaggle.com/t/afa474967fed4896ba83f8efb7ac7446
+
+2. Every individual is a single team. 
+
+3. Download the Yahoo music data from the above Kaggle webpage.
+
+4. Use users' training histories to find the related rating scores for the track IDs with the testing users.
+
+5. Define your rule to find 3 tracks with "1" and 3 with "0".  
+
+6. On Kaggle: refer to the sample submission file, and submit your solution online with Kaggle. 
+
+7. On canvas, submit your Python code file and screenshot of the Kaggle ranking score. 
+
+Note: The solution file only submits to Kaggle.  Submit Python code and screenshots only to Canvas (no submission files). 
+
+
+-------------------------------------------------------------------------------------------
+Description
+
+Recommend music to the customers.
+
+Nowadays, technology companies often use recommender algorithms to recommend products, music, movie, etc. The recommender algorithm is really useful and helps all those companies make a huge profit. Now, after learning the factorial matrix and other useful algorithms. It's your turn to solve the problem that Spotify, Amazon, and Yahoo Music faced every day.
+Evaluation
+
+    Submissions are evaluated on the area under the ROC curve between the predicted probability and the observed target.
+
+    Submission - For each TrackID in the test set, you must predict whether we should recommend this track. The file should contain a header and have the following format:
+
+TrackID, Predictor 199810_208019 , 1​​​​​​​​​
+
+
+
+-------------------------------------------------------------------------------------------
+Dataset Description
+
+*- Overview *
+
+trainIterm2.txt - the training set
+
+testIterm2.txt - the test set
+
+sample_ submission.csv - a sample submission file in the correct format
+
+trackData2.txt -- Track information formatted as:
+
+<'TrackId'>|<'AlbumId'>|<'ArtistId'>|<'Optional GenreId_1'>|…|<'Optional GenreId_k'>
+
+albumData2.txt -- Album information formatted as:
+
+<'AlbumId'>|<'ArtistId'>|<'Optional GenreId_1'>|…|<'Optional GenreId_k'>
+
+artistData2.txt -- Artist listing formatted as:
+
+<'ArtistId'>
+
+genreData2.txt -- Genre listing formatted as:
+
+<'GenreId'>

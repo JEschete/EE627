@@ -1,0 +1,755 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large February 13, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Recurring Theme: AI Changes What Skills Matter}
+%------------------------------------------------------------
+
+The professor opened with another iteration of the course's core message,
+worth recording because the framing was sharpened this week.
+
+\begin{itemize}
+    \item AI is narrowing the \textbf{experience gap} --- a junior using AI can
+      now access the accumulated knowledge that previously required 20--30 years
+      of practice. This is not a problem to resist; it is a tool to leverage.
+    \item As a result, \textbf{memorizing syntax or formulas is no longer the
+      differentiator}. (Example: SQL commands used to be a gatekeeping
+      interview question; now you just describe what you want and AI writes
+      the query.)
+    \item What \emph{is} the differentiator: \textbf{reading an AI output and
+      knowing whether it is correct}. If the ACF plot AI returns ``looks
+      wrong,'' the value is in catching it --- not in being able to produce
+      the plot by hand.
+    \item The interview of the future: \textit{``Here is a dataset. Show me
+      what you find.''} The process you run, the questions you ask, and the
+      order in which you check assumptions reveal your level --- not which
+      commands you typed.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{AR Model Recap: Stationarity and ACF (Brief)}
+%------------------------------------------------------------
+
+The lecture opened with a condensed review of Week 3 material to set up
+the new content. Key reminders:
+
+\begin{itemize}
+    \item \textbf{Stationarity first.} Before applying any AR model, confirm
+      the series is stationary. A trending or explosive series violates the
+      model's assumptions. Preprocess (difference, log-transform) until the
+      mean and variance are stable, then model.
+    \item \textbf{AR(1) stationarity condition:} $|a_1| < 1$. If $a_1 = 1$,
+      you have a random walk --- variance grows without bound. If $|a_1| > 1$,
+      the series explodes.
+    \item \textbf{ACF of AR(p)} decays gradually toward zero as lag increases:
+      high correlation for nearby time steps, tapering to near-zero for distant
+      lags. This is the expected shape; if it does not taper, something is wrong.
+    \item \textbf{PACF gives a cliff.} For an AR($p$) process, the PACF is
+      nonzero for lags $1, \ldots, p$ and drops to approximately zero beyond
+      lag $p$. Reading where the cliff occurs identifies the order $p$.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Statistical Significance and $p$-values: Intuition}
+%------------------------------------------------------------
+
+Before moving to new models, the professor introduced the concept of
+statistical significance with a concrete example --- this will recur throughout
+the rest of the course.
+
+\subsection{The Dining Hall Analogy}
+Scenario: the dining hall promises an average meal cost of \$15.
+You survey 100 random students exiting the hall and compute the sample mean.
+
+\begin{itemize}
+    \item Sample mean = \$15.30. Difference from \$15 is only \$0.30.
+      \textit{Judgment:} the gap is small enough to attribute to random
+      variation --- you cannot confidently say the price changed.
+    \item Sample mean = \$18.00. Difference is \$3.00.
+      \textit{Judgment:} this may or may not be significant --- depends on
+      the variance of the data and the sample size.
+    \item Sample mean = \$25.00. Difference is \$10.00.
+      \textit{Judgment:} this is clearly too large to ignore --- the price
+      has almost certainly changed.
+\end{itemize}
+
+The question is always: \textit{``How far is my observation from the expected
+value, relative to the natural variability?''}
+
+\subsection{The Significance Threshold}
+The answer is formalized through a \textbf{significance level}
+(typically 1\% or 5\%):
+
+\begin{itemize}
+    \item Under the null hypothesis (nothing changed), the sample mean
+      follows a distribution centered at the expected value (\$15) with
+      standard error $\propto 1/\sqrt{T}$, where $T$ is sample size.
+    \item A \textbf{5\% significance level} means: any value outside the
+      central 95\% of this distribution is considered ``too extreme to
+      have happened by chance'' --- you reject the null.
+    \item A \textbf{1\% significance level} is stricter: the value must be
+      even further from the center before you reject.
+    \item \textbf{Larger $T$} $\Rightarrow$ smaller standard error $\Rightarrow$
+      the threshold narrows $\Rightarrow$ smaller differences become
+      statistically detectable.
+\end{itemize}
+
+\subsection{Application to PACF}
+The same logic applies when deciding whether a PACF value at lag $l$ is
+``significantly nonzero.'' The standard error of the sample PACF is
+$\approx 1/\sqrt{T}$. Any lag whose PACF exceeds $2/\sqrt{T}$ (95\% level)
+or $2.58/\sqrt{T}$ (99\% level) is declared significant. Everything else
+is treated as zero.
+
+\textit{This is why choosing the 5\% vs.\ 1\% threshold can give different
+AR orders from the same PACF plot --- the professor's worked example in
+Week 3 identified either AR(3) or AR(9) depending on which cutoff was used.}
+
+
+%------------------------------------------------------------
+\section{Estimating AR Coefficients: Yule-Walker (Brief)}
+%------------------------------------------------------------
+
+Once the order $p$ is identified from the PACF, the AR coefficients
+$a_1, a_2, \ldots, a_p$ are estimated by solving the \textbf{Yule-Walker
+equations}:
+
+\[
+\begin{pmatrix} r(1) \\ r(2) \\ \vdots \\ r(p) \end{pmatrix}
+=
+\begin{pmatrix}
+  r(0)   & r(1)   & \cdots & r(p-1) \\
+  r(1)   & r(0)   & \cdots & r(p-2) \\
+  \vdots & \vdots & \ddots & \vdots \\
+  r(p-1) & r(p-2) & \cdots & r(0)
+\end{pmatrix}
+\begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_p \end{pmatrix}
+\]
+
+Invert the (Toeplitz) matrix to recover the coefficients. In practice, call
+the function --- do not implement the inversion by hand.
+
+\textbf{Workflow summary so far (AR modeling):}
+\begin{enumerate}
+    \item Observe series; confirm stationarity.
+    \item Call \texttt{ACF} and \texttt{PACF}; identify cliff $\Rightarrow$
+      estimate $p$.
+    \item Call Yule-Walker solver $\Rightarrow$ get $\hat{a}_1, \ldots,
+      \hat{a}_p$.
+    \item Use fitted model for recursive forecasting.
+\end{enumerate}
+
+
+%------------------------------------------------------------
+\section{Moving Average (MA) Models}
+%------------------------------------------------------------
+
+\subsection{When AR Is Not the Right Model}
+The PACF is the diagnostic for AR. But sometimes the PACF shows no clean
+cliff --- it does not taper to near-zero at any single lag. This signals
+that AR is the wrong model.
+
+The alternative: a \textbf{Moving Average (MA)} model.
+
+\subsection{Intuition}
+\textit{From the lecture:} On a typical trading day, if there are no earnings
+reports, no major news, and no macroeconomic events, the stock price moves
+purely from random perturbations --- a trader here, an automated order there.
+What you observe is an accumulation of those random shocks:
+\[
+X_t = \varepsilon_t + b_1 \varepsilon_{t-1} + b_2 \varepsilon_{t-2}
+    + \cdots + b_q \varepsilon_{t-q}
+\]
+
+The current price is not a function of past \emph{prices} (that would be AR);
+it is a weighted sum of past \emph{noise events}. This is the MA($q$) model.
+
+\subsection{Definition}
+\[
+\text{MA}(q):\quad X_t = \mu + \varepsilon_t + b_1 \varepsilon_{t-1}
+    + b_2 \varepsilon_{t-2} + \cdots + b_q \varepsilon_{t-q}
+\]
+where $\varepsilon_t \sim \text{WN}(0, \sigma^2)$ (white noise).
+
+\begin{itemize}
+    \item $q$ = the number of past noise terms that influence today.
+    \item The ACF of MA($q$) \textbf{cuts off sharply} after lag $q$:
+      $r(k) = 0$ for $k > q$. (Compare: AR has gradually decaying ACF.)
+    \item The PACF of MA($q$) decays slowly/gradually. (Compare: AR has
+      cliff in PACF.)
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Model} & \textbf{ACF} & \textbf{PACF} \\
+\midrule
+AR($p$) & Gradual exponential decay & Sharp cliff at lag $p$ \\
+MA($q$) & Sharp cutoff after lag $q$ & Gradual exponential decay \\
+ARMA($p$,$q$) & Gradual decay after lag $q$ & Gradual decay after lag $p$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%------------------------------------------------------------
+\section{AR--MA Duality: Why They Are Two Sides of the Same Coin}
+%------------------------------------------------------------
+
+This section contains the lecture's most conceptually important derivation.
+The professor showed, by successive substitution, that AR and MA are
+\textbf{mathematically equivalent} in the limit --- they are two different
+representations of the same underlying process.
+
+\subsection{AR(1) $=$ MA($\infty$)}
+Start with AR(1): $X_t = a_1 X_{t-1} + \varepsilon_t$.
+
+Substitute the expression for $X_{t-1}$:
+\[
+X_{t-1} = a_1 X_{t-2} + \varepsilon_{t-1}
+\]
+$\Rightarrow\quad X_t = a_1(a_1 X_{t-2} + \varepsilon_{t-1}) + \varepsilon_t
+= a_1^2 X_{t-2} + a_1 \varepsilon_{t-1} + \varepsilon_t$
+
+Continue substituting indefinitely:
+\[
+X_t = a_1^k X_{t-k} + \varepsilon_t + a_1 \varepsilon_{t-1}
+    + a_1^2 \varepsilon_{t-2} + \cdots + a_1^{k-1} \varepsilon_{t-k+1}
+\]
+
+Since $|a_1| < 1$ (stationarity), $a_1^k \to 0$ as $k \to \infty$, so the
+$X_{t-k}$ term vanishes:
+\[
+\boxed{X_t = \sum_{j=0}^{\infty} a_1^j \varepsilon_{t-j}}
+\]
+This is \textbf{MA($\infty$)}: today's observation equals an infinite weighted
+sum of all past noise, with weights decaying geometrically.
+
+\textbf{Conclusion: AR($p$) $=$ MA($\infty$).}
+
+\subsection{MA(1) $=$ AR($\infty$)}
+Start with MA(1): $X_t = \varepsilon_t - b_1 \varepsilon_{t-1}$.
+
+Rearrange to express $\varepsilon_{t-1}$ in terms of $X_{t-1}$:
+\[
+\varepsilon_{t-1} = X_{t-1} + b_1 \varepsilon_{t-2}
+\]
+Substitute into the MA(1) equation and repeat:
+\[
+X_t = \varepsilon_t - b_1 X_{t-1} - b_1^2 X_{t-2} - b_1^3 X_{t-3} - \cdots
+\]
+This is \textbf{AR($\infty$)}: today's observation is expressed as an infinite
+linear combination of all past observations.
+
+\textbf{Conclusion: MA($q$) $=$ AR($\infty$).}
+
+\subsection{What This Means Practically}
+\begin{itemize}
+    \item Any stationary process can be represented as either a (possibly
+      infinite-order) AR or MA model.
+    \item ARMA models are \textbf{parsimonious}: instead of infinite-order
+      AR or MA, use a small $p$ and a small $q$ to approximate the same
+      process with far fewer parameters.
+    \item The AR$\leftrightarrow$MA duality also appears in diffusion models,
+      transformers, and NLP sequence models --- AR is not just time series,
+      it is the backbone of modern generative AI.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{ARMA($p$,$q$): The Unified Model}
+%------------------------------------------------------------
+
+\subsection{Definition}
+An \textbf{ARMA($p$,$q$)} model combines both AR and MA terms:
+\[
+X_t = a_1 X_{t-1} + \cdots + a_p X_{t-p}
+    + \varepsilon_t + b_1 \varepsilon_{t-1} + \cdots + b_q \varepsilon_{t-q}
+\]
+
+Special cases:
+\begin{itemize}
+    \item $q = 0$: pure AR($p$).
+    \item $p = 0$: pure MA($q$).
+    \item $p, q > 0$: mixed ARMA.
+\end{itemize}
+
+\subsection{Estimation}
+Once $p$ and $q$ are identified (from the ACF/PACF table above), call the
+appropriate function (e.g., Python's \texttt{statsmodels.tsa.arima.model.ARIMA})
+with the $(p, 0, q)$ specification. The function returns estimates of all
+$a_i$ and $b_j$ coefficients. No manual implementation needed.
+
+\textit{Why it is still your job:} AI or a function call will give you a
+number, but the judgment --- \textit{Is this model appropriate? Are the
+residuals white noise? Did I check stationarity first?} --- requires you.
+
+
+%------------------------------------------------------------
+\section{ARIMA($p$,$d$,$q$): Handling Non-Stationary Series}
+%------------------------------------------------------------
+
+\subsection{The Real-World Problem}
+Virtually every time series encountered in industry is \emph{not} stationary
+in its raw form. Stock prices trend upward over decades. GDP grows. User counts
+grow. Applying AR or ARMA directly to a non-stationary series is invalid ---
+the model assumptions are violated.
+
+\subsection{The Fix: Differencing}
+Convert a non-stationary series $X_t$ into a stationary one by taking
+\textbf{differences}:
+\[
+Y_t = X_t - X_{t-1} \quad \text{(first difference, removes linear trend)}
+\]
+\[
+Z_t = Y_t - Y_{t-1} = (X_t - X_{t-1}) - (X_{t-1} - X_{t-2})
+\quad \text{(second difference, removes quadratic trend)}
+\]
+
+The number of differences required is the parameter $d$:
+\begin{itemize}
+    \item $d = 0$: series is already stationary; use ARMA directly.
+    \item $d = 1$: first-order differencing. Most common in practice.
+    \item $d = 2$: second-order differencing. Rarely needed beyond this.
+\end{itemize}
+
+\subsection{Definition and Acronym}
+\textbf{ARIMA} = \textbf{A}uto\textbf{R}egressive \textbf{I}ntegrated
+\textbf{M}oving \textbf{A}verage. Each letter maps to a component:
+
+\begin{itemize}
+    \item \textbf{AR} --- autoregression: uses lagged values of the series
+      itself as predictors.
+    \item \textbf{I} --- integrated: raw observations are differenced
+      $d$ times to remove trends and achieve stationarity.
+    \item \textbf{MA} --- moving average: uses lagged residual errors as
+      additional predictors.
+\end{itemize}
+
+\textbf{ARIMA($p$,$d$,$q$)}: fit an ARMA($p$,$q$) model to the
+$d$-times-differenced series. Parameters:
+\begin{center}
+\begin{tabular}{@{}cl@{}}
+\toprule
+\textbf{Parameter} & \textbf{Meaning} \\
+\midrule
+$p$ & Lag order: number of AR terms (lagged observations) \\
+$d$ & Degree of differencing: how many times to difference \\
+$q$ & MA order: moving average window size \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The Differencing Step: What ``Integrated'' Means}
+For $d=1$: construct $y_t = x_t - x_{t-1}$, then fit ARMA to $y_t$:
+\[
+y_t = a_0 + \sum_{i=1}^{p} a_i y_{t-i} + \varepsilon_t
+    + \sum_{j=1}^{q} b_j \varepsilon_{t-j}
+\]
+For $d=2$: difference twice --- $y_t = x_t - x_{t-1}$, then
+$z_t = y_t - y_{t-1}$ --- and fit ARMA to $z_t$.
+
+\subsection{Special Cases: When $p$, $d$, or $q$ Are Zero}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Condition} & \textbf{Reduces to} & \textbf{Name} \\
+\midrule
+$d=0,\; q=0$        & AR($p$)          & Pure autoregressive \\
+$d=0,\; p=0$        & MA($q$)          & Pure moving average \\
+$d=0$               & ARMA($p$,$q$)    & Stationary, no differencing \\
+$q=0$               & AR($p$) on differenced series & After $d$ differences \\
+$p=0$               & IMA (Integrated MA) & No autoregressive terms \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Mnemonic from lecture:} the ``I'' in ARIMA stands for
+\textbf{Integrated} --- taking differences is the inverse of integration.
+
+
+%------------------------------------------------------------
+\section{Transformations for Stationarity: An Open Question}
+%------------------------------------------------------------
+
+Differencing removes polynomial trends. But many real series have more
+complex non-stationarity that differencing alone cannot fix. This is where
+engineering judgment enters.
+
+\subsection{Common Transformations}
+\begin{itemize}
+    \item \textbf{Log transform:} $Y_t = \log(X_t)$. Use when $X_t$ grows
+      exponentially (e.g., stock price over decades, compound growth). The log
+      compresses large values and stabilizes multiplicative volatility.
+    \item \textbf{Square root:} $Y_t = \sqrt{X_t}$. Use when variance scales
+      with the level (common in count data).
+    \item \textbf{Reciprocal:} $Y_t = 1/X_t$. Occasionally useful for
+      rate-like quantities.
+    \item \textbf{Differencing:} $Y_t = X_t - X_{t-1}$. Use when there is
+      a trend to remove. Can apply iteratively ($d = 1, 2, \ldots$).
+    \item \textbf{Combinations:} e.g., log then difference (standard for
+      financial returns: $\log(P_t/P_{t-1}) = \log P_t - \log P_{t-1}$).
+\end{itemize}
+
+\subsection{Why This Is an Open Question}
+There is no universal recipe. The transformation must match the data:
+\begin{itemize}
+    \item Look at the time plot: is the growth linear? exponential?
+      oscillatory?
+    \item Look at the variance over time: does it grow with the level?
+    \item Try a transformation, re-check stationarity, iterate.
+\end{itemize}
+
+\textit{This open-endedness is exactly what separates junior from senior
+analysts.} A junior says: ``I applied first-order differencing.'' A senior
+says: ``I observed that the series grows exponentially, so I took the log
+first, then differenced. Here is why and here is the diagnostic.'' The
+chain of reasoning is the signal of depth.
+
+\subsection{Full ARIMA Workflow}
+\begin{enumerate}
+    \item \textbf{Visualize} the raw series; identify any trend, seasonal
+      pattern, or changing variance.
+    \item \textbf{Transform} to approximate stationarity (log, square root,
+      differencing). Verify with a stationarity test or visual inspection.
+    \item \textbf{Identify} $p$ and $q$ from ACF/PACF of the transformed
+      series.
+    \item \textbf{Fit} ARIMA($p$, $d$, $q$) using the appropriate function.
+    \item \textbf{Diagnose} residuals: check that they are white noise
+      (ACF of residuals $\approx 0$; Ljung-Box test not significant).
+    \item If residuals show structure: \textbf{iterate} --- revise model order
+      or transformation and repeat.
+\end{enumerate}
+
+
+%------------------------------------------------------------
+\section{Market Basket Analysis and Association Rules}
+%------------------------------------------------------------
+
+The second half of the lecture introduces an entirely new application domain
+that will carry through the rest of the semester: \textbf{recommender systems}.
+The entry point is \textbf{market basket analysis} --- finding associations
+in transactional data.
+
+\subsection{What Is Market Basket Analysis?}
+The goal is to identify which items are commonly purchased together.
+The output is a set of \textbf{association rules} of the form:
+\[
+\{\text{peanut butter},\ \text{jelly}\} \;\longrightarrow\; \{\text{bread}\}
+\]
+Read: ``customers who buy peanut butter and jelly also tend to buy bread.''
+
+This is the foundation of every ``Customers who bought this also bought\ldots''
+feature you see on Amazon, Netflix, or any retail site.
+
+\subsection{The Apriori Algorithm}
+Transaction databases can have millions of rows and thousands of distinct items.
+Brute-force enumeration of all possible itemsets is infeasible.
+The \textbf{Apriori algorithm} makes it tractable via a single key insight:
+
+\textbf{Apriori property:} \textit{all subsets of a frequent itemset must
+also be frequent.} Equivalently, if $\{A\}$ is infrequent, then
+\emph{no superset} of $\{A\}$ can be frequent --- prune the entire branch.
+
+\textbf{Two-phase process:}
+\begin{enumerate}
+    \item \textbf{Find frequent itemsets}: starting from 1-item sets, grow to
+      $k$-item sets. At each step, use the Apriori property to prune candidates
+      whose subsets are not frequent. Stop when no new frequent itemsets are found.
+    \item \textbf{Generate rules}: from each frequent itemset, enumerate all
+      possible rules. Keep only those that exceed a minimum \emph{confidence}
+      threshold.
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Property} & \textbf{Detail} \\
+\midrule
+Strengths & Large transactional data, interpretable rules, discovers hidden patterns \\
+Weaknesses & Useless on small data; can surface spurious or trivially obvious rules \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%------------------------------------------------------------
+\section{Measuring Association Rules: Support, Confidence, and Lift}
+%------------------------------------------------------------
+
+Three statistics determine whether a rule is worth reporting.
+
+\subsection{Support}
+\textbf{Support} measures how often an itemset appears in the data:
+\[
+\text{support}(X) = \frac{\text{count}(X)}{N}
+\]
+where $N$ is the total number of transactions and $\text{count}(X)$ is the
+number of transactions containing $X$.
+
+\textit{Interpretation:} support is the fraction of all shopping baskets that
+contain the itemset. Analogy: support$(X) \Leftrightarrow P(X)$.
+
+\textit{Example (hospital gift shop, $N=5$ transactions):}
+\begin{itemize}
+    \item $\text{support}(\{\text{get well card},\text{flowers}\}) = 3/5 = 0.60$
+    \item $\text{support}(\{\text{candy bar}\}) = 2/5 = 0.40$
+\end{itemize}
+
+\subsection{Confidence}
+\textbf{Confidence} measures the predictive accuracy of a rule
+$X \to Y$:
+\[
+\text{confidence}(X \to Y) = \frac{\text{support}(X,Y)}{\text{support}(X)}
+\]
+\textit{Interpretation:} among all transactions containing $X$, what fraction
+also contain $Y$? Analogy: confidence$(X \to Y) \Leftrightarrow P(Y \mid X)$.
+
+Note: $\text{confidence}(X \to Y) \neq \text{confidence}(Y \to X)$ ---
+the direction matters.
+
+\textit{Example:}
+\begin{itemize}
+    \item $\text{confidence}(\{\text{flowers}\} \to \{\text{get well card}\})
+      = 0.60/0.80 = 0.75$. Flowers are purchased in 80\% of transactions;
+      in 75\% of those, a get well card also appears.
+    \item $\text{confidence}(\{\text{get well card}\} \to \{\text{flowers}\})
+      = 0.60/0.60 = 1.0$. Every get well card purchase includes flowers.
+\end{itemize}
+
+\subsection{Lift}
+\textbf{Lift} measures how much more likely $Y$ is purchased when $X$ is
+purchased, \emph{relative to the baseline rate} of $Y$:
+\[
+\text{lift}(X \to Y) = \frac{\text{confidence}(X \to Y)}{\text{support}(Y)}
+\]
+\textit{Interpretation:}
+\begin{itemize}
+    \item $\text{lift} > 1$: the two items appear together \emph{more often
+      than chance} --- a true association.
+    \item $\text{lift} = 1$: the items are independent.
+    \item $\text{lift} < 1$: the items are rarely purchased together.
+\end{itemize}
+
+Unlike confidence, lift is \textbf{symmetric}: $\text{lift}(X \to Y) =
+\text{lift}(Y \to X)$.
+
+\textit{Example:} $\text{lift}(\{\text{pot plants}\} \to \{\text{whole milk}\})
+= 0.40 / 0.256 = 1.56$. Customers who buy a potted plant are 56\% more likely
+than a random customer to also buy whole milk.
+
+\subsection{The Three Metrics Together}
+\begin{center}
+\begin{tabular}{@{}p{2cm}p{4.5cm}p{5.5cm}@{}}
+\toprule
+\textbf{Metric} & \textbf{Formula} & \textbf{What it answers} \\
+\midrule
+Support & $\text{count}(X,Y)/N$ & How common is this pair in the data? \\
+Confidence & $\text{support}(X,Y)/\text{support}(X)$ & How often does $X$ predict $Y$? \\
+Lift & $\text{confidence}(X \to Y)/\text{support}(Y)$ & Is the link stronger than chance? \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A \textbf{strong rule} has high support \emph{and} high confidence \emph{and}
+lift $\gg 1$.
+
+
+%------------------------------------------------------------
+\section{Practical Implementation: Apriori in R}
+%------------------------------------------------------------
+
+\subsection{Data Format: Sparse Matrix}
+Transactional data is \emph{not} a standard data frame. Each row is a
+basket with a variable number of items. It is represented as a
+\textbf{sparse matrix}:
+\begin{itemize}
+    \item Rows = transactions; columns = all possible items.
+    \item Each cell is 1 (item purchased) or 0 (not purchased).
+    \item Zero values are \emph{not stored} --- hence ``sparse.'' Memory
+      efficient when most cells are 0.
+\end{itemize}
+
+\textit{Groceries dataset: 9,835 transactions $\times$ 169 items, density
+0.026 --- only 2.6\% of cells are nonzero. Average basket size:
+$169 \times 0.026 \approx 4.4$ items.}
+
+\begin{verbatim}
+library(arules)
+groceries <- read.transactions("groceries.csv", sep = ",")
+summary(groceries)
+\end{verbatim}
+
+\subsection{Choosing Support and Confidence Thresholds}
+Parameter choice requires judgment --- there is no universal answer:
+
+\begin{itemize}
+    \item \textbf{Support too high}: only common-sense rules appear
+      (``whole milk appears in every basket'').
+    \item \textbf{Support too low}: combinatorial explosion of rules,
+      many spurious.
+    \item \textbf{Confidence too high}: only trivially obvious rules
+      (``buying a smoke detector implies buying batteries'').
+    \item \textbf{Confidence too low}: unreliable rules flood the output.
+\end{itemize}
+
+\textit{Rule of thumb:} set support to the frequency you would consider
+``interesting'' as a minimum --- e.g., if an item is purchased twice daily
+over 30 days: $60/9835 \approx 0.006$.
+
+\begin{verbatim}
+myrules <- apriori(data = groceries,
+                   parameter = list(support = 0.006,
+                                    confidence = 0.25,
+                                    minlen = 2))
+# Returns 463 rules
+\end{verbatim}
+
+\subsection{Evaluating and Sorting Rules}
+\begin{verbatim}
+inspect(sort(myrules, by = "lift")[1:5])
+\end{verbatim}
+
+Top 5 rules by lift from the groceries dataset:
+\begin{center}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{LHS} & \textbf{RHS} & \textbf{Support} & \textbf{Confidence} & \textbf{Lift} \\
+\midrule
+\{herbs\}                            & $\Rightarrow$ \{root vegetables\}  & 0.00701 & 0.431 & 3.956 \\
+\{berries\}                          & $\Rightarrow$ \{whipped/sour cream\}& 0.00904 & 0.272 & 3.797 \\
+\{tropical fruit, other veg., milk\} & $\Rightarrow$ \{root vegetables\}  & 0.00701 & 0.411 & 3.768 \\
+\{beef, other vegetables\}           & $\Rightarrow$ \{root vegetables\}  & 0.00793 & 0.402 & 3.689 \\
+\{other vegetables, tropical fruit\} & $\Rightarrow$ \{pip fruit\}        & 0.00945 & 0.263 & 3.483 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Reading rule 1:} a customer who buys herbs is \textbf{3.96$\times$
+more likely} than a random customer to also buy root vegetables.
+
+\subsection{Classifying Rules: Actionable, Trivial, Inexplicable}
+After generating rules, categorize them by usefulness:
+
+\begin{itemize}
+    \item \textbf{Actionable:} non-obvious, interpretable, and usable for
+      decisions (e.g., cross-promotions, product placement).
+    \item \textbf{Trivial:} obviously true, zero value (e.g., diapers
+      $\Rightarrow$ baby formula).
+    \item \textbf{Inexplicable:} statistically strong but no plausible
+      mechanism. Requires further investigation before acting on.
+\end{itemize}
+
+The \textbf{goal} is the hidden gem: a pattern that seems obvious
+\emph{once discovered} but was not obvious beforehand.
+
+\subsection{Subsetting Rules for a Specific Item}
+\begin{verbatim}
+berryrules <- subset(myrules, items %in% "berries")
+\end{verbatim}
+The \texttt{\%in\%} operator matches any rule where the item appears
+anywhere (LHS or RHS). Use \texttt{\%pin\%} for partial matching,
+\texttt{\%ain\%} for requiring all listed items to appear.
+
+
+%------------------------------------------------------------
+\section{ARIMA Model Selection: AIC}
+%------------------------------------------------------------
+
+\subsection{The Question}
+Once you have fit several candidate ARIMA models with different $(p,d,q)$
+choices, which one is best? You need an objective criterion that:
+\begin{enumerate}
+    \item Rewards models that fit the data well.
+    \item Penalizes models that use more parameters (to prevent overfitting).
+\end{enumerate}
+
+\subsection{Akaike Information Criterion (AIC)}
+\[
+\text{AIC} = 2k - 2\ln(\hat{L})
+\]
+where $k$ is the number of estimated parameters in the model and $\hat{L}$
+is the maximum value of the likelihood function.
+
+\begin{itemize}
+    \item $-2\ln(\hat{L})$: the \textbf{goodness-of-fit} term --- larger
+      likelihood (better fit) makes this more negative, reducing AIC.
+    \item $+2k$: the \textbf{complexity penalty} --- each additional
+      parameter adds 2 to the AIC.
+    \item \textbf{Smaller AIC = better model.}
+\end{itemize}
+
+AIC balances the risk of \textbf{underfitting} (too few parameters, high
+residual error) against \textbf{overfitting} (too many parameters, model
+memorizes noise). It is \emph{not} about finding the true model; it is about
+finding the most predictive model given the available data.
+
+\textit{Practical use in R:}
+\begin{verbatim}
+testModel <- ARIMA(your_Data_vector, c(p, d, q))
+summary(testModel)   # reports AIC among other statistics
+testModel$residuals  # extract residuals for diagnostics
+\end{verbatim}
+
+
+%------------------------------------------------------------
+\section{Residual Diagnostics: Confirming Model Adequacy}
+%------------------------------------------------------------
+
+\subsection{What Are Residuals?}
+After fitting an ARIMA model, the \textbf{residuals} are the difference
+between the observed values and the model's fitted values. For AR(1):
+\[
+\$\text{residuals} = x_t - \left(\hat{a}_0 + \hat{a}_1 x_{t-1}\right)
+\]
+The true noise term $\varepsilon_t$ is unobservable. The residuals are its
+empirical proxy --- what the model could not explain.
+
+\subsection{The Ideal Residual Criterion}
+A well-specified ARIMA model should have residuals that behave like
+\textbf{Gaussian white noise}: $\$\text{residuals} \approx \varepsilon_t$.
+
+The white noise condition means:
+\[
+\text{ACF}(l) = 0 \quad \text{and} \quad \text{PACF}(l) = 0
+\quad \text{for all } l > 0
+\]
+If the residuals' ACF or PACF shows significant spikes, the model has left
+exploitable structure behind --- it is inadequate.
+
+\subsection{Iterative Refinement}
+\begin{enumerate}
+    \item Fit ARIMA$(p,d,q)$.
+    \item Extract \texttt{\$residuals}; plot their ACF and PACF.
+    \item If ACF/PACF of residuals are not flat $\Rightarrow$ revise $p$,
+      $d$, or $q$ and refit.
+    \item Repeat until residuals look like white noise.
+    \item Among all adequate models (passing residual check), select the
+      one with the smallest AIC.
+\end{enumerate}
+
+This iterative loop (Explore $\to$ Fit $\to$ Diagnose) is the
+\textbf{Box-Jenkins methodology} applied in practice.
+
+\end{document}

@@ -1,0 +1,465 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large February 20, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Closing the Loop: From ARIMA to Model Evaluation}
+%------------------------------------------------------------
+
+The lecture opened by connecting all prior time series topics into a single
+workflow. The central question:
+
+\textit{``You have two ARIMA models. Both were fit to the same data with
+different $(p,d,q)$ parameters. Which is better?''}
+
+The answer is \textbf{not} to look at the coefficients. The answer is to
+look at the \textbf{residuals}.
+
+\subsection{What Are Residuals --- Again}
+For an AR(1) model $X_t = a_0 + a_1 X_{t-1} + \varepsilon_t$, after
+estimation:
+\[
+\text{residual}_t = X_t - \left(\hat{a}_0 + \hat{a}_1 X_{t-1}\right)
+\]
+This is the portion of today's observation that the deterministic model
+\emph{could not explain}. The model captures structure; the residual is
+what is left over.
+
+\subsection{The Residual as the Judge}
+\textbf{Key insight:} if the model is perfect, the residuals must be
+\textbf{pure white noise} --- IID, zero mean, constant variance, zero
+autocorrelation for all lags.
+
+\textit{Why?} The model's job is to extract every deterministic pattern
+from the data. Noise, by definition, has no structure to extract. So if
+any structure remains in the residuals, the model is inadequate --- it left
+something exploitable behind.
+
+\textit{Analogy from lecture:} squeezing an orange for juice. The model
+must squeeze as hard as possible to extract every drop of signal. If the
+residual still contains ``juice'' (structure), you have not squeezed hard
+enough. The ideal residual is a dry peel --- pure noise, nothing more.
+
+\subsection{How to Test Residuals}
+A residual sequence is white noise if and only if:
+\[
+\text{ACF}(l) = 0 \quad\text{and}\quad \text{PACF}(l) = 0
+\quad\text{for all } l > 0
+\]
+\textit{Procedure:}
+\begin{enumerate}
+    \item Fit ARIMA$(p,d,q)$.
+    \item Extract \texttt{\$residuals}.
+    \item Plot the ACF and PACF of the residuals.
+    \item If all values lie within the confidence band (near zero) $\Rightarrow$
+      adequate model.
+    \item If spikes appear $\Rightarrow$ the model missed structure; revise
+      $(p,d,q)$ and refit.
+\end{enumerate}
+
+\subsection{AIC for Choosing Among Adequate Models}
+When \emph{multiple} models pass the residual test, use the
+\textbf{Akaike Information Criterion (AIC)} to choose:
+\[
+\text{AIC} = 2k - 2\ln(\hat{L})
+\]
+where $k$ = number of estimated parameters and $\hat{L}$ = maximized
+likelihood. \textbf{Smaller AIC = better model.}
+
+AIC penalizes complexity --- a model that fits well with fewer parameters
+is preferred. This prevents selecting an over-parameterized model that
+memorizes noise rather than capturing genuine structure.
+
+\textbf{Practical workflow:}
+\begin{enumerate}
+    \item Try multiple $(p,d,q)$ combinations; check residuals for each.
+    \item From candidates that pass residual diagnostics, pick the one with
+      the lowest AIC.
+\end{enumerate}
+
+
+%------------------------------------------------------------
+\section{Reading ACF and PACF: The Diagnostic Table}
+%------------------------------------------------------------
+
+A major chunk of the lecture clarified how to identify the right model
+family (AR vs.\ MA vs.\ ARMA) from plots. This is the key interview skill.
+
+\subsection{Diagnostic Summary Table}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Model} & \textbf{ACF} & \textbf{PACF} & \textbf{Decision rule} \\
+\midrule
+AR($p$) & Gradual decay to zero & \textbf{Cliff at lag $p$} & Cliff in PACF \\
+MA($q$) & \textbf{Cliff at lag $q$} & Gradual decay to zero & Cliff in ACF \\
+ARMA($p,q$) & Gradual decay after lag $q$ & Gradual decay after lag $p$ & Both decay \\
+White noise & All zeros & All zeros & No structure \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Where does ``cliff'' come from?} For an AR($p$) model, the PACF
+value at lag $l$ is the last-added coefficient $\hat{a}_{l,l}$ from the
+AR($l$) fit. For $l > p$, the ground truth says those lags do not exist,
+so $\hat{a}_{l,l} \to 0$. The drop from nonzero to zero at lag $p$ is
+the cliff.
+
+\textit{Equivalently for MA:} MA($q$) = AR($\infty$) (from the AR--MA
+duality), so its PACF never cuts off --- it decays gradually. But its
+ACF cuts off sharply at $q$ because observations more than $q$ noise
+terms apart share no common noise history.
+
+\subsection{Identifying the Order from the Cliff}
+\textbf{AR order $p$:} find the last lag in the PACF that lies
+\emph{outside} the significance band. All subsequent lags should be inside.
+
+\textbf{MA order $q$:} find the last lag in the ACF that lies
+\emph{outside} the significance band. All subsequent lags should be inside.
+
+The significance band is $\pm\, 2/\sqrt{T}$ (95\% level). Any PACF or
+ACF value outside this band is statistically distinguishable from zero.
+
+\textit{Key judgment:} if you observe 20 lags and lags 1 and 2 are outside
+the band but lags 3--20 are inside, treat this as a ``cliff at lag 2'' and
+specify order 2 --- even if a single later lag pokes slightly outside by
+chance.
+
+\subsection{Worked Example from Lecture (Homework Data)}
+The professor showed a dataset whose ACF and PACF looked as follows:
+\begin{itemize}
+    \item \textbf{ACF:} lags 1 and 2 outside the band; lags 3 onward inside.
+      $\Rightarrow$ cliff at lag 2 in the ACF.
+    \item \textbf{PACF:} gradual decaying values, no clear cliff.
+\end{itemize}
+
+From the table: ACF cliff + PACF decay = \textbf{MA(2)} model.
+
+\textit{Instructor reasoning:} ``If I see zeros from lag 3 onward, I trust
+that the further lags will also be zero, because as the lag grows, the
+probability of two time points sharing any informational link decreases.''
+
+
+%------------------------------------------------------------
+\section{Worked Example: Interest Rate Time Series}
+%------------------------------------------------------------
+
+The second example used real Yahoo Finance data (interest rate series).
+
+\subsection{Step 1: Check Stationarity}
+Plot the raw series. Observation: the mean is clearly changing over time
+(trending). \textbf{Verdict: not stationary.} Cannot apply ACF/PACF to the
+raw data.
+
+\subsection{Step 2: First Differencing}
+Compute $Y_t = X_t - X_{t-1}$.
+\begin{itemize}
+    \item The new series $Y_t$ has a mean that appears approximately
+      constant (near zero).
+    \item The variance changes slightly in different windows, but not
+      dramatically --- close enough to treat as stationary for this exercise.
+\end{itemize}
+
+\subsection{Step 3: Fit ARIMA(3,1,2)}
+Based on inspection of the ACF/PACF of $Y_t$, the professor tried
+ARIMA(3,1,2): AR order 3, one difference, MA order 2.
+
+\subsection{Step 4: Check Residuals}
+After fitting, plot ACF and PACF of \texttt{\$residuals}:
+\begin{itemize}
+    \item ACF: lag 0 = 1 (expected); lags 1 onward approximately within
+      the blue significance bands.
+    \item PACF: mostly within bounds, with minor deviations at the
+      far end.
+\end{itemize}
+\textbf{Verdict:} residuals are close to white noise. ARIMA(3,1,2) is an
+adequate model for this series. Further tuning could improve it, but the
+baseline is already good.
+
+\textit{Key message:} in a real interview or job setting, the boss does not
+look at whether you called the right function. The boss plots your residuals.
+If the residuals are not noise, the model is rejected --- regardless of how
+elegant the formula looks.
+
+
+%------------------------------------------------------------
+\section{Recommender Systems: Business Motivation}
+%------------------------------------------------------------
+
+\subsection{Why Recommenders Matter}
+\begin{itemize}
+    \item \textbf{Unavoidable:} every click, every scroll, every search
+      result is mediated by a recommender. Google, YouTube, Amazon, Netflix,
+      TikTok, Instagram --- all run on recommenders.
+    \item \textbf{Two sides of the same product:} recommenders and search
+      engines are mirror images. ``Flip a recommender around and you get a
+      search engine.'' Both match a user to relevant content.
+    \item \textbf{Instant monetization:} most industries require a long
+      production cycle before revenue arrives (plant soybeans, wait a year).
+      Recommenders generate cash in \textit{milliseconds} --- the moment
+      you click, money flows. This is why companies like Meta and Google make
+      their money through recommenders, not software licenses.
+    \item \textbf{Compensation premium:} engineers working on recommender
+      and search systems earn dramatically more than typical software
+      engineers, because a 0.001\% improvement at billion-user scale
+      translates to enormous profit.
+\end{itemize}
+
+\subsection{Recommenders Shape Reality}
+The professor made a point worth recording: recommenders do not only
+\emph{reflect} user preferences --- they actively \emph{shape} them.
+\begin{itemize}
+    \item A recommender that always returns exactly what you searched for
+      creates a closed feedback loop (``filter bubble''): you watch football,
+      you get football, you watch more football --- you never discover
+      anything new.
+    \item Good recommenders deliberately add \textbf{diversity} --- a small
+      fraction of results that go slightly beyond what you searched for ---
+      to develop new interests and prevent the loop from closing.
+    \item This is not an accident or an error; it is intentional psychological
+      design to expand the user's engagement surface.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{The Four-Stage Recommender Architecture}
+%------------------------------------------------------------
+
+Modern recommender systems at scale (YouTube, Amazon, Spotify) process
+\textbf{billions of items} to deliver a ranked list of 10--20 results in
+milliseconds. A single-stage model cannot do this. The standard architecture
+uses four cascading stages, each narrowing the candidate pool.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Stage} & \textbf{Candidate pool} & \textbf{Primary goal} \\
+\midrule
+1. Retrieval / Candidate Generation & Billions $\to$ Thousands & Speed; broad relevance \\
+2. Rough Ranking (Pre-filter)        & Thousands $\to$ Hundreds & Rule-based filtering \\
+3. Fine Ranking                      & Hundreds $\to$ Tens      & Precision scoring \\
+4. Final Re-ranking                  & Tens $\to$ Top 10        & Business rules + diversity \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Offline vs.\ Online Pipeline}
+The architecture runs as two separate pipelines:
+
+\begin{itemize}
+    \item \textbf{Offline pipeline:} pre-computes and stores item embeddings
+      for all items in a \textbf{Vector Database (Vector DB)}. This runs
+      continuously in the background, not in real time.
+    \item \textbf{Online pipeline:} when a user makes a request, computes
+      the customer embedding in real time (using the trained Two-Tower
+      model), queries the Vector DB for nearest neighbors, then passes
+      those candidates through Stages 2--4.
+\end{itemize}
+
+The offline/online split is what makes billion-item retrieval fast: the
+expensive pre-computation is done once and stored; only the customer query
+runs live.
+
+\subsection{Stage 1: Retrieval / Candidate Generation}
+\textbf{Goal:} reduce from $>$100M--billions of items to $\sim$100--1000
+relevant candidates per user.
+
+\textbf{Key approach --- embedding-based Two-Tower retrieval:}
+\begin{itemize}
+    \item Every user and every item is mapped to a \textbf{dense embedding
+      vector} in the same latent space.
+    \item These vectors encode semantic meaning numerically --- similar
+      items cluster together in the space.
+    \item Retrieval = approximate nearest-neighbor (ANN) search: find the
+      item vectors closest to the customer query vector.
+    \item Similarities expressed initially in coarse features (customer ID,
+      item ID); fine attributes are added in later stages.
+\end{itemize}
+
+\textbf{Retrieval methods:}
+\begin{itemize}
+    \item \textbf{Content-based:} match user/item embeddings via dot product
+      or cosine similarity.
+    \item \textbf{Collaborative filtering:} user-item interaction matrix
+      (matrix factorization, ANN search).
+    \item \textbf{Graph-based:} random walks on the user-item interaction
+      graph to find structurally proximate candidates.
+    \item \textbf{Heuristic rules:} popularity, trending, recency boosts
+      (effective for cold-start and smaller datasets).
+\end{itemize}
+
+\textbf{Output:} $\sim$100--1000 candidate items per user.
+
+\subsection{Stage 2: Rough Ranking (Filtering / Preliminary Ranking)}
+\textbf{Goal:} filter out irrelevant or ineligible candidates cheaply,
+before the expensive Stage 3 scoring. Output: $\sim$100--300 items.
+
+\textbf{Key tasks:}
+\begin{itemize}
+    \item Remove items the user has already seen or purchased.
+    \item Remove unavailable, policy-violating (NSFW), or out-of-region
+      items.
+    \item Apply basic scoring for click probability or engagement using
+      \emph{shallow} ML models (logistic regression, gradient boosting).
+    \item Filter out irrelevant categories based on context.
+\end{itemize}
+
+\textbf{Bloom filter:} seen/purchased item removal is often implemented
+with a \textbf{Bloom filter} --- a space-efficient probabilistic data
+structure that answers ``has this item been seen before?'' in $O(1)$
+time with very low memory, at the cost of a small false-positive rate.
+
+\subsection{Stage 3: Fine Ranking}
+\textbf{Goal:} assign precise relevance scores to each
+\texttt{(item, customer)} pair and sort by score. Output: top $\sim$20--50
+items.
+
+\textbf{Why this stage is expensive:} unlike Stage 1 (fast approximate
+similarity), Stage 3 uses rich features for every candidate:
+\begin{itemize}
+    \item Item features: title, tags, description, category, rating.
+    \item Customer features: demographic info, historical behavior,
+      contextual signals (device, time, location).
+    \item All features fetched on demand from a \textbf{feature store}
+      (a low-latency key-value store for pre-computed features).
+\end{itemize}
+
+\textbf{Models used:}
+\begin{itemize}
+    \item XGBoost or CatBoost (for tabular features)
+    \item Deep neural networks (DNNs), e.g., YouTube's ranking network
+    \item Multi-objective optimization targets: CTR, CVR, watch time,
+      revenue, diversity
+    \item LLMs (emerging use case)
+\end{itemize}
+
+After scoring, items are ordered by their ranking score, optionally cut to
+$xK$ items before Stage 4. Having the most personalized item at rank 1 is
+critical --- users rarely scroll past the first few results.
+
+\subsection{Stage 4: Re-ranking (Post-ranking)}
+\textbf{Goal:} optimize the final ordered list for multiple objectives
+beyond pure relevance. Output: final list shown to the user.
+
+\textbf{Key adjustments:}
+\begin{itemize}
+    \item \textbf{Diversity / novelty / serendipity:} deliberately inject
+      items slightly outside the user's usual interest to prevent filter
+      bubbles and develop new engagement. Algorithms: MMR (Maximal Marginal
+      Relevance), xQuAD, fairness-aware ranking.
+    \item \textbf{Sponsored content:} blend in advertisements according to
+      business contracts and content mix policies.
+    \item \textbf{Multi-source blending:} merge results from multiple
+      recommendation signals (``Because you watched\ldots'' +
+      ``Trending now'' + ``Friends liked\ldots'').
+    \item \textbf{Exploration:} bandit or reinforcement learning to
+      adaptively reorder and discover what works over time.
+    \item \textbf{Multi-objective trade-offs:} balance engagement vs.\
+      satisfaction vs.\ fairness vs.\ revenue.
+\end{itemize}
+
+\textit{Key insight:} final re-ranking is \emph{not} purely a ranking
+problem --- it is a multi-objective optimization that reflects business
+strategy, psychology, and fairness constraints. This is where engineering
+judgment --- not just model output --- determines the product experience.
+
+\subsection{Why Only the Top 10 Matter}
+Users do not scroll beyond the first 10--20 results. A recommendation at
+position 200 has near-zero click probability. Each stage's primary job is
+to preserve the highest-quality candidates as the pool shrinks, so the
+final top-10 list is maximally relevant.
+
+
+%------------------------------------------------------------
+\section{The Two-Tower Model: Architecture and Training}
+%------------------------------------------------------------
+
+The two-tower model is the standard embedding architecture for Stage 1
+retrieval. Understanding it is important because the same structure appears
+throughout deep learning (attention in transformers, contrastive learning,
+semantic search).
+
+\subsection{Architecture}
+Two neural networks (``towers'') run in parallel, each producing a
+dense embedding vector:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Tower} & \textbf{Inputs} & \textbf{Output} \\
+\midrule
+Customer Query Encoder & Demographics, historical behavior, contextual features & $\mathbf{u} \in \mathbb{R}^d$ \\
+Item Candidates Encoder & Tags, description, rating, category & $\mathbf{v} \in \mathbb{R}^d$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Both towers project into the \textbf{same $d$-dimensional embedding space}.
+This is the key constraint --- it is what allows direct comparison.
+
+\subsection{Similarity and Loss}
+The predicted relevance of item $j$ for customer $i$ is the dot product:
+\[
+\text{score}(i, j) = \mathbf{u}_i \cdot \mathbf{v}_j
+\]
+\begin{itemize}
+    \item Vectors nearly parallel $\Rightarrow$ large dot product $\Rightarrow$
+      high relevance.
+    \item Vectors orthogonal $\Rightarrow$ dot product near zero $\Rightarrow$
+      no match.
+\end{itemize}
+
+\textbf{Training signal:} the interaction matrix provides labels.
+\begin{itemize}
+    \item Positive pair (customer bought/watched/clicked item): target
+      score = 1.
+    \item Negative pair (no interaction): target score = 0.
+\end{itemize}
+The loss function minimizes the difference between the dot product scores
+and these binary labels, forcing matched pairs to be close in embedding
+space and non-matched pairs to be far apart.
+
+\subsection{Interaction Matrix}
+The training data is the \textbf{user-item interaction matrix}:
+rows = users, columns = items, cells = feedback signal.
+\begin{itemize}
+    \item \textbf{Explicit feedback:} star ratings (1--5), thumbs up/down.
+    \item \textbf{Implicit feedback:} watch time, click, purchase, share,
+      dwell time. More common in practice because explicit ratings are
+      sparse.
+\end{itemize}
+
+\subsection{Why Dot Product / Why Latent Space}
+The computer has no semantic understanding of ``swimming goggle.''
+In original item-ID space, item 10033 and item 10034 are just two numbers
+--- there is no notion of similarity. In the learned latent space, similar
+items cluster together numerically. The dot product measures how aligned
+two vectors are --- a purely numerical operation the computer executes
+instantly. This is why embedding + ANN search can retrieve relevant items
+from a billion-item corpus in milliseconds.
+
+The same inner-product similarity is used in transformers (attention
+= $\mathbf{Q}\mathbf{K}^T$), contrastive learning (CLIP, SimCLR), and
+semantic search. The two-tower model is a foundational building block
+across modern AI.
+
+\end{document}

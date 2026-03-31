@@ -1,0 +1,329 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large March 6, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Logistic Regression vs.\ Linear Regression}
+%------------------------------------------------------------
+
+\subsection{The Fundamental Distinction}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Model} & \textbf{Task} & \textbf{Output} \\
+\midrule
+Linear regression  & Regression      & Continuous value $\hat{y} \in (-\infty, +\infty)$ \\
+Logistic regression & Classification & Probability $p \in [0, 1]$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Linear Regression Equation}
+\[
+\hat{y} = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_n x_n
+\]
+The output can be any real number --- unbounded.
+
+\subsection{Logistic Regression Equation}
+The same linear combination is fed into the \textbf{sigmoid (logistic) function}
+to produce a probability:
+\[
+\Prob(y = 1) = \frac{1}{1 + \exp\!\bigl(-[b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_n x_n]\bigr)}
+\]
+
+\begin{itemize}
+    \item Output is always between 0 and 1 --- interpretable as a probability.
+    \item Target variable is \textbf{categorical} (class label 0 or 1).
+    \item The logistic function squashes the linear combination into
+      $[0,1]$ via the S-shaped sigmoid curve.
+\end{itemize}
+
+\subsection{Pipeline View}
+\[
+\underbrace{x_1, x_2, x_3, x_4}_{\text{inputs}}
+\;\xrightarrow{\text{linear model}}\;
+\underbrace{b_0 + \sum b_i x_i}_{\text{linear score}}
+\;\xrightarrow{\text{sigmoid}}\;
+\underbrace{p \in [0,1]}_{\text{probability}}
+\;\xrightarrow{\text{threshold}}\;
+\underbrace{0 \text{ or } 1}_{\text{class label}}
+\]
+
+
+\newpage
+%------------------------------------------------------------
+\section{Interpreting Logistic Regression Weights: Log Odds}
+%------------------------------------------------------------
+
+\subsection{Why Linear Interpretation Breaks Down}
+In linear regression, each weight $b_i$ has a direct interpretation: a
+one-unit increase in $x_i$ increases $\hat{y}$ by $b_i$. In logistic
+regression this is no longer true because the output is a probability,
+not a linear function of the inputs.
+
+\subsection{The Log Odds (Logit) Formulation}
+To recover a linear interpretation, rearrange the logistic formula:
+
+\[
+\log\!\left(\frac{P(y=1)}{1 - P(y=1)}\right)
+= \log\!\left(\frac{P(y=1)}{P(y=0)}\right)
+= b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_n x_n
+\]
+
+\begin{itemize}
+    \item The fraction $P(y=1)/P(y=0)$ is called the \textbf{odds} ---
+      the probability of the event divided by the probability of no event.
+    \item Taking the natural log of the odds gives the \textbf{log odds}
+      (also called the \textbf{logit}).
+    \item The right-hand side is \emph{linear} in the features.
+\end{itemize}
+
+\textit{Key insight:} Logistic regression is a \textbf{linear model for the
+log odds}. The weights $b_i$ describe how a one-unit increase in $x_i$
+changes the \emph{log odds} of the outcome, not the probability directly.
+
+
+\newpage
+%------------------------------------------------------------
+\section{ROC Curve Construction}
+%------------------------------------------------------------
+
+The \textbf{Receiver Operating Characteristic (ROC)} curve is the standard
+tool for evaluating binary classifiers.
+
+\subsection{Setup}
+After fitting a logistic regression model, each sample receives a predicted
+probability $p \in [0,1]$. Place the ground-truth labels and predicted
+probabilities side by side:
+
+\begin{center}
+\begin{tabular}{@{}cc@{}}
+\toprule
+\textbf{Truth} & \textbf{Predicted prob.} \\
+\midrule
+1 & 0.9 \\
+1 & 0.7 \\
+1 & 0.6 \\
+1 & 0.4 \\
+0 & 0.7 \\
+0 & 0.5 \\
+0 & 0.4 \\
+0 & 0.2 \\
+0 & 0.2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Threshold Sweep}
+Choose a threshold $\tau$ (starting from 1.0, sweeping down to 0):
+\[
+\hat{y} = \begin{cases} 1 & p \geq \tau \\ 0 & p < \tau \end{cases}
+\]
+
+At each threshold, compute:
+\begin{itemize}
+    \item \textbf{True Positive Rate (TPR):}
+      $\displaystyle\frac{\text{correctly predicted positives}}{\text{all actual positives}}$
+    \item \textbf{False Positive Rate (FPR):}
+      $\displaystyle\frac{\text{negatives incorrectly predicted as positive}}{\text{all actual negatives}}$
+\end{itemize}
+
+\subsection{Worked Example}
+Using the table above (4 true positives, 5 true negatives):
+
+\begin{center}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+\textbf{Threshold} & \textbf{1} & \textbf{0.9} & \textbf{0.7}
+  & \textbf{0.6} & \textbf{0.5} & \textbf{0.4} & \textbf{0.2} \\
+\midrule
+False Positive & 0     & 0     & 1/5   & 1/5   & 2/5   & 3/5   & 1 \\
+True Positive  & 0     & 1/4   & 2/4   & 3/4   & 3/4   & 1     & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Reading the table:} at $\tau = 0.7$, the model predicts ``1'' for
+any sample with $p \geq 0.7$. The predictions of 1 include truth-1 samples
+with prob 0.9 and 0.7 (2 out of 4 true positives captured) and the
+truth-0 sample with prob 0.7 (1 false positive out of 5 negatives).
+
+\subsection{Plotting the ROC Curve}
+Plot FPR on the $x$-axis and TPR on the $y$-axis. Each threshold setting
+gives one point; connecting the points traces the ROC curve.
+\begin{itemize}
+    \item A \textbf{perfect classifier} reaches the upper-left corner
+      $(0, 1)$: zero false positives, all true positives captured.
+    \item A \textbf{random classifier} lies on the diagonal from $(0,0)$
+      to $(1,1)$.
+    \item A better model pushes the curve toward the upper-left.
+\end{itemize}
+
+
+\newpage
+%------------------------------------------------------------
+\section{AUC: Area Under the ROC Curve}
+%------------------------------------------------------------
+
+\subsection{Why AUC?}
+Different models produce different ROC curves. To compare them with a
+single number, use the \textbf{Area Under the Curve (AUC)}.
+
+\begin{itemize}
+    \item AUC ranges from 0 to 1.
+    \item Random classifier: $\text{AUC} = 0.5$ (diagonal line).
+    \item Perfect classifier: $\text{AUC} = 1.0$.
+    \item To improve AUC: push the ROC curve toward the upper-left corner
+      (lower FPR at equal TPR, or higher TPR at equal FPR).
+\end{itemize}
+
+\subsection{AUC Quality Scale}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{AUC range} & \textbf{Test quality} \\
+\midrule
+0.9 -- 1.0 & Excellent \\
+0.8 -- 0.9 & Very good \\
+0.7 -- 0.8 & Good \\
+0.6 -- 0.7 & Satisfactory \\
+0.5 -- 0.6 & Unsatisfactory \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Comparing Multiple Models}
+Multiple ROC curves can be plotted on the same axes and compared by their
+AUC values. Example: a model with $\text{AUC} = 0.9$ dominates one with
+$\text{AUC} = 0.65$ across virtually all threshold settings.
+
+
+\newpage
+%------------------------------------------------------------
+\section{R Implementation: Logistic Regression with \texttt{glm}}
+%------------------------------------------------------------
+
+In R, logistic regression is fit using \texttt{glm()} with
+\texttt{family = "binomial"}.
+
+\subsection{Graduate Admissions Example}
+\begin{verbatim}
+mydata <- read.csv("binary.csv")
+mylogit <- glm(admit ~ gre + gpa + rank,
+               data = mydata, family = "binomial")
+summary(mylogit)
+\end{verbatim}
+
+Abbreviated output:
+\begin{verbatim}
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept) -3.98998    1.13995   -3.50  0.00047 ***
+gre          0.00226    0.00109    2.07  0.03847 *
+gpa          0.80404    0.33182    2.42  0.01539 *
+rank2       -0.67544    0.31649   -2.13  0.03283 *
+rank3       -1.34020    0.34531   -3.88  0.00010 ***
+rank4       -1.55146    0.41783   -3.71  0.00020 ***
+
+Null deviance: 499.98  on 399 degrees of freedom
+Residual deviance: 458.52  on 394 degrees of freedom
+AIC: 470.5
+\end{verbatim}
+
+\subsection{Interpreting the Coefficients}
+Because logistic regression models log odds, each coefficient
+describes the change in log odds per unit increase in the predictor:
+\begin{itemize}
+    \item \textbf{GRE:} one-unit increase $\Rightarrow$ log odds of
+      admission increase by $+0.002$.
+    \item \textbf{GPA:} one-unit increase $\Rightarrow$ log odds
+      increase by $+0.804$.
+    \item \textbf{Rank 2 vs.\ Rank 1:} attending a rank-2 institution
+      (vs.\ rank-1) changes log odds by $-0.675$ (lower chance of
+      admission).
+    \item Rank 3 and Rank 4 have progressively more negative
+      coefficients, confirming a monotone penalty.
+\end{itemize}
+
+\subsection{ROC Curve in R}
+The ROC curve can be constructed manually or via the \texttt{ROCR}
+package:
+\begin{verbatim}
+library(ROCR)
+p   <- predict(model, newdata=test, type="response")
+pr  <- prediction(p, test$Survived)
+prf <- performance(pr, measure="tpr", x.measure="fpr")
+plot(prf)
+auc <- performance(pr, measure="auc")@y.values[[1]]
+\end{verbatim}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Case Study: Titanic Survival Prediction}
+%------------------------------------------------------------
+
+The Titanic dataset is a standard binary classification benchmark.
+The task is to predict survival (0/1) from passenger features.
+
+\subsection{Features Used}
+From the raw CSV, columns selected:
+\begin{itemize}
+    \item \textbf{Survived} (target), \textbf{Pclass}, \textbf{Sex},
+      \textbf{Age}, \textbf{SibSp}, \textbf{Parch}, \textbf{Fare},
+      \textbf{Embarked}
+\end{itemize}
+
+\subsection{Missing Value Handling}
+\begin{itemize}
+    \item \textbf{Age:} missing values replaced with the column mean.
+    \item \textbf{Embarked:} rows with missing values dropped entirely
+      (very few affected).
+\end{itemize}
+
+\subsection{Workflow}
+\begin{verbatim}
+data <- subset(raw, select=c(2,3,5,6,7,8,10,12))
+data$Age[is.na(data$Age)] <- mean(data$Age, na.rm=TRUE)
+data <- data[!is.na(data$Embarked),]
+
+train <- data[1:800,]
+test  <- data[801:889,]
+
+model <- glm(Survived ~., family=binomial(link='logit'),
+             data=train)
+
+fitted <- predict(model, newdata=test, type='response')
+fitted <- ifelse(fitted > 0.5, 1, 0)
+accuracy <- 1 - mean(fitted != test$Survived)
+\end{verbatim}
+
+\subsection{Key Steps}
+\begin{enumerate}
+    \item Load data and inspect missingness (\texttt{missmap}).
+    \item Impute / drop missing values.
+    \item Fit \texttt{glm} with \texttt{binomial} family on training set.
+    \item Predict probabilities on test set; apply threshold 0.5.
+    \item Evaluate: print accuracy; plot ROC; compute AUC.
+\end{enumerate}
+
+\end{document}

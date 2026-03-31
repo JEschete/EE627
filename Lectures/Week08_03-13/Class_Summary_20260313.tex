@@ -1,0 +1,363 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large March 13, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Why Feature Selection?}
+%------------------------------------------------------------
+
+A common question: \textit{why not give all features to the ML algorithm
+and let it decide which ones matter?} Three reasons argue against this:
+
+\subsection{Reason 1: Overfitting}
+When the number of features (columns) exceeds the number of samples
+(rows), the model can fit the training data perfectly --- but it learns
+both the true signal \emph{and} the noise.
+\begin{itemize}
+    \item Result: near-perfect training accuracy, terrible test accuracy.
+    \item The model has memorized the noise features as if they were signal.
+\end{itemize}
+
+\subsection{Reason 2: Occam's Razor}
+Simpler models are more explainable. A model with hundreds of features
+is a black box even if it is technically more accurate. Interpretability
+matters both for debugging and for stakeholder communication.
+
+\subsection{Reason 3: Garbage In, Garbage Out}
+Most real datasets contain many non-informative features.
+\begin{itemize}
+    \item Poor-quality inputs distract the learning process and degrade
+      output quality.
+    \item More features $\Rightarrow$ higher training cost, longer runtime,
+      and harder implementation.
+\end{itemize}
+
+\textbf{Conclusion:} select only the useful features.
+
+
+\newpage
+%------------------------------------------------------------
+\section{Three Families of Feature Selection Methods}
+%------------------------------------------------------------
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Family} & \textbf{How it works} & \textbf{Examples} \\
+\midrule
+Filter-based  & Score each feature independently; keep top $n$ & Pearson correlation, $\chi^2$ \\
+Wrapper-based & Treat selection as a search problem over subsets & RFE, sequential forward selection \\
+Embedded      & Algorithm has built-in selection during training & Lasso, Random Forest \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Filter Method: Pearson Correlation}
+%------------------------------------------------------------
+
+\subsection{Definition}
+Pearson correlation between feature $x$ and target $y$:
+\[
+r = \frac{\sum (x - \bar{x})(y - \bar{y})}
+         {\sqrt{\sum (x - \bar{x})^2 \sum (y - \bar{y})^2}}
+\]
+where $\bar{x}$ is the sample mean of $x$.
+
+\subsection{Application}
+Compute $|r|$ between each numerical feature and the target.
+Keep the top $n$ features ranked by $|r|$.
+
+\subsection{Python Implementation}
+\begin{verbatim}
+def cor_selector(X, y, num_feats):
+    cor_list = []
+    feature_name = X.columns.tolist()
+    for i in X.columns.tolist():
+        cor = np.corrcoef(X[i], y)[0, 1]
+        cor_list.append(cor)
+    cor_list = [0 if np.isnan(i) else i for i in cor_list]
+    cor_feature = X.iloc[:,
+        np.argsort(np.abs(cor_list))[-num_feats:]].columns.tolist()
+    cor_support = [True if i in cor_feature else False
+                   for i in feature_name]
+    return cor_support, cor_feature
+
+cor_support, cor_feature = cor_selector(X, y, num_feats)
+\end{verbatim}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Wrapper Method: Recursive Feature Elimination (RFE)}
+%------------------------------------------------------------
+
+\subsection{Algorithm}
+RFE is a \textbf{wrapper method}: it frames feature selection as a
+search problem.
+
+\begin{enumerate}
+    \item Train the estimator on the current full feature set.
+    \item Obtain the importance of each feature via
+      \texttt{coef\_attribute} or \texttt{feature\_importances\_attribute}.
+    \item Prune the least important features.
+    \item Repeat on the reduced set until the desired number of
+      features remains.
+\end{enumerate}
+
+\subsection{Python Implementation (with Logistic Regression)}
+\begin{verbatim}
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+
+rfe_selector = RFE(estimator=LogisticRegression(),
+                   n_features_to_select=num_feats,
+                   step=10, verbose=5)
+rfe_selector.fit(X_norm, y)
+rfe_support = rfe_selector.get_support()
+rfe_feature = X.loc[:, rfe_support].columns.tolist()
+print(str(len(rfe_feature)), 'selected features')
+\end{verbatim}
+
+The \texttt{step=10} parameter removes 10 features per iteration.
+The \texttt{LogisticRegression} estimator provides \texttt{coef\_}
+as the importance measure.
+
+
+\newpage
+%------------------------------------------------------------
+\section{Embedded Methods: Lasso and Ridge Regression}
+%------------------------------------------------------------
+
+\subsection{Overfitting and Regularization}
+Linear regression minimizes the residual sum of squares (RSS):
+\[
+\sum_{i=1}^{M} (y_i - \hat{y}_i)^2 =
+\sum_{i=1}^{M}\!\left(y_i - \sum_{j=0}^{n} w_j x_{ij} - b\right)^{\!2}
+\]
+With many features and limited data, this leads to overfitting.
+\textbf{Regularization} adds a penalty term to shrink or zero out
+weights.
+
+\subsection{Lasso (L1 Regularization)}
+\[
+\text{Cost}_{\text{Lasso}} =
+\sum_{i=1}^{M}\!\left(y_i - \sum_{j=0}^{n} w_j x_{ij} - b\right)^{\!2}
++ \lambda \sum_{j=0}^{n} |w_j|
+\]
+\begin{itemize}
+    \item The L1 penalty forces many weights \emph{exactly} to zero.
+    \item Higher $\lambda$ $\Rightarrow$ fewer non-zero features.
+    \item Built-in feature selection: features with zero weight
+      are effectively eliminated.
+\end{itemize}
+
+\subsection{Ridge (L2 Regularization)}
+\[
+\text{Cost}_{\text{Ridge}} =
+\sum_{i=1}^{M}\!\left(y_i - \sum_{j=0}^{n} w_j x_{ij} - b\right)^{\!2}
++ \lambda \sum_{j=0}^{n} w_j^2
+\]
+\begin{itemize}
+    \item The L2 penalty shrinks weights toward zero but rarely
+      sets them \emph{exactly} to zero.
+    \item Ridge reduces complexity but does not eliminate features.
+    \item Lasso is preferred when explicit feature selection is needed.
+\end{itemize}
+
+\subsection{Lasso: \texttt{SelectFromModel} in Python}
+\begin{verbatim}
+from sklearn.feature_selection import SelectFromModel
+from sklearn.linear_model import LogisticRegression
+
+embeded_lr_selector = SelectFromModel(
+    LogisticRegression(penalty="l1"),
+    max_features=num_feats)
+embeded_lr_selector.fit(X_norm, y)
+embeded_lr_support = embeded_lr_selector.get_support()
+embeded_lr_feature = X.loc[:, embeded_lr_support].columns.tolist()
+\end{verbatim}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Embedded Method: Tree-Based Feature Importance}
+%------------------------------------------------------------
+
+\subsection{How Random Forest Selects Features}
+Random Forest (an ensemble of decision trees) provides feature
+importance scores automatically:
+\begin{itemize}
+    \item Feature importance = mean improvement in the splitting
+      criterion (``impurity'') produced by that variable across
+      all trees.
+    \item In other words: how much does splitting on this feature
+      reduce impurity on average?
+    \item Features can be ranked by importance and a subset selected.
+\end{itemize}
+
+\subsection{Python Implementation}
+\begin{verbatim}
+from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import RandomForestClassifier
+
+embeded_rf_selector = SelectFromModel(
+    RandomForestClassifier(n_estimators=100),
+    max_features=num_feats)
+embeded_rf_selector.fit(X, y)
+embeded_rf_support = embeded_rf_selector.get_support()
+embeded_rf_feature = X.loc[:, embeded_rf_support].columns.tolist()
+\end{verbatim}
+
+
+\newpage
+%------------------------------------------------------------
+\section{MATLAB Implementation: Sequential Forward Selection}
+%------------------------------------------------------------
+
+The course project uses MATLAB for feature selection via
+\texttt{sequentialfs}, which performs \textbf{sequential forward
+selection} (a wrapper method).
+
+\subsection{Criterion Function}
+A criterion function is required to score each candidate feature
+subset. Here the criterion is the \textbf{deviance} from a binomial
+logistic regression fit:
+
+\begin{verbatim}
+function dev = critfun(X, Y)
+    [b, dev] = glmfit(X, Y > 0, 'binomial');
+\end{verbatim}
+
+Lower deviance = better fit = better feature subset.
+
+\subsection{Feature Selection Driver}
+\begin{verbatim}
+function [feaInd] = featureSelection(TrainMat, target)
+    maxdev = chi2inv(.95, 1);
+    opt = statset('display', 'iter', ...
+                  'TolFun', maxdev, ...
+                  'TolTypeFun', 'abs');
+    feaInd = sequentialfs(@critfun, TrainMat, target, ...
+                          'cv', 'none', ...
+                          'nullmodel', true, ...
+                          'options', opt, ...
+                          'direction', 'forward');
+\end{verbatim}
+
+Key parameters:
+\begin{itemize}
+    \item \texttt{direction = 'forward'}: start from empty set, add
+      one feature at a time.
+    \item \texttt{TolFun = chi2inv(.95,1)}: stop adding features when
+      the improvement in deviance falls below the 95th percentile of
+      the $\chi^2(1)$ distribution (i.e., $\approx 3.84$).
+    \item \texttt{nullmodel = true}: compare each subset against an
+      intercept-only model.
+    \item \texttt{cv = 'none'}: no cross-validation; use training data
+      directly.
+\end{itemize}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Best Subset Selection with \texttt{bestglm}}
+%------------------------------------------------------------
+
+\subsection{The Best Subset Problem}
+Given $p$ features, there are $2^p$ possible subsets. Best subset
+selection exhaustively evaluates all of them and picks the one that
+minimizes a chosen criterion.
+
+\begin{itemize}
+    \item The \texttt{bestglm} R package implements this for the GLM
+      family (linear, logistic, etc.).
+    \item Feasible in practice for $p \lesssim 15$--25; for larger
+      $p$, stepwise methods are used instead.
+    \item Input format: a data frame \texttt{Xy} where the last column
+      is the response and all other columns are predictors.
+\end{itemize}
+
+\subsection{Information Criteria for Model Selection}
+All criteria penalize model fit (deviance $\mathcal{D} = -2\log\hat{\mathcal{L}}$)
+by a term that grows with the number of parameters $k$:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Criterion} & \textbf{Formula} & \textbf{Tendency} \\
+\midrule
+AIC  & $\mathcal{D} + 2k$ & More variables; asymptotically efficient \\
+BIC  & $\mathcal{D} + k\log n$ & Fewer variables; consistent \\
+BIC$_\gamma$ & $\mathcal{D} + k\log n + 2\gamma\log\binom{p}{k}$ & Adjustable sparsity \\
+BIC$_q$  & $\mathcal{D} + k\log n - 2k\log\tfrac{q}{1-q}$ & Bernoulli prior on inclusion \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item When $n > 7$, BIC penalty exceeds AIC, so BIC always selects
+      $\leq$ as many features as AIC.
+    \item BIC is the default in \texttt{bestglm}.
+    \item BIC$_q$ with $q = 1/2$ reduces to BIC.
+\end{itemize}
+
+\subsection{Prostate Cancer Example}
+\begin{verbatim}
+library(bestglm)
+data(zprostate)
+train <- (zprostate[zprostate[,10],])[,-10]
+X <- train[, 1:8]
+y <- train[, 9]
+Xy <- cbind(as.data.frame(X), lpsa = y)
+
+bestglm(Xy, IC = "AIC")   # selects 7 variables
+bestglm(Xy, IC = "BIC")   # selects 2: lcavol, lweight
+\end{verbatim}
+
+AIC selects 7 variables (including two that are not significant at
+5\%), while BIC selects only 2 (the two strongest predictors).
+This illustrates BIC's stronger preference for parsimony.
+
+\subsection{Cross-Validation Methods in \texttt{bestglm}}
+When \texttt{IC = "CV"} is used, the package selects the best model
+via cross-validation:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Method} & \textbf{Description} & \textbf{Notes} \\
+\midrule
+Delete-$d$ & Random subsets of size $d$ as validation set & Recommended default \\
+$K$-fold   & Data partitioned into $K$ folds; each fold serves as validation once & Use 1-SD rule for stability \\
+LOOCV      & Each observation left out once & High variance; asymptotically $\equiv$ AIC \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The \textbf{one-standard-deviation rule} for $K$-fold CV: instead of
+the model with the single lowest CV error, choose the most parsimonious
+model whose CV error is within one standard deviation of the minimum.
+This produces more stable, simpler models.
+
+\end{document}

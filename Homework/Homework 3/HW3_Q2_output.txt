@@ -1,0 +1,21 @@
+Problem 2 (EE627A_HW3_Q2.csv)
+============================================================
+Selected model (lowest AIC): ARIMA(0, 0, 3)
+AIC: 977.0179
+BIC: 995.5369
+
+Stationarity check used to choose differencing order d:
+ADF statistic: -9.878476
+ADF p-value: 0.000000
+Stationary at 5%: True
+Critical values:
+  1%: -3.453262
+  5%: -2.871628
+  10%: -2.572146
+
+Model coefficients:
+const     0.000191
+ma.L1    -1.143604
+ma.L2    -0.123881
+ma.L3     0.267776
+sigma2    1.438139

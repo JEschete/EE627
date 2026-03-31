@@ -1,0 +1,499 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large February 27, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Final Project Structure and Course Philosophy}
+%------------------------------------------------------------
+
+\subsection{How the Final Project Works}
+Starting this week, the course pivots to an industry recommender dataset.
+The project is \textbf{guided} --- not ``here is data, figure it out.''
+\begin{itemize}
+    \item Each week introduces one new technique or approach.
+    \item Sample code and a direction are provided.
+    \item Students apply that week's technique to the same ongoing project.
+    \item By the end of the semester, multiple approaches have been tried
+      on the same dataset, allowing direct comparison.
+\end{itemize}
+The goal is to replicate the workflow of a real data scientist iterating
+toward a better solution --- not to complete a one-shot assignment.
+
+\subsection{Why This Class Exists}
+The professor explained the origin of the course directly:
+\begin{itemize}
+    \item ECE had no recommender-focused course despite recommenders being
+      one of the highest-cash-flow areas in tech.
+    \item The syllabus is assembled from \textbf{industry interview
+      requirements}, not from textbooks. Every topic covered reflects
+      what top companies actually test.
+    \item The interview process at major tech companies has become highly
+      standardized --- there are known preparation paths for specific
+      companies (behavioral, system design, ML technical). This course
+      targets the ML technical component.
+\end{itemize}
+
+\subsection{The Right Way to Engage}
+\begin{itemize}
+    \item \textbf{Ask questions aggressively.} ``What happens if my data
+      is NOT like what you described?'' is the right question. The
+      standard case is never what you encounter in a real job.
+    \item \textbf{Challenge yourself.} After every explanation: does this
+      make sense? Can I generalize it beyond the example shown?
+    \item Focus on \textbf{higher-level reasoning} --- why to choose model
+      A over B, what assumptions to check, how to handle dirty data ---
+      not on syntax and commands.
+\end{itemize}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Two-Tower Model: Training and Tuning}
+%------------------------------------------------------------
+
+This lecture provided the deepest explanation of how the two-tower
+recommendation model actually works end-to-end, including training.
+
+\subsection{The Core Idea: Everything Becomes a Number}
+Computers cannot process names, IDs, or descriptions. The fundamental
+operation of the two-tower system is:
+
+\[
+\textbf{user features} \;\xrightarrow{\text{encoder}}\; \mathbf{u} \in
+\mathbb{R}^d, \qquad
+\textbf{item features} \;\xrightarrow{\text{encoder}}\; \mathbf{v} \in
+\mathbb{R}^d
+\]
+\[
+\text{relevance score}(u, i) = \mathbf{u} \cdot \mathbf{v}
+\]
+
+\begin{itemize}
+    \item A user named ``Jason'' with membership ID ``12700-AD-Y'' gets
+      mapped to a float vector, e.g., $[0.3,\; -0.4,\; -0.1,\; \ldots]$.
+    \item A video about deep learning gets its own float vector.
+    \item Dot product between the two vectors $=$ a single scalar
+      representing predicted affinity.
+    \item \textbf{High dot product} $\Rightarrow$ user likely to engage
+      with this item.
+    \item \textbf{Low dot product} $\Rightarrow$ user unlikely to engage.
+\end{itemize}
+
+\subsection{Training: From Random to Meaningful}
+\begin{enumerate}
+    \item \textbf{Initialization:} assign random float vectors to every
+      user and every item. At this point, the dot products are meaningless.
+    \item \textbf{Observe interactions:} the system collects real user
+      behavior --- clicks, purchases, watch time, shares.
+    \item \textbf{Tune embeddings:} adjust the vectors so that user--item
+      pairs with high interaction get high dot products, and pairs with
+      no interaction get low dot products.
+    \item \textbf{Iterate:} after every batch of new interactions,
+      re-tune. The embeddings gradually become meaningful representations.
+\end{enumerate}
+
+\textit{Intuition:} if a user watches many deep learning videos, their
+embedding vector should drift toward the region of the latent space where
+deep learning video vectors cluster. ``Closeness in the embedding space
+$\Leftrightarrow$ high likelihood of engagement.''
+
+\subsection{Offline vs.\ Online: Why the Split Is Necessary}
+Training embeddings is \textbf{computationally expensive} --- it cannot
+happen in real time.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Pipeline} & \textbf{Timing} & \textbf{Work done} \\
+\midrule
+Offline & Nightly (or periodic batch) & Retrain/update embeddings using all interactions \\
+Online  & Milliseconds (user request) & Fetch pre-trained embeddings; compute dot products; rank \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item When a user logs in to Amazon at 9 a.m., the system \emph{fetches}
+      their pre-computed embedding and computes dot products against item
+      embeddings instantly.
+    \item The embedding models are \emph{not} retrained at login time.
+    \item After midnight, the system processes the day's interactions
+      offline to update the embeddings for the next day.
+\end{itemize}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Retrieval (Stage 1): Vector Nearest-Neighbor Search}
+%------------------------------------------------------------
+
+\subsection{The Geometric Picture}
+Think of the embedding space as a high-dimensional map. Each item is a
+point on this map. Each user query is also a point. The Stage 1 retrieval
+problem is: \textit{find the points closest to the user query point.}
+
+\begin{itemize}
+    \item Items nearby in the embedding space have high dot products with
+      the user vector.
+    \item Items far away have low dot products.
+    \item A ``slice'' of the nearest neighborhood gives the candidate pool.
+\end{itemize}
+
+\textit{Analogy from lecture:} imagine a pie chart. The user vector is the
+center. Items form a ring around it. The retrieval algorithm takes the
+nearest arc --- the items within the smallest angular distance from the
+user vector.
+
+\subsection{Why ANN (Approximate Nearest Neighbor) Is Needed}
+A billion-item catalog means a billion dot products per user request.
+Computing all of them exactly is too slow. \textbf{Approximate Nearest
+Neighbor (ANN)} algorithms (e.g., HNSW, FAISS) trade a small accuracy
+loss for orders-of-magnitude speed improvement, reducing lookup time
+from seconds to milliseconds.
+
+\subsection{Output}
+Stage 1 outputs $\sim$100--1000 candidate items per user.
+
+
+\newpage
+%------------------------------------------------------------
+\section{Feature Engineering for Stage 3 Fine Ranking}
+%------------------------------------------------------------
+
+Stage 3 is the \textbf{sophisticated feature engineering stage}. Because
+the candidate pool is now small (hundreds of items), a rich ML model
+can be run on each (user, item) pair. The quality of the features
+determines the quality of the ranking.
+
+\subsection{User-Side Features}
+\begin{itemize}
+    \item \textbf{User ID:} the raw identifier, embedded into a vector.
+    \item \textbf{Login time:} hour of day (6 a.m.\ vs.\ 10 p.m.\ reflect
+      different user states and intent). Encoded as one-hot or cyclic
+      numeric features.
+    \item \textbf{Region / location:} inferred from IP address.
+      Enables local recommendations (nearby news, local events, relevant
+      language content).
+    \item \textbf{Language / device:} proxy for nationality, platform
+      preference, and content type.
+    \item \textbf{Historical behavior (statistics):} the richest signal.
+      In the past week:
+      \begin{itemize}
+          \item Number of purchases / views by category
+          \item Distribution across categories (electronics: 3, fashion: 4,
+            sports: 2)
+          \item Average session length, frequency
+          \item Which specific items were browsed, purchased, reviewed
+      \end{itemize}
+\end{itemize}
+
+\subsection{Item-Side Features}
+\begin{itemize}
+    \item Item ID (embedded vector)
+    \item Click-through rate (CTR), watch time, share count
+    \item Category, tags, description keywords
+    \item Recency (how recently was this published/listed?)
+    \item Popularity rank within category
+\end{itemize}
+
+\subsection{Model Choices for Stage 3}
+All of these features feed into a standard ML model:
+\begin{itemize}
+    \item XGBoost / CatBoost / GBDT (tabular features)
+    \item Deep neural network (mix of sparse and dense features)
+    \item LLM-based ranker (emerging)
+\end{itemize}
+The model predicts an engagement probability score for each
+(user, item) pair. Items are sorted by score.
+
+
+\newpage
+%------------------------------------------------------------
+\section{Re-ranking (Stage 4): Beyond Pure Relevance}
+%------------------------------------------------------------
+
+Stage 4 is where business, psychology, and ethics enter the pipeline.
+The ranked list from Stage 3 is technically correct but not yet ready
+to show to the user.
+
+\subsection{The Dead Loop Problem (Filter Bubble)}
+If the system only recommends what the user has already shown interest in:
+\begin{enumerate}
+    \item User watches gaming videos.
+    \item System recommends more gaming videos.
+    \item User watches more gaming videos.
+    \item System recommends even more gaming videos.
+    \item User never discovers anything else.
+\end{enumerate}
+This is a \textbf{filter bubble} --- the user's world shrinks to their
+existing interests. It also limits revenue, because a user who only
+consumes one type of content has a limited engagement ceiling.
+
+\subsection{Diversity Injection}
+Intentionally include a small fraction ($\sim$10\%) of items outside the
+user's primary interests:
+\begin{itemize}
+    \item If the user primarily watches gaming: add 1--2 sports videos.
+    \item If the user searches for swimwear: add 1--2 general outdoor
+      sports items.
+    \item Purpose: \textbf{spark new interests}, expand the user's
+      engagement surface, and increase long-term revenue.
+\end{itemize}
+\textit{This is not a mistake and not random --- it is intentional
+psychological engineering.}
+
+\subsection{Business Rules (Sponsored Content)}
+\begin{itemize}
+    \item Advertisers pay for placement. Some items are elevated in the
+      final ranking \emph{despite lower relevance scores} because a
+      business contract requires it.
+    \item Example: Amazon search results include sponsored products that
+      are ranked by payment, not by relevance.
+    \item The system must blend: (high relevance score) + (sponsored
+      placement contract) into the final list.
+\end{itemize}
+
+\subsection{Contextual Adjustment}
+The final ranking accounts for situational context:
+\begin{itemize}
+    \item \textbf{Timestamp / calendar:} on Thanksgiving, inject holiday
+      gift recommendations regardless of the user's search intent.
+    \item \textbf{Trending events:} a major news story justifies appearing
+      in feeds even for users who did not search for it.
+    \item \textbf{Freshness:} prefer recently published content over older
+      content with equal relevance scores.
+\end{itemize}
+
+\subsection{Evaluation: How to Know If Re-ranking Is Working}
+Change one parameter (e.g., diversity ratio from 4\% to 5\%) and measure:
+\begin{itemize}
+    \item Average session duration (did users spend more time?)
+    \item Click-through rate on diversified items (did new interests spark?)
+    \item Revenue change
+\end{itemize}
+At billion-user scale, a 1\% improvement in session duration translates
+to hundreds of millions in additional revenue. This is why companies
+invest heavily in re-ranking tuning and why engineers who do it well
+command exceptional compensation.
+
+
+\newpage
+%------------------------------------------------------------
+\section{Interview Preparation: Drawing the Recommender Pipeline}
+%------------------------------------------------------------
+
+The professor made explicit what industry interviews test for recommenders:
+
+\textit{``They will not ask you to write code for a recommender. They will
+ask you to \textbf{draw the diagram}.''} Specifically:
+
+\begin{enumerate}
+    \item Draw the four-stage pipeline (Retrieval $\to$ Rough Ranking
+      $\to$ Fine Ranking $\to$ Re-ranking).
+    \item Draw the two-tower architecture: user tower, item tower,
+      dot product, interaction-based training signal.
+    \item Draw the offline/online split: offline nightly training,
+      online real-time serving.
+    \item For each stage: state the \textbf{candidate pool size}, the
+      \textbf{key technique}, and the \textbf{output size}.
+    \item Explain \textbf{why} each stage exists --- not just what it does.
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Stage} & \textbf{Input} & \textbf{Technique} & \textbf{Output} \\
+\midrule
+1.\ Retrieval       & Billions & Two-tower ANN search & $\sim$1000 \\
+2.\ Rough Ranking   & $\sim$1000 & Rules, shallow ML, Bloom filter & $\sim$300 \\
+3.\ Fine Ranking    & $\sim$300 & Feature engineering + XGBoost/DNN & $\sim$50 \\
+4.\ Re-ranking      & $\sim$50 & Business rules, diversity, context & Top 10 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\newpage
+%------------------------------------------------------------
+\section{Final Project: Yahoo Music Dataset (Detailed)}
+%------------------------------------------------------------
+
+The course final project uses a real industry dataset from \textbf{Yahoo
+Music}. The core task is building a recommendation system that predicts
+user--item interactions (song ratings).
+
+\subsection{Hierarchical Data Structure}
+Music data is stored in a four-level hierarchy:
+
+\[
+\text{Track} \;\longrightarrow\; \text{Album} \;\longrightarrow\;
+\text{Artist} \;\longrightarrow\; \text{Genre}_1, \ldots, \text{Genre}_K
+\]
+
+\begin{itemize}
+    \item A song track belongs to one album.
+    \item An album belongs to one artist.
+    \item An artist is associated with one or more genres.
+    \item Users can rate \emph{any} item in the hierarchy (track, album,
+      artist, or genre) with a score between 0 and 100.
+\end{itemize}
+
+\textit{Example:} ``Poker Face'' $\to$ ``The Fame'' $\to$ ``Lady Gaga''
+$\to$ Pop, Dance.
+
+\subsection{Data Statistics}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Split} & \textbf{Quantity} & \textbf{Notes} \\
+\midrule
+Training users  & 249K & --- \\
+Items           & 296K & tracks, albums, artists, genres \\
+Rating scores   & 62M  & explicit ratings 0--100 \\
+Test users      & 100K & subset of training users \\
+Test tracks/user & 6   & must classify each as rated or not \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Training data item breakdown by level: tracks 43.6\%, albums 31.2\%,
+artists 19.1\%, genres 6.0\%. Test data is \emph{100\% track-level}.
+
+\subsection{The Actual Task (Binary Classification)}
+For each test user, 6 candidate track IDs are provided. The task is
+\textbf{not} to predict the rating score --- it is to determine which
+3 of the 6 tracks the user actually rated highly (label ``1'') and which
+3 they did not (label ``0'').
+
+\begin{itemize}
+    \item Training data: (UserID, ItemID, Rating) tuples across all item
+      levels.
+    \item Test data: (UserID, TrackID, ?) --- binary label unknown.
+    \item Goal: produce correct 3-``1'' / 3-``0'' assignments.
+\end{itemize}
+
+\subsection{Hierarchy Search: Linking Tracks to Ratings}
+A test track often has \emph{no direct rating} in the training data.
+The solution is \textbf{hierarchy search}: look up the track's parent
+album, parent artist, and associated genres and retrieve whatever
+ratings exist at those levels.
+
+\textit{Example for User 249008, Track 1 (ID 4967):}
+\begin{itemize}
+    \item Album 205719 was rated 90; Artist 197877 was rated 80.
+    \item Genre IDs 172023, 201738 present but no direct genre rating.
+\end{itemize}
+The hierarchy ratings become the feature set for the prediction model.
+
+\subsection{Feature Generation from Rating Scores}
+
+\textbf{Approach 1 --- Simple rule-based:}
+\begin{itemize}
+    \item Use raw hierarchy ratings directly as a heuristic.
+    \item Achieves $\sim$87\% accuracy (13\% error rate).
+\end{itemize}
+
+\textbf{Approach 2 --- Statistical features:}
+\begin{itemize}
+    \item Album and artist each have one rating score per user.
+    \item Genres may have \emph{multiple} rating scores (user rated
+      several tracks in the genre); extract:
+      \begin{itemize}
+          \item Maximum / minimum score
+          \item Average score
+          \item Variance
+          \item Score count (length)
+      \end{itemize}
+    \item Feed these features into an ML classifier.
+    \item Achieves $\sim$90\% accuracy (10\% error rate).
+\end{itemize}
+
+\subsection{Handling Sparse Users: Similar-User Borrowing}
+Some users have very few rating records. For these users, hierarchy
+search and expansion return nothing useful. Strategy:
+
+\begin{enumerate}
+    \item \textbf{Hierarchy expansion:} from a known item, expand
+      upward through the hierarchy tree to find \emph{all} related
+      items and borrow their ratings as proxy features.
+    \item \textbf{Similar-user matching:} find training users with
+      similar rating behavior; borrow their hierarchy features to
+      supplement the sparse test user's feature vector.
+\end{enumerate}
+
+\subsection{Actual File Formats}
+
+\textbf{Test data} --- \texttt{testTrack\_hierarchy.txt} (pipe-delimited):
+\begin{center}
+\texttt{userID | trackID | albumID | artistID | genreID$_1$ | $\cdots$ | genreID$_K$}
+\end{center}
+Fields that do not exist are filled with \texttt{None}.
+Example rows:
+\begin{verbatim}
+199810|208019|209288|None
+199810|74139|277282|271146|113360|173467|173655|192976|...
+\end{verbatim}
+
+\textbf{Training data} --- \texttt{trainIdx2\_matrix.txt} (pipe-delimited):
+\begin{center}
+\texttt{userID | itemID | score}
+\end{center}
+\texttt{itemID} may be a track, album, artist, or genre ID; \texttt{score}
+is 0--100.
+Example rows:
+\begin{verbatim}
+199808|248969|90
+199808|2663|90
+199808|28341|90
+\end{verbatim}
+
+The workflow: for each test user, retrieve their test track hierarchy from
+\texttt{testTrack\_hierarchy.txt}, then look up each hierarchy node in
+\texttt{trainIdx2\_matrix.txt} to collect the user's historical rating
+scores as features.
+
+Sample starter code is provided in \texttt{read\_rating\_V3.py}.
+
+\subsection{The Approach: Matrix Factorization}
+The first technique applied to the project will be
+\textbf{matrix factorization} --- the foundational collaborative filtering
+method. The goal: decompose the sparse rating matrix into compact user and
+item embedding vectors such that the dot product of a user vector and an
+item vector predicts the user's rating for that item.
+
+This is precisely the two-tower concept applied to an explicit rating
+matrix. The details and implementation will be covered in subsequent
+lectures.
+
+\subsection{Course Trajectory}
+Each week, a new technique is introduced and applied to the same Yahoo
+Music dataset:
+\begin{enumerate}
+    \item Matrix factorization (collaborative filtering baseline)
+    \item Additional retrieval and ranking approaches
+    \item Feature engineering to improve Stage 3 scoring
+    \item Evaluation metrics (comparing models)
+\end{enumerate}
+The final grade reflects the student's ability to improve the recommender
+across multiple iterations --- mirroring the real job of a data scientist.
+
+\end{document}

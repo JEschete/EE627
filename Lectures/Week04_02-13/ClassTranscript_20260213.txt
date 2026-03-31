@@ -1,0 +1,722 @@
+Rensheng Wang
+Rensheng Wang
+Great. It's Good Friday, and before we start this session, does anyone have any questions?
+Or anything you want me to address during the class?
+Great. Before I started this, I have some extra comments I'd like to share with you guys.
+I think you are aware, right? So, this kind of AI, related, work
+And it's penetrating our ordinary life.
+So, that means for your homework, for your project, for your proposal, for your PhD thesis, for anything, even for the government proposal findings.
+more or less, people were trying to utilize this AI,
+That's the one you cannot refuse.
+So, I would say… Invited to… join this kind of AI,
+You know, advisory board, because inside and outside the campus, from the elementary school, middle school, high school, college, graduate school.
+They are… Think about, you know, it's more likely a revolution will change over education.
+In the past, we used to worry about this kind of online learning, but now.
+we get an even further, you know, boost from these AI tools.
+think about, you know, if the professor assigned a project homework, you can work with AI. AI means you can leverage the experience from
+The majority of the societies
+You are not the work on your own. You are trying to leverage the knowledge space from anything… Everywhere.
+So that's greatly reduced the… the experience gap. Typically, you know, when people who had, you know.
+20 years, 30 years experience typically is very difficult for the junior to achieve or to get closer. But nowadays, the AI will greatly shrink this technical gap.
+under this kind of consideration, now you need to think about, you know, what you can learn from this. Even for the job market, for the interview, they are trying to reshape the interview process. In other words, more or less, you need to pay less attention to this kind of
+programming syntax.
+You don't have to care too much about this kind of, typing related things, or some very, you know, ordinary process cycles.
+They are more oriented to test you.
+How do you think about the question, how they analyze the question, how they propose the insights for the business acumen.
+So, in terms of the…
+big data processing, you may don't have to memorize, oh, how to use Hadoop? That's okay, you don't even know. You don't have to, you know, memorize the command, how to use… you can as the Hadoop, utilize this kind of for big data processing.
+The interview question is not asking, do you know the command to use? No, you don't have to, because AI can very quickly
+Process any bigger data, doesn't matter how big it.
+the question is come with, if you're given the data, or even you already have the solution, for example, the AI-provided the solution, what's your comment? What's your suggestion? So this is why
+We are not eager to jump to
+someone, you know, programming scripts. We're more…
+emphasize what's the real meaning you learn from this. We are trying to explain this.
+For example, I always explain, what do you mean, coordination, right? It's easy to ask AI to calculate the coronation for you, to calculate all the coordinated functions for you, but do you know what's the really meaning? What you can learn from this? Or if we plot this for you, what did you say? What did you say from this?
+That's the more interesting, you know, how to resolve questions, how to propose questions, how to make a judgment, because you are the judge trying to guide the AI.
+So we are trying to think about, in the next, you know, a few years.
+The midterm final assignment, we also were undergoing some revolution change. A lot of sense, you know, you have to change the way how you learn the knowledge space.
+And, we… from my point of view, you know, I don't mind that you're using AI, but the question is, do you really learn from the AI? Because AI will perform, like, a sales standard for you.
+It's good, you know, you're trying to…
+make use of it. You know, that's the way… how you utilize AI for reflecting the gap between different candidates. Some candidates can fully utilize the AI, they will have the better position. Someone have a very odd
+you know, operations with AI, then you made far behind, you know, the peers.
+So that's my point, you know. For example, for time series analysis, right?
+you may not necessarily memorize some results. For example, what's the AR1, the mean, and the variance?
+Do you need to memorize? No, you don't have to. But the point is not about that, it's about, you know.
+What do you learn from this? What do you mean AI? What do you mean AR means? All the regression means?
+how this relevant to some other related topics? How you can…
+Utilize autoregressive to describe the data to formulate this
+Because if you really fully understand AR, it's called all the regression model here, you will be much… take a much better advantage for the most popular
+generative AI for this kind of, for, you know, diffusion model, you are so comfortable.
+Because you already have the knowledge space from the AR here.
+So, what I described here, right, I don't give you the formula, I'm trying to say, when you are in the… all the regressional model means, you know, we are trying to take advantage of a time index, we are trying to describe today's observation based on yesterday.
+That's called all the regression, right? I'm describing Apple's stock price based on Apple's stock price in the past, in history.
+That's how I make a… description, right? Today's Apple stock price equals yesterday times 0.3.
+You see? That's the… called the AR1. Today's Apple stock price equals yesterday times 0.3 minus 0.2
+times the day before yesterday. That's called AR2.
+If this… Linear combination of a history
+You say, that's history, making a combination, right? Which today, they're not equal, don't worry, the gap is absolute T. They call it a random noise.
+So that's the point about the Aon.
+So we are trying to say, if you are given some data, which is relevant to this kind of form.
+index. The index here is time series, right? Time series is this obvious, intuitive way to understand the connections.
+In the future, this can be expanded to… Geom… geometric. For example, Mapping information, right?
+you just had Google Maps, those… every single pixels, they are aligned in the direction, right? It's similar like a time series.
+Or, if you're working for Army, DOD,
+You may have this kind of sensor data, you may have this kind of fragrance data, they're all aligned in the index. You will have very similar AR.
+Doesn't matter. You may work for the medical imaging. Again, you can use AR or the regressory.
+You may have amendment order.
+for the typical AI artificial intelligence technical, again, you have sequence, right? Even for natural language processing, you will have this kind of index, because every single token is aligned with time index to tell you the order.
+Again, you can use AR.
+AR can also be utilized to think… to generate this
+The future model, just like I just described a few words, then put bubble.
+You know, a synthetic image.
+Those kind of general AI. Again, you'll use all the regress, trying to capture denoise, or remove your noise.
+in the similar, you know, sequential processing, so that's the AR, means you are trying to use it itself with the history to describe it. So this is the sequential-driven event.
+What we learned from the AR1 is, you know, these coefficients A… one…
+For example, if AR1, today equals yesterday day times A1, right? A1 can only be 1. So you can never say, oh, today's observation equals yesterday's observation plus something. No, if you do something like this, that would be not a station anymore.
+You see, if the day equals yesterday times something, and yesterday equals the day before yesterday times something. So you accumulate this term, right, as time passes by. This will make your…
+times 3, it's going to neglect this. Up, up, up, right? It's going up.
+You can never get this kind of stationary, so that's why you may need to make sure you multiply with something… this coefficient should be with absolute value between 0 and 1.
+So that's the range. You need a skill.
+Not information make this equal to 2. If today equals yesterday times 2 plus something, you can expect that this time series will be exploded.
+It's not stationary.
+You see, we always assume we have a stationary time series.
+And in the next, we were trying to explain what happens if they're not stationary.
+Right? Just for example, in the homework, you will say someone… I will give you some time series, you know, like this.
+this is not stationary, because I saw it's going up, up, up, right?
+So that means if your something is not stationary, you cannot directly say, hey, all the regress, no, you cannot do that.
+In that situation, you need to do some unnecessary pre-processing. So that means you're given XT,
+you need to convert XT to YT, new.
+And make sure why T should it be stationary?
+For example, XT like this, right, should, right? You need to get a new series, YT. If YT goes something like this, you see?
+Now, you see, right? That's stationary. Then, from YT, maybe you can apply this autoregressive model.
+What happens if it didn't work in this way, YT is still not stationed? That's fine, keep doing. You need to convert YT to ZT, make sure you make a further
+manipulations of the original from X,
+Until you get something close to stationary, then you need to consider autoregressive. So that's what… that's the common mistake. If you're given some time series.
+When the interviewer asks you, how can you do this? Make a prediction, it's, oh, I will try an AR model, right?
+Don't rush. Make sure you first confirm your assumption.
+If this… It's a stationary.
+satisfied or not? Is that stationary or not?
+That's very important.
+So we will have the chance to practice in the homework. So that's where you need to think about.
+So, we memorize, right? We know if we have AR1, make sure A1 is not greater than 1.
+And, we also… notice, you know, if A0 is 0, that means the constant is 0, that means…
+This XT itself must be with zero mean.
+Okay? The timesheets itself get a zero mean, then you don't need this one.
+And after this, get this, right?
+you say, if you are wondering this one, we need to calculate that if you have AR model, order regression, we need to calculate the order coordination function.
+So, you don't have to worry about how to calculate all the correlation functions we call the ACF.
+But you'd memorize, for AR model, what ACF means.
+ACF means, you say, 0, 1, 2… 3…
+4… 5. So they're trying to say, if you gave it time series XT, it's a stationary time series.
+I'm asking you, how today is… Dynamica, you know.
+dynamic is similar to the movement with XT subter this delta. Delta equals 0 means XT and XT itself.
+So if I'm asking, how's today similar to XT itself?
+In terms of dynamic and statistical measurement.
+Because they aren't exactly the same, right? So, it's 1.
+Just like you said, right? How you leverage yourself, right? Of course, 100%, you are yourself.
+But if you take one here, what does it mean? You're trying to say how XT Dynamica, similar to…
+One day before, just like I said, how today is dynamic?
+Coronated to one day before.
+So that's called autocronation. So this coefficients should be between 0 and 1, so you may get something here.
+You see? That's ACF1. ACF2 means, how did they…
+coordinated to 2 days before, XT-2?
+Right? So you get another correlation factors, so on and so forth, you can imagine.
+And maybe you'll notice, when I plot this, right, you will see, looks like you are getting smaller and smaller, right?
+Always important. Well, generally speaking, for AR model, you have something like this.
+That's… what does that mean? That means how today, similar to yesterday, you get a very high coronation. How today, similar to two days before, you get less, right? Because as time passed by.
+You get a less and less coordinated.
+If you get far away, you get what? You get totally independent.
+Just like, let's say… The temperature forecast.
+how today and yesterday they coordinate each other? We are also pretty much close, right? Because today and yesterday, we know they're not the same, but…
+they always have some coordination, similarities. Healthy day and the two days before, well, you should get the last, right? Because whatever you already have two.
+this gap. How about 3 days before? You get even less, right? So, when you calculate the coronation for this kind of auto-accur.
+regressive model, you were expecting this kind of ACF,
+we're getting the occasion, because when time passed by, getting longer and longer time window, you should get less. So that's how we interpret this one.
+You don't have to say, how I do this? No, because just call function. If you don't know how to call function, ask AI.
+You don't have to worry about how to do this, you only need to know what does it mean for ACF, what do you learn from ACF.
+If you say something is against you, your knowledge, against your intuition, then that's where you need correct AI.
+Right? If the AI plot this, other…
+is F to something like this.
+All are different.
+then you need to say, wow, what happens? That's against the intuition, right? How this can be.
+All the regressive, right?
+Because what do you expect to shoot something like this, right? If you don't have the knowledge base, maybe it's, oh, it's okay, good, because you are violated your knowledge space here. So that's where you need to keep in mind. You don't have to memorize how to do this.
+But you need to know what's the meaning. If I gave you the ACF, do you know… what do you learn from this?
+Right? So that's the most important step.
+And similar to AR2, AR1, it's very similar, no. You will say this kind of for,
+the Cajun ACF, something like this. Let's just telling you, you know, as time passed by.
+the time series getting less and less coordinated each other, because you get far away, right? Today and many days before, how likely they are similar to each other.
+Something like this, right? Just like today's stock price, and many, many days before stock price, how they are calling each other, right? When you get a longer distance, you always get less, almost, like, not relevant at all. When you… time window is enough, right? So that's the meaning about the ACF.
+Now we switch to… oh, by the way, if you really care about ACF, right? Actually, we have a function. You don't have to memorize how to do this mathematically. You just call the function, ACF will return this for you.
+Okay.
+Let's switch to you.
+Another one, let me see…
+Now, the next question, okay? If you…
+If you know, this is the AR… process model.
+How to determine the order? In other words, how do you know this AR1, AR2, or A3, right?
+So, for example, if I saw this kind of, you know, stock price from Apple.
+XT.
+This can be…
+Very, very different, right? It can be very, very high. And then, oh, no, this cannot… definitely, it's not a stationary time series. That's fine. I make some unnecessary manipulation, I get YT,
+Okay? How do you get this?
+That's another question, we will talk about that later, okay? So from X to Y, you get something like this.
+Why I say this, the stationary? Because the mean, you see.
+The mean, if you take the window, look at the mean here, or you take another window, shift it.
+I guarantee they're the same. Looks like, right, the mean not changing. Although, variance is not the change, right? The magnitude of volatility of the curve not changing, so that's the constant. That's people call the…
+stationary, okay? Now, it's good. Now, from here, I can say, this property is AR. Looks like it's up and down, up and down, it's consistent, up and down, right? Even so.
+You need to know what's exactly the order to describe the information.
+So, we need to identify, is this the AR model? If this AR model, what's the… order, right?
+So, in order to do this, we would do…
+This kind of partial autoporation function.
+Again, if you wonder, how do you do this, don't worry, you just call PACF.
+You see? You just call it PACF. You don't have to know exactly how mathematically to calculate this. You gave them the time series, call it PACF. They will give you this.
+The idea behind it is, if you have a time series, just like, you already get a stationary times raise.
+looks like very, like, random noise, but I know this is not a random noise, okay? But how do you describe the relationship? You need to know to guess, right? The general philosophy for
+identify AR model, It's trying to consistently guessing.
+That is very simple. You can try, let's say, P equals 1.
+that this looks like what you want, or you can say, how about a P equals 2?
+So on and so forth. So that's the general philosophy.
+I can further describe it for you, okay?
+You see? You have XT, right? You can say, oh, give me XT, and let's say… let's assume, because I don't know exactly what's the…
+more order, right? It's AR1 or 2, or 3, whatever. I can say, maybe, how about this? If I assume this is AR1, say, what is, right? How about this… what is AR2? What should be, right? So, if this is AR1, we can…
+measure what's the coefficient A1, right, in front of yesterday. Because A1 means today equals yesterday times constant, right, A1.
+But if you… this AR2, that means today equals…
+yesterday times A1 plus the day before yesterday day times A2. But now you notice, wow, you have two
+doubles!
+subscripted, right? Why? Because, you know.
+For AR1, you have today equals yesterday times A1. For AR2, you also have today equals yesterday times A1, plus the day before yesterday times A2, right? So you have both have A1. But this A1, it's relevant to AR1. This A1 is for AR… for AR2 model. Both are relevant to yesterday. So you want to differentiate this A1, so that's why A by 1
+A12. So this A1 is for AR1 model, this A1 is for AR2 model, so on and so forth.
+Right?
+So, that's the reason.
+And, let's assume, okay, you have the tool. You can do this, you know, you will get this estimate when you have AR1,
+you call the function, they will give you, okay, if XT is AR1, you should have the A11.
+So, then you assume this AR2.
+Then you were on this… the highest order should be A2Q, right? Because that's…
+relevant to two days before. And if you assume this AR3,
+So you should have A13, A23, A33.
+Now, let's assume
+Because we are trying to guess, right? Let's assume you have… you are the god. You know the ground truth.
+That's the AR1. The ground chooses this AR1. So we are trying to guess
+you're trying AR1, you get AR1. You're trying AR2, you get A22. You're trying A3, AR3, you get A3, so on and so forth. But you know the ground truth, this is the AR1.
+You are the god, okay? But now, when you compare this estimate, okay, based on A1, you get AR1. Based on AR2, you get another A22, because the ground chooses AR1, so you must observe this kind of A22 equals 0. A3 straight equals 0.
+Why? Because, you know, if…
+for the ground truth AR1, if A22 not equal 0, what does it mean? That's the… that's the fully AR2 model, right? That's violated your assumption, this is AR1, right?
+you are saying this is the ground truth A1, so when you use AR2, your overestimated parameters, the actual parameter always equals 0, right? So, the same thing, A33, A44, A55, all the following should be zero.
+So that's given the catch.
+If you are not sure what's the order of ARP,
+You just try error 1, error 2, error 3, and sooner or later, you will see, boom!
+What do you estimate the highest order?
+Coefficients.
+When I say higher sold, it means when you…
+try AR1, look at the A11. When you try AR2, look at the A22, because that's the highest order coefficient. When you try AR3, look at the A33. When you try AR4, you look at A44. Always look at the highest coefficient. So, the highest…
+other coefficients should be close to zero. If they're close to zero, then that means you are overestimate, so you need to go back to here.
+So this is the why.
+You are saying… This kind of…
+PACF, you call the PACF of the function, you will get some,
+estimate value. So the PSF is trying to give you something like this.
+So that's PACF. So you get the 1, 2,
+3, 4, 5, something like this. So they're trying to tell you, okay, if
+This is the AR1. So the AR1 should be something like this, that's the value estimate. If this is AR2, you should have A22 here.
+If this AR3, you have some value here, so on and so forth, right? If you suddenly observe some A33 here, A44 here, A55 here, what does it mean?
+So even your… that means even you are using AR3 to estimate this time series, but the third order
+A33 equals 0, that means it doesn't exist. That means today not depends on 3 days before, only depends on
+Yesterday and the day before yesterday, not 3 days before.
+So, look at this candle for PACF.
+See, where you get cleave? Where is… when you say this kind of for…
+coefficients jump, right? Get cliff. Then, that's where you get an estimate about ARP.
+So that's the idea here, see? If you… if you know the ground truth P, then the estimate APP from your PACF will converge to the sample size.
+So when… you have the L,
+the order greater than the ground truth order.
+you will find this one converted to zero, close to zero. That's what I said, right? If you know the ground truth is 2, if you're trying to use a 3 or 4 or 5 to estimate, then you always get 0, 0 everywhere, right? You only have the 1 and 2, you get the non-zero.
+So that's where you observe that this kind of PACF, you will get this kind of order.
+So, let me say… let me give you one example to show you if the people give you the ACF and the PACF,
+And how you make judgment if they see the AR model or not, okay? So that's how typically you have interview questions. They will not ask you how do you…
+write the code for you. That's fine, you don't have to memorize, right? You just say, use the ACF, AI will get this result for you, and from the result, you know, you generate the result.
+Tell me, what do you…
+you know, what do you learn from this curve, right? So if you have ARP model.
+If you look at the ACF, You will see acepenic days.
+That's called ACF.
+You'll see one here.
+You will see something here, something here.
+So you get the occasion, something like this, you know, from 0, 1, 2, 3, 4. So that means
+When the times reach, compare with itself, because zero, right? No delay.
+Compared with itself, how dynamic?
+similarities, coordinate each other, right? So that's one. 100% identical. And when you shift 1, how the dynamic change
+coordinate each other, right? So that's 1. You say Ace F1, Ace F2. You're trying to say when you shift the time series, 1, 2, 3, 4, right? And how they're simulated each other.
+Aim is auto, because you're compiled yourself, right?
+Just by shift the different…
+time index, right? So that's why you got ACF, URC, this can decay and curse.
+And if you look at the PACF,
+So you request something like this, 0, 1… To you.
+3, 4? So you were saying something.
+Here, here, and then 0, 0, 0.
+So, where you say the cliff here, that's where's your P hand, you see? Because get a cliff at a Q, right? Then that's the PR.
+P equals 2.
+So, you are using ACF and PAS. PACF is much easier for you to identify, oh, that's the AR2 you should get.
+So, very likely, if you are giving someone
+measurements, you know, from the sensor, maybe from the imaging, maybe from the map, or from the time series, you know, a lot of things, all from the language, natural language sequence. When you get some
+It's too good data.
+And you're wondering, how do you describe this data in terms of sequence? You can use the order regressive model, and then how do you know the order? Then you just plot it. You just call ACF and copy ACF. When you look at the plot, you are…
+you get some impression, how do you calculate this kind of, determine this order, P?
+And increasing here?
+So, most likely, you know, for this kind of financial company in the future, when they're trying to make interview, they are trying to give the data. That's very easy. They give it the computer, they give it the control of the terminal. Now, you give the data. Tell me, how do you determine this?
+Right? You don't have to memorize the command, the scrape the syntax, you just call the AI, you say, I need to plot ACF, PACF, or I need to plot this kind of stationarity validation, right?
+And then… From this one, you make some reading from the plot you determine.
+let's make some real examples to help you get some understanding. For example, that's the… PACF we have, okay?
+We are trying to identify what's the AR.
+Let's assume you have ACF like this, that's the PACF. Because what I mentioned, right? PACF is essentially you're trying to look in for something like this, 1.0, right?
+And you're trying to say where you could cut zero, right? But actually non-zero, right?
+That's okay, because we are talking about some very ideal case. In the real world, In reality, They're nodded.
+zero, but close to zero. When you say, what do you mean, close zero? That means compelled to the rest. They are statistically much smaller. So where you think it is much smaller? For example, I can say here, you see, before and after, right?
+this is, like, 12 times bigger than this one, right? Much bigger. You know, so that's why I think that's the reasonable cutting point, right? I… I can…
+trade, you know, anything after this one, there are reasonably small, reasonably small, because compared to anything before, right? So, maybe I can, you know, trade these that are close 0, 0, 0, that's what I call it, right? So, you can say this P equals 9, okay? But…
+Here, we are trying to make sure you understand, you know, this kind of… how small you treat it like zero, you know, it really depends on this kind of significant level.
+Okay?
+You may have this kind of 1% or 5% significant levels.
+So… Another way to think about, you know.
+is here, it may cut it, because compared from 3 or 4, they're much smaller than this one, you can think.
+Okay?
+And this is really based on, you know.
+Which one you want to cut, and what's the, you know, significance level you want to choose.
+This is coming with a very important statistical, measurement.
+Like, the p-value? Like, a significance level.
+Okay, this,
+Significant level, you know, typically in the statistical world, you know, they are using 1% or 5%.
+So… 5% significance level, that means, you know.
+When you are looking at this kind of for random noise here, you see, right?
+5% means 2.5 left, 2.5 right, right?
+Okay? So, right, the center point is zero. That's the mean value, center point. So, how likely there are disputed, disturbed, right? Align this kind of for your targeting value. That's what they said, right? Ideally, you're looking for zero, right?
+But of course, nothing is really zero, okay? It's something close zero, but your question, how close to zero? It's zero, right?
+If you have 5% significantly means, you know, it's the value beyond this range, because that's huge, right? Too large.
+So you think it's not zero anymore. Anything within this, you think is zero, because I still close zero, right? So… but this one also depends on the sample size, because the variation depends on how many samples you have, right? If you have less sample, you should have much wider
+stand division. If you have huge…
+T, that means you have so many measurements, then…
+as simple because, you know, the standard error should get smaller.
+it should be scaled by 1 over square root t, okay? So this is why
+if you are choosing different significant level, you are choosing different levels to say where it should be zero, right? For example.
+even choosing 5%, that means if anything here, even if they're not zero, you know, but they're close zero, right? Negative in this range, positive in this range, you think about, okay, it's still zero.
+Beyond that, one, no, it's not zero anymore.
+And now, if you release from
+5% to 1%, and that means I need to move further, right? I need to move here, you know, you get a 0.5%,
+And not 0.5% here.
+So that means any value In this range
+Right? Anyway, in this range. Then…
+That's not zero anymore, because it's so huge, right, compared to the center point of zero, right? But anything between from here to here, you still… you still think it's reasonable small. I pretend it's zero. That's exactly… you make a cutting point.
+And pricing here?
+Let me try to give you an example to show, you know, how this statistical measurement, you know.
+For example, if Stevens has the dining hall.
+you know, they make a pre-charge, right? You pay something, then you just get a free, you know, dinner every day, you know. And as you promised.
+or something, they said, oh, I promise, okay, the dinner should be close to… $15.
+on average, Okay?
+But if this year, most students get complacent, they say, doesn't matter how much I buy, you know, I always feel my… what I paid is more than… definitely more than 15.
+Right?
+Because everybody… we have very diversified student groups. Someone eat more, someone eat less, someone pay more, someone pay less. But overall, they assume, you know, their promise should be averaged $15, right? But you doubt. They probably… they raised the price. It's definitely way more than…
+15. So you can do some, survey like this. You just randomly check a few students, step out of the dining hall. You say, hey, how much you spend today? Hey, how much you spending? Right? Just randomly. You sample, let's say, 100 students from the
+the student debt.
+Report value, you get something like this.
+So, 15 is your assumption, right? That means average, right? But what you collect in the data, you get a distribution like this.
+Your sample like this.
+The mean value is 18.
+Right? It's 15, you know, the mean value you're collecting from your student is 18. It's not 15, you know. But 18 and 15, it is $5, $3 shifting
+It's small enough, or it's big enough, right? If this one you think is small, then you pretend 15 and 18, statistically the same, almost, you know.
+But, if you imagine something different, let's say it's not 18, You measure that.
+you have this kind of survey, randomly student. On average, you found a student paid $25, because from 15 to 25, the gap is $10. $10 is not a small number. It's obvious that too much, right?
+Zone, you can say, no, I think something happened. Definitely, you increased the price. It's not the average 15 anymore.
+So that's a similar point here, you know. When you observe something.
+it's away from your expectation, right? It's different from your observation, but how…
+big. You think it's beyond your, you know, A significant survival.
+Right? If you're tiny, right? You say they promised the average is 15, but you imagine the average is, like, 15…
+0.3, then there's, oh, forget about it, because only 30 cents, right? Beyond the average, oh, it's almost identical, then nothing changes. Yeah, you're right, it averaged 15 for students that are spending.
+But your average is way more large than your assumed value, then you say, no, I cannot ignore this difference, because $10 is really a big gap. Then you really, in order to keep your promise, you change the average price, right? That's something like this.
+Any questions?
+So, now we move on to… If you have this…
+how to gather estimate? Let's say.
+you… you have this determinant, P, or 3 or 4, whatever, right? How do you get an estimate of this one?
+Then, we need the mobile user.
+Okay, can you see? Let me share this again.
+So, once you know this auto-regressive, right, model, that's the condition for stationary, okay? I can skip this one, you know.
+But I will try to jump to here. Let's say…
+you use what I mentioned before, right? I use the ACF, like this.
+PACF, something here, you get a P here, okay, oh, I know this ARP. But now, if you know ARP, that means today can be reformed as…
+yesterday, times A1, class… A2 times 2 days before, And the plus… AP…
+And the P days before, right?
+and plus epsilon t.
+Noise. Noise you cannot estimate, okay? But you want to estimate what's A1, A2, AP, right? So this formula tells you what's the Euler-Walker equation. That's how you can estimate this A1 to AP.
+The idea is very simple.
+You don't have to memorize, or how do you implement this, but you know the idea, you know. They are doing something like this.
+They're trying to… Determ, this kind of cross-product.
+Take the, you know, cross variance.
+you multiply it today and the K days before. You take it.
+You take this.
+expectation, that means take average if you have multiple measurements, right? If this kind of process is stationary, right? Because XT itself
+can be reformed as well. Today, it goes the… I… days before, right? You sum this kind of P, right?
+Because today equals P days before. Make a linear combination, right? So you just replace XT by a sequence of history. In total, you have P history, right? Together. So you have…
+K days before and I days before, you want to calculate this cross Variance.
+That's why we did it before, right?
+And we found that if the day… if K days before and I days before, you get VK minus I cross-core product and AI, because that's what you ship AI, right? That's got the VK. So…
+this one, both sides, normalized by V0. V0 is the variance term, okay? So you get R1, this ACF1, ACF2, ACFP. So the left side corner is trying to say.
+R1, how today and yesterday similar to each other, right? How today and the two days before similar to each other? How today and the two days before similar to each other? And based on this formula.
+Today… how today and yesterday similar equals days, multiply it's A1, A2 to AP, okay? So…
+In terms of the details, you don't have to worry about how this formula… but… Basically…
+Emphasize a very useful strategy.
+That's what you need to learn, you know?
+That's the strategy for this kind of parameter estimations.
+It's very simple, but it's very profound, you know.
+They're trying to say, what's R1? How today and yesterday they similar, right? Do you know how to do this? Of course, right? You have all the time series, right? If you ask yesterday, that is very simple. If it's the XT times 3, if asking what's yesterday, just shift 1, right? You get something like this, right?
+So that's the XT.
+That's XT minus 1, right? You just shift 1. Now you want to calculate the cross
+product divided by the variance. That's very simple, right? After one simple, you calculate this cross product, cross product, right?
+For this one, because you have single one, you just drop this one. This one, the last one, you drop this, right? So you have this cross product.
+and scaled by the variants that target R1.
+R2 is very similar, right? You shift the tube, you remove the first two elements, and also remove the last two elements. You do the same thing, plus product scaled by the variance. Let's get R2, RP, right? So…
+the left side, you know how to do this. This one is also, you know, right? That's how you get a discount for ACF12 to P-1, something, right?
+You can easily calculate this one. The only thing that's unknown is A1, A2, AP, that's why you need an estimate, right?
+So, the left side, you know, this formula, this matrix, you know, this is unknown. In order to get this unknown parameters A1, A2, AP,
+That's only the unknown.
+Okay? In order to get this one, that's very easy, I just remove this one. In order to remove this one, I need multiple
+Immerse.
+Right? This one is gone, because something times inverse is identity, it's gone, equal this, right? So A1, A2, AP equals something inverse times this, right?
+This one is coming from here, I just moved it here, I take inverse.
+So, that's typically called the Euler-Walker equations.
+And this is obtained, again, just by…
+the function. You just call the function. You just ask AI to do this, or you can do this on your own. You should call the function, utilizeer function, okay?
+So that's how you estimate it.
+Now, let's summarize, let's imagine.
+you're given some time series. From the observation, from the measurement, you know this is the stationary times 3. Now you're wondering, okay, maybe this is AR, right?
+And, if this error, what's the order? It's AR1, error 2, air 3, right? Okay? Call function, ACF,
+Paul function, PACF, Okay, got it. You get a 3, okay? That means P equals 3.
+So once you get 3, you call another function, you know.
+User work equation, then they will return the result. It tells you AY equals blah, A2 equals blah, A3 equals blah, you know. They're given three values called the function.
+Now it's clear, right?
+So make sure you understand the process, and then you can call the corresponding functions. So, nothing you need to worry about. Everything is standardized.
+But when AI calls something, make sure that's what you want, right?
+For example, if AI directly recalled this ACF or PACF without the check in this kind of stationery, you have to go, hey, stop.
+That's not valid. Before you…
+you know, check this stationary time, so you cannot apply AR at all, right? Or, in order to get the AR,
+coefficients, they are trying to run some, you know, other estimates than you have the doubt. Why not use the Euler worker, right? It's very standard. So, something like that. So that's how you can utilize your guidance to net AI to leverage these efforts.
+In other words, a lot of boring technical
+You have to use some memory to do
+Then, you can diminish the impact.
+Because, think about it, back to 20 years ago.
+a lot of job, you know, is required to memorize very strict syntax. For example, SQL.
+very… you know, back to 20 years ago, Cisco will hire people, they ask you, you know, how do you write a SQL? Do you memorize the commands for different variations?
+If you can memorize, then you get hired. If you can not memorize, sorry, you failed.
+But nowadays, why you need to memorize? You don't have to, just tell me. Use your very natural language to tell me what you want. Oh, I want to join this table, right? I want to use blah blah blah. Yeah, you can say something, they will do it for you.
+I don't know how to join this, but that's very standard, you know? You don't have to worry about how do you memorize the syntax, how do you utilize this language to write this command.
+So the same thing were happening here.
+From what you analyze, what do you operate, what you plan this question, people can…
+very easily to identify what's your potential, what's your experience level. So that's why I emphasize, for this kind of time series, or whatever, big data processing.
+It's not about which technique you're using, it's really about how you're using it, how you think about the questions, right?
+Because this kind of shows, you know, the levels.
+For example.
+if you learn how to use time series, if some company, you know, Goldman Sachs trying to hire you to make this kind of high-frequency trading, but how do you know your junior or senior level?
+That's very easy, you know.
+If they are giving you some…
+non-standard data, that means you cannot apply the data to what I described right here. You need to do a lot of pre-processing, you need to do a lot of cleaning, you need to match a lot of missing data, you need to make a lot of necessary adjustments. Those are really open questions.
+Because it's not a standard. From the open questions, it's very easy to testify your experience or not.
+So that's why, when you utilize the tools, make sure you understand what's the limitation here, right?
+Otherwise, you know, if AI can do this, what you can do is not beyond AI, then why I need to hire you, right? You need to know something, AI cannot do it for you. For example, this kind of for alanite, this kind of, you know,
+Business intelligence, or this kind of, you know, high-level domain knowledge.
+That's your cutting edge, compared to the automated AI.
+So, at least for… you have time series, if this is stationary, if you assume this AR, you know how to estimate the order, P. If you know the ARP, you know how to estimate the A1, A2 to AP, right? So that's what it is. So what we left is, what happens if this is not stationary, right?
+Okay, so let's take a short break, we come back, because the other one is the real case. In the industry, in the real life, you never have this kind of stationary time series.
+For sure. All the time suites are very, really argive, very, very, you know, stochastic, very random, you know, so you have to use some way to control this wild animal.
+Okay, let's take a short break.
+Hello, can you hear me?
+Jude Eschete
+Jude Eschete
+01:06:44
+Yes.
+Rensheng Wang
+Rensheng Wang
+01:06:45
+Great. So let's continue, okay?
+So, we have the Elon Walker, okay?
+Now, we introduce another process. We're talking about the AR, right? Auto-reggressory model, you know.
+Because what we are trying to say is, AI model means today, equals… the history.
+And the P dates before, right?
+You got the AI, times this.
+and plus epsilon. So that means today can be described by the past, the P days. You make a linear combination, that's what you observed.
+And you may find, you know, a lot of times raised when you're trying to formulate this.
+Doesn't work in this way.
+In other words, You may say PACF like this.
+What does it mean? That's PA safe, okay? Don't confuse.
+When you have PCF next, what does that mean? You don't have cliff.
+Because when we are trying to use AR model to determine this order, you're expecting something like here, right? Like, sudden.
+That's where you get the P here. But if you don't have this, that means ARP model doesn't…
+Qualified to use to hear.
+So you have another possible… Moving average model.
+They're trying to say today, Equal to the history, noise, all the perturbations together.
+You have queued this before noise, together.
+And, you know, the interesting thing is, you know, they are trying to say like this, for example, for…
+The stock price.
+If nothing happened, there's no, you know, finance report released, there's no revenue released, there's no big news happens.
+And if everything is normal, you only have some random perturbations. So what do you observe for the stock price equals what? Equals…
+Today's perturbation and history perturbations Yesterday, perturbation.
+cue this before perturbation, right? That's random noise. You have this added together, that's what you observed at this.
+Nois pseudo.
+So that's the one trying to describe it, not today, to the history observation.
+But today, to the history, perturbations. So, they're trying to say, whatever you observe, the price dynamics, it's all the history, you have this randomness chosen, chosen every day together, that's what you observe. So, that's why you see a lot of jumping up and down, right? This kind of volatility is coming from absolute T here.
+So that's what you are trying to do. But the question is, how many days noise, right, that's called a cube, that's M-A-Q means?
+And how AR… and MA relevant each other?
+That's a good question, you know, because we already introduced ARP, now you get MAQ, right?
+Okay.
+Let me explain, okay, how this is, event.
+Let's imagine, let's use a very simple way, let's say P equals 1, let's use AR1 model. So you should have what? XT?
+A1? Yesterday, Plus, Absolute T, right? That's what you have.
+But again, what's yesterday? Yesterday equals what, A1?
+Today, before yesterday, right? T minus 2. Plus… epsilon t minus 1.
+Okay, now once you have this one, you get some…
+You see? At T minus 1, you can plug in here.
+So, after you plug in here, what do you have?
+So you have what? You get a… A1?
+A1XT minus 2.
+Plus… epsilon t minus 1.
+plus absolute t, right?
+Okay, so this term is trying to say.
+yesterday's stock price equals what? The day before yesterday, the stock price
+times A1, plus the day before yesterday's… yesterday's noise, right? Okay, so this one, we could further expand it to A1. Equals A1 square…
+XT minus 2.
+Plus, Absolute T.
+Plus… A1.
+absentee?
+Minus 1. Okay, let me interpret. That's XT, right?
+Today equals 2 days stock price multiplied with A1 scale. Plus, today's noise and yesterday's noise scaled by A1.
+Right? So that means today depends on 2 days before noise.
+And 2 days before stock price multiplier is something, right?
+But once you have XT minus 2 again.
+For this turn, we should have something…
+They say, what's XT minus 2?
+That equals A1.
+XT minus 3, plus epsilon of T,
+Minus 2, right? So you have similar situation.
+For this one, You need to plug in here.
+After plugging here, I want to show you today equals A1.
+Q.
+XT minus 3.
+plus epsilon t, Plus, A1.
+epsilon of t minus 1 plus A1 square.
+epsilon t minus 2.
+So this one is coming from, this trend is coming from this, okay? So now let's interpret this expression. Today's stock price equals 3 days before stock price times A1Q, plus today's noise, yesterday's noise, multiplies A1, 2 days before noise, plus A1 squared, right?
+And you can imagine, because I already see the pattern, you know, from XT, XT,
+minus 1, you know, I keep writing this, right? So if I keep doing this, I can imagine I will get something XT equals what?
+equals A1 to infinity.
+XT minus infinity, right? So that means long, long, long time ago.
+And the plus what?
+epsilon t plus A1, absolute t minus 1, Plus, A1 square… epsilon t minus 2.
+plus A1Q, Epson t minus 3,
+And the blah blah blah, right?
+And for this formula here, you say, A1, remember, for AR model, A1 is what? Less than 1, right?
+So A1 to infinity gets what?
+It went to infinity.
+So, let's get 0. 0 times XT infinity, right? So this one gets zero, so this turn disappeared, okay?
+After this one disappeared, what do you have? So you have XT, equals absolute t, plus A1,
+epsilon with T minus 1.
+plus A2, A1 squared, epsilon t minus 2, And, plus…
+blah blah, right? So that means, for AR1, today equals today's noise, yesterday's noise, 2 days before noise, 3 days noise to infinity noise, right? Each noise, you multiply with some coefficients.
+So, that's how you can reform the XT, today's observation, as the noise accumulation over the history to infinity.
+And you can treat it like, well, that's… we're talking about AR1, right?
+So that AR1, that means equals what? That exactly equals MA model, right?
+So you get the wallet. That's MA… Infinity.
+So that means ARP model, you can think about this MA infinity.
+If you have AR model, that means today equals all the… even if we need the history, noise, accumulated together, that's what you observed.
+And increasing here?
+Now, what happens? MA1?
+as you mentioned, what's MA1?
+If MA1, that means today, Equals today's noise, minus B1,
+Yes, there is a noise, right? So that's MA1 means.
+Okay, so what happens yesterday for MA1?
+So you have, yes, that there's noise.
+minus B1, 2 days before noise, right?
+Great. Based on this observation again, you see?
+you have… this, right? So you can plug in here.
+Okay? So that's why, based on this observation, you will say, okay, today, Equals today's noise, minus B1.
+Epson t minus 1, right? Epson t minus 1 equals what?
+XT minus 1.
+Plus, B1.
+epsilon of t minus 2.
+Right? So that means ego swapped.
+Absolute T, minus B1… XT minus 1.
+Foss.
+Another plus.
+minus B1 squared.
+absolute T minus… absolute T minus 2, right? So that means today, equals yesterday times minus B1.
+minus B1 epsilon t, right? So today equals… Today's noise?
+and yesterday's observation times B1. And the day before…
+Yesterday's noise times B1 squared, right?
+So that's fine, you know. What's absent t minus 2?
+Because for XT minus 2, That's what E equals epsilon t minus 2, minus P1,
+epsilon t minus 3, right?
+So… so for this one, you can plug in here.
+And similarly, you can expand this one, XT equals today's noise, Subject yesterday's observation, T-1.
+minus P1 square, And epsilon t minus 2, right, equals 1.
+Two days before, stock price.
+Plus, B1, absentee minus 3.
+Right? So that's why today's stock price equals today's noise, Pass.
+Yes, that is stock priced.
+Plus, Two days before, stock price XT minus 2, right?
+Plus, B1Q.
+Absolute T minus 3, right? 3 days before noise. So you want to get 3 days before noise? You should get XT minus 3.
+Right? Blah, blah. So you can plug in here. So, so on and so forth. What do you get? So today's stock price equals…
+Today's noise, and yesterday's observation, two days before observation, three days before observation, and all the history observation linear combined together, that's what you have today, right?
+So, when you have…
+Infinity linear combination of the history observations XT, XT minus i, so that means MA1 equals AR infinity.
+Any pricing here?
+So, in a short… Conclusion, you can think about it this way.
+ARP?
+equals MA infinity.
+And the MA cube.
+equals A are infinity.
+That means if today depends on p days before observation, that means today depends on all the infinity history noise summed together. So that's ARP means.
+If today depends on the past, the Q is noise together, that means today depends on all the history of vision taken linear combination. That's AR infinity.
+And increasing here?
+Now… You may have some suggestion.
+The time series is not AR, it's not A. Instead, we have ARMA, aroma.
+Arma model.
+So that means today depends on P dates before observation.
+At this, you call it AR model, right?
+Because that's the today depends on the few days before observation, you sum together.
+And also today, it goes a few days before noise summed together, that's MA. But if the day depends on both, that means ARMA, called the armor, PQ processor.
+So, you can think about it like this.
+What's AR? AR is… means… If you have Q, Ego 0, so that's ARP.
+Right? Because Q is zero.
+If you have P equals 0, So that MAQ.
+Okay, that's a special case. Generally speaking, you have
+ARMA model. Today's observation depends on history.
+observation also depends on history noise term. Noise term is the historical perturbations, how do this kind of time series random jump and dump.
+Okay.
+So… ARMA model is trying to…
+Describe this kind of stochastic randomness up and down over the history.
+So that's the formula. And again, this part is trying to explain this unless you have time to read, to validate. In reality, you only need… you don't have to do this. There's no way for you to write something like this. You just call ARMAPQ.
+You have a function, just call the function, that's it.
+the Omnivore's… If you know… ARMA, the order P or Q,
+you just call this function, they will return all the estimate parameters. They just return what's A1, A2, AP, what's B1, B2, BQ.
+Okay? Just call the function.
+Very simple, right? Save your time. You don't have to memorize that syntax, you don't have to memorize how you mathematically do you run the for loop, or you run this kind of, you know, data frame, or run whatever manipulations, right? There's no need.
+You just call the function.
+But on the other hand, you need to be…
+cautious, because it's very dangerous. If it's that simple. Why do they need to hire some real people, right? Just AI can do this, if it's simple.
+If everything's getting automated, getting simplified.
+That's no, you know, space for the human being to take this job.
+That's the same thing for the homework.
+You don't have to write your own way, you just call this function to make this parameters estimated for you.
+Okay.
+Here is a simple example to show if you really want to manually do this. Let's say you can manually validate something, right? For example, if you observe some time series, which is a stationary
+And, you use the A, C, F, PACF.
+you found that this is the AR2, P equals 2.
+And then, you can use either a worker to do something like this. You calculate this kind of for SF1, SF2, right? What do you mean, SF1? How today and yesterday is similar in terms of the dynamic range, right?
+How did they, and two days before, how they are dynamic in the actions, right? So that's R2.
+You calculate this one, You calculate this one.
+And A1, A2 is unknown, so both sides, you calculate the inverse, right, of this matrix. Then you get A1, A2, so you get some formula like this.
+And if you have time series, you plug in, you get this, this, and you ask me something like that.
+Okay, so if you have some time series, whatever here.
+and the AR2, and the estimate A1, A2… great!
+Because based on this one, you can predict
+Future stock price, right? Future times raise.
+If today is T, based on this one, you know XT plus 1, right?
+you just replace this, that's T, T minus 1 here, you get XT plus 1. If you know XT plus 1,
+And iteratively, you can estimate XT plus 2, right?
+So on and so forth. Then you can make a further forecast in the future.
+So that's… that's how you can utilize this technology to help you make a forecasting.
+Any pricing here?
+So, that's the example to show, but in reality, again, you know, most likely you don't have to do this. You just call the function, they will return this for you, okay? Just tell me, what do you want? You want AR2, or you want MA3, you know?
+I will return the estimate for you. You don't have to run anything on your own.
+Now, let's back to the original question. At the beginning, we said, right, you first make sure you have stationary time series. That's very strict condition. Very likely, look at this Yahoo Finance website. All the time series, none of them is stationary.
+That means I cannot apply this, or yes, you cannot apply.
+You cannot apply in this way. Why? Because you need to first convert your observation XT,
+to use some new time series, Y. Make sure Y is stationary.
+Otherwise, you cannot apply anything here.
+So what happens if not?
+Then, that's what we're trying to…
+Talking about, if the real time series is not stationary, what you can do?
+Let me switch to another… Fire.
+Can you see it?
+Okay. So, the typical model you can use is ARIMA, A-R-I-M-A model.
+In other words, in most situations, If you have something…
+Which is not stationary, what you can do… You can do this.
+you can take integrated. That means you have a given XT,
+you're trying to use XT, derive YT, equals XT, minus XT minus 1.
+So this subtraction, we get what? You will remove the trend.
+So, most likely, this will get some… for example, if X like this.
+Why we're very lucky to connect this?
+You say, compared to X, Y is more stationary, right? So that's the trick. You make a subtraction.
+And sometimes.
+Why is it still not stationary? So you make it a Z, T equals YT.
+minus YT minus 1. So you make the second order, you know, Difference.
+That's how you get the new Z.
+That means you can do multiple steps, you take the…
+Difference again, again, and again, we call it integrated.
+And you need to decide that you need to take one or two, three, right? How many in… difference you want to take. That's where you construct the new time streets. Hopefully, this is better for sedationary.
+That's very simple, right? If you have non-stationary, how you get the stationary? But you may have a… naturally have a doubt. Does this work for every time series? You may have very strange time series, right? Maybe this one doesn't work. Yes.
+you may have a lot of situations, even this one doesn't work. So what you can do?
+Now, this is the open question. In other words, we don't have a general solution here. That's how you differentiate you from the senior conversation to the junior conversation. This can be a huge gap.
+This really depends on how open-minded you are, how innovative you are.
+So, the general process for some time streets, which is not a stationary, which you want to move to the stationary, you need to do a few things. First.
+where you observe this time series, which is not stationary? In other words, in other words, for example, this one, you say, well, you say this can trend, right? So that's why you can utilize, integrate, take a difference, you can remove this trend.
+And if you are seeing something.
+Say, if he sometimes needs to make this.
+you doubt that maybe this is the log distribution, right? Exponential increasing. So, if possible, you may have, from XT,
+You convert it to… YT.
+equals… log.
+XT.
+So that means you, hopefully, if you say X is getting growing, growing, naturally growing, growing, right? If you're growing very fast.
+or something, you know, maybe from X to Y, you take a lock.
+You're trying to convert this to some consistent, stationary, volatility range.
+And, if you ask me why you slog, I'm saying this is not general, okay? Can be anything, so that's an open question. Depends on your observation, depends on your thinking.
+you have to do a lot of reasonable, necessary manipulations. You need to define… you need to define some new function to map X to Y,
+X is not as stationary, but Y should be closer to stationary?
+You can be… you can be any function. YT is a function of XT.
+Can be log, can be square root.
+Can be, you know, reciprocal, can be, you know, some reasonable other.
+functions is a really open question. Depends what exactly XT looks like. Warriors. Look at this, right?
+Depends on this kind of shape.
+Then, you need to find out what's the right why you should be.
+Once you convert from X to Y, if Y is the stationary, then all the following is a piece of cake. As long as it is readily stationary, the following discussion will be more standardized. Just use the regular, you know, defined arrayment model. You can try this, you know.
+So that's why people genuinely ask you to make some necessary observation to massage the data, to observe the data, to try different… which kind of nonlinear mapping to change the distribution, to make this the accordingly
+close to… Stationary distribution.
+But you have to use a very concrete example to make a discussion. Just like I said, right? There's no general solution. You can always say, oh, for any signal, I just reapply this formula, then magically you can resolve this issue. No.
+Sova, any questions?
+So when you're using this function, you know, you just call this function, and then you need to put some PDQ are 3 parameters. P is the number of the lag observed, right, in the XT. How did they, relevant to P today's observation.
+Q is how today, relevant, Q days before random noise, right, that's the order for moving average. D means for the current time series, how many raw
+observation should be different, right? From X,
+you get XT minus XT minus Y. That's called Y. From Y, XYT minus YT minus 1, you get a Z. That's called a second order difference, right? D equals 1, D equals 2, 3, so on and so forth. You can bring multiple, and see what happens.
+You can choose some of them as 0. For example, if I make a D and Q 0, that's the pure AR, right?
+If you make a… P and D is 0, that's the typical MAQ.
+Right? Something like that.
+So here, it's trying to explain what do you mean this integrated D. So for D equals 1, that means you have the first difference. You want to use X, you get Y.
+And you are, instead of use X to fit arrema, you are trying to use Y.
+to feed Arima, okay?
+Right? Because once you convert from X to Y, Y equals the P days before, and the Q days before noise, something like that. If Y is still not a decision rate, you keep doing… make it D equals 2, from Y, you get to Z, you apply… now you apply Z to the…
+I'm rumbled, so I'm saying good at that.
+So that's the meaning, okay, for 0. If a peak goes 0,
+you reduce the integrated and moving average, right? If D is 0, that means
+Arma. If you cube zero AR, right?
+So, so-and-so forced you, okay.
+So, typically, when you are trying to apply this modeling, you want to explore in the analysis.
+Because exploring what that means. You want to know how the data evolving over time. Did you see any trend? Is… is the…
+Decrease and increase exponentially, or locally, or some reciprocally, you know, you want to observe some reasonable function to match the mapping relationship.
+And from then, you want to make some mapping to make sure it's stationary disputed. And from then, after you get the stationary transform, then you can fit the model, and then you can diagnose the measurement.
+May you, you may get some, you know, iteratively again, again, to measure.
+Now, the last surprising here.
+If you have time series, let's say you already say stationary.
+And you are trying to apply the Rhema model
+But how do you know it's good or not, right?
+Because I can use aroma model 1, Model 2, you know, different students may have different,
+Assumptions. You may have different model.
+How do you know which one is better?
+Right?
+So that's a question I will leave to next speaker, because I want you guys to play with some data. First, I will explain how you can evaluate this model.
+Okay. So, I will leave some minutes for you guys. Any questions? But…
+So I will stay here for a while, so that's all for today's lecture.
+And I hope the next, well, this coming is a long weekend, right? I hope everyone, you know, enjoys a long weekend, you know.
+Have fun, okay? Take care.
+Ryan Hu
+Ryan Hu
+01:40:18
+Thank you, Professor.
+Rensheng Wang
+Rensheng Wang
+01:40:20
+Sure. So, I'm still here, you know, if anything you ask, you know, just talk to me again.
+Thank you, everyone.
+Thank you. Take care, yeah.

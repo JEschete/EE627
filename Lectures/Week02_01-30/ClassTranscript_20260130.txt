@@ -1,0 +1,649 @@
+Rensheng Wang
+Rensheng Wang
+Hello, everyone. Can you hear me?
+Brandon McFarlane
+Brandon McFarlane
+00:00:08
+Yes.
+Rensheng Wang
+Rensheng Wang
+00:00:09
+Great. Okay. It's a good Friday afternoon, so…
+You know, as usual, before we start the session, does anyone have any questions
+You know, anything about the course, the assignment, the homework, or the test, or whatever, you know.
+Jude Eschete
+Jude Eschete
+00:00:46
+No questions, just saying that it's nice to have another class with you.
+Rensheng Wang
+Rensheng Wang
+00:00:53
+Whoa.
+One second, okay, let me… more skilled.
+Jude Eschete
+Jude Eschete
+00:01:00
+I was in a 628 last semester.
+Rensheng Wang
+Rensheng Wang
+00:01:03
+Oh, okay. No wonder, yeah.
+Jude Eschete
+Jude Eschete
+00:01:06
+Yep.
+Rensheng Wang
+Rensheng Wang
+00:01:07
+This week, we started to put the first assignment, so the last week, there's no homework assignment yet.
+Tomorrow, you will say, or tonight, or tomorrow, you will say to release the homework one, relevant to XGBoost.
+Anyone else?
+You can either speak out, or you just type your questions, concerns in the chart window, either in public or in private messages. Either way should be fun, you know.
+If no more questions here, so I will proceed to our lecture notes. So, this week.
+we were starting to talk about the XGBoost.
+And in XGPUs, you know, The most important thing is not about how to use this one.
+We will have some extended discussion here.
+we have, you know, planted a few, items in this class. One is how to use this, right? And two is why it's, you know, it's how…
+Why?
+And the 3 and the 4, we are trying to cover very special situation.
+Me some value.
+imbalanced value.
+So, in other words, the first two items are very ordinary discussion. It's trying to help you understand why XGBoost is popular.
+Then, we will have two specific discussions relevant to
+missing value and imbalanced value. Those are… the height… frequency… Interview questions.
+this is easy to understand, right? The majority of the technology company, or AI company, or financial service company.
+Data are majority, you know, resource asset.
+You will have tons of opportunity, you know, to make this open question, to testify how qualified, how experienced you are in this, you know, big data analysis field.
+Why trade-ins, they are more like open questions.
+You are required to put some examples, to have extended discussion, to convince people you know how to work on this kind of special situations.
+The typical, you know, trap is, you know a lot of machine learning.
+methods, approaches, and you feel you are very confident, right? But the situation is, in reality, we never have this kind of idea, vanilla machine learning crisis.
+It's not like, oh, I have data, ready data, run the model, get the result, a few seconds. It's not like that.
+When you get the data.
+you need to specify a lot of efforts on exploring the data. So that's the open question. Depends which kind of industry you are working on.
+So that's why, in this class, we are not trying to say, how do you use this? It's more like why this works, and how you take some very specific, you know, technical discussions.
+The first one we're talking about XGBoost, right? Let me put it this way. If you are
+Not sure about the machine learning field.
+If you are… First one, to receive any assignment from industry.
+If you're wondering, do I need to use the logistic regression, or random forest, or, you know, decision tree, whatever?
+The simple answer is, if your data is structured data, that's the majority of industry.
+you prefer to use XGBoost. That's the only one on your top priority.
+Because all… The conventional machine learning method has been
+integrate to XUBoost, so you can use XBoost as the one dominant option to try.
+So that's why XGBoost is also a major
+You know, hot topic for this kind of data engineering interview, for instance.
+In the following, we are trying to explain why this is powerful, okay?
+Because XGBoost is a decision tree based on. It's working on this kind of typical structured data.
+If you have unstructured data.
+Then, this one will be resolved to 6 to 8.
+One typical, like, image, it's unstructured data.
+Natural language processing.
+unstructured data. Those… those structured data is more like, you know, the typical table.
+Excel file. You know, specifically, column meaning. You know exactly sample space. You are trying to map this kind of information to the ZADA, you know.
+Results.
+So, in that stu… In that field, We have two branches.
+People typically try to testify if you're qualified for data engineer, or for data scientist, for data analyst. One, it's focused on the feature engineering.
+Unfortunately, this, again, is open question, just like I explained in the last lecture, right? So that's the one place to identify if you're in the regular ranking.
+Or you should be a more senior ranking for your conversation.
+That's very easy to testify. You cannot just, You know, to read, memorize.
+to copy some solutions. This is a very dynamic, very open discussions.
+So that's the typical reason to how you make the feature engineer.
+Another one is how to make these kind of models and actions.
+So that means if you have the feature, if your data is set up, how to use the right tool to get the right solution? If you have no prior experience or prior knowledge.
+So XGBoost is always the top selections. So we are focused on the item 2 here. Item 1 will be extended to the future discussion.
+I can explain what you mean, feature engineer here. So that means you already have some table here, right? For example, you have, you know, every individual column indicates something, you know. If you have a system, for example, the typical
+classification. You want to predict the 1 or 0. You want to, based on the consumer records, you are trying to guess if this, you know, this customer should be married or unmarried, single or married, right? Or this one is men or woman, or this is the senior people, or junior.
+Or this, you know, how likely this record should indicate that you will die in the next 5 years or not, right? So you have a lot of,
+clarification discussions based on individual features. That's called, you know, feature predict image guess, and this is the response factor.
+In that situation, if you are trying to expand from this, you want to expand.
+That means you want to generate something new.
+information columns, that's typically called the feature engineering. You're trying to generate from existing features some new features. You're trying to expand
+You're trying to expand, you're trying to make connection, you're trying to make this kind of weight.
+That's typically called feature engineering. So, in our discussion here, we assume everything is already done. Doesn't matter if it's the original data or it's already expanded by the feature engineering. But the data is here, we're trying to make model selections. So here, that comes with the XGBoost. Everything is ready here.
+Okay? You just use the tree base step.
+This is a trendy telling you, you know, why it's popular, right? It's extremely gradient boosting.
+And it's an open source tool, it's widely arranged application, it's tree-based. Tree-based model, that means you have a very good
+explanations.
+Because it's a tree base, right? Tree is more like a decision, decision tree. So this tree structure can help you understand how you can interpret this data.
+So that's the difference between the data engineer and… between the feature engineering.
+If you have a trade-based model, typically people want to show this to client, to your user, because they want to explain why this works, which one makes more weight, which one makes more sense, something like that.
+Unlike this kind of deep learning.
+In the deep learning, it's like black box. If you get a good one, typically you don't have very, explicit explanation for some features. Sometimes you have, but sometimes it's very, you know, inexplicit. That means it's difficult to explain.
+As long as it works, you know, people trying to exclude this kind of
+possibility space. They don't… they will lose this kind of explainable space.
+Also, XE Boost is because, you know, it's famous, right? You've got a lot of winning models, you know.
+The initiation for XGBoost.
+It's a decision tree.
+you have so many different columns. Based on each feature, you want to make a split trade. You want to make different decisions, okay?
+This one is also just like, you know, in the real life, a lot of,
+Complicated business decisions is also based on multivariant information resource, right? When a lot of information combine together, you have to make an adjustment that is trying to help you to avoid this kind of obvious, you know, trouble.
+Let's say, this example, trying to say, if you're the hire manager, right? If you're taking an interview of multiple candidates, there are qualifications.
+you must have some baseline requirements. Those baseline requirements automatically help you field up something unqualified?
+Like, this is the senior. I need at least a master's degree.
+or PhD. For master, at least 5 working experience. You see, these kind of things can help you filter a lot of information to focus on as more qualified.
+when anything above this level, then you can make further selections, and so on and so forth. You're trying to further to find the unique, you know, qualified
+Candidates.
+So each step, when you're trying to evolve in this control-based step, you can think about it's a…
+You know, integrate the interview process.
+if you think about, like, what's decision tree, you know, decision tree, you can think about this week. Every hire manager, you have a bunch of criterions, right? You don't have a simple, job role. Typically, you have… nowadays, you know, every single job role, hopefully you can…
+Manipulate everything, you know everything.
+It's not like all the days, you know, if you are the secretary, they only require you to make a typing, rating email, that's good. But then nowadays, almost like everything. Start from the document processing, data processing, data visualization, you know.
+Diagnosis.
+Blah, blah, you know, you have so many things around you, make a multi-task, multi, you know, responsibilities.
+So, a decision tree, in this scenario, you know, is really trying to… Mimikaika.
+a hire manager, right? You interview candidates based on multiple criteria on your own.
+Right?
+When you step from decision tree to begging.
+So, you are trying to say one interview.
+In the year, maybe it's not reliable, because you must… you may have some BIOS
+Right? Because you are graduated from computer science, so you are more oriented confidently with something relevant to computer science. Or another
+team member is a graduate from business school. He has very good business, you know, intelligence sense, but he has less solid technical background, right? So that's how you differentiate, you know, you're trying to avoid this kind of bios.
+The bagging is trying to say, instead of one single interview, you're trying to get a panel, a committee, interview committee, a group of people. So.
+The back-end or the following bootstrap, you know, are trying to aggregate
+Multiple combined input from individual individuals.
+Decision tree, just like you have one set criterion.
+Back in just seconds, you have many different decision trees, because you're trying to use different
+criteria, just like you hired multiple different interviews, right? You have very different background people trying to test by the same candidate.
+And all the information you want to combine together, you make a fusion, make it for the final decision, you know.
+For example, you have…
+10 interview people to test the candidate. If 9 of them are very happy, loves… they love this…
+you know, candidate, then you get 9 over 1, so very likely you will get hired, you know. If you get 10 over 0, then that's even better, that's the ideal case. So you are trying to make sure when you're trying different variety of criterias, most of them can
+Give you a systematic, statistical, Converged performance, that's the backend.
+Let's back the intuition for this method.
+If you're trying to make your method is robust, What do you mean, robust?
+when you're training some data, now I have very good performance, now I switch to some new data sets, then very likely you get very bad.
+That's how you get this kind of overfitting, right? From one dataset, it works well, switch to another data set, not good at all. Badding is trying to help you, you know, because they are trying to test a lot of different strategies, different criterions.
+And, you know, I hope… I don't know which one is more dominant, but I hope, you know.
+you tried as many, then you're trying to statistically to make a decision. Just like I said, if I only have one person make an interview, I was worried about maybe you have bias. If you say yes or no, it's very easy… it's dangerous to make a decision, you know. So I prefer to make a committee. More people.
+If you have more people, then you have more chance to, you know, exploring the different aspects of the candidate. The back end is very similar. You're trying to testify different criterion.
+Different procedures, and trying to find… if you find some statistical conclusions.
+What do you mean, statistical conclusion? For example, I have 10 people test your, you know, he's a software engineer. If 9 of them just say, this guy's very good at coding, right? That's called a statistical…
+you know, observations. Just, like, a majority of them have the very similar feedback. They say the coding is very strong. If that's the case, that's a very solid signal to help you make a decision.
+So that's why we need a backend instead of individual decision tree.
+Now, the random forest, it's a…
+It's in other words, you know.
+You are trying to make it random.
+So that means… you have a lot of features, right? We are trying to…
+Randomly select a subset of features, just like, for
+the individual processing, we are randomly say, oh, maybe I will test your, you know, coding. Maybe another guy coming in, they say, oh, let me test your, you know, behavioral questions, or…
+You're running a… someone interview coming here, oh, let's ask you a question about the system designs.
+So, they are randomly connecting. When you're randomly selecting this one, you know, they are trying to avoid this, kind of, for overfitting. They are trying to find the more generic.
+Statistically independent, this can look for strong signal that's gonna help you make some random forests is powerful.
+What happens if you choose something wrong, randomly select something wrong? That's fine, because you are selecting as many, right? You are selecting so many subsets. So, if you have so many subsets, if you choose one or two bad features, that's okay, you know, because definite is not dominant, right?
+So you are hopefully, by selecting a lot of random sub-features.
+And the majority of them should be giving you some positive indicator, then that means is a strong signal. If when you're randomly saying something.
+If the return signal is also random, people typically politely say, oh, it's a mixture, so that means someone's good, someone's bad. If that happens, then it's very doubtful. It's very likely you will get a reject. So that's how you can make a judgment for the random forest.
+If you're in a forest, you get some very mixture that, you know, responds, good one, bad one, good one, bad one, then probably this is very bad, you know.
+Now, let's switch to boosting. When you have boosting done.
+It's really trying to, you know.
+have this kind of evaluation, feedback from the previous one. Just like if you have interview, right? Let's say in the morning at 8, you have the first interview 10, second, afternoon 2, third one, afternoon 4,
+The first one. In one day, you have sequentially take an interview. So, each time, when you finish the first interview, before the second interview comes in, the second interview will ask the previous interview, hey, how's it going with the candidate? The first interview is, oh, oh, this guy…
+Technically, he's very strong, but he doesn't know how to make communications. He didn't say much. Okay? Now you get some impression, right? You know how to make a next interview. So that means it's trying to boost. It's trying to make someone very, you know.
+subjectively, very, you know, specific adjustment based on the previous feedback, right? I'm not trying to
+make it blank, minus side of Q.
+big interview with you. I read Hama.
+get some prior knowledge. The prior knowledge is the previous feedback.
+After this one, if the servant come in, then I say, okay, from my experience, from my, you know, process with the candidate, I feel he's very good at coding, but he's not good at expressing, and he looks like a very,
+unconfident, something like that. So that's my, you know, feedback to the third one, right? So…
+The third one, the fourth one, so on and so forth. Each one, when you get a later.
+And later, following interview, you should collect more and more feedback from peers, right? Then you can have more specific questions. You know how to avoid these kind of situations. You know how to have some very specific, you know, clarified questions.
+So that's called boosting. It's trying to make sequential evaluation based on the purest feedback. So that's the boosting, okay?
+The gradient boost, you make a little bit… this one is trying to say, based on the period, you know how to make a gradient adjustment, so that means you learn how to make an adjustment speed.
+So…
+this one is trying to help you, you know, easily to, you know, separate this kind of less qualified candidate, okay? Because you are trying to
+Use the gradients, that means you evaluate how bad Your…
+evaluation matrix is away from what we expect, ideal case, right? For example, we require you very good at coding, because that's specifically the software developer position, but your feedback
+from the previous one, it's far away from coding. Like, you're very good at explaining questions. You're very good at…
+communications, but when you make a coding, you are very awkward, because you don't have experience at all, something like that. So that means you know the gap, right? You know the arrows. So this one would be treated like the gradient.
+Listen, you're trying to fail this to the next interview, to say, does this gap?
+The coding requirement gap is still qualified for you to make the next round interview or not.
+So that's… take these ingredients. You are trying to measure how different the distance between your required and the current ones.
+So, XGBoost.
+You know, it's called extreme ingredient boosting. You know, why?
+you have a few things you can explain, because it's not a simple algorithm. You can think about it as a…
+Ensemble the system.
+Because they are not only trying to measure
+the distance between your desired criterion and your observed qualification criterion. You not only say the gap, and also trying to say how the gap is changing over different
+Qualification space.
+So, not only trying to find the gradients, and also trying how gradients is changing over different space.
+So that's why, not only for the first derivative, you're also trying to measure the second derivative.
+Just like, when you are trying to say, speedy change.
+Right? The first derivative, you can think about this. And the change of speed… the change of change of speed, you can think about the second level.
+derivative. So, you have gradients, you have a Hershins. So, XGBoost is trying to take it when you boost, so that's why you get a very extreme gradient boost. Not only measure how far the
+what do you desire without, and what do you observe, and also say how quickly this kind of distance will be changing. You will get further.
+Or you get very quickly close, or you gotta very slowly converge, right? So, not only distance, and also you care about how distance is changing over time, so that's why you have second order.
+Greetings.
+Second-order derivatives in XGBoost.
+Of course, this one is also take advantage of the both hardware or software.
+You know, so that's why you make this kind of implementation is really, you know, extremely efficient.
+Any questions so far?
+Any extra discussion you want to meet. Otherwise, you know.
+If you want to use it, just one sentence, just one command, you can write it. So, but we are trying to understand why this works and how this performs well, right? So that's the point.
+Now, this comes with a few things. Let me try to explain.
+Why this thing?
+Uniforke.
+This is a very typical interview questions, because from here, you are…
+You know, very easy to give the interviewer some topical following questions.
+let me think this way. It's not about… the question is really important, it's really about, from this question, I can easily expand it. It's not like, say, oh, 1 plus 1 equals what? 2. Then, what I can choose next, right?
+But here, as long as you can answer this question, why XC Boost is performing good, I don't care about how you answer it. As long as you can say something, I can very easily make extended follow-up questions.
+For example, if you are the one trying to make an interview, you can say this is gonna paralyze them.
+That's very important, you know, because you may have a lot of data, right? You have a lot of features. If the data size is huge.
+parallelize the trade build. It's definitely… it's a huge benefit.
+So you don't have to wait a sequential.
+feature or tree building, right? You can build up…
+three parallels simultaneously. That's how you can utilize the CPU or GPU processing.
+Secondly, you know, All the trees, you can use plumbing.
+So that means they can easily identify which…
+which kind of features, which kind of measurements are more robust? Which kind of thing is more oriented to noise? So that's why you keep trying to follow the tree, the main branch.
+Because we have a lot of…
+tree structure, right? You have the data. When the data makes feeding, like, the tree branches, right? Some of them get less important than others, so you're always trying to follow the main branch. The same thing for the tree, right? The tree have five branches.
+you're not treating the five simultaneously, significantly or equally important. You're only trying to find that maybe two or three are
+bigger, thicker. If you have very… two are very tiny branches, you can ignore. You know this will contribute less, so you can get more efficient, okay?
+This one is cash awareness. What do you mean cash awareness? You know, when you do this kind of for XGBoost, you have a lot for comparison, selections, combinations, so you may have a lot of redundant or repeated calculations. Repeatory calculations means
+A times B.
+If this one, you didn't ask 100 times, if you didn't do this kind of cash awareness, that means you need to waste time, right? When A times B, calculate. A times B, calculate. You already keep repeating, calculating this again and again, right? Just because you don't optimize.
+So that's very similar.
+philosophy for Transformer. You know Transformer. In Transformer, you have a lot of Kiwi cache.
+What do you mean? That means if you have a multiplication of some measurements, make sure they can be shared. Make sure you don't…
+You know, waste your energy, your resource to repeat this again, again, again.
+So that's why when you design this algorithm, you have to be very reasonably arrange this kind of cache, make sure something… you will use this again, right? So don't throw away, keep it. Next time, if you need it, direct it, call it. You don't have to recalculate it.
+This can, especially when you have some…
+Recursary combination, back and forth, back and forth, you need to compare, right? So you can save a lot. How much you can save? In some situations, you can make two order of magnitude efficiency. That means you used to run 100 a second, and now you're only 1 or 2 seconds, something like that.
+This one, again, you know, for interviews, if you can say something like this, they will know exactly how you are knowledgeable in this space, because this one you have
+XGBoost automatically implemented this kind of regulation to avoid this overfitting.
+if you are using conventional machine learning, people always say, hey, how do you avoid overfading, right? Because they worry about maybe you have too many features, but too little data space, or you may have too
+you know, complicated model, but they actually have too, you know, little data to support it. So you may end with some overfitting, but how do you overfitting, right?
+the…
+automatically appended this kind of regulation, so you don't have to explicitly say, oh, from Xe Boost, I need to add some extra column to make some extra regulation. No, you don't have to. They will take care of everything for you. They will make a regulation.
+Okay, so that's one, right? Think about… if you have someone…
+Model automatically take care of this overfitting, you will be so happy.
+You can never be more than happy than that.
+So that's why it actually boosts the performance so well, right? You… typically, you can avoid a lot of, you know, routine data processing, or feature processing. You already have this.
+This one, you have this kind of handling of missing data.
+I know, you know, if you are… go back to some year ago, when you're trying to use machine learning, do any…
+accuracy and analysis, you will find very painful is if the data is dirty. What do you mean, dirty?
+You have some missing data, so that means some user, you don't have information for this.
+For example, you know, you're trying to say, hey, for every single ID, you're trying to say what's your name.
+What's your age?
+What's your salary?
+And, what's the education, blah, blah, blah. In that situation, you may have some user, you know.
+They have age.
+they have education, but they don't have salary. Some of them have salary, some don't, you know. If that situation… if salary is a very important feature, but they're missing what they can do.
+In the old days, for these junior analysts, they can do it a very simple way, delete the data. For any record, if you have some missing data, I forget about it, because it's missing, it's incomplete, I don't want to use it, just remove it, okay?
+And the worst situation is, if you have some missing data, it's very easy, you cannot load it. If you don't delete it, then, you know, you cannot load it.
+Why? Because…
+When you are using the MetLab, for example, there usually are some situations, if you have a missing data, MetLab returns error.
+just say that, oh, the data format is not comparable, because we have some missing data, I cannot do it again.
+So, we typically, we used to have some, you know, embedded library to take care of the missing data by putting some default value, or putting some,
+empty value, or put some zero, or blah blah blah. But we know, right, that's not an easy job. Either, whatever you put, you put a zero, or you put average, whatever, that's not the right way to do it. It's only better than nothing.
+But for XGPUST, when you have this kind of missing data.
+They are trying to take care, but maybe you're wondering how you can take care of the missing?
+that's relevant to the decision tree, because the tree structure, right? For the tree structure, you always have this kind of split by branch split, right? When you make a branch split, they are trying to smartly estimate, okay?
+If you have missing data, you want to make this missing part to the left or right. They are trying to evaluate, and very, you know, intelligently to decide it go to the left or right. If left… if left side data is
+You know, if the data is…
+It's way more than right side than
+what do you want… where do you want to put that? You want to put the missing data to the left or right, right? So most likely, you will put the missing data to the left side, because left, you have more information, right, you have less information. So you want to decide this kind of missing data. So, execution will automatically intelligently to make this kind of a smart switch.
+To avoid this kind of missing data trouble.
+Number one!
+If you're missing data, you don't have to do anything.
+Wow, unbelievable, right? I used to have this trouble, you know, if I need some data, either I remove it, or I need to replace it to make it readable.
+I know it's a really hard deck, you know, but for X equals, that's fine, you don't have to. Number two, remember?
+For most,
+Machine learning method, when you have some categorical data, that's also really a headache, right? Just like you have education level, you know, oh, you have the PhD, you have the graduate, you have the college, you have the high school, or you have others. Those are the really different categories.
+you can treat it like it's not a numerical. It's not a simple string. It's really by different, you know, levels.
+So that's why, for this kind of categorical data, machine learning people say, oh, I cannot do it, you know what, I can take care of numerical data, but when you say PhD, master.
+The computer doesn't mean… what does it mean? You have to convert to a number, right? You have to tell me, just like the age, like, the salary, like, the education years. This… because they are pure numbers. Computer is good at the numbers. When you say some PhD, master, ecology.
+they don't understand. You know, you have to convert to something, so that's why, again, you need to have some… you need to take some very painful processing. You need to convert this kind of categorical data to something numerical.
+For example, man, woman, you say, oh, man is one, woman 0. At least you…
+replaced by binary numbers. You cannot just directly say man-woman ascending to the machine. Machine doesn't know what you mean, man-woman. But you say 1 or 0, then they know this is the two categories. They've been also different categories.
+Two different groups.
+So this kind of process is really painful, headache, but for XC Boost, that's fine, you know. As long as you market these categorical variables, they know what it will do, okay? They will do this kind of thing for you. You don't have to take care.
+Now, I already see that a lot of, you know…
+you know, features to help you saving, right? It's so good. It's really trying to, you know, remove this kind of redundant, you know, boring, tedious data preparation, data cleaning, right? Actually boost, they're trying to
+Take care of as many, you know, diversify the…
+raw data as much as they can. You don't have to worry about this kind of pre-processing.
+And also, the last one here, you know, you have this kind of cross-validation capability. In other words, when XC Poost is trying to give you the solution, before the output solution, they already make internal
+cross-validation. That means you don't have to worry about overfitting before they say the performance. Internally, they already split these data sets to training data, testing data, validating data, so they already do this for you, so you don't have to manually do this.
+I remember when you have this kind of logicity regression, we typically say, oh, you have data sets that make the 70…
+30% split. And 70% as training, and 30 or 20 as the testing.
+So, that's why you need to manually make a random split, but for X equals, again, they will do it for you, you don't have to worry about this.
+Any questions so far?
+If no question, Jason, no, that's fine, you know. It's just in the chart windows to make sure we know you're still here.
+So here, you already said, right, you paralyzed, okay? So this paradise, not only for in terms of softwheel.
+manipulation, also in hardware. In other words, if Axie Boost deployed it to some cluster, some high-end server, they know how to make this kind of parallel processing, you know?
+Why? Let's think about it. If you have…
+100 features. That's a small number, right? And you want to make some subs… subtree features.
+let's say random is a negative 20. Well, come on. From 100…
+You want to make it 20.
+Do you know how large this number can be?
+I'll give you a few numbers. It's the beginning level? Is the thousand level?
+And it's a bidding level, or even a training level.
+Just estimate how big the number is.
+The answer is, it's way more than 1,000. It's way more than 1 million. It's way more than 1 billion. It's way more than one training. It's way more than 1,000 times 1 training.
+Even more than that, think about it. You ready times thousands by training is still too small compared to these combinations.
+You can imagine how big it is, right? So that means, if you really want to make this random selection of this one, you have to make the parallelization.
+very efficient. Otherwise, that's almost impossible to implement this. Of course, for this kind of parallelization, because you have the special tree structure, they have a pre-valued
+So, when you make this kind of subset, subtree for me, you know, they know how to make it.
+quickly and effectively. They're not trying to scan
+all the subset of select selections, because that's really overwhelming. Some of them really doesn't make sense. Definitely, you can avoid that.
+Okay, so that's parallel addition.
+The same thing for transformer. When you have a transformer, transformer, you have to make sure you can parallelize it.
+If you cannot prioritize them, then…
+you have very limited, you know, applications. That's… this is why Transformer is so popular, because
+When you have sequence processing, before this, you have long shot, you know, LSTM, you know.
+LSM, you know, long-short processing model.
+But when transformer comes here, transformer resolves this kind of sequential processing in parallel. I don't care how long sequence it is, it's just processing
+simultaneously.
+In parallel. That's how you make this process so efficient.
+Okay, so that's a very critical property for this model.
+System property, right? As ready, trade priming and hardware augmentation.
+That's… that's the, you know… That's good to know, you know.
+Now, in terms of aggregation, you know, because this is relevant to hardware, so there's nothing you can, you know, to interpret. Here is a… for accuracy, you have organ… regularizations, sparsity values with the quantity, you know, cost validation. Regardization here, I already explained, right?
+How to avoid overfitting? You need to put a regularizer. In XGBoost, they put both L1 and LQ.
+Wow, that's good, right? Because we typically, when we teach this kind of regulation, we say either you take L1, L2,
+Now, I have one question here. I think I discussed it before. For L1, L2, for these two different Lasso and Rage recognizer.
+And which one you want to prefer? Let's say you want to make some feature reductions.
+For feature reductions.
+which one you want to prefer? L1 or LQ? Can you type your answer in the chart window?
+Because that's the typical question people trying to ask, you know, for the interview.
+Does anyone want to write the answer? L1, LT? Which one do you want to choose? Or you want to choose both?
+When you're trying to make feature reductions, reduce the dimension.
+If you don't know, just say, don't know, that's fine, you know, at least I know what's suggestion.
+That's one, let me tell you, okay? Even people taking interviews, ask you L1, L2, the major difference, or… because that's determined how you want to use L1, L2, right?
+L1… You're gonna fast!
+feature drop. So that means you go very fast to make some selections.
+You will drop some… you will drop a lot of features. You only pick this…
+you know, most important features. If you want to have this feature dimension reduction, always L1. L1 can quickly get this reduced feature dimensions. L2, you get much slower.
+So, before I say this, let me explain what you mean, L1. L1 means, you know, make absolute value of the parameters. For example, for logistic regression, right, you want to say, given the input X1,
+X cubed, X3.
+you want to… how do you predict the, you know, response vector Y, right? For logistic regression, what you want to do is, you want to have this kind of E to…
+You know, or just… Lodge it.
+loyalty to function.
+over A1… X1 plus… A2.
+X2.
+plus A3, X3.
+plus B.
+Okay? That's a lot of function, okay.
+So that means you make a linear combination of input, then you make a large function. Large function means you have
+you know, ET minus X over 1 plus ED minus X.
+Okay.
+So this one will be mapping anything from
+Map to infinity, infinity, the range, go to… from 0 to 1.
+Okay, so that's for the logistics. So for this logistic regression function here.
+X is input feature, Y is your observation. So, the model is trying to Find the coefficients. It's A1,
+A 2… a 3.
+Okay, so if you need to use L1 Nassau regularization, that means you want the plus nanometer.
+absolute value of A1, plus absolute value A2, plus absolute value A3.
+Okay? That's the… regulation L1, you'll take absolute value of your unknown.
+optimization parameters, so that's called L1.
+For L2, means Uplus.
+Lagrange in Nambda, A one squeal, A1… A2 Skrill, plus A3 squared.
+So, when you say 1, that means a normal 1. You say normal 1 is absolute value.
+L2 means the normal 2. Norm 2 means, you know, you take absolute value, right? You take a, sort of take a square, that's L2. So, L1, L2, L1 will be very quickly make a selection of subset. You make the dimension reduced very quickly. L2 would be much smaller.
+And why? I think in the future lectures, we will have a chance to talk about this.
+for this kind of a regularization. Why? L1 is faster than L2, so we will have separated the figure to make a discussion here.
+So, let's take a short break. We come back, we talk about this fastness, okay? So, this is also relevant to you, this kind of missing data. This is also relevant to you, this kind of imbalance of the data. So, this is also critical for interviews. They really want to ask you these kind of questions.
+you can never, by copy or cheat for these questions. You have to show your understanding. So that's why this is a very good exercise to work on this.
+So let's take a short break.
+Take a 5 to 10 minutes break, then I will come back, okay? Meanwhile, if you have any questions, try to feel free to write in the chart window. When I come here, I will try to address your questions and concerns.
+Hello.
+Can you hear me?
+Preksha Shah
+Preksha Shah
+01:04:26
+Yes, Professor, we hear you.
+Rensheng Wang
+Rensheng Wang
+01:04:29
+Great, thank you.
+So far, any questions?
+Preksha Shah
+Preksha Shah
+01:04:37
+No question. Thank you.
+Rensheng Wang
+Rensheng Wang
+01:04:45
+So, we mentioned the recognition part here, you know.
+Because this is the embedded, so that you can see you don't have to take any extra work. You just run this model, you don't have to take any extra, you know, regularization item.
+Second one, this kind of spark is a world… Because…
+A lot of models, if you have some amazing data, they refuse to accept it as input.
+Because for misdata, they don't know how to take care.
+That's very common.
+I remember in Math Lab, in Python, they typically have a, you know.
+some software to help you make some emissions, but I… typically, I don't trust this.
+Why? The reasons.
+For this kind of missing data.
+I don't believe there's one simple way to replace the missing data.
+Because how do you know the word to make the musician, right? If you're using various…
+you know, very hard decision. You are very… you say, well.
+Pre-programmed criterion to make missing them a doubt.
+So that's why we needed some data engineering people, we needed some data science people to help you to manipulate this kind of missing value.
+Now they say, for what reason the data currently is missing, some part of them, I don't have anyone, I really want to run the model, that's fine. Excuse, we do it for you. But they are trying to learn the missing data. What's the distribution? When I say distribution, that means
+When you make an ex-exposure, you need to make a trade.
+decision, right? You need to make a split on a tree, right? So this kind of missing, they want to identify where they make a missing, where you make a missing, make a mix… make a split, right? For example, for…
+H.
+You have some of the people you're missing.
+the age, okay? Now, if I need to make a decision tree over age, that means I say, maybe 30, I make a cutting point, right?
+So that means belongs… about 30, it goes to the left.
+less than 30 your age, go to the right. So that's how you split this tree here. But once you realize that you have a mission, then you need to be careful, because
+Typically, missing happens, what's the range? Does this missing happen for more than 30, or less than 30?
+If you find a lot of records have age missing, it's above 30,
+Then, you need to decide where you want to put this, right? You want to put the missing data in the left side, above Surrey, or right side.
+Actually, The short answer is.
+It's better to utilize which way you get the bigger impact. So they are trying to try both. They're trying to say, hey, what's missing to greater than 30. Say, what's that?
+performance change. Then you… Reverse, you put this missing to the right.
+decide, and say what's missing? You choose one, can give you the best, the better benefit than you decide. Okay, so this kind of for missing sparse
+awareness, it really depends on you are trying to balance, okay? You're trying left, or try right, that means you want to put the missing at the left, you want to put the missing at the right, as which one is better, right? They'll automatically do this for you.
+That's great, right? That's so good, right? So that's why, you know, a lot of people like this, you know. It looks like you don't have to clean the data. If the data is thoroughly missing, okay, do it. They can still do it.
+Another thing is they make weighted quantile sketch. So that means when you have the data, right, for example, you have a…
+age, again, let me use the age, okay? Everybody, you have some age here. They are trying to scan the H screen, so that's how you can make this quantile sketch. So that means, I want to understand the top 10%, what's the age?
+Zim…
+the least 10% of what's the age? The least 20% of what's the age, right? For example, maybe from 18,
+tune… 20.
+you have the first of 25% people. Then from 20…
+Till 30, you have another 25.
+If I'm sturdy.
+to 45, you have another 25%, so on and so forth, right? The rest is another 25%. You have four quarter split, right? 25, 25, okay?
+They are trying to understand the distribution.
+Let me ask you, why? Why do you need to pre-scan this?
+Threat is, once I understand the distribution in quantite, I know where I make a cutting, right?
+Because when you make a trade, right, that's where I didn't know to make some reasonable split.
+I cannot just randomly select, right? If I randomly select the 10, what does it mean? Everybody's beyond 10, right? There's nothing below 10.
+So that means the wrong decision, right? So once you have this quantitative sketch, when you make a split, I'm not just randomly split, I'm really based on some reasonable
+split. Maybe I will try to choose the speed close to the medium value, or close to the maximum value, right? So that this can split. You make it more meaningful.
+So these kind of things can be utilized multiple times, because once you wait, you…
+make a quantized sketch. You can repeatedly utilize this information in the future split.
+So now you understand, right? So X equals, even if you just run one line command, you have very sophisticated design behind it.
+This one I already explained, so I will skip here.
+That's the, you know, publication to show the proof, okay, how they make improvements, how they efficient, and so on and so forth.
+So…
+you're always trying to ask yourself, right? Do you need to use XB Boost? You know, your most suggestions, that's true, but in some suggestions, you need to think about it twice, okay?
+Why? Because XGBoost is very genetic. That means they can take care of this kind of categoric data. They can take care of a lot of numerical data.
+Especially, they're very good at this kind of categorical data, just like your education, your man, woman, you know, right, your country, or this kind of a categorical indicator. If you have a Q, numerical.
+it's still good, but you need to take a further, you know, validation or investigation. The reason is, for the pure numerical data.
+For example, just like Times 3, right? You may have extra space to make some feature engineering.
+It's not that straightforward to make this kind of splitting, so… so you need to be careful, so when you're trying to use XGBoost. But XGBoost, it really match a lot of real questions, right? In the reality, you have a very diversified quantitative, or,
+or categorical measurements, then that attributes is perfect!
+But if you have some special, you know, pure mathematical, numerical data, then you need to investigate, you know, exploring this kind of special property of your data distribution before you apply XGBoost.
+Here, you explain why it's popular, and how to implement it, you know.
+I know it's hard to read this, you know, if you want, that's just trying to give you some impression how they are trying to, implement it. But I can give you some impression. So, for example, G here is what? Gradients. Gradients just by difference, right?
+That means delta X, for example, right? The first level, okay. Every step, what's delta X?
+you have H, the Hershen, the secondary, second, right? You have delta X, over delta.
+Okay? So… That's the first derivative, the second derivative.
+not only have measured this gradients changing, you also measure the Hershen changing. So that's why it's efficient.
+In order to understand, you know.
+For example, for this one, right?
+You're trying to…
+find the minimal value, for example, here. So, gradients trying to say like this, right? That's the slope determined. Hershing means what? Given this slope, you want to make another one.
+you want to test, you know, how soon from here to here you will get change, right? How quickly this will change. Because this kind of for slope is not constant, the slope is varying, right? So how quickly the slope is varied?
+So they're trying to make the second order
+derivative, they are trying to get a Hershen measurement.
+For example, if this is very deep, Right? So from here…
+The gradient is big, but the Hershing tells you the gradient will be quickly Reduce to zero.
+You will not keep this forever.
+This is only… high gradients only exist for a very small range, and then quickly reduce to zero. So that hurts and tells you how quickly this curve will be…
+you know, evolving. So this kind of second order helps you understand how
+far, you should reach the next one, because you're trying to make an iteration, trying to reach the minimum point, right? That's the first one, you say, first step, you make an approximate here, then what's the next one? If you know Hershen, then probably you will take something here.
+you're trying to quaker. If you don't use version, that means your second step iteration would be…
+Here, you change much slower, because you measure this Hershing, you see, you get much quicker.
+adjustment. So, this kind of second-order Herschel measurement that can help you make an adjustment is more effectively. So that's why you can make a less iteration, get more efficient.
+This is the… what I explained before, you know, how to make it reorganized, right?
+you know, For the regularized, you know, you make the first order and the second order, recommendations.
+That's the gradients. G. That's the Hershen. H.
+Okay, you see the first derivative, the second derivative, okay.
+So this one is trying to say.
+that's your current, you know, model production, that's your targeting one at T minus 1. So, what's the loss function here?
+And you're trying to make a arrange a function multiply with the gradients, that's where you adjust.
+Okay, that's the objective function.
+This one, you can take your time, you know.
+This is ready to tell you, okay, sparse aware, right?
+You are trying to say where you have the missed value, and how many times you have zero interest.
+And, you are… you see, you know…
+How do you utilize this kind of for one hot encoding?
+What do you mean on how the encoding? Typically, when you have a mission, right.
+You can assign, you say, for example, here is missing, that means you can say, hey, you have missing one, and zero everywhere.
+One means at this… at this stem, at this index, is something missing.
+If you have another missing, that means you got another… for example, here is also missing, that means you what? You need to make one here, and 0, 0 here.
+So that's typical one hot protein.
+But the trouble here is, if you have too many missions, you will have a huge
+one hot coding dimension. For example, if you have 1,000 missing, you need to have this one hot coating get 1,000 dimensions.
+Okay, because each time you only use 1 and 0 differential there, right?
+Another way you want to do it is you've got to embed it.
+Or you can imagine, okay? Because 0101 is simple, but it's too expensive.
+In order to get the embedding, that means, you know, you are trying to ask the transformer, for example.
+I don't want to use 1010, I want to use a separate vector. For example, maybe I can use the .3 minus 0.2…
+And then 0.01, blah blah blah.
+this vector. I have another vector, maybe minus 0.7, Point the one, blah blah.
+And these two vectors, when you multiply together, is close to zero.
+You see, these two vectors?
+none of them is zero, but when you multiply together, they cross 0, that means they're almost orthogonal. So that means you have a huge
+Difference.
+So I assign something like this, just like an embedding vector, instead of one hot vector. So I can only keep one.
+dimension. Even if I have 1,000, that's fine, you know. Even if I have 1,000 missing variables, I don't have to add 1,000 extra one hot coding vectors. I keep one vector.
+For this one vector, in the high dimensional, I split it as 100 Far away.
+vector space.
+So that means each vector, just like I said here and here, right? When you multiply together, they are orthogonal across zero. So I construct 100 of these kind of vectors.
+Each vector, when you multiply together, all close to zero.
+Then, if you have one unknown vector, I only need to use this one vector, come here to match.
+then I can say which one is missing. Because I want to say this vector is closing this one, then that means
+You have the first missing element. If this vector is close into this vector, has the shortest distance, then you can say the second element is missing. So, you only need to change the numbers in this vector
+That means you only take one vector.
+Space, but you can represent many, many different missing, element dimensions.
+Of course, this will be very expensive when you have to make training to find the right embedding.
+And, you know, for this kind of mission, right, typically you have two choices, you know, for the default direction. They are trying to test either one, you know, trying to find the optimum one.
+And what happens? For training, you have no missing, but when you have testing, you have missing what you can do?
+Because the trinity never… met this kind of mission.
+Value situation, but we are trying to…
+use this kind of testing data, oh, I get missing. What I can do? So, XQ boost will be defaulted to say, let's go to the left. Something like that, you have something default, okay? Because that's the best they can do. I have no idea, because in the training never told me you would have missing data, right? But at least, they will not make this one
+failed, at least the model can still run, okay? So that's the interesting setup.
+This is another one, you know, you have the variation of XGBoost, you call the light… you know.
+execute.
+This one, just because, you know, XUBoost is very powerful, but you have… need some resource support, so that when people are trying to find some economy version… version of this XUBoost, trying to make a lower memory, for example, I can run it with a very low configuration PC.
+You know, and we'll make training faster. Even I lose a little bit of precision, but I will make the training
+speed, much, much faster, take a much, much more time saving, you know? And also, in some situations, you will get a better accuracy.
+Okay, so that's why, if you look at this kind of efficiency, you say it gets 6 times faster than this one. It gets some improved version.
+I think they mentioned that the difference, you know, why is the… you can think about it's the,
+BFS, you know, brass-first search. Why is DFS dips first? So that means, You have trade.
+some tree like this, right? So, for the conventional.
+actually boost their Chinese scan level by level. They scan here, Scan here.
+Scan here.
+scan here, level by level. But, if you're using light, XGBoost.
+What they are trying to do, you know, the scan.
+Here, and your stomach is choosed here.
+Right? Next level. From this level to this level, make this one, from this one to here, this one.
+Okay? So you have tips first.
+Or people call the liber first.
+Right? You can think about each node, they just, like, leave off the tree, okay? Leave first.
+So that's the difference for these two different methods. I think we showed here, you see.
+you have leaf-wise, you know, you always cook tips first. You're trying to get deeper, deeper, deeper, but if you have, you know, conventional, you have the level-wise, you know, you always make a level-by-level scan.
+So that's the, difference.
+Let me… There's a…
+comparisons, I think you can read, you know. The most important thing here, we put this kind of a Python code, you can run this one, and you can show how they're different, you know, you can try both the typical execute booster regression model, okay?
+or you have this kind of classification model, you can either use this or this, okay? But the X here is the predictive matrix, Y is the response vector.
+Okay.
+And X is a particular… Y is what is the outcome, right?
+Vector.
+Similarly, you can try your slide, you know, actually boost.
+They will do the training, And, testing makes 30% the splitting, okay?
+And the rest, you know, you really want to make it practical, you need to understand that you have to… where you can make hyperparameters tuning, right? So, that's also the intuitive question. If you only run this model by before the parameters, that means you can never make your hands dirty, they know you have very limited experience. But when you know this one.
+This somehow also is the catch to make your master work very well.
+Okay.
+So, for example, the learning rate, it's about the step size, how the shrink is, you know, used.
+you can choose a different range. They have some typical value here, and doesn't matter, you can always try, because you never know which kind of data set you're using.
+So…
+If you feel necessary, you can tune this one and say how the performance is changing. If your performance is sensitive to this learning rate or not. Because if learning rate is too small, that means you need to wait too long before you upturn some update.
+And also, you need to understand the number of estimators. Okay.
+This is the number of boosting rounds.
+for the decision tree, right? How many you want to make in sample model? You want to make 100 of a boost in round, you know, or 200.
+Right? So that's the one also you can test. If you make it smaller, of course, you can make it more efficient, but if you…
+If the condition permits.
+You can increase the number of estimates, because typically, more, you know, you can get better.
+This is about the maximum dips.
+Because when you're trying to…
+dig in, just trade, and how many levels you want to touch, right? You want to split it down further.
+When you get too deep, unless the data itself is very…
+complicated. Let's say you have thousands, hundreds of thousands of features, then you may need a very deep tree. Otherwise, let's only have 20 features. Now you make your dips, like, 10, then, well, that's really… that's really too much.
+So you have the typical range, you can try, from the left to right, you can try typical range, and say how this will change your performance.
+In other words, most of the suggestion, when you make the adjustment, doesn't work, doesn't change much. But as long as you find one parameter which is sensitive with this adjustment, then you will feel, whoa, that's great! Finally, I find the catch.
+Because, you know, not all the data are sensitive to the same habit parameters.
+See, in other words.
+Maybe if you have some image and data generated features, maybe it's very insensitive to this number of estimates. Or maybe you have some, you know.
+You know, medical imaging data, or some, you know, survey data, which is very sensitive to this kind of maximum depths.
+So, that depends on the data. So, there's no fixed globally overall indicator.
+That's the minimum child weight.
+Okay, this is the trend, you say what's the minimum sum of the, you know, instance weights.
+required for childhood.
+Because when you're trying to speed this data, right, from parent to child in order, from childhood to grandchild in order, when you make some partitions, where you need to, you know.
+Make it minimal.
+instance weight. If lower than this one, then you shouldn't take it further split.
+That's the gamma. It's a minimum loss reduction required, okay?
+You measure the performance over these, you know, reductions.
+And, if you… more than this one, or less than this one, then that's the… where you can make a gamma make a split.
+This is the subsample.
+How many, you know, roles… how many subsets do you want to choose, right?
+The colon sample by tree.
+By construction, how many columns? Let's say you have 100 columns, you want to take a 50%, you get a 0.5, you want a 60%, you know, 0.6, how many trade you want to take?
+This is the column sample by level, because that's the fraction of features to randomly select, right?
+This is by node, left or right.
+Again, you can also make selections.
+Namada. That's the… Level 2, recognition. Level 2 is just get a square, right?
+Just like the reach regressions, you can also change, yeah.
+If you have zero, actually, that means you know… you have no recommendation.
+Alpha is the L1 recommendation.
+is similar to Lasso.
+So that's a few things you can play with, and that's how you get the first homework.
+If you have, you know, experienced any questions, you can send me an email, you know, we can make a further discussion next week.
+And, from next week, you know, we are trying to start with an introduction about this kind of, recommendation system.
+I want you guys to have a more impression about the recommendation, because the recommendation, just like I explained it before, that's the cash cow, you know.
+You can never underestimate how important this kind of recommendation systems can build up this kind of business can…
+Why? Because in the reality, it's advertisement everywhere. Advertisement is always trying to penetrate your privacy. And the privacy will be the last word trying to resist advertisements.
+Recommendation is trying to build a bridge. They're trying to balance those, and this gets instantaneous feedback of the cash flow.
+So, we make an assignment today. Next Friday, we will make a discussion in class.
+It's still not a dude.
+Then the next Sunday, that means typically you have, what, 9?
+Or 10 days, something like that. Because the first 7 days, that means you make sure we have 2 consecutive weeks we can
+discussed homework. This week, we make assignment. Next week.
+There's pop-up questions. You can talk about the…
+the homework questions in class, we can make a further discussion, and then you can prepare, refine your homework, make a submission. So that's… that's the pattern.
+Any more questions?
+So, unfortunately, you know.
+we don't expect something, we just make one, you know, lecture, we can finish it. We can make a continuous discussion for the missing data. The missing data, we will make very concrete or deep discussions. Why? Because from here, you can help you
+open your eyes, open your mindset. Now you realize that you can very independently to take care of a lot of situations, very similar to this kind of missing data. So that's why we will start from, when people ask, you have missing data, or you have this kind of imbalanced data.
+The key point is, don't make a simple answer, yes or no, or…
+Give you the solution note, that's… the right answer is depends. Always call it depends. What do you mean, depends? When you say missing, the first question is.
+how large ratio of missing? That means, you know, 1% missing, or 2% missing, 20% missing, 30% missing, they're different.
+Or you only have zero point… point…
+1% missing, right? You're tiny missing.
+a small missing, median missing, you know, how many percentage missing that you need to ask. Otherwise, you know, you're just, oh, you're missing, you need to do this. No, that's… that's too rushed.
+Second, how many missing variables?
+which kind of variables missing? Are they categoric? Are they continuous?
+And how they're missing? They're missing…
+With one range, or are they missing with correlations between, or are they independently missing?
+They're very different.
+Right? So we will make a future discussion about this kind of data, because that can show you how knowledgeable, how experienced in this field.
+So, I like these questions, because you can never expect something you search and copy, right? So, it really depends on how you're confident with this kind of, your mind is set to resolve questions, to exploiting the data.
+Okay, that's all for today. I wish everyone has a great weekend. Thank you, everyone.
+Thank you.
+Bye.
+Thanks.

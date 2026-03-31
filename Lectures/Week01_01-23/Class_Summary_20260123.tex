@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large January 23, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Course Philosophy: What This Class Is Actually For}
+%------------------------------------------------------------
+
+\subsection{The Core Goal}
+This is not a class about memorizing commands. The objective is to build the kind of analytical judgment that separates junior-level workers from senior-level ones --- and that separates candidates who get screened out from candidates who get hired.
+
+The professor's framing: \textit{anything covered here, you can find on YouTube. The value is in how it is explained --- plain English, sharp points, with direct links to what industry actually tests.}
+
+\subsection{The AI Shift Changes What Is Valuable}
+\begin{itemize}
+    \item ChatGPT, Gemini, and Copilot can generate code more precisely than most humans.
+    \item Therefore, \textbf{writing code is no longer your competitive edge.}
+    \item What AI \emph{cannot} provide is:
+    \begin{itemize}
+        \item Domain knowledge and context
+        \item Judgment about whether a result is good or bad
+        \item The decision to improve rather than accept
+        \item Strategic direction: what features to engineer, which model to pick, how to iterate
+    \end{itemize}
+    \item The new interview standard: give candidates data and tools, then ask \textit{``Can you improve it?''} --- not \textit{``Can you write the syntax?''}
+\end{itemize}
+
+\textit{Analogy from lecture:} In the near future, every real engineer manages a team of AI agents. Each agent handles implementation. \textbf{You supply the judgment that tells the agents what to do.}
+
+\subsection{Feature Engineering as the Differentiator}
+The single most important skill emphasized throughout the semester is \textbf{feature engineering} --- deriving new, informative columns from raw data.
+
+\begin{itemize}
+    \item Raw data fed directly into a model is like a chef throwing an unpeeled potato into a wok. The preparation \emph{is} the craft.
+    \item Feature engineering is open-ended: there is no one right answer, which is exactly why it reveals the depth of a candidate's thinking.
+    \item Pre-screening tests at companies like Two Sigma and Goldman Sachs are frequently feature engineering problems for this reason.
+\end{itemize}
+
+\textit{``Squeeze the orange''} --- the job is to extract as much useful signal (``juice'') from the raw data as possible. How you do that is your insight.
+
+\newpage
+%------------------------------------------------------------
+\section{Course Structure and Logistics}
+%------------------------------------------------------------
+
+\subsection{Assignments}
+\begin{itemize}
+    \item \textbf{Weekly homework} --- builds grades incrementally; each assignment gives multiple days to complete.
+    \item \textbf{Midterm} --- approximately the first week of April (week of March 30 -- April 6).
+    \item \textbf{Final project} --- end of semester.
+    \item No single high-stakes test; weekly work compounds into the final grade.
+\end{itemize}
+
+\subsection{Submission Format}
+\begin{itemize}
+    \item Accepted: \textbf{PDF}, images (JPEG/PNG screenshots), or \texttt{.py} Python files.
+    \item \textbf{Not accepted:} Jupyter notebook \texttt{.ipynb} files directly --- export to PDF first, or take a screenshot.
+    \item \textbf{Not accepted:} Zip archives. Upload individual files only.
+\end{itemize}
+
+\textit{Why:} Canvas cannot render \texttt{.ipynb} files online. PDF and images allow the professor to annotate directly with brush/pencil comments, which is how grading feedback is delivered.
+
+\subsection{Kaggle Platform}
+Homework and projects are submitted through \textbf{Kaggle}:
+\begin{itemize}
+    \item Kaggle provides \textbf{instant scoring feedback} --- no waiting for the professor to grade to know if you are on the right track.
+    \item All activity is logged: number of submissions, approaches tried, data used. There is no way to claim effort that is not recorded.
+    \item Kaggle's open discussion forums let you see how peers (mostly beginners, like you) approach the same problems.
+\end{itemize}
+
+\newpage
+%------------------------------------------------------------
+\section{Setup Checklist for Week 2}
+%------------------------------------------------------------
+
+Before the next session, complete all of the following:
+
+\begin{enumerate}
+    \item \textbf{ChatGPT or Gemini account} --- free tier is sufficient. Use it to generate code from descriptions, then evaluate whether the output makes sense.
+    \item \textbf{Python environment} with \texttt{xgboost} installed. Verify you can import the library.
+    \item \textbf{Kaggle account} --- required to submit homework and receive scores.
+    \item \textbf{GitHub familiarity (optional but recommended)} --- learn to browse open-source repos to avoid reinventing solutions to low-level problems.
+\end{enumerate}
+
+\textit{The professor's message:} Do not spend a weekend figuring out how to open a file in Python. That is a one-line ChatGPT question. Spend your learning budget on judgment, not syntax.
+
+\newpage
+%------------------------------------------------------------
+\section{Course Topics Overview (Semester Syllabus)}
+%------------------------------------------------------------
+
+\subsection{Feature Engineering + XGBoost (Weeks 1--3)}
+\begin{itemize}
+    \item \textbf{XGBoost is the default first model for structured data.} If you have tabular data and no strong prior, start here.
+    \item Structured data = anything with named columns (CSV, TSV, PSV). Every column has a defined meaning.
+    \item After running XGBoost: if performance is mediocre, the next question is always \textit{``How do I improve it?''} --- that question leads directly to feature engineering.
+\end{itemize}
+
+\subsection{Time Series Analysis}
+\begin{itemize}
+    \item Time series = data indexed in a fixed sequential order that cannot be shuffled.
+    \item Core concept: \textbf{autocorrelation} --- exploiting the dependency between adjacent time steps to forecast future values.
+    \item Broader relevance: the same index-dependency logic appears in:
+    \begin{itemize}
+        \item Natural language (word order in a sentence)
+        \item Geospatial data (neighboring locations)
+        \item Generative AI diffusion models
+        \item Transformers
+    \end{itemize}
+    \item Financial markets are one of the richest sources of time series data, and a strong reason to develop this skill set.
+\end{itemize}
+
+\subsection{Linear and Logistic Regression (Conceptual Bridge)}
+\begin{itemize}
+    \item The goal is not to learn \emph{how} to run these models (you already know that).
+    \item The goal is to understand \emph{why they fail} in certain settings --- which directly motivates the jump to neural networks.
+    \item Understanding limitations gives you language to explain poor model performance and propose the right fix.
+\end{itemize}
+
+\newpage
+\subsection{Recommendation Systems (Main Focus)}
+The semester's central application domain. Reasons:
+\begin{enumerate}
+    \item Recommendation is a superset of feature engineering, big data, and model improvement --- all major course themes appear here.
+    \item It is one of the highest cash-flow areas in tech: a 0.001\% improvement to a system used by billions of users translates to massive profit. This explains why top engineers in recommendation/search earn dramatically more than industry average.
+    \item Nobody can escape it: Google, Amazon, Netflix, Instagram, TikTok --- every platform's output is filtered through recommendation.
+\end{enumerate}
+
+\textit{Recommendation and search are two sides of the same coin.} Flip a recommendation engine around and you get a search engine. The underlying methods are nearly identical.
+
+\subsection{Ensemble Methods}
+\begin{itemize}
+    \item Instead of relying on one model, combine multiple models' outputs --- different judgments fused into one stronger decision.
+    \item Covered toward the end of the semester as a capstone technique.
+\end{itemize}
+
+\newpage
+%------------------------------------------------------------
+\section{Structured vs.\ Unstructured Data}
+%------------------------------------------------------------
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Type}        & \textbf{Examples}                        & \textbf{Default Model}     \\
+\midrule
+Structured           & CSV, TSV, SQL tables                     & XGBoost                    \\
+Unstructured (image) & Pixel arrays, photos                     & Deep learning / CNN        \\
+Unstructured (text)  & Articles, sentences, chat logs           & Deep learning / Transformer \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Why XGBoost does not work on images or text:}
+A pixel at position (row 1, col 1) has no fixed semantic meaning --- it could represent an eye, a background, noise, anything. Structured data's power comes from every column having a stable, interpretable meaning. Without that, tree-based methods have nothing meaningful to split on.
+
+Unstructured data requires neural networks (covered in EE628) to learn representations automatically.
+
+
+\newpage
+%------------------------------------------------------------
+\section{Industry Context: How AI Changes the Job Market}
+%------------------------------------------------------------
+
+\begin{itemize}
+    \item Pure front-end and back-end software roles are increasingly automatable.
+    \item ML/AI engineering is the growth area --- and it requires humans for the judgment layer.
+    \item The new interview format: open data + open tools. The question is not \textit{``Write a function''} but \textit{``Here is a dataset. Improve the model.''} Show multiple approaches. That range of thinking is what impresses interviewers.
+    \item A candidate who says \textit{``I ran random forest''} and stops has shown a ceiling. A candidate who proposes four different feature engineering directions demonstrates potential.
+\end{itemize}
+
+\textbf{The multiplier effect:} A strong engineer who uses AI as a force multiplier produces output equivalent to 10--100 weaker engineers. The key word is \emph{multiplier} --- it amplifies what you bring in, not a substitute for it.
+
+\end{document}
