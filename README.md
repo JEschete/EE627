@@ -27,19 +27,6 @@ EE627A covers foundational and applied topics in large-scale data acquisition an
 
 ---
 
-## Midterm: Heuristic-Based Music Recommendation
-
-The midterm project builds a content-based recommendation system for the Yahoo Music dataset (Kaggle competition). Given six candidate tracks per user, the system recommends three using hierarchy-derived features (Album, Artist, Genre).
-
-**Part 1** implements three heuristic strategies over user-specific feature vectors:
-- **Strategy 1 --- Max Genre Score** (AUC 0.829)
-- **Strategy 2 --- Weighted Average** (AUC 0.865)
-- **Strategy 3 --- Evidence-Weighted Composite** (AUC 0.869)
-
-**Part 2** addresses the cold-start problem with Global Fallback and Dig Deeper (sibling-track search) strategies. Key finding: naive global imputation *decreases* AUC by 0.10--0.12 because non-personalized scores dilute the personalized signal.
-
----
-
 ## Tools & Dependencies
 
 - **Python 3** (standard library + `collections.defaultdict`)
