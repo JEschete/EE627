@@ -1,7 +1,5 @@
 # EE627A --- Data Acquisition and Processing I: Big Data
 
-**Stevens Institute of Technology** | Department of Electrical and Computer Engineering  
-**Instructor:** Prof. Rensheng Wang  
 **Semester:** Spring 2026  
 **Student:** Jude Eschete
 
