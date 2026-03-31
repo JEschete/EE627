@@ -1,16 +1,18 @@
 """
-EE627A Midterm - Part 1: Heuristic-Based Music Recommendation
+EE627A Midterm - Heuristic-Based Music Recommendation
 Jude Eschete
 
-Develops a rule-based recommendation system to predict user preferences
-for six candidate tracks. For each test user, exactly three tracks are
-labeled '1' (Recommend) and three tracks '0' (Do Not Recommend).
+Part 1: Rule-based recommendation via feature engineering on the
+        Album / Artist / Genre hierarchy.
+Part 2: Cold-start handling with Global Fallback and Dig-Deeper
+        intra-album search logic.
 
 Usage:
     python EE627_Midterm.py
 """
 
 import os
+from collections import defaultdict
 
 # =====================================================================
 # Configuration
@@ -344,18 +346,227 @@ def print_feature_table(example, track_meta):
 
 
 # =====================================================================
-# 6. Main
+# 6. Part 2 — Cold Start: Global Fallback & Dig Deeper
+# =====================================================================
+
+
+def build_album_to_tracks(track_meta):
+    """Build {album_id: [track_ids]} from track metadata.
+
+    Used by the "Dig Deeper" fallback to find sibling tracks that share
+    the same album as a candidate track.
+    """
+    album_tracks = defaultdict(list)
+    for tid, (alb, _, _) in track_meta.items():
+        if alb is not None:
+            album_tracks[alb].append(tid)
+    print(f"       Album->Tracks index: {len(album_tracks):,} albums")
+    return dict(album_tracks)
+
+
+def build_global_stats(user_ratings):
+    """Compute global popularity: mean rating & rater count per item.
+
+    Iterates every (user, item, rating) triple in the training set and
+    aggregates by item_id.  Works for tracks, albums, artists, and genres
+    since they share one ID space.
+
+    Returns {item_id: (mean_rating, num_raters)}.
+    """
+    item_sum = defaultdict(float)
+    item_cnt = defaultdict(int)
+    for _, ratings in user_ratings.items():
+        for item_id, rating in ratings.items():
+            item_sum[item_id] += rating
+            item_cnt[item_id] += 1
+    stats = {iid: (item_sum[iid] / item_cnt[iid], item_cnt[iid])
+             for iid in item_sum}
+    print(f"       Global stats for {len(stats):,} items")
+    return stats
+
+
+def compute_feature_vector_v2(user_ratings, track_meta, uid, tid,
+                              album_to_tracks, global_stats,
+                              use_dig_deeper=True, use_global=True):
+    """Enhanced feature vector with hierarchical cold-start fallback.
+
+    Album-score priority:
+        1. Primary   — direct album rating from user's history
+        2. Dig Deeper — mean rating of sibling tracks in same album
+        3. Global    — global average rating for this album
+
+    Artist and genre scores follow a simpler two-level fallback:
+        1. Primary   — direct rating
+        2. Global    — global average
+
+    Returns the same dict as compute_feature_vector() plus:
+        album_source  : 'direct' | 'dig_deeper' | 'global' | 'none'
+        artist_source : 'direct' | 'global' | 'none'
+    """
+    ratings = user_ratings.get(uid, {})
+    alb_id, art_id, genre_ids = track_meta.get(tid, (None, None, []))
+
+    # --- Album score (hierarchical fallback) ---
+    album_score, has_album, album_source = 0, 0, "none"
+
+    if alb_id is not None:
+        if alb_id in ratings:
+            # 1. Primary: direct album rating
+            album_score = ratings[alb_id]
+            has_album = 1
+            album_source = "direct"
+        elif use_dig_deeper:
+            # 2. Dig Deeper: sibling tracks in the same album
+            siblings = album_to_tracks.get(alb_id, [])
+            sib_ratings = [ratings[st] for st in siblings
+                           if st in ratings and st != tid]
+            if sib_ratings:
+                album_score = sum(sib_ratings) / len(sib_ratings)
+                has_album = 1
+                album_source = "dig_deeper"
+            elif use_global and alb_id in global_stats:
+                # 3. Global: average across all users
+                album_score = global_stats[alb_id][0]
+                has_album = 1
+                album_source = "global"
+        elif use_global and alb_id in global_stats:
+            # Global only (Dig Deeper disabled)
+            album_score = global_stats[alb_id][0]
+            has_album = 1
+            album_source = "global"
+
+    # --- Artist score (direct → global) ---
+    artist_score, has_artist, artist_source = 0, 0, "none"
+
+    if art_id is not None:
+        if art_id in ratings:
+            artist_score = ratings[art_id]
+            has_artist = 1
+            artist_source = "direct"
+        elif use_global and art_id in global_stats:
+            artist_score = global_stats[art_id][0]
+            has_artist = 1
+            artist_source = "global"
+
+    # --- Genre scores (direct → global per genre) ---
+    genre_scores = []
+    for gid in genre_ids:
+        if gid in ratings:
+            genre_scores.append(ratings[gid])
+        elif use_global and gid in global_stats:
+            genre_scores.append(global_stats[gid][0])
+
+    n = len(genre_scores)
+    if n > 0:
+        g_max  = max(genre_scores)
+        g_min  = min(genre_scores)
+        g_mean = sum(genre_scores) / n
+        g_var  = sum((s - g_mean) ** 2 for s in genre_scores) / n
+        g_sum  = sum(genre_scores)
+    else:
+        g_max = g_min = g_sum = 0
+        g_mean = g_var = 0.0
+
+    return {
+        "album_score":  album_score,
+        "artist_score": artist_score,
+        "has_album":    has_album,
+        "has_artist":   has_artist,
+        "genre_count":  n,
+        "genre_max":    g_max,
+        "genre_min":    g_min,
+        "genre_mean":   g_mean,
+        "genre_var":    g_var,
+        "genre_sum":    g_sum,
+        "album_source": album_source,
+        "artist_source": artist_source,
+    }
+
+
+# =====================================================================
+# 7. Part 2 Pipeline
+# =====================================================================
+
+
+def run_strategy_v2(user_ratings, track_meta, test_users, strategy_fn,
+                    album_to_tracks, global_stats, out_path,
+                    use_dig_deeper=True, use_global=True):
+    """Run a strategy with the Part 2 enhanced feature vector.
+
+    Returns (results, source_counts) where source_counts tracks how
+    often each fallback level was triggered for album scores.
+    """
+    name = strategy_fn.__name__
+    tag = []
+    if use_dig_deeper:
+        tag.append("DigDeeper")
+    if use_global:
+        tag.append("Global")
+    tag_str = "+".join(tag) if tag else "NoFallback"
+    print(f"\n>>> Running {name} [{tag_str}] ...")
+
+    results = []
+    src_album = defaultdict(int)
+    src_artist = defaultdict(int)
+
+    for uid, candidates in test_users:
+        feats = [compute_feature_vector_v2(
+                     user_ratings, track_meta, uid, tid,
+                     album_to_tracks, global_stats,
+                     use_dig_deeper=use_dig_deeper,
+                     use_global=use_global)
+                 for tid in candidates]
+        scores = strategy_fn(feats)
+        recs = rank_top3(scores, candidates)
+
+        for feat in feats:
+            src_album[feat["album_source"]] += 1
+            src_artist[feat["artist_source"]] += 1
+
+        for tid in candidates:
+            results.append((f"{uid}_{tid}", recs[tid]))
+
+    write_submission(results, out_path)
+    ones = sum(v for _, v in results)
+    zeros = len(results) - ones
+    print(f"    {len(results):,} predictions  "
+          f"({ones:,} recommend, {zeros:,} don't)")
+    print(f"    Saved -> {out_path}")
+
+    total = sum(src_album.values())
+    print(f"    Album source breakdown:")
+    for src in ["direct", "dig_deeper", "global", "none"]:
+        c = src_album.get(src, 0)
+        print(f"      {src:>11}: {c:>7,}  ({100*c/total:.1f}%)")
+    print(f"    Artist source breakdown:")
+    for src in ["direct", "global", "none"]:
+        c = src_artist.get(src, 0)
+        print(f"      {src:>11}: {c:>7,}  ({100*c/total:.1f}%)")
+
+    return results, dict(src_album)
+
+
+# =====================================================================
+# 8. Main
 # =====================================================================
 
 
 def main():
-    # ---- Load all data ----
+    # ================================================================
+    # Load all data
+    # ================================================================
     user_ratings = parse_training(TRAIN_FILE)
     track_meta   = parse_tracks(TRACK_FILE)
-    parse_albums(ALBUM_FILE)     # loaded for completeness / Part 2
+    parse_albums(ALBUM_FILE)
     test_users   = parse_test(TEST_FILE)
 
-    # ---- Strategy 1: Max Genre Score ----
+    # ================================================================
+    # PART 1 — Heuristic Strategies (no cold-start handling)
+    # ================================================================
+    print("\n" + "=" * 60)
+    print("  PART 1: Heuristic-Based Recommendation")
+    print("=" * 60)
+
     res1, ex1 = run_strategy(
         user_ratings, track_meta, test_users,
         strategy_max_genre,
@@ -363,23 +574,21 @@ def main():
     )
     print_feature_table(ex1, track_meta)
 
-    # ---- Strategy 2: Weighted Average ----
     res2, _ = run_strategy(
         user_ratings, track_meta, test_users,
         strategy_weighted_avg,
         os.path.join(OUTPUT_DIR, "submission_strategy2_weightedavg.csv"),
     )
 
-    # ---- Strategy 3: Evidence-Weighted ----
     res3, _ = run_strategy(
         user_ratings, track_meta, test_users,
         strategy_evidence_weighted,
         os.path.join(OUTPUT_DIR, "submission_strategy3_evidence.csv"),
     )
 
-    # ---- Cross-strategy comparison ----
+    # Cross-strategy agreement
     print(f"\n{'='*60}")
-    print("  Cross-Strategy Agreement")
+    print("  Part 1 Cross-Strategy Agreement")
     print(f"{'='*60}")
     total = len(res1)
     for na, nb, ra, rb in [
@@ -391,13 +600,12 @@ def main():
         print(f"  {na:>12} vs {nb:<12}:  "
               f"{agree:,}/{total:,}  ({100*agree/total:.1f}%)")
 
-    # ---- Data-sparsity analysis ----
+    # Data-sparsity analysis
     print(f"\n{'='*60}")
     print("  Data-Sparsity Analysis (all test candidates)")
     print(f"{'='*60}")
     n_total = n_album = n_artist = n_genre = 0
     gc_list = []
-
     for uid, candidates in test_users:
         for tid in candidates:
             feat = compute_feature_vector(user_ratings, track_meta, uid, tid)
@@ -407,7 +615,6 @@ def main():
             if feat["genre_count"] > 0:
                 n_genre += 1
             gc_list.append(feat["genre_count"])
-
     print(f"  Total candidates:      {n_total:,}")
     print(f"  Have album rating:     {n_album:,}  "
           f"({100*n_album/n_total:.1f}%)")
@@ -417,7 +624,129 @@ def main():
           f"({100*n_genre/n_total:.1f}%)")
     print(f"  Avg genre matches:     {sum(gc_list)/len(gc_list):.2f}")
 
-    print("\nDone. Submission files in:", OUTPUT_DIR)
+    # ================================================================
+    # PART 2 — Cold Start: Global Fallback & Dig Deeper
+    # ================================================================
+    print("\n" + "=" * 60)
+    print("  PART 2: Cold Start — Building Fallback Structures")
+    print("=" * 60)
+
+    album_to_tracks = build_album_to_tracks(track_meta)
+    global_stats    = build_global_stats(user_ratings)
+
+    # --- 2a. Global Fallback Only (no Dig Deeper) ---
+    print("\n" + "-" * 60)
+    print("  Part 2.a: Global Fallback Only")
+    print("-" * 60)
+
+    res_global_wt, _ = run_strategy_v2(
+        user_ratings, track_meta, test_users,
+        strategy_weighted_avg,
+        album_to_tracks, global_stats,
+        os.path.join(OUTPUT_DIR, "submission_p2a_global_weightedavg.csv"),
+        use_dig_deeper=False, use_global=True,
+    )
+
+    res_global_mg, _ = run_strategy_v2(
+        user_ratings, track_meta, test_users,
+        strategy_max_genre,
+        album_to_tracks, global_stats,
+        os.path.join(OUTPUT_DIR, "submission_p2a_global_maxgenre.csv"),
+        use_dig_deeper=False, use_global=True,
+    )
+
+    # --- 2b. Full Hierarchical: Direct → Dig Deeper → Global ---
+    print("\n" + "-" * 60)
+    print("  Part 2.b: Full Hierarchical (Dig Deeper + Global)")
+    print("-" * 60)
+
+    res_hier_wt, src_hier_wt = run_strategy_v2(
+        user_ratings, track_meta, test_users,
+        strategy_weighted_avg,
+        album_to_tracks, global_stats,
+        os.path.join(OUTPUT_DIR, "submission_p2b_hier_weightedavg.csv"),
+        use_dig_deeper=True, use_global=True,
+    )
+
+    res_hier_mg, src_hier_mg = run_strategy_v2(
+        user_ratings, track_meta, test_users,
+        strategy_max_genre,
+        album_to_tracks, global_stats,
+        os.path.join(OUTPUT_DIR, "submission_p2b_hier_maxgenre.csv"),
+        use_dig_deeper=True, use_global=True,
+    )
+
+    run_strategy_v2(
+        user_ratings, track_meta, test_users,
+        strategy_evidence_weighted,
+        album_to_tracks, global_stats,
+        os.path.join(OUTPUT_DIR, "submission_p2b_hier_evidence.csv"),
+        use_dig_deeper=True, use_global=True,
+    )
+
+    # ================================================================
+    # Impact Analysis
+    # ================================================================
+    print("\n" + "=" * 60)
+    print("  IMPACT ANALYSIS")
+    print("=" * 60)
+
+    # Compare Part 1 baseline vs Part 2 variants (WeightedAvg strategy)
+    print("\n  WeightedAvg Strategy — Prediction Changes:")
+    for label, res_new in [
+        ("Global Only  ", res_global_wt),
+        ("Hierarchical ", res_hier_wt),
+    ]:
+        changed = sum(1 for (_, v1), (_, v2) in zip(res2, res_new) if v1 != v2)
+        agree   = total - changed
+        print(f"    Part1 vs {label}:  "
+              f"{changed:,} changed ({100*changed/total:.1f}%), "
+              f"{agree:,} same ({100*agree/total:.1f}%)")
+
+    # Compare Global-only vs Hierarchical
+    changed_g_h = sum(1 for (_, a), (_, b)
+                      in zip(res_global_wt, res_hier_wt) if a != b)
+    print(f"    Global vs Hierarchical:  "
+          f"{changed_g_h:,} changed ({100*changed_g_h/total:.1f}%)")
+
+    # Dig Deeper trigger rate
+    print(f"\n  Dig-Deeper Trigger Rate (Hierarchical, WeightedAvg):")
+    dd_count = src_hier_wt.get("dig_deeper", 0)
+    print(f"    Triggered:  {dd_count:,} / {total:,}  "
+          f"({100*dd_count/total:.1f}%)")
+
+    # Same for MaxGenre
+    print(f"\n  MaxGenre Strategy — Prediction Changes:")
+    for label, res_new in [
+        ("Global Only  ", res_global_mg),
+        ("Hierarchical ", res_hier_mg),
+    ]:
+        changed = sum(1 for (_, v1), (_, v2) in zip(res1, res_new) if v1 != v2)
+        print(f"    Part1 vs {label}:  "
+              f"{changed:,} changed ({100*changed/total:.1f}%)")
+
+    dd_mg = src_hier_mg.get("dig_deeper", 0)
+    print(f"    Dig-Deeper triggered: {dd_mg:,} / {total:,}  "
+          f"({100*dd_mg/total:.1f}%)")
+
+    # ---- Final summary of all submission files ----
+    print(f"\n{'='*60}")
+    print("  ALL SUBMISSION FILES")
+    print(f"{'='*60}")
+    subs = [
+        ("Part 1 — S1 MaxGenre",            "submission_strategy1_maxgenre.csv"),
+        ("Part 1 — S2 WeightedAvg",         "submission_strategy2_weightedavg.csv"),
+        ("Part 1 — S3 Evidence",            "submission_strategy3_evidence.csv"),
+        ("Part 2a — Global+WeightedAvg",    "submission_p2a_global_weightedavg.csv"),
+        ("Part 2a — Global+MaxGenre",       "submission_p2a_global_maxgenre.csv"),
+        ("Part 2b — Hier+WeightedAvg",      "submission_p2b_hier_weightedavg.csv"),
+        ("Part 2b — Hier+MaxGenre",         "submission_p2b_hier_maxgenre.csv"),
+        ("Part 2b — Hier+Evidence",         "submission_p2b_hier_evidence.csv"),
+    ]
+    for label, fname in subs:
+        print(f"  {label:<35} {fname}")
+
+    print("\nDone. All files in:", OUTPUT_DIR)
 
 
 if __name__ == "__main__":
