@@ -17,6 +17,10 @@
 *.nav
 *.snm
 *.vrb
+*.out
+*.log
+*.equ
+*.aux
 
 # Windows
 desktop.ini

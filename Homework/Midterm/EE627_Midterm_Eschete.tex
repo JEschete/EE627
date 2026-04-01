@@ -124,7 +124,7 @@ Users rate items across all hierarchy levels on a scale of 0--100. The training 
 
 \subsubsection{Methodology}
 
-For each candidate track, the system looks up the track's hierarchy (Album ID, Artist ID, and Genre IDs) from \texttt{trackData2.txt}, then searches the test user's training history for direct ratings of those hierarchy items.
+For each candidate track, the system looks up the track's hierarchy (Album ID, Artist ID, and Genre IDs) from \texttt{trackData2.txt}, enriched with \texttt{albumData2.txt} (tracks inherit missing artist IDs and gain additional genre IDs from their album's metadata). The system then searches the test user's training history for direct ratings of those hierarchy items.
 
 The resulting feature vector for each (user, candidate-track) pair contains:
 
@@ -241,7 +241,7 @@ The strategies agree on 93--98\% of predictions, indicating that the underlying 
 
 \subsection{Python Implementation}
 
-The complete Python implementation for Part~1 is presented in Appendix~\ref{app:code}. The code handles data parsing, feature engineering, the three heuristic strategies, ranking, and Kaggle submission generation.
+The complete Python implementation for Part~1 (\texttt{EE627\_Midterm\_part1\_v2.py}) is presented in Appendix~\ref{app:code}. The code handles data parsing, album-based track enrichment, feature engineering, the three heuristic strategies, ranking, and Kaggle submission generation.
 
 %----------------------------------------------------------------------
 \newpage
@@ -266,9 +266,9 @@ Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\tim
 		\toprule
 		\textbf{Strategy} & \textbf{Scoring Rule} & \textbf{AUC-ROC} \\
 		\midrule
-		S1: Max Genre Score   & $0.30 \cdot \text{album} + 0.20 \cdot \text{artist} + 0.50 \cdot \text{genre\_max}$ & 0.829 \\
-		S2: Weighted Average  & $0.40 \cdot \text{album} + 0.35 \cdot \text{artist} + 0.25 \cdot \text{genre\_mean}$ & 0.865 \\
-		S3: Evidence-Weighted & $\text{has\_alb} \cdot \text{album} + \text{has\_art} \cdot \text{artist} + \frac{\text{g\_cnt} \cdot \text{g\_mean}}{10}$ & \textbf{0.869} \\
+		S1: Max Genre Score   & $0.30 \cdot \text{album} + 0.20 \cdot \text{artist} + 0.50 \cdot \text{genre\_max}$ & 0.834 \\
+		S2: Weighted Average  & $0.40 \cdot \text{album} + 0.35 \cdot \text{artist} + 0.25 \cdot \text{genre\_mean}$ & 0.868 \\
+		S3: Evidence-Weighted & $\text{has\_alb} \cdot \text{album} + \text{has\_art} \cdot \text{artist} + \frac{\text{g\_cnt} \cdot \text{g\_mean}}{10}$ & \textbf{0.871} \\
 		\bottomrule
 	\end{tabular}
 	\caption{Part 1 Kaggle AUC-ROC comparison.}\label{tab:part1-kaggle}
@@ -277,11 +277,11 @@ Each strategy produces a Kaggle-format CSV with 120,000 rows (20,000 users $\tim
 \subsubsection{Part 1 Key Observations}
 
 \begin{enumerate}
-	\item \textbf{Evidence-Weighted wins (AUC = 0.869):} Strategy~3 outperforms the other two by explicitly addressing data sparsity. Rather than assigning a zero to un-rated albums/artists (which drags down scores for tracks the user may actually like), it only counts an item when the user has \emph{actually} rated it. This avoids penalizing tracks with missing data.
+	\item \textbf{Evidence-Weighted wins (AUC = 0.871):} Strategy~3 outperforms the other two by explicitly addressing data sparsity. Rather than assigning a zero to un-rated albums/artists (which drags down scores for tracks the user may actually like), it only counts an item when the user has \emph{actually} rated it. This avoids penalizing tracks with missing data.
 
-	\item \textbf{Weighted Average is a close second (AUC = 0.865):} Balancing album, artist, and mean genre scores is effective. The small gap to S3 suggests that the fixed zero-imputation for missing scores is only mildly harmful when all three hierarchy levels are combined.
+	\item \textbf{Weighted Average is a close second (AUC = 0.868):} Balancing album, artist, and mean genre scores is effective. The small gap to S3 suggests that the fixed zero-imputation for missing scores is only mildly harmful when all three hierarchy levels are combined.
 	\newpage
-	\item \textbf{Max Genre Score underperforms (AUC = 0.829):} Placing 50\% weight on a single genre's maximum rating is too aggressive. In a sparse dataset where only 48.5\% of candidates have any genre match, the genre\_max signal is zero for half the candidates, reducing discriminative power.
+	\item \textbf{Max Genre Score underperforms (AUC = 0.834):} Placing 50\% weight on a single genre's maximum rating is too aggressive. In a sparse dataset where only 48.5\% of candidates have any genre match, the genre\_max signal is zero for half the candidates, reducing discriminative power.
 
 	\item \textbf{Severe data sparsity:} Only 28.6\% of candidates have a direct album rating, 43.3\% have an artist rating, and 48.5\% have at least one genre match. For roughly half of all candidates, the system has zero personalized features---motivating the cold-start strategies in Part~2.
 \end{enumerate}
@@ -367,7 +367,7 @@ Artist and genre scores use a simpler two-level fallback (Direct $\rightarrow$ G
 
 \subsection{Part 2 Python Implementation}
 
-The Part~2 Python code---including the album-to-tracks index, global statistics computation, and the enhanced feature vector with hierarchical fallback---is presented in Appendix~\ref{app:code}.
+The Part~2 Python code (\texttt{EE627\_Midterm\_part2\_v2.py})---including the album-to-tracks index, global statistics computation, and the enhanced feature vector with hierarchical fallback---is presented in Appendix~\ref{app:code}.
 
 %----------------------------------------------------------------------
 \newpage
@@ -425,16 +425,16 @@ The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not 
 		\toprule
 		\textbf{Part} & \textbf{Strategy} & \textbf{AUC-ROC} & \textbf{$\Delta$ vs.\ Part 1} \\
 		\midrule
-		1  & S1: Max Genre Score      & 0.829 & --- \\
-		1  & S2: Weighted Average     & 0.865 & --- \\
-		1  & S3: Evidence-Weighted    & \textbf{0.869} & --- \\
+		1  & S1: Max Genre Score      & 0.834 & --- \\
+		1  & S2: Weighted Average     & 0.868 & --- \\
+		1  & S3: Evidence-Weighted    & \textbf{0.871} & --- \\
 		\midrule
-		2a & Global + MaxGenre        & 0.720 & $-0.109$ \\
-		2a & Global + WeightedAvg     & 0.747 & $-0.118$ \\
+		2a & Global + MaxGenre        & 0.734 & $-0.100$ \\
+		2a & Global + WeightedAvg     & 0.756 & $-0.112$ \\
 		\midrule
-		2b & Hier + MaxGenre          & 0.727 & $-0.102$ \\
-		2b & Hier + Evidence          & 0.747 & $-0.122$ \\
-		2b & Hier + WeightedAvg       & 0.755 & $-0.110$ \\
+		2b & Hier + MaxGenre          & 0.742 & $-0.092$ \\
+		2b & Hier + Evidence          & 0.752 & $-0.119$ \\
+		2b & Hier + WeightedAvg       & \textbf{0.764} & $-0.104$ \\
 		\bottomrule
 	\end{tabular}
 	\caption{Complete Kaggle AUC-ROC comparison: Part 1 vs.\ Part 2.}\label{tab:all-kaggle}
@@ -442,7 +442,7 @@ The Dig Deeper logic identified 5,678 candidates (4.7\%) where the user had not 
 
 \subsubsection{Key Findings --- Why Fallback Scores Decreased}
 
-A critical and instructive result: the Part~2 cold-start strategies \emph{decreased} AUC-ROC by 0.10--0.12 compared to Part~1. This is a well-documented phenomenon in recommender systems, and understanding \emph{why} is the central takeaway.
+The Part~2 cold-start strategies \emph{decreased} AUC-ROC by 0.09--0.12 compared to Part~1. This is a well-documented phenomenon in recommender systems, and understanding \emph{why} is the central takeaway.
 
 \begin{enumerate}
 	\item \textbf{Global imputation introduces noise that drowns the personalized signal.}
@@ -451,17 +451,20 @@ A critical and instructive result: the Part~2 cold-start strategies \emph{decrea
 	In Part~2, replacing those zeros with global averages (typically in the 50--80 range) gives \emph{every} candidate a non-zero score. But these imputed scores are not personalized---they reflect crowd popularity, not individual taste. A track the user has never encountered can now outscore a track the user genuinely interacted with, purely because it is globally popular. This \textbf{dilutes the personalized signal} and degrades ranking quality.
 
 	\item \textbf{Absence-of-evidence $\neq$ evidence-of-absence.}
-	Part~1's Evidence-Weighted strategy (S3, AUC = 0.869) already handled this correctly: it only counts a score when the user \emph{actually} rated that hierarchy item, avoiding the ``zero penalty'' without introducing imputation noise. The Part~2 global fallback effectively undoes this advantage by treating ``not rated'' as ``rated at the global average,'' which is a stronger and less accurate assumption.
+	Part~1's Evidence-Weighted strategy (S3, AUC = 0.871) already handled this correctly: it only counts a score when the user \emph{actually} rated that hierarchy item, avoiding the ``zero penalty'' without introducing imputation noise. The Part~2 global fallback effectively undoes this advantage by treating ``not rated'' as ``rated at the global average,'' which is a stronger and less accurate assumption.
 
 	\newpage
 	\item \textbf{Dig Deeper provides a small relative lift within Part~2.}
-	Comparing Part~2a (Global only) to Part~2b (Hierarchical), the Dig Deeper logic does improve scores slightly (e.g., WeightedAvg: 0.747 $\rightarrow$ 0.755, a +0.008 lift). This confirms that when sibling-track evidence exists, it is more predictive than the global average. However, the Dig Deeper rule only triggers for 4.7\% of candidates, so its impact is limited.
+	Comparing Part~2a (Global only) to Part~2b (Hierarchical), the Dig Deeper logic does improve scores slightly (e.g., WeightedAvg: 0.756 $\rightarrow$ 0.764, a +0.008 lift). This confirms that when sibling-track evidence exists, it is more predictive than the global average. However, the Dig Deeper rule only triggers for a small percentage of candidates, so its impact is limited.
+
+	\item \textbf{Sibling tracks do not predict better than Artist score alone.}
+	The assignment asks whether looking at sibling tracks in an album predicts a user's interest better than just using the Artist score. The answer is \emph{no}. In Part~1, 44\% of candidates have a direct artist rating, and the Evidence-Weighted strategy leverages this clean signal to reach AUC = 0.871. In Part~2b, the Dig Deeper rule triggers for only 4.7\% of candidates, computing a sibling-track mean as a proxy for the missing album score. While this proxy does outperform the global average (WeightedAvg improves from 0.756 to 0.764), the sibling-track signal remains far weaker than a direct Artist rating. The reason is twofold: (i)~the proxy only fires for a small fraction of candidates, leaving the remaining 95\% reliant on global imputation that dilutes ranking quality; and (ii)~the sibling-track mean is inherently noisier than a direct artist rating because co-album tracks can span different styles within an artist's catalog. In short, Dig Deeper is a useful refinement over global averages, but it does not substitute for genuine user--artist interaction data.
 
 	\item \textbf{Data sparsity limits Dig Deeper's reach.}
 	The Dig Deeper rule requires the user to have rated at least one other track in the same album---a rare condition in a dataset with 224,041 tracks spread across 31,141 albums. Only 5,678 of 120,000 candidates (4.7\%) met this condition. This extreme sparsity is the fundamental constraint on the strategy's effectiveness.
 
 	\item \textbf{Lesson learned.}
-	Naive feature imputation can be counterproductive in sparse recommendation settings. The optimal approach from Part~1 (Evidence-Weighted, AUC = 0.869) works precisely because it respects the distinction between ``no data'' and ``low preference.'' A more sophisticated cold-start strategy would need to impute selectively---e.g., only for users with truly zero features---rather than applying global averages uniformly across all missing values.
+	Naive feature imputation can be counterproductive in sparse recommendation settings. The optimal approach from Part~1 (Evidence-Weighted, AUC = 0.871) works precisely because it respects the distinction between ``no data'' and ``low preference.'' A more sophisticated cold-start strategy would need to impute selectively---e.g., only for users with truly zero features---rather than applying global averages uniformly across all missing values.
 \end{enumerate}
 
 %----------------------------------------------------------------------
@@ -476,16 +479,16 @@ A critical and instructive result: the Part~2 cold-start strategies \emph{decrea
 		\toprule
 		\textbf{Part} & \textbf{Strategy} & \textbf{File} & \textbf{AUC} \\
 		\midrule
-		1  & S1: Max Genre Score     & \texttt{submission\_strategy1\_maxgenre.csv}     & 0.829 \\
-		1  & S2: Weighted Average    & \texttt{submission\_strategy2\_weightedavg.csv}  & 0.865 \\
-		1  & S3: Evidence-Weighted   & \texttt{submission\_strategy3\_evidence.csv}     & \textbf{0.869} \\
+		1  & S1: Max Genre Score     & \texttt{submission\_v2\_maxgenre.csv}     & 0.834 \\
+		1  & S2: Weighted Average    & \texttt{submission\_v2\_weightedavg.csv}  & 0.868 \\
+		1  & S3: Evidence-Weighted   & \texttt{submission\_v2\_evidence.csv}     & \textbf{0.871} \\
 		\midrule
-		2a & Global + MaxGenre       & \texttt{submission\_p2a\_global\_maxgenre.csv}      & 0.720 \\
-		2a & Global + WeightedAvg    & \texttt{submission\_p2a\_global\_weightedavg.csv}   & 0.747 \\
+		2a & Global + MaxGenre       & \texttt{submission\_p2a\_global\_maxgenre.csv}      & 0.734 \\
+		2a & Global + WeightedAvg    & \texttt{submission\_p2a\_global\_weightedavg.csv}   & 0.756 \\
 		\midrule
-		2b & Hier + MaxGenre         & \texttt{submission\_p2b\_hier\_maxgenre.csv}        & 0.727 \\
-		2b & Hier + Evidence         & \texttt{submission\_p2b\_hier\_evidence.csv}        & 0.747 \\
-		2b & Hier + WeightedAvg      & \texttt{submission\_p2b\_hier\_weightedavg.csv}     & 0.755 \\
+		2b & Hier + MaxGenre         & \texttt{submission\_p2b\_hier\_maxgenre.csv}        & 0.742 \\
+		2b & Hier + Evidence         & \texttt{submission\_p2b\_hier\_evidence.csv}        & 0.752 \\
+		2b & Hier + WeightedAvg      & \texttt{submission\_p2b\_hier\_weightedavg.csv}     & \textbf{0.764} \\
 		\bottomrule
 	\end{tabular}
 	\caption{Complete list of Kaggle submission files.}\label{tab:all-subs}
@@ -497,288 +500,15 @@ A critical and instructive result: the Part~2 cold-start strategies \emph{decrea
 \section{Python Source Code}\label{app:code}
 % =====================================================================
 
-The complete Python implementation is contained in a single script (\texttt{EE627\_Midterm.py}). The code is organized into data parsing, feature engineering, heuristic strategies, and the execution pipeline.
+The implementation is split into two scripts: Part~1 (\texttt{EE627\_Midterm\_part1\_v2.py}) handles feature engineering and heuristic strategies, while Part~2 (\texttt{EE627\_Midterm\_part2\_v2.py}) implements the cold-start fallback logic. Both scripts are included in full below.
 
-\subsection{Data Parsing}
+\subsection{Part 1: Feature Engineering \& Heuristic Strategies}
 
-\begin{lstlisting}[caption={Data parsing functions.}]
-import os
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(SCRIPT_DIR, "..", "Homework 4", "Data")
-TRAIN_FILE = os.path.join(DATA_DIR, "trainItem2.txt")
-TEST_FILE  = os.path.join(DATA_DIR, "testItem2.txt")
-TRACK_FILE = os.path.join(DATA_DIR, "trackData2.txt")
-ALBUM_FILE = os.path.join(DATA_DIR, "albumData2.txt")
-OUTPUT_DIR = SCRIPT_DIR
-
-
-def parse_training(path):
-    """Parse training file into {user_id: {item_id: rating}}.
-    Format: UserID|NumItems header, then ItemID<TAB>Rating lines.
-    Items can be tracks, albums, artists, or genres."""
-    users = {}
-    with open(path, "r") as f:
-        uid = None
-        for line in f:
-            line = line.strip()
-            if "|" in line:
-                uid = int(line.split("|")[0])
-                users[uid] = {}
-            elif "\t" in line and uid is not None:
-                parts = line.split("\t")
-                users[uid][int(parts[0])] = int(parts[1])
-    return users
-
-
-def parse_tracks(path):
-    """Parse trackData2.txt -> {tid: (album, artist, [genres])}."""
-    tracks = {}
-    with open(path, "r") as f:
-        for line in f:
-            parts = line.strip().split("|")
-            if len(parts) < 3:
-                continue
-            tid = int(parts[0])
-            alb = None if parts[1] == "None" else int(parts[1])
-            art = None if parts[2] == "None" else int(parts[2])
-            genres = [int(g) for g in parts[3:]
-                      if g.strip() and g != "None"]
-            tracks[tid] = (alb, art, genres)
-    return tracks
-
-
-def parse_test(path):
-    """Parse testItem2.txt -> [(user_id, [track_ids])]."""
-    test = []
-    with open(path, "r") as f:
-        uid, tids = None, []
-        for line in f:
-            line = line.strip()
-            if "|" in line:
-                if uid is not None:
-                    test.append((uid, tids))
-                uid = int(line.split("|")[0])
-                tids = []
-            elif line:
-                tids.append(int(line))
-        if uid is not None:
-            test.append((uid, tids))
-    return test
-\end{lstlisting}
+\lstinputlisting[caption={EE627\_Midterm\_part1\_v2.py --- Part 1 complete source code.}, language=Python]{EE627_Midterm_part1_v2.py}
 
 \newpage
-\subsection{Feature Engineering (Part 1)}
+\subsection{Part 2: Cold-Start Fallback Strategies}
 
-\begin{lstlisting}[caption={Feature engineering (Part 1.a).}]
-def compute_feature_vector(user_ratings, track_meta, uid, tid):
-    """Build feature vector for one (user, track) pair."""
-    ratings = user_ratings.get(uid, {})
-    alb_id, art_id, genre_ids = track_meta.get(
-        tid, (None, None, []))
-
-    # Album score
-    if alb_id is not None and alb_id in ratings:
-        album_score, has_album = ratings[alb_id], 1
-    else:
-        album_score, has_album = 0, 0
-
-    # Artist score
-    if art_id is not None and art_id in ratings:
-        artist_score, has_artist = ratings[art_id], 1
-    else:
-        artist_score, has_artist = 0, 0
-
-    # Genre statistics
-    genre_scores = [ratings[g] for g in genre_ids
-                    if g in ratings]
-    n = len(genre_scores)
-    if n > 0:
-        g_max  = max(genre_scores)
-        g_min  = min(genre_scores)
-        g_mean = sum(genre_scores) / n
-        g_var  = sum((s - g_mean)**2 for s in genre_scores) / n
-        g_sum  = sum(genre_scores)
-    else:
-        g_max = g_min = g_sum = 0
-        g_mean = g_var = 0.0
-
-    return {
-        "album_score": album_score,
-        "artist_score": artist_score,
-        "has_album": has_album,    "has_artist": has_artist,
-        "genre_count": n,          "genre_max": g_max,
-        "genre_min": g_min,        "genre_mean": g_mean,
-        "genre_var": g_var,        "genre_sum": g_sum,
-    }
-\end{lstlisting}
-
-\subsection{Heuristic Strategies (Part 1)}
-
-\begin{lstlisting}[caption={Heuristic strategies (Part 1.b).}]
-def strategy_max_genre(features_list):
-    """Strategy 1: 0.30*album + 0.20*artist + 0.50*genre_max"""
-    return [0.30 * f["album_score"]
-            + 0.20 * f["artist_score"]
-            + 0.50 * f["genre_max"]
-            for f in features_list]
-
-
-def strategy_weighted_avg(features_list):
-    """Strategy 2: 0.40*album + 0.35*artist + 0.25*genre_mean"""
-    return [0.40 * f["album_score"]
-            + 0.35 * f["artist_score"]
-            + 0.25 * f["genre_mean"]
-            for f in features_list]
-
-
-def strategy_evidence_weighted(features_list):
-    """Strategy 3: has_album*album + has_artist*artist
-       + genre_count*genre_mean/10"""
-    return [f["has_album"] * f["album_score"]
-            + f["has_artist"] * f["artist_score"]
-            + f["genre_count"] * f["genre_mean"] / 10.0
-            for f in features_list]
-\end{lstlisting}
-
-\newpage
-\subsection{Ranking and Submission Pipeline}
-
-\begin{lstlisting}[caption={Ranking and submission pipeline.}]
-def rank_top3(scores, track_ids):
-    """Pick top-3 scored tracks as '1', rest as '0'."""
-    paired = sorted(zip(scores, track_ids),
-                    key=lambda x: x[0], reverse=True)
-    top3 = set(tid for _, tid in paired[:3])
-    return {tid: (1 if tid in top3 else 0)
-            for tid in track_ids}
-
-
-def write_submission(results, path):
-    with open(path, "w") as f:
-        f.write("TrackID,Predictor\n")
-        for key, label in results:
-            f.write(f"{key},{label}\n")
-
-
-def run_strategy(user_ratings, track_meta, test_users,
-                 strategy_fn, out_path):
-    results = []
-    for uid, candidates in test_users:
-        feats  = [compute_feature_vector(
-                      user_ratings, track_meta, uid, tid)
-                  for tid in candidates]
-        scores = strategy_fn(feats)
-        recs   = rank_top3(scores, candidates)
-        for tid in candidates:
-            results.append((f"{uid}_{tid}", recs[tid]))
-    write_submission(results, out_path)
-    return results
-\end{lstlisting}
-
-\newpage
-\subsection{Main Entry Point (Part 1)}
-
-\begin{lstlisting}[caption={Main entry point.}]
-if __name__ == "__main__":
-    user_ratings = parse_training(TRAIN_FILE)
-    track_meta   = parse_tracks(TRACK_FILE)
-    test_users   = parse_test(TEST_FILE)
-
-    # Strategy 1: Max Genre Score
-    run_strategy(user_ratings, track_meta, test_users,
-        strategy_max_genre,
-        os.path.join(OUTPUT_DIR,
-            "submission_strategy1_maxgenre.csv"))
-
-    # Strategy 2: Weighted Average
-    run_strategy(user_ratings, track_meta, test_users,
-        strategy_weighted_avg,
-        os.path.join(OUTPUT_DIR,
-            "submission_strategy2_weightedavg.csv"))
-
-    # Strategy 3: Evidence-Weighted
-    run_strategy(user_ratings, track_meta, test_users,
-        strategy_evidence_weighted,
-        os.path.join(OUTPUT_DIR,
-            "submission_strategy3_evidence.csv"))
-\end{lstlisting}
-
-\newpage
-\subsection{Part 2: Cold-Start Extensions}
-
-\begin{lstlisting}[caption={Album-to-tracks index and global statistics (Part 2 setup).}]
-from collections import defaultdict
-
-def build_album_to_tracks(track_meta):
-    """Build {album_id: [track_ids]} for Dig Deeper."""
-    album_tracks = defaultdict(list)
-    for tid, (alb, _, _) in track_meta.items():
-        if alb is not None:
-            album_tracks[alb].append(tid)
-    return dict(album_tracks)
-
-
-def build_global_stats(user_ratings):
-    """Global mean rating per item across all users.
-    Returns {item_id: (mean_rating, num_raters)}."""
-    item_sum = defaultdict(float)
-    item_cnt = defaultdict(int)
-    for _, ratings in user_ratings.items():
-        for item_id, rating in ratings.items():
-            item_sum[item_id] += rating
-            item_cnt[item_id] += 1
-    return {iid: (item_sum[iid] / item_cnt[iid],
-                  item_cnt[iid])
-            for iid in item_sum}
-\end{lstlisting}
-
-\newpage
-\begin{lstlisting}[caption={Enhanced feature vector with hierarchical fallback.}]
-def compute_feature_vector_v2(user_ratings, track_meta,
-        uid, tid, album_to_tracks, global_stats,
-        use_dig_deeper=True, use_global=True):
-    ratings = user_ratings.get(uid, {})
-    alb_id, art_id, genre_ids = track_meta.get(
-        tid, (None, None, []))
-
-    # Album: Direct -> Dig Deeper -> Global
-    album_score, has_album, album_source = 0, 0, "none"
-    if alb_id is not None:
-        if alb_id in ratings:
-            album_score = ratings[alb_id]
-            has_album, album_source = 1, "direct"
-        elif use_dig_deeper:
-            siblings = album_to_tracks.get(alb_id, [])
-            sib_ratings = [ratings[st] for st in siblings
-                           if st in ratings and st != tid]
-            if sib_ratings:
-                album_score = sum(sib_ratings)/len(sib_ratings)
-                has_album, album_source = 1, "dig_deeper"
-            elif use_global and alb_id in global_stats:
-                album_score = global_stats[alb_id][0]
-                has_album, album_source = 1, "global"
-        elif use_global and alb_id in global_stats:
-            album_score = global_stats[alb_id][0]
-            has_album, album_source = 1, "global"
-
-    # Artist: Direct -> Global
-    artist_score, has_artist = 0, 0
-    if art_id is not None:
-        if art_id in ratings:
-            artist_score, has_artist = ratings[art_id], 1
-        elif use_global and art_id in global_stats:
-            artist_score = global_stats[art_id][0]
-            has_artist = 1
-
-    # Genre: Direct -> Global (per genre)
-    genre_scores = []
-    for gid in genre_ids:
-        if gid in ratings:
-            genre_scores.append(ratings[gid])
-        elif use_global and gid in global_stats:
-            genre_scores.append(global_stats[gid][0])
-    # ... compute genre stats as in Part 1 ...
-\end{lstlisting}
+\lstinputlisting[caption={EE627\_Midterm\_part2\_v2.py --- Part 2 complete source code.}, language=Python]{EE627_Midterm_part2_v2.py}
 
 \end{document}
