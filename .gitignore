@@ -6,8 +6,6 @@
 *.log
 *.out
 *.toc
-*.lof
-*.lot
 *.fls
 *.fdb_latexmk
 *.synctex.gz
@@ -19,9 +17,12 @@
 *.vrb
 *.out
 *.log
-*.equ
 *.aux
+
+# Data
+Homework/Midterm/Data/
 
 # Windows
 desktop.ini
 Thumbs.db
+.vscode/

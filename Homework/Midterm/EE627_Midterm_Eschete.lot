@@ -1,0 +1,10 @@
+\contentsline {table}{\numberline {1}{\ignorespaces Dataset statistics.}}{1}{table.1}%
+\contentsline {table}{\numberline {2}{\ignorespaces Feature coverage across all 120,000 test candidates.}}{2}{table.2}%
+\contentsline {table}{\numberline {3}{\ignorespaces Feature vectors for the first test user (User 199810).}}{3}{table.3}%
+\contentsline {table}{\numberline {4}{\ignorespaces Pairwise agreement between strategies (out of 120,000 predictions).}}{5}{table.4}%
+\contentsline {table}{\numberline {5}{\ignorespaces Part 1 Kaggle AUC-ROC comparison.}}{6}{table.5}%
+\contentsline {table}{\numberline {6}{\ignorespaces Album score source breakdown with Global Fallback.}}{8}{table.6}%
+\contentsline {table}{\numberline {7}{\ignorespaces Album score source: Global-only vs.\ full Hierarchical fallback.}}{10}{table.7}%
+\contentsline {table}{\numberline {8}{\ignorespaces Prediction changes vs.\ Part 1 baseline (WeightedAvg strategy).}}{10}{table.8}%
+\contentsline {table}{\numberline {9}{\ignorespaces Complete Kaggle AUC-ROC comparison: Part 1 vs.\ Part 2.}}{11}{table.9}%
+\contentsline {table}{\numberline {10}{\ignorespaces Complete list of Kaggle submission files.}}{13}{table.10}%

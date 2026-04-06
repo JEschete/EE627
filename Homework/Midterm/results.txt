@@ -1,0 +1,260 @@
+============================================================
+  EE627 Midterm v6 - Refined Model
+============================================================
+  Device: cuda
+  GPU: NVIDIA GeForce RTX 5080
+
+[1/4] Loading training data ...
+       49,204 users, 12,403,575 ratings
+[2/4] Loading track metadata ...
+       224,041 tracks
+[3/4] Loading album metadata ...
+       52,829 albums
+[4/4] Loading test data ...
+       20,000 test users, 120,000 candidates
+
+============================================================
+  ENRICHING TRACKS
+============================================================
+  Enrichment: 8,134 artists filled, 119,842 genres added
+
+============================================================
+  BUILDING AUXILIARY STRUCTURES
+============================================================
+  Building global item stats ...
+       295,799 items with global stats
+  Building track mappings ...
+       31,141 albums, 12,291 artists mapped
+
+============================================================
+  TRAINING MF MODELS
+============================================================
+
+  Training MF [mf32] (k=32, 40 epochs) ...
+    [mf32] Epoch   1/40  MSE=2957.62
+    [mf32] Epoch  10/40  MSE=661.48
+    [mf32] Epoch  20/40  MSE=547.26
+    [mf32] Epoch  30/40  MSE=505.62
+    [mf32] Epoch  40/40  MSE=489.57
+    [mf32] Done. User: (49204, 32), Item: (295799, 32)
+
+  Training MF [mf128] (k=128, 80 epochs) ...
+    [mf128] Epoch   1/80  MSE=3811.98
+    [mf128] Epoch  10/80  MSE=686.29
+    [mf128] Epoch  20/80  MSE=572.63
+    [mf128] Epoch  30/80  MSE=500.95
+    [mf128] Epoch  40/80  MSE=449.34
+    [mf128] Epoch  50/80  MSE=412.86
+    [mf128] Epoch  60/80  MSE=387.94
+    [mf128] Epoch  70/80  MSE=371.12
+    [mf128] Epoch  80/80  MSE=359.55
+    [mf128] Done. User: (49204, 128), Item: (295799, 128)
+
+============================================================
+  BUILDING NEIGHBOR INDEX
+============================================================
+
+  Building neighbor index (k=20) ...
+       Built neighbors for 49,204 users in 5.9s
+
+============================================================
+  BUILDING TRAINING & VALIDATION DATA
+============================================================
+  Train users: 44,283, Val users: 4,921
+  Train groups: 705,270, Val groups: 25,910
+
+  Featurizing training groups ...
+       Featurized 50,000/705,270 groups ...
+       Featurized 100,000/705,270 groups ...
+       Featurized 150,000/705,270 groups ...
+       Featurized 200,000/705,270 groups ...
+       Featurized 250,000/705,270 groups ...
+       Featurized 300,000/705,270 groups ...
+       Featurized 350,000/705,270 groups ...
+       Featurized 400,000/705,270 groups ...
+       Featurized 450,000/705,270 groups ...
+       Featurized 500,000/705,270 groups ...
+       Featurized 550,000/705,270 groups ...
+       Featurized 600,000/705,270 groups ...
+       Featurized 650,000/705,270 groups ...
+       Featurized 700,000/705,270 groups ...
+       Featurized 705,270 groups -> X(705270, 6, 36)
+  Featurizing validation groups ...
+       Featurized 25,910 groups -> X(25910, 6, 36)
+  Feature computation: 111.0s
+
+============================================================
+  V2 HEURISTIC BASELINE
+============================================================
+  v2 heuristic val AUC: 0.6675  (Kaggle: 0.871)
+
+============================================================
+  PHASE 1: INITIAL MODEL (all {N_FEATURES} features)
+============================================================
+    Epoch   1/100  loss=0.2546  train_acc=0.7550  val_AUC=0.7432 *BEST*
+    Epoch   5/100  loss=0.2522  train_acc=0.7716  val_AUC=0.7566 *BEST*
+    Epoch  10/100  loss=0.2519  train_acc=0.7743  val_AUC=0.7601 *BEST*
+    Epoch  15/100  loss=0.2518  train_acc=0.7772  val_AUC=0.7622 *BEST*
+    Epoch  20/100  loss=0.2517  train_acc=0.7750  val_AUC=0.7617
+    Epoch  25/100  loss=0.2517  train_acc=0.7759  val_AUC=0.7612
+    Epoch  30/100  loss=0.2517  train_acc=0.7781  val_AUC=0.7621
+    Early stopping at epoch 30
+    Best val AUC: 0.7622
+
+============================================================
+  FEATURE SELECTION
+============================================================
+
+  Computing feature importance (permutation) ...
+    Base val AUC: 0.7622
+    Feature importance (top 15):
+      # 1  feature[29]  AUC drop = +0.2415
+      # 2  feature[16]  AUC drop = +0.0621
+      # 3  feature[28]  AUC drop = +0.0583
+      # 4  feature[13]  AUC drop = +0.0319
+      # 5  feature[17]  AUC drop = +0.0239
+      # 6  feature[15]  AUC drop = +0.0223
+      # 7  feature[14]  AUC drop = +0.0208
+      # 8  feature[22]  AUC drop = +0.0126
+      # 9  feature[ 3]  AUC drop = +0.0031
+      #10  feature[23]  AUC drop = +0.0030
+      #11  feature[10]  AUC drop = +0.0026
+      #12  feature[ 1]  AUC drop = +0.0022
+      #13  feature[26]  AUC drop = +0.0022
+      #14  feature[25]  AUC drop = +0.0021
+      #15  feature[34]  AUC drop = +0.0016
+    Bottom 5:
+          feature[31]  AUC drop = -0.0001
+          feature[ 0]  AUC drop = -0.0002
+          feature[ 4]  AUC drop = -0.0002
+          feature[35]  AUC drop = -0.0004
+          feature[21]  AUC drop = -0.0004
+
+  Selected 22/36 features: [1, 2, 3, 9, 10, 13, 14, 15, 16, 17, 18, 19, 22, 23, 25, 26, 28, 29, 30, 32, 33, 34]
+
+============================================================
+  PHASE 2: RETRAIN WITH 22 SELECTED FEATURES
+============================================================
+    Epoch   1/100  loss=0.2546  train_acc=0.7559  val_AUC=0.7453 *BEST*
+    Epoch   5/100  loss=0.2521  train_acc=0.7739  val_AUC=0.7606 *BEST*
+    Epoch  10/100  loss=0.2519  train_acc=0.7777  val_AUC=0.7622 *BEST*
+    Epoch  15/100  loss=0.2517  train_acc=0.7774  val_AUC=0.7621
+    Epoch  20/100  loss=0.2517  train_acc=0.7762  val_AUC=0.7622
+    Epoch  25/100  loss=0.2517  train_acc=0.7752  val_AUC=0.7617
+    Early stopping at epoch 25
+    Best val AUC: 0.7622
+
+  Full model AUC:     0.7622
+  Selected model AUC: 0.7622
+  Using selected features (22)
+
+============================================================
+  ENSEMBLE: TRAINING 3 MODELS
+============================================================
+
+  --- Ensemble model 1/3 (seed offset=0) ---
+    Epoch   1/100  loss=0.2546  train_acc=0.7559  val_AUC=0.7453 *BEST*
+    Epoch   5/100  loss=0.2521  train_acc=0.7739  val_AUC=0.7606 *BEST*
+    Epoch  10/100  loss=0.2519  train_acc=0.7777  val_AUC=0.7622 *BEST*
+    Epoch  15/100  loss=0.2517  train_acc=0.7774  val_AUC=0.7621
+    Epoch  20/100  loss=0.2517  train_acc=0.7762  val_AUC=0.7622
+    Epoch  25/100  loss=0.2517  train_acc=0.7752  val_AUC=0.7617
+    Early stopping at epoch 25
+    Best val AUC: 0.7622
+    Model 1 val AUC: 0.7622
+
+  --- Ensemble model 2/3 (seed offset=100) ---
+    Epoch   1/100  loss=0.2545  train_acc=0.7551  val_AUC=0.7449 *BEST*
+    Epoch   5/100  loss=0.2521  train_acc=0.7750  val_AUC=0.7583 *BEST*
+    Epoch  10/100  loss=0.2519  train_acc=0.7707  val_AUC=0.7600 *BEST*
+    Epoch  15/100  loss=0.2517  train_acc=0.7746  val_AUC=0.7613 *BEST*
+    Epoch  20/100  loss=0.2518  train_acc=0.7748  val_AUC=0.7614 *BEST*
+    Epoch  25/100  loss=0.2517  train_acc=0.7739  val_AUC=0.7603
+    Epoch  30/100  loss=0.2517  train_acc=0.7760  val_AUC=0.7607
+    Epoch  35/100  loss=0.2516  train_acc=0.7766  val_AUC=0.7618 *BEST*
+    Epoch  40/100  loss=0.2516  train_acc=0.7748  val_AUC=0.7618 *BEST*
+    Epoch  45/100  loss=0.2516  train_acc=0.7768  val_AUC=0.7625 *BEST*
+    Epoch  50/100  loss=0.2516  train_acc=0.7786  val_AUC=0.7618
+    Epoch  55/100  loss=0.2516  train_acc=0.7766  val_AUC=0.7624
+    Epoch  60/100  loss=0.2516  train_acc=0.7780  val_AUC=0.7617
+    Early stopping at epoch 60
+    Best val AUC: 0.7625
+    Model 2 val AUC: 0.7625
+
+  --- Ensemble model 3/3 (seed offset=200) ---
+    Epoch   1/100  loss=0.2546  train_acc=0.7553  val_AUC=0.7454 *BEST*
+    Epoch   5/100  loss=0.2521  train_acc=0.7739  val_AUC=0.7583 *BEST*
+    Epoch  10/100  loss=0.2519  train_acc=0.7769  val_AUC=0.7608 *BEST*
+    Epoch  15/100  loss=0.2518  train_acc=0.7771  val_AUC=0.7609 *BEST*
+    Epoch  20/100  loss=0.2517  train_acc=0.7786  val_AUC=0.7620 *BEST*
+    Epoch  25/100  loss=0.2517  train_acc=0.7772  val_AUC=0.7612
+    Epoch  30/100  loss=0.2518  train_acc=0.7770  val_AUC=0.7620
+    Epoch  35/100  loss=0.2517  train_acc=0.7785  val_AUC=0.7611
+    Early stopping at epoch 35
+    Best val AUC: 0.7620
+    Model 3 val AUC: 0.7620
+
+  Ensemble individual AUCs: [0.7622046399931386, 0.7624833826493418, 0.7620373943994168]
+  Mean: 0.7622
+
+============================================================
+  GENERATING SUBMISSIONS
+============================================================
+
+>>> Predicting with v6 Ensemble (3 models) (3 models) ...
+    120,000 predictions (60,000 rec, 60,000 don't)
+    Saved -> D:\judee\Google Drive\School\Classes\EE627\Homework\Midterm\submission_v6_ensemble.csv
+
+============================================================
+  HYBRID SUBMISSIONS (multiple thresholds)
+============================================================
+
+  Pure v6 vs v2 agreement: 97,368/120,000 (81.1%)
+
+   Threshold    v2 users    v6 users    v6 pct   Agreement  File
+  ---------------------------------------------------------------------------
+           0      15,468       4,532     22.7%       92.2%  submission_v6_hybrid_gap0.csv
+           1      15,281       4,719     23.6%       92.0%  submission_v6_hybrid_gap1.csv
+           2      15,146       4,854     24.3%       91.8%  submission_v6_hybrid_gap2.csv
+           3      15,012       4,988     24.9%       91.6%  submission_v6_hybrid_gap3.csv
+           5      14,762       5,238     26.2%       91.2%  submission_v6_hybrid_gap5.csv
+           8      13,081       6,919     34.6%       89.2%  submission_v6_hybrid_gap8.csv
+          10      12,483       7,517     37.6%       88.5%  submission_v6_hybrid_gap10.csv
+          15      12,253       7,747     38.7%       88.2%  submission_v6_hybrid_gap15.csv
+          20      11,712       8,288     41.4%       87.6%  submission_v6_hybrid_gap20.csv
+          30      11,238       8,762     43.8%       87.1%  submission_v6_hybrid_gap30.csv
+          50      10,342       9,658     48.3%       86.3%  submission_v6_hybrid_gap50.csv
+
+============================================================
+  FINAL RESULTS
+============================================================
+  v2 heuristic val AUC:  0.6675  (Kaggle: 0.871)
+  v5b hybrid (gap>5):    0.908    (Kaggle best so far)
+  v6 full model AUC:     0.7622
+  v6 selected model AUC: 0.7622
+  v6 ensemble AUCs:      [0.7622046399931386, 0.7624833826493418, 0.7620373943994168]
+  Features used:         22 (selected)
+  Pure v6 agreement:     81.1%
+  MF models:             ['mf32', 'mf128']
+  Neighbors:             20
+  Ensemble size:         3
+
+  Submissions generated:
+    submission_v6_ensemble.csv         -- pure v6 model
+    submission_v6_hybrid_gap0.csv   -- v2 if gap>0, else v6
+    submission_v6_hybrid_gap1.csv   -- v2 if gap>1, else v6
+    submission_v6_hybrid_gap2.csv   -- v2 if gap>2, else v6
+    submission_v6_hybrid_gap3.csv   -- v2 if gap>3, else v6
+    submission_v6_hybrid_gap5.csv   -- v2 if gap>5, else v6
+    submission_v6_hybrid_gap8.csv   -- v2 if gap>8, else v6
+    submission_v6_hybrid_gap10.csv  -- v2 if gap>10, else v6
+    submission_v6_hybrid_gap15.csv  -- v2 if gap>15, else v6
+    submission_v6_hybrid_gap20.csv  -- v2 if gap>20, else v6
+    submission_v6_hybrid_gap30.csv  -- v2 if gap>30, else v6
+    submission_v6_hybrid_gap50.csv  -- v2 if gap>50, else v6
+
+  Best bet: start with gap5 (matched v5b's 0.908 threshold)
+  Then try gap3 and gap8 to find the sweet spot
+  Total time: 13255.9s (220.9m)
+
+Done.

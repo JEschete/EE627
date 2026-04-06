@@ -1,0 +1,13 @@
+Use the dataSet_2.mat to generate a new Predictor matrix. 
+1. For example, for each time series in column, compute the daily change rate, i.e., 
+[X(t)- X(t-1)]/X(t-1)  to get a new predictor.
+Add the new generated predictor matrix with the original predictor matrix together, and repeat what you did in the HW3, observe what are the changes with ROC and AUC.  You need to observe whether the new generated predictor matrix has impacts in the feature selection at Step 3. 
+ 
+2. In step 1, for the first row, since you cannot have the row zero to calculate the difference ratio, [X(t)- X(t-1)]/X(t-1). 
+You can drop the first row. 
+3. You can use the featureSelection.m function (you need to download critFun.m file too) to make selections of the features (i.e., the columns in the predictor matrix).
+
+         [ SelectedFeatureInd]=featureSelection( Predictor, response )
+
+See how different features will change the AUC with the testing set of data. 
+For example, you can choose the top 5 feature columns, or top 10,  etc to see how the AUC values are varying. 

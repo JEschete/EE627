@@ -1,0 +1,87 @@
+================================================================
+  KAGGLE SUBMISSION LOG - All submissions with CSV on disk
+================================================================
+
+--- Part 1 Results (v2 enriched, heuristic) ---
+submission_p1_evidence.csv          0.871  <-- BEST HEURISTIC
+submission_p1_weightedavg.csv       0.868
+submission_p1_maxgenre.csv          0.834
+
+--- Part 2 Results (cold-start fallback) ---
+submission_p2b_hier_weightedavg.csv 0.764
+submission_p2a_global_weightedavg.csv 0.756
+submission_p2b_hier_evidence.csv    0.752
+submission_p2b_hier_maxgenre.csv    0.742
+submission_p2a_global_maxgenre.csv  0.734
+
+--- v3 Results (weight tuning, conservative v2 variants) ---
+submission_v3_additive.csv          0.871
+submission_v3_confidence.csv        0.871
+submission_v3_genre_both.csv        0.871
+submission_v3_interact.csv          0.871
+submission_v3_tuned.csv             0.870
+
+--- v4 Results (sklearn models - pointwise regression) ---
+submission_v4_ridge.csv             0.852
+submission_v4_gbm.csv               0.821
+submission_v4_pairwise.csv          (collapsed model, not submitted)
+submission_v4_pairwise_lg.csv       (collapsed model, not submitted)
+
+--- v5 Results (PyTorch BPR + MF embeddings) ---
+submission_v5_nn.csv                0.878
+submission_v5b_nn.csv               0.878  (pure model)
+submission_v5b_hybrid.csv           0.908  (hybrid, gap>5)
+submission_v5b_hybrid_gap0.csv      0.878
+submission_v5b_hybrid_gap1.csv      0.883
+submission_v5b_hybrid_gap2.csv      0.893
+submission_v5b_hybrid_gap3.csv      0.898
+submission_v5b_hybrid_gap4.csv      0.903
+submission_v5b_hybrid_gap5.csv      0.908
+submission_v5b_hybrid_gap6.csv      0.908
+submission_v5b_hybrid_gap7.csv      0.909
+submission_v5b_hybrid_gap8.csv      0.910
+submission_v5b_hybrid_gap10.csv     0.911  <-- BEST OVERALL
+submission_v5b_hybrid_gap12.csv     0.911
+submission_v5b_hybrid_gap15.csv     0.911
+submission_v5b_hybrid_gap20.csv     0.911
+
+--- v6 Results (dual MF, feature selection, ensemble) ---
+submission_v6_ensemble.csv          (pure ensemble, not submitted)
+submission_v6_hybrid_gap0.csv       0.878
+submission_v6_hybrid_gap1.csv       0.882
+submission_v6_hybrid_gap2.csv       0.891
+submission_v6_hybrid_gap3.csv       0.896
+submission_v6_hybrid_gap5.csv       0.903
+submission_v6_hybrid_gap8.csv       0.907
+submission_v6_hybrid_gap10.csv      0.907
+submission_v6_hybrid_gap15.csv      0.907
+submission_v6_hybrid_gap20.csv      0.907
+submission_v6_hybrid_gap30.csv      0.907
+submission_v6_hybrid_gap50.csv      0.907
+
+================================================================
+  KEY FINDINGS
+================================================================
+- Heuristic ceiling: 0.871 (evidence-weighted, album-enriched)
+- All v3 weight variants tie at 0.871 -- formula is already optimal
+- Pointwise ML models underperform heuristic (0.821-0.852)
+- BPR pairwise neural net: 0.878 pure model
+- Hybrid strategy (v2 when confident, model when uncertain): 0.908-0.911
+- Best score: 0.911 at gap>=10 (v5b hybrid)
+- v6 more complex but peaked at 0.907 -- simpler v5b generalizes better
+- Cold-start global imputation always hurts (0.734-0.764)
+
+================================================================
+  DELETED SUBMISSIONS (no CSV, for reference only)
+================================================================
+submission_v2_evidence.csv          0.871  (same as p1_evidence)
+submission_v2_baseline_evidence.csv 0.869
+submission_v2_weightedavg.csv       0.868
+submission_v2_maxgenre.csv          0.834
+submission_v3_tuned_evidence.csv    0.870
+submission_v3_hybrid.csv            0.868
+submission_v3_ensemble.csv          0.850
+submission_v3_tuned_normalized.csv  0.809
+submission_strategy3_evidence.csv   0.869
+submission_strategy2_weightedavg.csv 0.865
+submission_strategy1_maxgenre.csv   0.829

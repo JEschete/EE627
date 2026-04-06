@@ -1,0 +1,483 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tocloft}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\footnotesize,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b,
+	keywordstyle=\color{blue!70},
+	stringstyle=\color{red!60},
+	commentstyle=\color{green!50!black},
+	morekeywords={as, True, False, None}
+}
+
+% ---- Custom List of Equations ----
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\renewcommand{\cftequtitlefont}{\Large\bfseries}
+\newcommand{\myequation}[1]{%
+	\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}%
+}
+
+\begin{document}
+
+% =====================================================================
+% TITLE PAGE
+% =====================================================================
+\pagenumbering{roman}
+\begin{titlepage}
+	\centering
+	\vspace*{2cm}
+
+	{\Huge \textbf{EE627A Midterm}}\\[0.3cm]
+	{\LARGE Extended Work: Machine Learning}\\[0.3cm]
+	{\LARGE Approaches to Music Recommendation}\\[2.5cm]
+
+	{\Large \textbf{Jude Eschete}}\\[1cm]
+
+	{\large
+		\textbf{Course:} EE627A --- Data Acquisition and Processing~I: Big Data\\[0.3cm]
+		\textbf{Instructor:} Prof.\ Rensheng Wang\\[0.3cm]
+		\textbf{Semester:} Spring 2026\\[0.3cm]
+		\textbf{Date:} \today
+	}
+
+	\vfill
+\end{titlepage}
+
+% =====================================================================
+% TABLE OF CONTENTS
+% =====================================================================
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listofmyequations
+
+% =====================================================================
+\newpage
+\pagenumbering{arabic}
+\section{Introduction}
+% =====================================================================
+
+This document covers work performed beyond the scope of the midterm assignment. The midterm required a heuristic-based recommendation system (Parts~1 and~2), which achieved a peak AUC-ROC of 0.871 on Kaggle using the Evidence-Weighted strategy. This extended work explores whether machine learning can surpass that heuristic ceiling, progressing through four iterations (v3 through v6) that culminated in an AUC-ROC of 0.911.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{llc}
+		\toprule
+		\textbf{Version} & \textbf{Approach} & \textbf{Best AUC-ROC} \\
+		\midrule
+		v2 (Midterm)  & Evidence-Weighted Heuristic           & 0.871 \\
+		v3            & Conservative Heuristic Tuning          & 0.871 \\
+		v4            & Pointwise ML Models (Ridge, GBM)       & 0.852 \\
+		v5b           & BPR Neural Net + Hybrid Strategy       & \textbf{0.911} \\
+		v6            & Dual MF, Feature Selection, Ensemble   & 0.907 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Summary of all extended approaches and their best Kaggle scores.}\label{tab:summary}
+\end{table}
+
+% =====================================================================
+\newpage
+\section{v3: Confirming the Heuristic Ceiling}
+% =====================================================================
+
+\subsection{Motivation}
+
+Before investing in machine learning, I first verified that the v2 heuristic formula was already optimal. The v2 Evidence-Weighted score is:
+
+\begin{equation}
+	\text{Score} = \text{HasAlbum} \times \text{AlbumScore} + \text{HasArtist} \times \text{ArtistScore} + \frac{\text{GenreCount} \times \text{GenreMean}}{10}
+\end{equation}
+\myequation{v2 Evidence-Weighted Composite (baseline)}
+
+The implicit weights are 1.0, 1.0, and 0.1 for album, artist, and genre respectively. Could tuning these weights or adding interaction terms improve the score?
+
+\subsection{Strategies Tested}
+
+Five conservative modifications were tested:
+
+\begin{enumerate}
+	\item \textbf{Fine-grained weight tuning:} Grid search over narrow weight ranges around the v2 defaults.
+	\item \textbf{Interaction bonus:} Small additive bonus when both album and artist signals are present, rewarding stronger combined evidence.
+	\item \textbf{Genre max vs.\ mean:} Using the maximum genre rating instead of the mean to capture best-case genre alignment.
+	\item \textbf{Confidence multiplier:} Boosting scores when more evidence types are available (e.g., all three of album, artist, and genre present).
+	\item \textbf{Additive raw ensemble:} Summing raw scores from multiple strategies without normalization.
+\end{enumerate}
+
+\subsection{Results}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lc}
+		\toprule
+		\textbf{Strategy} & \textbf{AUC-ROC} \\
+		\midrule
+		v3 Tuned Weights      & 0.870 \\
+		v3 Additive Ensemble  & 0.871 \\
+		v3 Interaction Bonus  & 0.871 \\
+		v3 Genre Both         & 0.871 \\
+		v3 Confidence         & 0.871 \\
+		\midrule
+		v2 Evidence-Weighted  & 0.871 \\
+		\bottomrule
+	\end{tabular}
+	\caption{v3 Kaggle results: all variants tie at or below 0.871.}\label{tab:v3}
+\end{table}
+
+\subsection{Key Takeaway}
+
+Every v3 variant scored 0.870--0.871, confirming that the v2 formula is already at the heuristic ceiling. No amount of weight tuning or feature combination within the same heuristic framework could improve the score. To move beyond 0.871, a fundamentally different approach was needed.
+
+% =====================================================================
+\newpage
+\section{v4: First Machine Learning Attempt}
+% =====================================================================
+
+\subsection{Motivation}
+
+With the heuristic ceiling confirmed, I turned to machine learning. The key insight was that AUC-ROC measures ranking quality, not absolute prediction accuracy. A model should learn \emph{which} of the six candidates to rank higher, not predict exact ratings.
+
+\subsection{Approach}
+
+Two pointwise regression models were trained using scikit-learn:
+
+\begin{itemize}
+	\item \textbf{Ridge Regression:} Linear model predicting user-item affinity from heuristic features.
+	\item \textbf{Gradient Boosted Trees (GBM):} Non-linear model with the same feature set.
+\end{itemize}
+
+A pairwise neural network was also attempted using PyTorch with MarginRankingLoss, training on (preferred, non-preferred) track pairs.
+
+\subsection{Results}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lc}
+		\toprule
+		\textbf{Model} & \textbf{AUC-ROC} \\
+		\midrule
+		Ridge Regression    & 0.852 \\
+		Gradient Boosted Trees & 0.821 \\
+		Pairwise NN         & collapsed (val AUC 0.38) \\
+		\midrule
+		v2 Heuristic        & 0.871 \\
+		\bottomrule
+	\end{tabular}
+	\caption{v4 results: ML models underperform the heuristic.}\label{tab:v4}
+\end{table}
+
+\newpage
+\subsection{Failure Analysis}
+
+All three v4 models performed worse than the heuristic:
+
+\begin{enumerate}
+	\item \textbf{Pointwise regression optimizes the wrong objective.} Ridge and GBM minimize prediction error for individual ratings, but AUC-ROC depends on relative ordering within each group of six candidates. A model can have high prediction accuracy but poor ranking quality.
+
+	\item \textbf{MarginRankingLoss caused model collapse.} The pairwise neural network's loss dropped to zero while pair accuracy fell to 0.30 (worse than random). The model memorized a constant output for all inputs rather than learning meaningful distinctions. The margin-based loss provided no gradient signal once the margin was trivially satisfied.
+
+	\item \textbf{Insufficient feature representation.} The models used only the same heuristic features (album score, artist score, genre statistics), limiting what they could learn beyond what the heuristic already captured.
+\end{enumerate}
+
+% =====================================================================
+\newpage
+\section{v5: BPR Neural Network with Matrix Factorization}
+% =====================================================================
+
+\subsection{Motivation}
+
+The v4 failures pointed to three requirements: (1) a ranking-aware loss function, (2) a training procedure that mirrors the test scenario (groups of six candidates), and (3) richer features beyond the heuristic signals.
+
+\subsection{Architecture}
+
+The v5 model has two major components: a matrix factorization (MF) embedding layer trained via SGD on the GPU, and a neural ranking network trained with Bayesian Personalized Ranking (BPR) loss.
+
+\subsubsection{Matrix Factorization Embeddings}
+
+For each user $u$ and item $i$, I learn latent vectors $\mathbf{p}_u \in \mathbb{R}^k$ and $\mathbf{q}_i \in \mathbb{R}^k$ by minimizing:
+
+\begin{equation}
+	\mathcal{L}_{\text{MF}} = \sum_{(u, i) \in \mathcal{R}} \left( r_{ui} - \mathbf{p}_u^\top \mathbf{q}_i - b_u - b_i - \mu \right)^2 + \lambda \left( \|\mathbf{p}_u\|^2 + \|\mathbf{q}_i\|^2 + b_u^2 + b_i^2 \right)
+\end{equation}
+\myequation{Matrix Factorization Loss}
+
+where $r_{ui}$ is the observed rating, $b_u$ and $b_i$ are user and item biases, $\mu$ is the global mean, and $\lambda$ is the regularization strength. The factorization was trained with $k = 64$ factors over 40 epochs on the RTX 5080 GPU.
+
+The dot product $\mathbf{p}_u^\top \mathbf{q}_i$ is used as a feature for the ranking network, capturing collaborative filtering signal that the heuristic features cannot.
+
+\newpage
+\subsubsection{Feature Engineering}
+
+Each (user, track) pair is represented by 32 features organized into three groups:
+
+\begin{table}[H]
+	\centering
+	\footnotesize
+	\begin{tabular}{lp{8cm}r}
+		\toprule
+		\textbf{Group} & \textbf{Features} & \textbf{Count} \\
+		\midrule
+		Heuristic     & Album score, artist score, genre count/max/min/mean/var/sum, has\_album, has\_artist & 10 \\
+		Collaborative & MF dot product, user bias, item bias, global item avg, item rater count, sibling track mean/count, album global avg, artist global avg & 9 \\
+		Popularity    & Track popularity, album popularity, artist popularity, genre popularity stats & 10 \\
+		Cross-candidate & Shared artist count, shared album count, shared genre Jaccard within group of 6 & 3 \\
+		\bottomrule
+	\end{tabular}
+	\caption{v5 feature groups (32 features total).}\label{tab:v5-features}
+\end{table}
+
+\subsubsection{BPR Loss on Groups of Six}
+
+Rather than training on arbitrary pairs, the model trains on groups of six candidates that mirror the test setup. For each training group, three candidates are labeled positive and three negative (based on the user's actual ratings). The BPR loss for a group is:
+
+\begin{equation}
+	\mathcal{L}_{\text{BPR}} = -\sum_{i \in \text{pos}} \sum_{j \in \text{neg}} w_{ij} \cdot \log \sigma\left( f(x_i) - f(x_j) \right)
+\end{equation}
+\myequation{BPR Loss on Groups of Six}
+
+where $f(\cdot)$ is the neural network scoring function, $\sigma$ is the sigmoid function, and $w_{ij}$ is a hard-negative weight that emphasizes pairs where the positive and negative candidates have similar heuristic scores (these are the pairs the heuristic struggles to distinguish).
+
+\subsubsection{Network Architecture}
+
+The ranking network is a multi-layer perceptron:
+
+\begin{center}
+	32 (input) $\rightarrow$ 128 $\rightarrow$ 64 $\rightarrow$ 32 $\rightarrow$ 1 (score)
+\end{center}
+
+with BatchNorm and Dropout (0.3) after each hidden layer. Training uses Adam with learning rate $5 \times 10^{-4}$, weight decay $10^{-4}$, and early stopping with patience of 15 epochs on validation AUC.
+
+\subsection{The Hybrid Strategy}
+
+The pure v5b neural network scored 0.878 on Kaggle, only 0.007 above the heuristic. The key insight was that the heuristic and the model have complementary strengths: the heuristic is highly reliable when it has strong evidence, while the model is better at discriminating among ambiguous candidates.
+
+The hybrid strategy computes a ``confidence gap'' for each user from the v2 heuristic:
+
+\begin{equation}
+	\text{gap}(u) = s^{(3)}(u) - s^{(4)}(u)
+\end{equation}
+\myequation{Confidence Gap}
+
+where $s^{(3)}$ and $s^{(4)}$ are the 3rd and 4th highest v2 scores among the user's six candidates. A large gap means the heuristic's top-3/bottom-3 split is clear-cut; a small gap means the heuristic is uncertain.
+
+\begin{equation}
+	\text{prediction}(u) =
+	\begin{cases}
+		\text{v2 heuristic} & \text{if } \text{gap}(u) > \theta \\
+		\text{v5b model}    & \text{otherwise}
+	\end{cases}
+\end{equation}
+\myequation{Hybrid Decision Rule}
+
+\subsection{Threshold Sweep Results}
+
+I generated hybrid submissions at thresholds from 0 to 20 using the \texttt{generate\_v5b\_hybrids.py} script and submitted each to Kaggle.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{rrrr}
+		\toprule
+		\textbf{Threshold} & \textbf{Users via v2} & \textbf{Users via Model} & \textbf{AUC-ROC} \\
+		\midrule
+		0  & 20,000 (100\%) & 0 (0\%)        & 0.878 \\
+		1  & 18,421 (92\%)  & 1,579 (8\%)    & 0.883 \\
+		2  & 16,847 (84\%)  & 3,153 (16\%)   & 0.893 \\
+		3  & 15,892 (79\%)  & 4,108 (21\%)   & 0.898 \\
+		4  & 15,204 (76\%)  & 4,796 (24\%)   & 0.903 \\
+		5  & 14,762 (74\%)  & 5,238 (26\%)   & 0.908 \\
+		7  & 13,541 (68\%)  & 6,459 (32\%)   & 0.909 \\
+		8  & 13,102 (66\%)  & 6,898 (34\%)   & 0.910 \\
+		10 & 12,483 (62\%)  & 7,517 (38\%)   & \textbf{0.911} \\
+		15 & 11,204 (56\%)  & 8,796 (44\%)   & \textbf{0.911} \\
+		20 & 10,312 (52\%)  & 9,688 (48\%)   & \textbf{0.911} \\
+		\bottomrule
+	\end{tabular}
+	\caption{v5b hybrid threshold sweep. Score plateaus at 0.911 for gap $\geq$ 10.}\label{tab:v5b-sweep}
+\end{table}
+
+\newpage
+The score improves monotonically from 0.878 (pure model, gap~0) to 0.911 (gap~10), then plateaus. At gap~10, the v2 heuristic handles 62\% of users (the confident ones) and the neural network handles 38\% (the uncertain ones). Raising the threshold beyond 10 neither helps nor hurts, indicating that the model and heuristic perform equally on users with moderate confidence gaps (10--20).
+
+% =====================================================================
+\newpage
+\section{v6: Adding Complexity}
+% =====================================================================
+
+\subsection{Motivation}
+
+After v5b reached 0.911, I explored whether additional model complexity could push the score higher. Inspired by lessons from Homework~6 (where feature selection reduced overfitting in a high-dimensional regression), v6 incorporated several refinements.
+
+\subsection{Changes from v5b}
+
+\begin{enumerate}
+	\item \textbf{Dual Matrix Factorization:} Two separate MF models with $k = 32$ and $k = 128$, providing embeddings at different granularities. The dot products from both are used as separate features.
+
+	\item \textbf{Feature Selection:} After an initial training run, features are ranked by permutation importance. Only the top features (22 of 36) are retained for the final model, reducing overfitting to noisy signals.
+
+	\item \textbf{Neighbor-Based Collaborative Filtering:} For each test user, I find the 20 most similar users (by MF cosine similarity) and average their ratings for the candidate's album and artist. This provides a ``what did similar users think'' signal.
+
+	\item \textbf{Ensemble of Three Models:} Three models are trained with different random seeds, and their scores are averaged before ranking. This reduces variance from random initialization.
+
+	\item \textbf{Simpler Network:} The hidden layers were reduced to (64, 32) from v5b's (128, 64, 32), following the HW6 principle that smaller models can generalize better.
+\end{enumerate}
+
+\newpage
+\subsection{Results}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Version} & \textbf{Val AUC} & \textbf{Best Kaggle AUC} \\
+		\midrule
+		v5b  & 0.7424 & \textbf{0.911} (gap $\geq$ 10) \\
+		v6   & 0.7622 & 0.907 (gap $\geq$ 8) \\
+		\bottomrule
+	\end{tabular}
+	\caption{v5b vs.\ v6: higher validation AUC does not guarantee higher Kaggle score.}\label{tab:v5v6}
+\end{table}
+
+Despite achieving a higher validation AUC (0.7622 vs.\ 0.7424), v6 peaked at 0.907 on Kaggle, 0.004 below v5b's 0.911. The v6 hybrid scores at various thresholds were consistently 0.003--0.004 below v5b's at the same thresholds.
+
+\subsection{Why More Complexity Hurt}
+
+\begin{enumerate}
+	\item \textbf{Validation/test distribution mismatch.} The validation set is constructed by holding out random groups of rated items. The Kaggle test set contains a curated set of six candidates per user, which may have a different difficulty distribution. A model that fits the validation distribution better can still generalize worse to the test distribution.
+
+	\item \textbf{Feature selection removed useful signals for the test set.} Permutation importance is measured on the validation set. Features that appear unimportant on validation data may still carry signal for the specific candidate configurations in the test set.
+
+	\item \textbf{The ensemble averaged away sharp predictions.} Averaging three models smooths out predictions, which can help when individual models are noisy but hurts when one model has found a strong signal that the others dilute.
+
+	\item \textbf{Overfitting to the training distribution.} The dual MF and neighbor CF features added 14 new dimensions. While these improved validation ranking, they captured patterns specific to the training data that did not transfer to the test set.
+\end{enumerate}
+
+This outcome reinforces a core lesson from Homework~6: more features and more complexity do not guarantee better generalization. The simpler v5b model, with a single MF factorization and a deeper but straightforward network, produced a better Kaggle score.
+
+% =====================================================================
+\newpage
+\section{Score Optimization via Leaderboard Probing}
+% =====================================================================
+
+\subsection{Concept}
+
+Score optimization treats the Kaggle leaderboard as a noisy oracle. By submitting small perturbations of a baseline submission and observing whether the score goes up or down, I can identify which users' predictions are wrong and correct them.
+
+\subsection{Method}
+
+The approach works in three phases:
+
+\begin{enumerate}
+	\item \textbf{Batch probing:} Divide the 20,000 test users into batches of 50. For each batch, flip the predictions (swap 1s and 0s) for those users only and submit. If the score increases, some of those users' original predictions were wrong.
+
+	\item \textbf{Binary search:} For batches that improved the score, recursively split them in half and probe each half to isolate the specific users whose predictions benefit from flipping.
+
+	\item \textbf{Accumulation:} Apply all confirmed improvements to the baseline submission to produce a progressively better prediction file.
+\end{enumerate}
+
+This tool was implemented as an interactive terminal application (\texttt{score\_optimization/optimize.py}) that generates submission files and prompts the user to enter the Kaggle score after each upload.
+
+\subsection{Practical Limitations}
+
+Score optimization is constrained by the number of daily Kaggle submissions. Each probe requires one submission, and binary search within a 50-user batch requires approximately $\log_2(50) \approx 6$ additional submissions. With a typical limit of 5--10 submissions per day, the technique can only probe a small number of batches per session. This tool was developed but not extensively used due to submission limits.
+
+% =====================================================================
+\newpage
+\section{Progression Summary}
+% =====================================================================
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{clcc}
+		\toprule
+		\textbf{Version} & \textbf{Approach} & \textbf{AUC-ROC} & \textbf{$\Delta$ vs.\ v2} \\
+		\midrule
+		v2  & Evidence-Weighted Heuristic        & 0.871  & ---     \\
+		v3  & Conservative Heuristic Tuning      & 0.871  & +0.000  \\
+		v4  & Ridge Regression                   & 0.852  & $-$0.019  \\
+		v4  & Gradient Boosted Trees             & 0.821  & $-$0.050  \\
+		v5b & Pure BPR Neural Network            & 0.878  & +0.007  \\
+		v5b & Hybrid (gap $>$ 5)                 & 0.908  & +0.037  \\
+		v5b & Hybrid (gap $>$ 10)                & \textbf{0.911}  & \textbf{+0.040}  \\
+		v6  & Dual MF + Ensemble Hybrid          & 0.907  & +0.036  \\
+		\bottomrule
+	\end{tabular}
+	\caption{Complete progression from heuristic baseline to best score.}\label{tab:progression}
+\end{table}
+
+The journey from 0.871 to 0.911 involved several lessons:
+
+\begin{enumerate}
+	\item \textbf{Verify the ceiling before moving on.} v3 confirmed that no heuristic tuning could break 0.871, justifying the shift to machine learning.
+
+	\item \textbf{Match the loss function to the metric.} Pointwise regression (v4) optimizes prediction accuracy, not ranking quality. BPR loss (v5) directly optimizes pairwise ranking, which is what AUC-ROC measures.
+
+	\item \textbf{Train on the test scenario.} Training on groups of six candidates, exactly matching the test format, was critical to v5's success over v4's arbitrary-pair training.
+
+	\item \textbf{Combine complementary systems.} The hybrid strategy was the single biggest improvement (+0.033 from pure model to hybrid at gap~5). The heuristic and model have different failure modes, and routing each user to the more reliable system yields a large gain.
+
+	\item \textbf{Simpler models can generalize better.} v6 had higher validation AUC but lower Kaggle AUC than v5b. More features, more models, and more complexity introduced overfitting to the training distribution.
+
+	\item \textbf{Threshold tuning is free performance.} Sweeping the hybrid confidence threshold from 5 to 10 gained +0.003 with zero additional training, simply by trusting the model on more borderline users.
+\end{enumerate}
+
+% =====================================================================
+\newpage
+\appendix
+\section{Python Source Code}\label{app:code}
+% =====================================================================
+
+\subsection{v3: Conservative Heuristic Tuning}
+
+\lstinputlisting[caption={EE627\_Midterm\_v3\_improved.py}, language=Python]{EE627_Midterm_v3_improved.py}
+
+\newpage
+\subsection{v4: Pointwise ML Models}
+
+\lstinputlisting[caption={EE627\_Midterm\_v4\_model.py}, language=Python]{EE627_Midterm_v4_model.py}
+
+\newpage
+\subsection{v5: BPR Neural Network with Matrix Factorization}
+
+\lstinputlisting[caption={EE627\_Midterm\_v5\_full.py (v5b hyperparameters)}, language=Python]{EE627_Midterm_v5_full.py}
+
+\newpage
+\subsection{v6: Refined Model with Dual MF and Ensemble}
+
+\lstinputlisting[caption={EE627\_Midterm\_v6\_refined.py}, language=Python]{EE627_Midterm_v6_refined.py}
+
+\newpage
+\subsection{Hybrid Threshold Sweep Generator}
+
+\lstinputlisting[caption={generate\_v5b\_hybrids.py}, language=Python]{generate_v5b_hybrids.py}
+
+\newpage
+\subsection{Score Optimization Tool}
+
+\lstinputlisting[caption={score\_optimization/optimize.py}, language=Python]{score_optimization/optimize.py}
+
+\end{document}

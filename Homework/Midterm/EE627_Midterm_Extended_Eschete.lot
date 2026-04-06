@@ -1,0 +1,7 @@
+\contentsline {table}{\numberline {1}{\ignorespaces Summary of all extended approaches and their best Kaggle scores.}}{1}{table.1}%
+\contentsline {table}{\numberline {2}{\ignorespaces v3 Kaggle results: all variants tie at or below 0.871.}}{3}{table.2}%
+\contentsline {table}{\numberline {3}{\ignorespaces v4 results: ML models underperform the heuristic.}}{4}{table.3}%
+\contentsline {table}{\numberline {4}{\ignorespaces v5 feature groups (32 features total).}}{7}{table.4}%
+\contentsline {table}{\numberline {5}{\ignorespaces v5b hybrid threshold sweep. Score plateaus at 0.911 for gap $\geq $ 10.}}{8}{table.5}%
+\contentsline {table}{\numberline {6}{\ignorespaces v5b vs.\ v6: higher validation AUC does not guarantee higher Kaggle score.}}{11}{table.6}%
+\contentsline {table}{\numberline {7}{\ignorespaces Complete progression from heuristic baseline to best score.}}{13}{table.7}%
