@@ -1,13 +1,21 @@
-# EE627A --- Data Acquisition and Processing I: Big Data
+# EE627A - Data Acquisition and Processing I: Big Data
 
-**Semester:** Spring 2026  
-**Student:** Jude Eschete
+Graduate machine learning and data processing coursework completed at Stevens Institute of Technology during Spring 2026.
 
----
+This repository contains lecture notes, reports, and project work spanning time series analysis, ensemble methods, recommender systems, logistic regression, and feature selection. The work is centered on Python-based implementations and quantitative evaluation against real-world datasets.
 
-## Course Overview
+## Repository Scope
 
-EE627A covers foundational and applied topics in large-scale data acquisition and processing, including time series analysis, ensemble methods, recommender systems, logistic regression, and feature selection. Coursework centers on Python-based implementations evaluated against real-world datasets.
+- Lecture summaries and supporting course material organized by week
+- Homework and project submissions with technical writeups and supporting code
+- Applied modeling work in forecasting, classification, recommendation, and feature selection
+
+## Notable Work
+
+- Time series modeling with autoregressive and ARIMA methods
+- Yahoo Music recommender system project with iterative model tuning and evaluation
+- Logistic regression and feature selection exercises on real datasets
+- Ensemble-based modeling and data analysis workflows documented in LaTeX reports
 
 ---
 
