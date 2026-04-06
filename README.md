@@ -31,7 +31,7 @@ This repository contains lecture notes, reports, and project work spanning time 
 | **Week 06** | 02-27 | Yahoo Music Recommender Project, Data Structures |
 | **Week 07** | 03-06 | Logistic Regression |
 | **Week 08** | 03-13 | Feature Selection, Best Subset GLM |
-| **Week 09** | 03-26 | Course Conclusion |
+
 
 ---
 
