@@ -1,0 +1,694 @@
+Oh, nice, thank you.
+Good afternoon, everyone.
+We will continue our discussion for…
+Hello. Oh, someone just complained that there's no…
+Okay, you're here, okay? Great, great, okay.
+Sorry, begin… at the beginning, you know, I want to check, does anyone have anything you want me to address?
+So, for homework 4, so it is already… has been passed for many weeks, okay, so there's no more, additional submissions.
+But in the following, we will have more
+Homework assignment, just like a homework of 4.
+you know, that's what I'm saying, right? We will do the cargo web page many, many times. We'll do the same thing with different targets.
+For homework of 4, it's trying to work on very simple, heuristic.
+recommendations.
+I provided the solution file online. Most students just ignore this, so…
+That's why, you know, I emphasize to have this, midterm to reinforce this recommendation with cargo.
+And, today we will do this recommendation again. We will ask you to do this similar thing, like homework before, like an intern. You will do the recommendation again, you will use cover by the page, you will use the same data set.
+But you need to use a different approach.
+Next week, we will do something again with a different target. Next week, we'll do something again with a different target. Next week, we'll do something again with a different target.
+Every time you will have a different assignment, but you have a different target, you will use a different approach.
+That's how you can enrich your knowledge space. You're not just using one solution to resolve this question, you are trying to develop many, many different solutions with different perspectives.
+And, just like I mentioned.
+So, that's… I hope this is not just, like, a regular homework, okay? I gave you some formula, you gave me some answer.
+Because what you learn from those kind of questions is very classical. It's somewhat outdated, you know. I hope we would emphasize more, like, engineering.
+For the real industry, that's how you can show your capability.
+You know, and also, that can quickly trigger interest, right? Because for the conventional training, we have a lot for
+gap between your future career and your current learning. Because nobody will ask you how to make an integration, or some equation, or derive some…
+calculations, but they more care about how you work on some real industry data to resolve this kind of industry questions. For example, recommendation is the most…
+Profitable, profitable system.
+when I say profitable, it means, you know, they're almost like they are used to spend $1, they can always earn $10. Think about it, in the real industry, nobody can do something like this. Number two, recommendation can make those candles for
+you know, cash flow immediately. When I say instantly, that means, you know, I put this recommendation at one second, at the second queue, I already get the money.
+Think about it, if you want to produce some, sports shoes.
+bicycle, anything in the real world, you know, you need to wait a long time before you start to plan, before you deliver the production, before you sell to someone, before you receive this payment. It will take a few months to a few years. Recommendation?
+Instantly.
+Take one second, you'll get a return.
+So that's the… why we emphasize, you know, you play more, you get more about this big tech company, what they are looking for. That's the big driven for
+artificial intelligence.
+Any more questions here?
+Preksha Shah
+Preksha Shah
+00:06:53
+No, Professor.
+Rensheng Wang
+Rensheng Wang
+00:06:55
+Okay, I think there's, maybe some,
+type in the assignment, okay? I think because we changed something. So, in homework 6, right, we're asking you to make some features and actions, so it's not like Homework 3, okay? It's not… it's just like what you did with the logistic regression, you know, or something else, and
+And you are trying to observe how to make, Refined features.
+So, let me try to emphasize…
+What happens with the homework 6? Let me see here.
+Let me emphasize, homework 6, okay?
+you have X.
+You have wine.
+in the vector
+Okay, so you make a logistic regression, right? So based on X, how do you predict the Y? For example, maybe X, like, the first row is the student 1, the second row is student 2, student 3, so on and so forth, right? The first one is, like, a UMass score.
+your art score, your literacy score, and your ranking.
+you are, you know, at worst, blah blah blah, right? And then you have 1, 0, 1, 0, blah blah blah, right? 1 means you get enrolled by every quality, 0 means you get rejected.
+So, based on your score sheet, right, and the performance, just like a spreadsheet, right?
+just like what I have here, you see, I have all the individual scores, just like every individual column. I want to make a prediction how likely you get enrolled by
+I would call it, right? I can do a very similar SKUB that, you know, you know.
+I don't know, just like, oh, based on your homework assignment, your midterm final, how likely do you get enrolled by
+Google, right? You get enrolled by Google, 1, and you get a not, 0. So based on your performance, right? How do you predict the student performance for something, right? You put a 1, succeed, 0, and not, right?
+So, the point here is that we are trying to…
+Yeah, sorry, I need to modify maybe the table in there, because we are somehow arranged this year.
+Because we are trying to see which kind of a feature is relevant.
+to help you make a prediction about the 1010, right? For example, I also have another one about your age, or have another one about your flavor food, right? So, typically, which kind of food do you like really have no impact for the
+decision to get the enrollment, right? So, for example, oh, this is the colon got the food, so this colonies really have nothing to do
+your enrollment decision, so this one should be directing noise, so this one you should be… get a delete, right?
+Compelled many, many…
+features, that means here, each feature is one single column, right? One specific attribute measurement. So we need to find which few measurements is more relevant to your
+response vector predictions.
+So that's called the features and actions. So we need to identify some of them are good to help, someone not.
+Right? That's very similar, you know, in the realities, we will have a lot of measurements based on the customers, and we want to make a decision. How likely do I want to recommend 1 or 0, 1 or 0, right?
+The same thing for our…
+cargo web page, music recommended, right? We have a lot of measurements. Some is more important than others, some is more relevant. So that's why you need some features and actions. Another situation is
+They're all relevant.
+For example, A and AB.
+say D, a lot of pollens, right? They're all relevant to this. For example, maybe A and B
+you need to select A and delete B.
+So that means for this one, you need to delete.
+Oh, the first impression is, oh, B is not relevant to this decision, right?
+Yes!
+It's relevant.
+I deleted B. It's not because this is not relevant, it's only because, you know, both A and B are relevant in this one. If you already have A, B is redundant.
+Make sense?
+So, sometimes, when you have these features in actions, it's not because this one is not relevant that you need deleted, it's because you have so many duplicate information.
+Some duplicated records, some duplicated measurements you need to remove.
+So that's why you need to get some feature reductions. You need to mix features and actions.
+So that's the stage one. Typically, when the company has the interview, the first assessment online.
+It makes features selections.
+That's the low level.
+The higher level is, we have this, you make selections. The next level, they will ask you, can you make new features?
+instead of deleting some features, can you add some new features? So that's exactly… that's the homework 6.
+when you're trying to make a selection, it means you want… you already have 1,000 features, you need to remove some of them, keep it, right? Homework 6 said, we already have the features. From these existing features, we want to generate the new features. From the new features, we make someone re…
+Selection, again.
+I also have another analog example, just like, you want to find the…
+It's a good, team, right?
+to… excluded. For example, we know Charity is excellent. I want to build a small team to
+create something similar to ChartGBT. So, we need to hire people, so we have 1,000 candidates. We need to make connections, just like a feature selections, right? We only need to select a few highest ones.
+to combine together to create this project. So that's for the features and actions.
+Any pricing here?
+Great. Let's move on. So, for… for recommendations, same thing here, you know, Typically, you have two strategies.
+One is called a continent.
+Future. Futuring approach.
+The content in the future, you know, for example, if you have a movie, right, you can…
+Exactly fund the related attributes, like,
+what's the genre, right? Is there something relevant to a historic movie, or some document… documentary movie, or the crime, right? Or some fantasy, right?
+And also, who is the actor, right? Who's the director, right? Because a lot of fans are very sensitive to this kind of a cast.
+If they say, for example, they say some famous actor, they say a very prestigious director, they'll say, oh, that's the movie I need to watch.
+And also, you can utilize the box office popularity, right? If you know this very popular, you know, movie.
+And so on and so forth. You trying to collect a lot for…
+related information attributes. Those kind of things can help you make decisions. Why? When you're trying to make a recommendation, you are trying to use more relevant, more popular, those kind of things to help you make decisions. You have
+two candidates, A and B, which one is more popular? If no other information, I would recommend the more popular one.
+ANDB, if you… I know this user is more per…
+profile to some specific director, and one is contains director, then I would recommend the one containing…
+Contains the director.
+In the custom.
+So that's the basic philosophy we had.
+But, of course, you know.
+The profile, you know, you're trying to associate the user to match this product, right?
+But those kind of content-based strategies require you have a lot of extra information, right? For example, every movie, when you come, you have to specifically list all the cast, all the related data, you know, summary information.
+So, it's not easy to collect. In other words, it's not automated, right? You have to manually to input this information.
+Another one we call the collaborative filter, you know.
+This is more trying to say we are learning the relationship between users and in the dependency of the products.
+So this can be user and item in actions, we call the collaborative filtering, okay?
+So those… collaborative filtering is the mainstream for recommendation now, because this part is more heavy
+processing. This one, it's more, you know, data-driven.
+In other words, any movie, when they publish it, you don't have to ask the publishers, hey, who is the actor, who is the… blah blah blah, right?
+For example, I'm the one, I upload some YouTube online. Can you ask me who is the actor, who is the director, who is… what's the blah blah blah, right? No, I have no information to provide. I just upload some YouTube video online.
+If that's case, you know, if you're using the content filtering approach, it's very difficult.
+Now, this collaborative filtering is very interesting, you know. We use the two…
+Primary arrow to demonstrate what does this mean?
+Wine is called a neighborhood, wine is called Laden Factors.
+Let's look at this neighborhood. The neighborhood is really trying to do something like this.
+People make social behaviors within the social Edge abuse.
+For example, if you… Why don't you predict that some guy's recommendation, you're trying to identify
+what's the most neighborhood around this guy? When I say neighborhood, it's not about the geographic, oh, what's the… who is living, you know, next door, right? It's nothing like that. It's trying to say which kind of population sharing the same common interests with you.
+Something to think about this fee, okay?
+For example, If you… Consider the movie, saving the to private, Ryan, right?
+what's the neighborhood? The neighborhood, you know, you may, relevant to this kind of, related to the war movies, the Tom Hanks movies, so on and so forth, right?
+If you want to predict a specific user possible rating for this movie, you want to look for the movies the nearest neighborhood, the user rated.
+Let's use the example you showed you.
+Okay. For example, the Joe watched a few movies like this, right? That's about your history.
+It's just like we did in the cargo webpage.
+And you also have another user used to watch this, right? These three movies.
+And then, those are few users you treated like Joe's neighbors.
+Even they are physically have no connection, they don't recognize each other, they don't know each other at all.
+But, those are…
+the secondary information resource we can utilize to help us to make a prediction for Joe. The ratings, think about it, you just pretend that they are your friends. Why? Because they share… they watch the same movie as you did, right? They love the same movie group as you did. And you can ask the one.
+To say, which else?
+movie you watched.
+Ask the second guy which else movie you did, right? Which else movie you did. So those kind of are the movie…
+the movie…
+list. From the list, you find the most highly recommended one, right? Then, that's why you want to recommend it for Joe. That also, very intuitively.
+can be explained in the real life, right? Think about you, you're called a Joe, you have a few buddies, okay? If you ask, hey, anyone can recommend some movie, right? Then all your buddies trying to say, hey, I watched this, I watched that, right? You collect all the information together, you find which… who has the highest vote.
+Then, that's what you need them.
+you know, recommend. So that's called the neighborhood message.
+Now, based on this one, Can I ask you one question?
+In our congl music recommendation, If you want to recommend that the users
+tracks, right? Which track do you need to recommend?
+Can you fund the neighborhood?
+for those testing users.
+Can you find the… The testing user's neighbors That's my question.
+Anyone?
+Can you type in the chart window? Yes, yes, thank you. Right?
+So, the neighbor… who is the neighborhood of the testing user?
+So that would be some user who
+share the same history with you, right? Because for the testing user, I know how many movies you watched, and which movie you get higher readings, right? So, I can search all the other testing users if they watched… they listened to similar tracks.
+They have similar ratings, then there should be your Neighbors, right?
+So you can have two steps. For example, in our project.
+Yahoo music recognition, right? For Joe, I'm asking you if you have 6 tracks you want to recommend, okay? Then I say, who is your neighbor for Joe, right? So, for Joe's history, I know you…
+Listen, a few trucks, right? Then, for those a few trucks, I check all the
+other users. For example, for Joe.
+I listened to 10 tracks in the history, right?
+Okay? I use these 10 traps. I will check all the individual people. For example, for this guy.
+Look at the… I use this thing to check your history.
+This guy has a lot of historical reading for the tracks, right?
+Over these readings, do you have this 10?
+Maybe you matched a 5, right?
+you have 5 tracks out of the 10 tracks, I get ratings for this.
+And also for this gentleman, I checked the history.
+Do you have any reading over this 10? Maybe out of the 10, you get a 9.
+And also, this one, maybe out of 10, I found… only found 1 record, right?
+So, based on this, you two users, because these two, you have most…
+Greetings, right? Share with this one.
+So, those two are… Call the neighbor users compelled to Joe.
+Does this make sense?
+If yes, type yes in the chart window.
+Thank you, Liam.
+Anybody else?
+Anyone else?
+with any crisis, I encourage you to pop up questions, right, if you feel…
+Okay.
+So that's two. These two people are the cold neighborhood, why? Because when you look at the history ratings, Joe have 10 ratings, and for these two, you have
+Out of 10, you have 5 for this guy. Out of the 10, you have 9 of this guy, right?
+That's where you're sharing, right? They share the same… they're sharing most, these two. So for all those two people, you're trying to say, okay, now I have six
+Trucks, right?
+That's our assignment, right? For each user, you have 6 tracks. This 10 tracks is a history.
+6 tracks is what you need to predict, right? So for these 6 tracks, you want to search these two persons, because they are your neighborhood.
+For these Q6 tracks, You ask this neighbor user, hey, for these 6 tests, what's your reading score?
+for this user, you're asking, hey, for these 6 tracks, what's your reading score? You may have something, you may have nothing, right? I don't know, for this kind of… for neighbor users, you just find all the possible
+Track scores over these 6 tracks.
+If you found 6 trucks related to the scores, Then, you make average, right?
+So, for these 6 tracks, you found the average score from the neighborhood users, and based on the average score from neighborhood ratings, then you know how to make a recommendation for Joe, right?
+It is clear. If yes, just tap yes.
+So, in other words, if you ask me, Joe, do you think I need to recommend something for you?
+I have no idea, but I can find some indirect connection, right? For example, I found a lot of users who share the very similar history with you, then I assume they are
+your neighbors.
+That's the neighbor we can utilize to make a rating for you.
+Because from then, I can find a lot of…
+Rating scores to whatever you want.
+So this kind of strategy is typical, the interview company trying to ask you.
+they will say, I have this data, I have this business target, can you
+Tell me something. You don't have to write any code.
+Because nowadays, people don't ask you to make code. They will ask you to design this to present your idea, just like what I showed to you.
+You say something, explain something, that's good enough.
+So that's called the neighborhood of Messers.
+Now we switch to native factor methods.
+Latent factor method is very interesting, you know?
+We have users
+We have some items.
+For example, movie, right? Can be track, can be movie, can be shopping items.
+So, for you… for users, We have a billion users in the real world.
+Every single user are different.
+But, we are trying to say something like this. Even every user are unique.
+But, we can still use the summer… Attributes.
+some factors to describe you. For example, if you're a human being, right, if you call that Alex, okay, Alex?
+I want to use a few numbers to describe you, for example. Just tell me, you know, in terms of the openness.
+just describe it to me, you know, in terms of openness. From 0 to 10, what did the… what do you want to describe yourself, right? Alice can say, oh, I'm not that open, I'm not that restricted, maybe I will put 7, okay? That's the number, right? Then you have another guy called Emily.
+Okay, I will ask the same question. In terms of openness, okay, from 0 to 10, what's the number you want to describe? I'm going to say, hey, I'm fully open, I'm rating myself, like, 10.
+And I keep asking questions, right? I use a lot for…
+attributes describe you, so I should get a bunch of numerical numbers.
+Maybe we get 7? 5?
+0, 9, 10, That's for Alex. Maybe for Amity, I get another vector, get a 10, 10, 10…
+5… 0… 2.
+Right?
+So, in this situation, every single user can be described by a few numbers, or a few factors. Those few factors, you can think about, like, attributes, like properties, whatever. It's a few numbers describe you.
+So everybody should have a vector like this.
+So, that's the factors.
+And similarly, You will have another st… In another pool.
+We'll call the item pool.
+So, for example, for the movie, right, you have a lot of movies. For one specific movie, okay, ask the movie, for example, you have another movie one.
+Hey, for this movie!
+In terms of the openings, you know.
+How do you describe this movie?
+Right?
+So maybe you can put the number, you know, maybe you can just say this is the 8.
+And you ask the same question for each movie, then you should also get a vector. Maybe this is 7, 8, 7, 2,
+5?
+9, that's for movie 1. And you can even repeat the same thing, you have another vector, blah blah blah. So each movie, you should have a vector.
+Just like each person, you have a vector describing you. For each movie, you have a vector. And you can expand this idea to anything.
+If you have the movie recommendation, you have the vector for movie. If you're talking about the music recommendation, you have the vector for music tracks. If you have an Amazon shopping list, you have a vector for the shopping items.
+Now the magic seems like this.
+When?
+On who Freedom asks?
+Why he loves this movie, Juan?
+Instead of Movie 2, The reason is.
+we are trying to say, if you have one specific user, you have one specific movie, this user loves this movie. The reading is, you have this specific user vector.
+Blah, blah. You have this specifica.
+That's the user vector.
+That's the item vector movie, right? So this vector and this vector, when you multiply together, that should be equals the rating score.
+So if this vector and this vector are similar, so these two vectors multiplied together should get a larger
+higher ratings. If this vector And this vector, the user vector, and the…
+The item vector, like the movie, if they are…
+Very different, so you should get a rating score, Very small.
+Okay? So, I can use a very dumb example, there's only two. For example, for user.
+I have 1 minus 1, that's for user.
+I also have the item.
+because I don't know, you're talking about the music recognition, or the movie recommendation, or shopping recommendation. So, I… all as an item. So, for this user, you have this,
+Vector 1 minus 1. For this item, you have minus 1.
+and 1. So, when this user and this item multiply together, that means you have 1 minus 1 multiplied with
+minus one.
+And one.
+What'd you get?
+So, when they bother together.
+You end the weights minus 2.
+Okay, now you have another item.
+Equals 1 minus 1.
+Okay? So, this user and this item, this item 1, that's item 2, So, item 1…
+Multiply the user, get a minus 2.
+adding Q, multiply with the user, you get the… 1 minus 1 times…
+1 minus 1, you got to get… you get a 2. You see, when item and users are similar, you get a much larger number 2. When item and user, they are opposite, you get much smaller.
+Right? When either users are not relevant to each other, they should typically get a zero.
+So, those kind of user and item
+Similarities. When I say similarities, that means you multiply these two vectors together.
+you get some score. Those scores can give you some indicator how this user and this item match each other.
+If they match very well, you should have a much bigger
+quantity number. If you're not match, you should get a much smaller quantity. So, based on this kind of, for two vectors multiplied together, you should have different score. Different score indicates a different flavor, how likely this user will like this item.
+This will be relevant to the radiance scores.
+So, if you're specifically asking me, what does mean 1 here, what does mean minus 1 here? My answer is, there's no physical meaning. I don't know what the meaning should be, so that's why I call it latent factors.
+In other words, I can always describe every single individual user as unique user by a number of numbers, or call the number of factors. But this number of factors, I cannot give you some very
+specific, explicit meaning of that. I don't know how to explain each number, but the…
+You have something here, that's why I call the latent factors.
+everybody can be described by a vector. The same…
+Can be applied to all the items.
+Item, just like, the shopping list, the item, The music item… Moving item.
+When you're trying to use YouTube, maybe you have the video item, when you have the web browser, you have the browser item. The document item, you know, if you have social media, you have a social media item, you know.
+Those kind of vector interactions can help you have this kind of…
+reading scores. So, We utilize this kind of latent factor method, trying to help you
+To explain why some user And some item.
+you get a higher score, get a higher rating, right? So we are trying to use the latent factor model to explain why some user likes some item. Because I believe this kind of user vector and item vector, they are very similar. So that's why when you multiply together, you get a higher number. When you have a higher number, you get a higher
+Flavor, you will get higher reading scores.
+you get more likelihood for recommendation. So that's the general basic idea behind.
+Any pricing here?
+If you have questions, just ask, or you just type in the chart window, right? Then I can… I know how to help you. Because that's the most popular and practical
+the… Individual companies will ask you.
+Great, thank you.
+Now, I use this one to show you, okay? For example, let's pretend every single people can be
+described it by two numbers, by two-dimensional descriptions. For example, one is for the… how likely you get the series or its captives.
+Or how likely, you know, killed 12 males or females?
+Right? For example, this person, I can say, you know, how likely you get the male or female, right? So this one, you know, one measurement. How likely do you get the serious or skeptic? Yeah, take some neutral, right? Not too much. And this one different, you know. You get more male…
+related, and also get a more serious person, right? So that's how you describe the person, by the two-dimensional coordinates.
+For example, For this user, I can say, your… X is what?
+Maybe he's a… 0.5?
+zero, right? For this guy. And for this one, You get what?
+Egative 0.6.
+0.8.
+0.6 means you're 60% more.
+guild towards males. 0.8 means 80% more related to series, right? That's how you can describe your personalities, or something like that.
+So, every people should have some…
+vector with two numbers. At the same time, you have a lot of movies, right? You want to ask the movie, for each movie, are you more geared towards male or female? For example, for Brave Heart, you know, so for Brief Help, you have 0.7
+Upon 8.
+who's very close to this guy, right? So they're very similar, if you compare these two vectors. When they multiply together, those two vectors multiply together, you should get a much bigger number, so if you want to recommend for this user which movie I need to recommend to you, that's the movie, because this movie is so close to you.
+Right? You have the largest similarities. When I say largest similarity means you have the shortest distance, right? When I say shortest distance of two vectors, for example, you have a vector here, you have another vector. When I say this two vectors has the shortest distance, how do you measure? Just multiply together.
+You know, so that's how you can describe it. Now, look at this.
+Ren.
+You have all the two-dimensional vectors to describe both user and item here, item in the movie, right?
+Based on this, now you know how to make a recommendation, right? Because if you want to recommend anyone, first, look at where's the guy, for example, Dave, where's Dave? Dave is here, right? So, around Dave, look at what's the movie have similar latent factors. So, looks like the non-king.
+It's very close, so that's the movie you want to recommend for Dave.
+Any pricing here?
+So the point here is, we want to project every single user, every single item to some latent space, latent factor space.
+In other words, every person, every user, I just used a few numbers we call the latent factors, right, to describe you.
+If you really ask them the 50 million, right? That's the meaning I explained, right? The first number to tell you how likely you gilded was a male. The second number is describing how likely you are more oriented to serious or his captives, right?
+So that's the meaning. If you really want to ask me to explain what that mean. So I may use a few numbers in the latent space.
+And that's where you have this kind of user and item making actions, because they are described by the same laten factor space.
+Because they are mapped to the same… originally, user is user, ID is item, there are no… there are no different… there are no similarities, like, they're not the same thing at all.
+But when you project, when you map to the same latent factor space.
+Then, that's much easier, right? They're sharing the same common ground. They are talking about the same laten factors. So, you're just trying to find the neighborhood.
+To help you make a recommendation, For example, for this user.
+I would recommend the Ocean Eleven instead of the Princess Diaries, right? Because it's far away from this. I definitely am not recommending this one for this guy. I only recommend the Ocean Elevens.
+Make sense?
+Any comments in the chart window?
+Now the next question is, I already explained, right? You want to map user and…
+Addis to the latent factor space.
+Next question, how to do it?
+We want to utilize So we're called a matrix factorization method.
+The latent matrix factorization method, you know, you can think about it in this way.
+Let me… Let's think of… let's introduce the matrix fertilization. Let's introduce the SVD.
+You know, we used to have something like this. If you have a matrix, Let's say… You have Emerald.
+And corners is a major case, right?
+So, that's the matrix. This matrix, you know, we want to Make a decommodation.
+Why you need to make a determination? Because we want to save space, because M times N is a matrix dimension, right? If M is big, n is big, this matrix can be very big. For example, image, think about…
+Think about that, 30 years ago, in 1990s, We in the networks, introduced.
+This lowers the transmit.
+Transportation is imagery. For example.
+If you send a text message to your friend in California from New York, that may be okay, but if you say I'm trying to send an image to my friend from New York to
+California, with internet.
+Then the trouble is, the image is too big.
+you have 1,000 pixel, by 1,000 pixel, you get a 1 minute pixel. 1 minute pixel means you have 1 minute
+Majkus, right?
+the science of matrix for one meaning. That's overwhelming compared to the text message. So people think about those kind of imaging, can we…
+make a compression, reduce the dimension. For example, theoretically.
+M by M matrix can be…
+Decomposed as M by one vector.
+multiply… 1 by n vector, right?
+Those two vectors, when you multiply together, they also can get the one Major Gus.
+These measures also have dimension M, N.
+But the problem is, you know.
+I cannot guarantee those multiplied against the exact equals this.
+They may not equal. In other words, I can only guarantee you have the magicus and this original matricus. The yellow one, the red one, they have the same dimension, but I cannot guarantee they are the exact same.
+The main not the same, okay?
+They're not the same. So, one vector times one vector, you get the matrix. They are the same dimension, but I cannot guarantee… typically, they are not the same.
+But, as VAD trend, you say, that's fine, you know, if they are not the same, how about this? I know why, you know, because you have a rank 1, right? Because M, by N matrix.
+This is the n by m matrix. If you're using one vector multiplied with another vector, this can only guarantee this with the rank 1 matrix, right?
+So, maybe you can do something like this. I can add one more column.
+Not m by 1, m by 2.
+You have two corners. Another 1 by N, you have two rows. You have 2 by N.
+Then, you should get another… M by M measure, but with rank 2.
+You see? Those, you get more likely
+Even they are still not the same, okay? But more likely, it's the green one, where we approximately equals the red one.
+So the point is, you keep adding more columns, adding more rows, you will make this matrix here.
+Get approximately to the left, the red matrix.
+The benefit… what's the benefit to something like this? Because the benefit, originally, if I want to send the imaging to my friend, right, I need to send a disk M by M.
+pixel. That's the total data volume, N by N. But if I'm using something like here, what do I need to send?
+For example, for the green one, so I need the 2M Plus, QN.
+Let's imagine if M, he… Let's make some calculation. M equals N equals 1000.
+So… The total will be 1 million, right? That's what you need to send.
+And what do you understand here? Big M, N equals 1000, right? You get what?
+4,000.
+Compare the original one, you need 1 million pixels. Here, you only need 4,000, right?
+How many times? You get a 250 times smaller, right?
+So you can use the much smaller vector multiplication, that's called SVD, then that can be approximately to the original one.
+But you may say, they're not the same. Yeah, if they're not the same, I can add another one. It's not M by 2, how about M by 3? I can add one more common.
+And you have also one more rows, you get 3 by N.
+I still get the sand, M by M, Mitch, because…
+So, what I'm describing here is, if you have a big metricus, it's a huge metricus.
+If you have huge images, you can decompose as much smaller
+Majors multiply with a smaller matricus, you can reconstruct the original huge matricus.
+So that's relevant to SVD accommodation.
+Does anyone have any question about this SVD dehumization here?
+Okay, let's take a short break, okay? Give me 5 minutes, okay? And I hope you can leave your questions, comments in the chart windows, and when I come back, I can say what's your question, I can get a better understanding how to help you to identify the symmetricization method.
+Okay, any questions so far?
+Preksha Shah
+Preksha Shah
+01:06:35
+No questions.
+Rensheng Wang
+Rensheng Wang
+01:06:37
+Thank you.
+So, let me try to expand, okay? What do we need to do? Here is…
+Based on the SVD concept, right?
+We were having the… Radiometricus.
+You have the user.
+You had an item.
+So, in the real world, you should have a huge, gigantic Reading Magicus.
+Because how many users? Let's say you have 10 minutes.
+So that's the number of rows. How many items? 60 million.
+So that means 6 million comments. 10 million URL and 6 million comments, that should be gigantic. You cannot open in your…
+Laptop.
+You cannot, simply, you know. Because in Google, it's not a million, it's a billion. You have 10 billion by 6 billion.
+And also, dramatic… majority of them are empty. So, for example, think about, for one user, if you have 6 million
+items. How can you interact with those? You may only have a very small portion. For example, you have 6 million movies. How many watched? How many you make readings, right? So you only have some of them
+50… 100th?
+70?
+80?
+Nandi?
+30… 100th?
+100… Nandy?
+70?
+80.
+Something like this, you know, you have a huge matrix, the majority, 99.9999 are empty. Only a few numbers with the reading scores.
+This means for user 1, item 1, I make a rating 50. For user 1, item 1000, for example, I get the reading score of 100, something like that.
+So, for any specific user, I…
+I then j, you know, you have 90, for example.
+So, this reading matrix is called rating matrix R.
+you have I,
+J, I means I's role, J means J's colon, I means user I, J means I didn't J,
+You know?
+So, for example, RIJ, if this ice roll.
+If it is J's colon, then that RIJ equals what?
+90.
+What we are trying to do is, you know, for the rating score here, for this reading matricus.
+we are trying to approximate by… for every single user, right? You have 10 million users. For each 10-minute user.
+Each user, you should have a few latent factors. Let's say K equals 2. So that means for you, the one, you should have, are you female or male-oriented, right? Gilded. Are you serious or escapist, right? You have two numbers. For each user, you have two numbers.
+I can expand to K, right? If K goes 5, that means every user has 5 numbers.
+you are trying to find every single user, you have K-laden factors here, multiply with similar things for those kind of for
+users of items. For each item, you'll have K factors. For example, if K goes 2, for the item 1, are you guilty to male or female? Are you serious or skeptic, right? So on and so forth.
+You see?
+each user, K lean factors, each item, Kname factors, K,
+It's much, much smaller than number of users.
+Much, much smaller than the number of items.
+MN are number of minutes.
+Okay, like, a few, like, 5, 6, you know, compare the 1 million, 10 million, 100 million, it's really, really nothing.
+So you have very, very tiny K compared to huge, huge M and N.
+Number of user M, number of items, N.
+So you want to use these two matrices multiplied together, approximately equals the rating matrix you observed.
+For example, The first user, the first item, right?
+50, that means you need to find the four numbers, these 2 times these two, Should be equals 50.
+When this multiplied by this, should be equals 50 here.
+Right?
+Okay? You need to find the four numbers. This 2 multiplied by these 2 equals 50.
+You also need to find another… Number… Here.
+And this… the first user and this item multiplied together usually equals 100.
+Okay? And similarly, you may need to…
+another here, right? So that means…
+You have two numbers here, K numbers here, You may have…
+number here. When this and this multiply together, you end the weight.
+80.
+So you need to find all the user k factors, all the item K factors, and when they multiply together, they should match.
+Those SVD here.
+Rating scores here.
+So that's your homework, and then that will be your project.
+With the cargo.
+Now we talk about implementation, you say?
+you will have this reading matricus R, right? For the user.
+I then… user item, you get the rating scores.
+And for each user, you have a vector QI. For each… so for each user, you have a vector PU, just like I showed, right? For each item, you have a vector QJ. Those Q multiplied together should be close to your rating score, right?
+for example, 50, right? The first user, PU, the first item, Q1, multiplied by the other, should be the R11. 50, right? I used to be sure, right? Should be close to 50.
+And, in order to make this valid, you know, I need to make some regulation. That means I need to add some penalty for this Q and the p-values here. I need to take the norm square, add this number, at the minimum, this
+Okay So… Let me show how to… Statistically, let's show that
+procedures for homework, okay? We are using this kind of automating these squares.
+So that means… The implementation I will describe here is That's a matrix R, right?
+That's… you… That's the item. So, this value, or this reading matrix, called RUI, right? You see? That's RUI.
+RUI, and you want the approximate this one, be…
+So, for this specific, Right? R-U-I? You should have… You're saying?
+That's the PU.
+You also have the colon here, It could have queued… Hi.
+Right? So this row and this quantum multiplied together should have equals the value here.
+Okay?
+But you may ask me, Professor, how good the PU, how good the QI?
+When you start at the beginning, you just make it random.
+Just randomly put the numbers in this matrix here, That's the P… Magicus, that's Q majorus.
+You just put random values in this matrix. Of course, because you put the random, right? So this… this row vector and this column vector multiply together, they are not equal, this rating. For sure, they're not equal. That's fine. If they're not equal, you have delta, right? You get the arrow, right? So once you get this arrow.
+You, using this arrow, multiply the PU,
+minus lambda, then QJ, multiply with gamma, then update the Q, okay? So that means, once you get this arrow, use this formula, you update this to make this one
+You get a queue.
+I, okay? I reached blue, you see? That's QI, right? How do you get the QI? You use the green one, multiply this quantity, right? Let's get the new one. The same thing for PU, you also update it.
+Okay? 9 by 9,
+9 by 9, column by column, you know, you're trying to update the P and the queue.
+Once you get the updated P and the queue, you want to go back to here, calculate this again, you can update the queue, update the P. After you update the P and the queue for all of them, then you start from here, right? Do this again, again.
+So that's your… Homework.
+And increasing here?
+Preksha Shah
+Preksha Shah
+01:17:16
+This is the homework, Professor.
+Rensheng Wang
+Rensheng Wang
+01:17:19
+Sorry, what's the question?
+Preksha Shah
+Preksha Shah
+01:17:21
+This is homework question.
+Rensheng Wang
+Rensheng Wang
+01:17:24
+Yes, that's homework. After you finish the homework, next week, we will use this one to… for your cargo.
+Preksha Shah
+Preksha Shah
+01:17:35
+Okay, no problem. Thank you.
+Rensheng Wang
+Rensheng Wang
+01:17:38
+Questions. If you don't know how to do it, just ask me, okay?
+Preksha Shah
+Preksha Shah
+01:17:43
+Sure.
+Rensheng Wang
+Rensheng Wang
+01:17:45
+For example, let me… let's make one concrete example for you, okay?
+Let's say I have a ready image because here, okay? That's for you.
+That's for I, right?
+So, for example, Let's say you have… 100.
+Here, and a 70 here.
+So what 100 means? 100 means…
+this role…
+And this colon…
+multiplied together should be close to 100, right? The first user, first item, right? You say? Right?
+But, just like I said, right, I just randomly assigned
+I randomly assigned some value here.
+So, for example, I can say.
+I maybe have 10?
+8… 9… 7, right? That's what I assigned, okay? For first row, first colon.
+Let me make a hit this bed.
+I randomly assigned a, like, a 10, 9…
+7, 8, right? That's the first column. You've asked me why you have 10, 9, 7… I'm still telling you, right? It's random. I'm randomly getting some number, okay? It just is random, okay? So, based on this, I will have what?
+These were vehicles I'm asking RUI equals 100, then?
+Right? That's the first row, first column, right? 100. Minus…
+That's the… Q, J, right, right? So that means you have 7… 8… Multiply with this.
+10?
+Nine, right?
+So that equals 100.
+minus… 70… plus what?
+2, right? So you get, what, the minus 42, right?
+You see, this UUI equals minus 40Q, right?
+is clear?
+Right? That's how you get the error here, right? Now, starting with this one, you get what? You get QI, right?
+That's the… QI.
+That's the PU, right? This vector.
+Okay, QI is what? Equals 7, 8… That's the PI.
+plus Nambda. Nambda is a .01. I will give you nambda, okay?
+Times… minus 42.
+Times the PU, right? What's the PU?
+PU is, what, 10?
+9, right? That's PU, right?
+And the minus numbda, nambda, say, I give you… I will give you 1.2. So this, this number I will give you, okay, given. QI, right? What's QI? QI is here, right?
+7… 8.
+Right? You see, this, this, and together, you get the new QI.
+So that means 7 and 8 should be replaced by the new vector here.
+Right? Is this not 7-8 anymore, should it be an updated one? The same PU also updated, right, by this one.
+Make sense?
+So you're using the for loop, right? You're trying to… update this.
+these P and the Q vectors.
+Initially, you have some random vector here, then you, based on these rating scores, you will get some updates.
+You keep this loop until you find something, you know, the update is very minor, then you stop it.
+That's your homework.
+Crisis?
+Are you wanting the Xfin more?
+Preksha Shah
+Preksha Shah
+01:22:43
+Cheers.
+No question, Professor.
+Rensheng Wang
+Rensheng Wang
+01:22:47
+Great.
+Thank you.
+You say, you will see something like this. So that means the user one loves this… the first item, right? I give the rating 5. The other one is… for the item to use so-so, you know, item's rating, no, I didn't watch it at all. This one, I really hate it, I get the 1, right? Something like that.
+So, if you choose K equals 2,
+Yeah, Q leading factor, what does it mean? So you want to approximate this one equals…
+two columns, okay? You have 5 users, right? 1, 2, 3, 4, right? That's 5 users.
+You have 4 items.
+1, 2, 3, 4, right?
+Something like that.
+So you run the need, put some number here, here, here, here, here, here, here, here, here, here, here, here, here, right? And the first one, should it be the first row?
+And the first column multiplied together, you should get what?
+get a difference between 5, right? That's how you can use our previous example to show how to update this, right?
+Make sense?
+You randomly assign the number here as the initial stage. With the initial stage, this row and this column multiplied together, compare with 5, you get a delta. Use the delta to update this kind of vector here, vector here, right?
+And so on and so forth.
+You bet.
+Any more questions here?
+Preksha Shah
+Preksha Shah
+01:24:59
+No, Professor.
+Rensheng Wang
+Rensheng Wang
+01:25:01
+Great, thank you.
+So, if you know more questions here, so I will look at this homework to show you what the homework looks like.
+There's homework like this.
+So, just like I explained, right? You say you have the radium 5, F3, 1. 0 means no, okay? It's empty. But I cannot put empty, right, for MATLAB, you know.
+You just say… if you say zero means empty, okay? You just ignore zero.
+So you get this kind of rating matrix here.
+you want to make a k equals 2, so that means you want to approximate this one equals something…
+equals some vector like this, right? Just I showed, you know.
+Times… and that's a vector, you know.
+This defy… by 2. What's 2? 2 is K, right? K equals 2.
+So you have 2x4.
+Igor Randini assigned some number here, Okay.
+then use what we described as a major configuration, you should get the new P and the new Q, okay?
+So if that's the matrix P, that's the matrix Q, you know, you want to get a new matrix.
+When you implement a metric fragrization, you only count any non-zero radians.
+Okay, because zero means it's empty.
+So, any quies in here?
+Great! If no more questions are here, so I will try to stop.
+And, just let me know if you need any extra help or explanations, okay?
+So that's all for the day, and I hope everyone has a great weekend again. Thank you.
+I never…
+And by the way, I think the next session, we were… we were tentatively to Wednesday, okay? So let's say I will send an email later.
+Preksha Shah
+Preksha Shah
+01:28:11
+And Professor, did you take off the AI6 to 8 lecture for today, right?
+Rensheng Wang
+Rensheng Wang
+01:28:21
+I wore… I already made a recording for today's lecture, I will post online.
+Preksha Shah
+Preksha Shah
+01:28:27
+Okay.
+Rensheng Wang
+Rensheng Wang
+01:28:35
+Okay? Thank you.
+Preksha Shah
+Preksha Shah
+01:28:36
+Noted online lecture, right? For the… the… another subject for the 6 to 8?
+Rensheng Wang
+Rensheng Wang
+01:28:44
+We have online tonight.
+Preksha Shah
+Preksha Shah
+01:28:47
+Tonight, okay.
+Rensheng Wang
+Rensheng Wang
+01:28:48
+Yeah.
+Preksha Shah
+Preksha Shah
+01:28:49
+7, right? It's 7…
+Rensheng Wang
+Rensheng Wang
+01:28:50
+7, 715, 715, yeah.
+Preksha Shah
+Preksha Shah
+01:28:52
+Okay, no problem.
+Rensheng Wang
+Rensheng Wang
+01:28:54
+I will send the announcement right away, okay?
+Preksha Shah
+Preksha Shah
+01:28:57
+Alright, thank you.
+Rensheng Wang
+Rensheng Wang
+01:28:59
+Take care. Bye.
+Preksha Shah
+Preksha Shah
+Bye-bye.

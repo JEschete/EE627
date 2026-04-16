@@ -1,0 +1,308 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\scriptsize,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=false,
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+	columns=flexible,
+	keepspaces=true,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b,
+	keywordstyle=\color{blue!70},
+	stringstyle=\color{red!60},
+	commentstyle=\color{green!50!black}
+}
+
+\title{\textbf{EE627 Homework 8\\ PySpark Matrix Factorization}}
+\author{\textbf{Jude Eschete}}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\newpage
+	%======================================================================
+	\section*{Instruction Checklist}
+	%======================================================================
+
+	\begin{enumerate}
+		\item[\checkmark] Part~1: use the PySpark sample code to implement matrix factorization on the final-project Yahoo~Music data and upload Kaggle submissions \dotfill Section~\ref{sec:part1}
+		\item[\checkmark] Part~1: Kaggle score screenshot \dotfill Section~\ref{sec:part1-kaggle}
+		\item[\checkmark] Part~2, Experiment 1: fix \texttt{maxIter=20}, sweep \texttt{rank}$\in\{5,7,10,20\}$, report MSE \dotfill Section~\ref{sec:exp1}
+		\item[\checkmark] Part~2, Experiment 2: fix \texttt{rank=20}, sweep \texttt{maxIter}$\in\{2,5,10,20\}$, report MSE \dotfill Section~\ref{sec:exp2}
+		\item[\checkmark] Part~2, Experiment 3: fix \texttt{rank=20}, \texttt{maxIter=20}, sweep data size \\ using \texttt{sc.textFile(\dots).take(n)}, report MSE \dotfill Section~\ref{sec:exp3}
+		\item[\checkmark] Part~2: observation on which factor affects MSE the most \dotfill Section~\ref{sec:discussion}
+	\end{enumerate}
+
+	\newpage
+	%======================================================================
+	\section{Introduction}
+	%======================================================================
+
+	This homework has two complementary pieces. Part~1 applies PySpark's built-in Alternating Least Squares (ALS) matrix factorization to the Yahoo~Music final-project dataset and produces Kaggle submissions. Part~2 uses the provided \texttt{re\_u.data} (a MovieLens-100k style ratings file) to systematically sweep the three primary ALS hyperparameters---\texttt{rank}, \texttt{maxIter}, and training-set size---and observe how each moves the held-out mean squared error (MSE).
+
+	Both parts are built on the same conceptual foundation as HW7, where matrix factorization was implemented from scratch in MATLAB using stochastic gradient descent. The same three knobs appear here under different names: HW7's $K$, \texttt{steps}, and $\beta$ correspond exactly to PySpark's \texttt{rank}, \texttt{maxIter}, and \texttt{regParam}. The optimizer changes (SGD~$\rightarrow$~ALS) but the objective $R\approx P\,Q^{\top}$ is the same.
+
+	\newpage
+	%======================================================================
+	\section{Part 1: PySpark ALS for the Final Project}\label{sec:part1}
+	%======================================================================
+
+	\subsection{Pipeline Overview}
+
+	Part~1 builds an iterative pipeline on top of the midterm's v3 heuristic (Kaggle $0.871$) by adding PySpark ALS as a new signal. The goal is \emph{not} to replace the heuristic with pure matrix factorization---which on this dataset is a weak ranker---but to let MF act where the heuristic has no signal. The pipeline performs six steps:
+	\begin{enumerate}
+		\item Parse \texttt{trainItem2.txt}, \texttt{testItem2.txt}, \texttt{trackData2.txt}, \texttt{albumData2.txt}, and the Week~6 supplemental \texttt{testTrack\_hierarchy.txt}.
+		\item Enrich each track with its album's artist and genres when available.
+		\item Train PySpark ALS directly on the professor-provided pre-flattened CSV \texttt{trainItem.data} using the sample-code pattern.
+		\item Compute features per \mbox{(user, candidate-track)} pair---including the ALS prediction \texttt{mf\_score}---using the enriched track metadata and the Week~6 hierarchy as a per-test-row override.
+		\item Rank each user's six test candidates by the chosen scoring strategy and write the Kaggle submission (top~3 get $\texttt{Predictor}=1$, bottom~3 get $0$).
+		\item A held-out validation pass (10\% of users, six items each) benchmarks every strategy via a pairwise positive-vs-negative AUC.
+	\end{enumerate}
+
+	\newpage
+	\subsection{ALS Configuration}
+
+	The PySpark ALS trainer follows the Week~11 sample-code pattern verbatim. The professor-provided \texttt{trainItem.data} and \texttt{testItem.data} files are already CSV-formatted \\ (\texttt{userID,itemID,rating}), so they are read directly with \texttt{spark.read.csv}---no custom parser is required. The ALS configuration is
+	\begin{verbatim}
+als = ALS(
+    rank=20,
+    maxIter=20,
+    regParam=0.05,
+    userCol="userID",
+    itemCol="itemID",
+    ratingCol="rating",
+    nonnegative=True,
+    implicitPrefs=False,
+    coldStartStrategy="drop",
+    seed=42,
+)
+	\end{verbatim}
+	
+	The sample code's defaults are \texttt{rank=5}, \texttt{maxIter=5}, and \texttt{regParam=0.01}. I bumped \texttt{rank} and \texttt{maxIter} to 20 each and loosened \texttt{regParam} slightly to 0.05 to give ALS more latent capacity on the 12.4-million-row training set. The model is trained on a 90\% split, evaluated on a 10\% holdout for an honest RMSE sanity check, then refit on the full set before generating test predictions. Cold-start predictions (26 out of 120{,}000 test pairs, users or items never seen in training) are filled with the global training mean so the submission always has exactly 120{,}000 rows.
+
+	\newpage
+	\subsection{Hybrid Strategy: v2 Heuristic with MF Tiebreaker}
+
+	A naive additive hybrid, $\text{score} = \text{v2} + w_m\cdot\text{MF}$, collapses on Kaggle because the two signals are on wildly different scales. A rank-normalized hybrid (both signals mapped to $[0,1]$ within the six candidates) regresses even further, scoring $0.688$---worse than v2 alone---because it strips the magnitude information that made v2 confident. The correct shape is a strict \emph{tiebreaker}:
+	\begin{equation}
+		\text{score} \;=\; \underbrace{h_\text{alb}\cdot r_\text{alb} + h_\text{art}\cdot r_\text{art} + n_\text{genre}\cdot \bar{r}_\text{genre}/10}_{\text{v2 heuristic}} \;+\; \underbrace{\epsilon\cdot\text{MF}}_{\text{tiny tiebreaker}},
+	\end{equation}
+	with $\epsilon = 10^{-3}$. Because v2 scores span roughly $[0, 300]$ on observed evidence while $\text{MF}$ is on the $[0,100]$ rating scale, a difference in v2 of even $1.0$ dominates the MF perturbation by a factor of $1000$. MF therefore only reorders candidates when v2 produces exact ties---which happens mostly on users whose six candidates all have zero album/artist/genre overlap with their history, where v2 would otherwise coin-flip. In that regime, any signal is strictly better than a random tie-break, so the tiebreaker can only improve the ranking (never hurt it) and the $0.871$ floor is preserved by construction.
+
+	\subsection{Test-Track Hierarchy Override}
+
+	Week~6's \texttt{testTrack\_hierarchy.txt} supplies, for every one of the 120{,}000 test candidates, the tuple \texttt{(userID, trackID, albumID, artistID, genre1, $\ldots$)}. In \texttt{compute\_features}, this per-test-row lineage takes precedence over the general-purpose \texttt{trackData2.txt} lookup, so candidates whose tracks are missing (or incompletely populated) in \texttt{trackData2.txt} still get their correct album/artist/genre references at scoring time. On held-out local validation the override produces no measurable change (the held-out tracks are always in \texttt{trackData2.txt} because the validation sampler draws them from users who already have rating data), but it is still wired through to the hybrid submission because it can only add information, never remove it.
+
+	\newpage
+	\subsection{Kaggle Results}\label{sec:part1-kaggle}
+
+	\begin{table}[H]
+		\centering
+		\caption{Kaggle public scores for the three Part~1 submissions (higher is better).}\label{tab:part1-kaggle}
+		\begin{tabular}{lcl}
+			\toprule
+			Submission & Kaggle score & Comment \\
+			\midrule
+			\texttt{submission\_hw8\_pyspark\_mf.csv}      & $0.636$ & Pure PySpark ALS, rank=20, maxIter=20 \\
+			\texttt{submission\_hw8\_hybrid.csv}           & $\mathbf{0.875}$ & v2 + MF tiebreaker ($\epsilon=10^{-3}$) \\
+			\texttt{submission\_hw8\_hybrid\_gated.csv}    & $0.513$ & v2 + evidence-gated MF (regression) \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	The tiebreaker hybrid cleared the v2 baseline of $0.871$ by $+0.004$ points, which matches the intuition that ties are rare---most users have at least one album, artist, or genre overlap, so v2 already produces a confident ordering on the majority of candidates. Pure PySpark ALS alone scores $0.636$, consistent with the midterm observation that pointwise regression models on these noisy 0--100 ratings lose to metadata-aware scoring. The evidence-gated hybrid (which lets MF speak loudly when \texttt{evidence\_count} is low) collapsed to $0.513$ because on the genuinely cold candidates the heuristic was silent \emph{and} ALS was noise, so giving MF a large weight amplified random predictions.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\textwidth]{SubmissionImgs/Part1Results.png}
+		\caption{Kaggle public-leaderboard screenshot for the Part~1 submissions.}%
+		\label{fig:kaggle}
+	\end{figure}
+
+	\subsection{Part 1 Run Summary}
+
+	\begin{table}[H]
+		\centering
+		\caption{Local metrics from the Part~1 pipeline run.}\label{tab:part1-local}
+		\begin{tabular}{lc}
+			\toprule
+			Metric & Value \\
+			\midrule
+			Training rows                                 & $12{,}403{,}575$ \\
+			Test pairs                                    & $120{,}000$ \\
+			Cold-start fills (global-mean backfill)       & $26$ \\
+			ALS holdout RMSE ($10\%$ split)               & $28.7487$ \\
+			ALS holdout MSE                               & $826.4860$ \\
+			v2 baseline validation AUC                    & $0.6692$ \\
+			v2$+$MF tiebreaker validation AUC             & $0.7029$ \\
+			v2$+$MF evidence-gated validation AUC         & $0.6934$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\newpage
+	%======================================================================
+	\section{Part 2: Parameter Sweeps on \texttt{re\_u.data}}\label{sec:part2}
+	%======================================================================
+
+	\subsection{Dataset and Experimental Setup}
+
+	\texttt{re\_u.data} is a 100{,}000-row MovieLens-100k style file with the format
+	\begin{verbatim}
+userID,itemID,rating
+196,242,3
+186,302,3
+22,377,1
+...
+	\end{verbatim}
+	Ratings are integers in $\{1,2,3,4,5\}$. Each of the 14 ALS runs in Part~2 uses an identical preprocessing protocol: the dataset (or its first-$n$ slice) is split 80/20 into training and holdout partitions with a fixed seed, ALS is trained with \texttt{regParam=0.05}, \texttt{nonnegative=True}, \texttt{coldStartStrategy="drop"}, and \texttt{seed=42}, then the holdout RMSE and MSE are measured with PySpark's \texttt{RegressionEvaluator}. For Experiment~3 the data slice is built with
+	\begin{verbatim}
+lines = spark.sparkContext.textFile("re_u.data").take(n)
+	\end{verbatim}
+	per the HW8 instructions, and then converted back into a DataFrame with the same three-column schema.
+
+	\subsection{\texorpdfstring{Experiment 1: Rank Sweep ($\text{maxIter}=20$)}{Experiment 1: Rank Sweep (maxIter=20)}}\label{sec:exp1}
+
+	\begin{table}[H]
+		\centering
+		\caption{Experiment 1: fixed \texttt{maxIter=20}, varying \texttt{rank}. Holdout MSE on a 20\% slice of the full 100k dataset.}\label{tab:exp1}
+		\begin{tabular}{ccc}
+			\toprule
+			\texttt{rank} ($K$) & Holdout RMSE & Holdout MSE \\
+			\midrule
+			$5$  & $0.9234$ & $\mathbf{0.8527}$ \\
+			$7$  & $0.9286$ & $0.8624$ \\
+			$10$ & $0.9417$ & $0.8867$ \\
+			$20$ & $0.9507$ & $0.9038$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\paragraph{Observation.} MSE increases monotonically with \texttt{rank}. The smallest model ($K=5$) achieves the lowest MSE of $0.8527$, and doubling the rank to $K=20$ raises MSE by about $0.05$ to $0.9038$. On this 100{,}000-row dataset the extra latent dimensions are unsupported: with only $\sim 943$ users and $\sim 1{,}682$ items, a rank-20 factorization has too much capacity relative to the amount of training signal, and the additional parameters mostly absorb noise. The total MSE range across Experiment~1 is $0.0512$.
+
+	\subsection{\texorpdfstring{Experiment 2: Iteration Sweep ($\text{rank}=20$)}{Experiment 2: Iteration Sweep (rank=20)}}\label{sec:exp2}
+
+	\begin{table}[H]
+		\centering
+		\caption{Experiment 2: fixed \texttt{rank=20}, varying \texttt{maxIter}. Holdout MSE on the full 100k dataset.}\label{tab:exp2}
+		\begin{tabular}{ccc}
+			\toprule
+			\texttt{maxIter} & Holdout RMSE & Holdout MSE \\
+			\midrule
+			$2$  & $0.9728$ & $0.9463$ \\
+			$5$  & $0.9379$ & $\mathbf{0.8797}$ \\
+			$10$ & $0.9458$ & $0.8946$ \\
+			$20$ & $0.9507$ & $0.9038$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\paragraph{Observation.} MSE is U-shaped in \texttt{maxIter}. Two iterations is clearly underfit ($0.9463$, the worst of the four). Five iterations is the sweet spot ($0.8797$), and beyond that the MSE creeps back up slightly as ALS begins to overfit the 80{,}000 training rows. The total MSE range across Experiment~2 is $0.0666$, about the same order of magnitude as the rank sweep. The fact that the best fit happens at \texttt{maxIter=5} rather than 20 is consistent with Experiment~1's message: this dataset does not support much expressive capacity, so both more iterations and more latent factors are wasted effort.
+
+	\subsection{Experiment 3: Data-Size Sweep}\label{sec:exp3}
+
+	\begin{table}[H]
+		\centering
+		\caption{Experiment 3: fixed \texttt{rank=20}, \texttt{maxIter=20}, varying data size via \texttt{sc.textFile.take(n)}. Holdout MSE on a 20\% slice of each truncated dataset.}\label{tab:exp3}
+		\begin{tabular}{cccc}
+			\toprule
+			Data size $n$ & Train / Holdout rows & Holdout RMSE & Holdout MSE \\
+			\midrule
+			$2{,}000$   & $1{,}591 / 409$     & $1.5395$ & $2.3701$ \\
+			$5{,}000$   & $4{,}005 / 995$     & $1.2822$ & $1.6440$ \\
+			$10{,}000$  & $7{,}996 / 2{,}004$ & $1.1935$ & $1.4244$ \\
+			$20{,}000$  & $15{,}965 / 4{,}035$ & $1.1203$ & $1.2550$ \\
+			$50{,}000$  & $40{,}104 / 9{,}896$ & $1.0365$ & $1.0743$ \\
+			$100{,}000$ & $80{,}037 / 19{,}963$ & $0.9459$ & $\mathbf{0.8946}$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\paragraph{Observation.} MSE decreases monotonically and dramatically as the training set grows. At $n=2{,}000$ the holdout MSE is $2.3701$; at $n=100{,}000$ it has dropped to $0.8946$. The total MSE range across Experiment~3 is $1.4755$---more than twenty times the variation observed in either Experiment~1 or Experiment~2. The decay roughly follows the classical $1/\sqrt{n}$ data-scaling law of MF: quadrupling the data ($n=2{,}000\rightarrow 8{,}000$, approximated by the $10{,}000$ row) cuts the MSE roughly in half.
+
+	\subsection{Discussion: Which Factor Moves MSE the Most?}\label{sec:discussion}
+
+	\begin{table}[H]
+		\centering
+		\caption{Holdout MSE range across each of the three experiments. Larger range $=$ more influence on model quality.}\label{tab:ranges}
+		\begin{tabular}{lccc}
+			\toprule
+			Experiment & Swept knob & MSE range ($\Delta$) & $[\min,\max]$ \\
+			\midrule
+			1 & \texttt{rank}     & $0.0512$ & $[0.8527,\ 0.9038]$ \\
+			2 & \texttt{maxIter}  & $0.0666$ & $[0.8797,\ 0.9463]$ \\
+			3 & data size         & $\mathbf{1.4755}$ & $[0.8946,\ 2.3701]$ \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	\begin{enumerate}
+		\item \textbf{Data size dominates by more than an order of magnitude.} Its MSE range of $1.4755$ is roughly $22\times$ the rank sweep's $0.0512$ and $22\times$ the iteration sweep's $0.0666$. Every other knob is noise compared to giving ALS more rows to learn from.
+		\item \textbf{Rank and \texttt{maxIter} contribute comparable, small effects.} Their ranges are within $30\%$ of each other ($0.0512$ vs $0.0666$). In both sweeps the \emph{smaller} setting wins, which is the signature of a dataset that lacks enough signal to justify a high-capacity model. This is consistent with HW7's observation that just $K=2$ latent factors could already reconstruct a $5\times 4$ toy matrix to within $0.135$ RMSE.
+		\item \textbf{Practical takeaway.} If you are handed a recommender-system MSE target and can spend effort on only one thing, spend it collecting more ratings. Hyperparameter tuning on a fixed dataset is second-order.
+	\end{enumerate}
+
+	\newpage
+	%======================================================================
+	\section{Conclusion}
+	%======================================================================
+
+	\begin{enumerate}
+		\item Part~1's PySpark ALS pipeline produces a Kaggle public score of $0.875$ on the Yahoo~Music final-project challenge, a $+0.004$ lift over the midterm's v3 heuristic baseline of $0.871$. The lift comes from the tiebreaker hybrid: ALS is used as a strictly additive tiny-weight signal so that the proven heuristic ordering is preserved everywhere except on exact ties, where the MF signal replaces what would otherwise be a random coin-flip.
+
+		\item A naive additive or rank-normalized hybrid regresses badly on Kaggle ($0.688$) because the two signals are on very different scales. An evidence-gated hybrid regresses even further ($0.513$) because giving MF more voice on genuinely cold users amplifies noise rather than signal. The tiebreaker design is the only hybrid formulation that has a provable floor at v2's score.
+
+		\item Part~2's sweeps on \texttt{re\_u.data} establish a clear ranking: data size affects MSE by a factor of roughly $22\times$ more than either \texttt{rank} or \texttt{maxIter}. Both hyperparameters favor smaller settings on this dataset, which is a signature of an over-parameterized model fighting a data-limited regime.
+
+		\item Across both parts, the recurring lesson from HW6 $\rightarrow$ HW7 $\rightarrow$ HW8 holds: for practical collaborative filtering, \emph{data quality and quantity dominate}, and ALS only materially helps the submission when it is used carefully (as a tiebreaker rather than a co-equal signal).
+	\end{enumerate}
+
+	\newpage
+	%======================================================================
+	\section{Appendix: Python Code}
+	%======================================================================
+
+	\lstinputlisting[caption={EE627\_Homework8\_Eschete\_Part1.py --- PySpark MF pipeline for the final project},label={lst:part1}]{EE627_Homework8_Eschete_Part1.py}
+
+	\newpage
+	\vspace{1em}
+
+	\lstinputlisting[caption={EE627\_Homework8\_Eschete\_Part2.py --- Parameter sweep driver for re\_u.data},label={lst:part2}]{EE627_Homework8_Eschete_Part2.py}
+
+	\newpage
+	%======================================================================
+	\section{Appendix: Console Output}
+	%======================================================================
+
+	\lstinputlisting[caption={Part~1 run log},label={lst:p1log},language={},keywordstyle=\ttfamily,stringstyle=\ttfamily]{Results/run_20260415_184902.txt}
+
+	\newpage
+	\vspace{1em}
+
+	\lstinputlisting[caption={Part~2 run log},label={lst:p2log},language={},keywordstyle=\ttfamily,stringstyle=\ttfamily]{Results/part2_run_20260415_191728.txt}
+
+\end{document}

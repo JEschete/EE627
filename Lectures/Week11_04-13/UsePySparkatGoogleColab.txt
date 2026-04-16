@@ -1,0 +1,74 @@
+Use pySpark at Google Colab
+1. Access Google Colab
+
+    Go to colab.research.google.com Links to an external site..
+
+    Sign in with your Google account.
+
+2. Create a New Notebook
+
+    In the top-left menu, click File > New notebook.
+
+    (Optional) Rename the notebook by clicking on "Untitled0.ipynb" at the top.
+
+3. Connect to Runtime
+
+    In the upper right corner, click Connect. This allocates a virtual machine to you.
+
+4. Install PySpark
+
+In the first cell, copy and run the following command. We no longer need to manually download .tgz files or use findspark in most modern Colab environments.
+Python
+
+# 1. Install specific version and ignore the dependency error
+!pip install pyspark==3.5.0 -q
+
+# 2. Install Java
+!apt-get install openjdk-8-jdk-headless -qq > /dev/null
+
+# 3. Set Environment Variables
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-8-openjdk-amd64"
+os.environ["PYARROW_IGNORE_TIMEZONE"] = "1"
+
+ 
+
+5. Initialize Spark Session
+
+Copy this into the next cell to start your Spark engine. PySpark will now automatically find the Spark installation via the pip package.
+Python
+
+from pyspark.sql import SparkSession
+
+# We add a config to handle the timezone warning explicitly
+
+spark = SparkSession.builder \
+
+ .master("local[*]") \
+
+ .appName("StevensGraduateCourse") \
+
+ .config("spark.sql.execution.arrow.pyspark.enabled", "true") \
+
+ .getOrCreate()
+
+print("Spark Session Created Successfully!")
+
+ 
+
+6. Upload Your Data
+
+Run this cell to upload your CSV (e.g., ratings.csv) from your local machine.
+Python
+
+from google.colab import files
+
+# Prompt to upload file
+uploaded = files.upload()
+
+# Example: Read the uploaded CSV into a Spark DataFrame
+# Replace 'ratings.csv' with your actual filename
+import io
+df = spark.read.csv("ratings.csv", header=True, inferSchema=True)
+df.show(5)
+

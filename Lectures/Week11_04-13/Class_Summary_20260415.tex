@@ -1,0 +1,372 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large April 15, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{From Small-Scale MF to Big-Data MF}
+%------------------------------------------------------------
+
+\subsection{Recap: The Homework 7 Picture}
+Homework~7 built matrix factorization for a tiny $5 \times 4$ rating matrix in MATLAB with a pair of nested \texttt{for} loops over every observed entry. The approach is conceptually complete: initialize $P$ and $Q$ randomly, compute $e_{ui} = r_{ui} - \mathbf{p}_u^{\top}\mathbf{q}_i$, apply the SGD updates, and iterate. For a $5 \times 4$ matrix this finishes in milliseconds.
+
+\subsection{Why That Breaks at Industrial Scale}
+A realistic recommender has $M \approx 10^{8}$--$10^{9}$ users and $N \approx 10^{6}$--$10^{8}$ items. Three problems arise immediately:
+
+\begin{itemize}
+    \item \textbf{Storage.} A dense $M \times N$ matrix is far too large to hold in RAM, on a single disk, or even on a single machine. Nothing you can buy will open it.
+    \item \textbf{Sparsity.} Almost every entry is missing. Iterating a nested \texttt{for} loop over $M \cdot N$ cells wastes essentially all of its work on zeros.
+    \item \textbf{Serial bottleneck.} Even restricting to observed entries, a single-machine SGD loop cannot process billions of updates per epoch within any practical wall time.
+\end{itemize}
+
+\subsection{The Shift}
+The lecture's framing was explicit: ``the idea is okay, but the engineering is not feasible.'' The rest of class introduced the big-data stack --- \textbf{Hadoop}, \textbf{Spark}, and the \textbf{PySpark ALS} recommender API --- that solves the engineering side so the same algorithm can run over a billion-row rating matrix on a cluster.
+
+
+%------------------------------------------------------------
+\section{Big Data: The Four V's}
+%------------------------------------------------------------
+
+Per the Hadoop slides, roughly 90\% of the world's data was produced in just the last two years, and 80\% of it is unstructured. A ``big data system'' is defined by four characteristics:
+
+\begin{description}
+    \item[Volume.] Internet and mobile usage dumped unprecedented quantities of data on every industry. Traditional relational databases break well before modern corpora fit.
+    \item[Variety.] Structured SQL tables are no longer the dominant form. Most data now arrives unstructured: text, images, audio, logs, clickstreams, JSON, XML.
+    \item[Velocity.] Users upload hundreds of hours of video to YouTube every minute, send hundreds of thousands of tweets, and transmit hundreds of millions of emails --- per minute. The stream never stops.
+    \item[Veracity.] Data streams are noisy and uncertain. Values disagree, sensors drift, users lie. Models have to cope with unreliable inputs.
+\end{description}
+
+Traditional single-machine tools cannot address any of these at the scales involved, which is why Google built a new architecture from scratch.
+
+
+%------------------------------------------------------------
+\section{Hadoop and HDFS}
+%------------------------------------------------------------
+
+\subsection{Origin and Purpose}
+Hadoop is an open-source, Java-based framework for distributed storage and processing of very large datasets. It is modeled on the \textbf{Google File System (GFS)} and the \textbf{MapReduce} programming model Google used to index the web.
+
+\subsection{Hadoop Distributed File System (HDFS)}
+HDFS is Hadoop's storage layer --- a UNIX-style, rack-aware filesystem that stripes files across thousands of commodity machines. Key characteristics:
+
+\begin{itemize}
+    \item \textbf{Partitioned across hosts.} Files are split into blocks and replicated across many nodes so computation runs close to the data.
+    \item \textbf{Fault tolerant.} Block replication lets the cluster survive individual machine failures without losing data.
+    \item \textbf{Commodity hardware.} No exotic servers required --- scale is achieved by adding cheap boxes.
+    \item \textbf{Huge datasets.} Yahoo! historically ran 40{,}000-server HDFS clusters storing 40 petabytes of data, with a single cluster up to 4{,}000 machines.
+    \item \textbf{Master--slave paradigm.} A name node tracks metadata; data nodes hold blocks.
+    \item \textbf{Write-once.} Files are immutable once written --- this constraint is what makes replication and fault recovery tractable.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{MapReduce}
+%------------------------------------------------------------
+
+\subsection{Programming Model}
+MapReduce is the programming paradigm that originally sat on top of HDFS. It decomposes a job into two phases that each operate on key/value pairs:
+
+\begin{enumerate}
+    \item \textbf{Map phase.} Each node receives a partition of the input and emits intermediate key/value pairs. The user-provided \texttt{Map()} function defines the transformation. Map input: \texttt{list(k1, v1)}; map output: \texttt{list(k2, v2)}.
+    \item \textbf{Shuffle.} The framework groups all intermediate values that share the same key and ships them to the reducer responsible for that key.
+    \item \textbf{Reduce phase.} Each reducer receives \texttt{(k2, list(v2))} and emits the final \texttt{(k3, v3)}. The user-provided \texttt{Reduce()} function defines the aggregation.
+    \item \textbf{Final write.} Reduce output is collected and written back to HDFS.
+\end{enumerate}
+
+\subsection{Why It Scales}
+The Map step is embarrassingly parallel: every mapper processes its own HDFS block without touching any other. The Shuffle moves only the intermediate key/value pairs, which are usually much smaller than the raw inputs. The Reduce step runs in parallel over disjoint key ranges. The result is linear scalability across thousands of nodes, fault-tolerant by virtue of HDFS replication.
+
+\subsection{Its Limitation --- And Why Spark Was Needed}
+Every MapReduce stage writes its intermediate output back to disk. An iterative algorithm like SGD or ALS --- which sweeps the data dozens of times --- pays a disk-I/O penalty on every pass. That is the specific pain point Apache Spark was built to fix.
+
+
+%------------------------------------------------------------
+\section{Apache Spark}
+%------------------------------------------------------------
+
+\subsection{What It Is}
+Spark is a fast cluster-computing framework for processing, querying, and analyzing big data. It is \textbf{not a replacement for Hadoop} --- it runs on top of it, reading from HDFS and reusing Hadoop's cluster resources. Its defining feature is \textbf{in-memory computation}: intermediate results stay in RAM across stages instead of being spilled to disk after each one.
+
+\begin{itemize}
+    \item Up to \textbf{100$\times$ faster} than MapReduce when workloads fit in memory.
+    \item Up to \textbf{10$\times$ faster} than MapReduce even on disk-bound workloads.
+    \item Originally built at UC Berkeley's AMPLab (2009), donated to Apache and open-sourced in 2010.
+    \item Written primarily in \textbf{Scala}, with APIs exposed for Java, Python, and R.
+\end{itemize}
+
+\subsection{Python vs.\ Scala}
+Scala is Spark's native language and is the fastest option because Spark itself runs on the JVM. Python (PySpark) is slower --- it uses process-based executors rather than thread-based ones, and it is not a JVM language, so Python objects must be serialized to cross the boundary. The tradeoff is accessibility: because Python is already the lingua franca of data science, PySpark lets people use Spark without learning a new language. For this class, PySpark is the right choice.
+
+
+%------------------------------------------------------------
+\section{Spark Architecture}
+%------------------------------------------------------------
+
+Every Spark application consists of three pieces:
+
+\begin{description}
+    \item[Driver program.] Runs the \texttt{main()} function, defines the distributed datasets, and launches parallel operations against them.
+    \item[SparkContext (\texttt{sc}).] The driver's handle to the cluster. In the PySpark shell it is pre-created as the variable \texttt{sc}. It is through \texttt{sc} that you build RDDs, e.g.\ \texttt{sc.textFile("myData.txt")}.
+    \item[Cluster manager + worker nodes.] The cluster manager (Standalone, Mesos, or YARN --- Spark is agnostic) allocates executor processes on worker nodes. Each executor runs tasks and caches data in its own local memory.
+\end{description}
+
+A Spark program's flow is always the same: the driver creates a \texttt{SparkContext}, builds RDDs or DataFrames, and issues parallel operations that the cluster manager schedules as tasks on the executors.
+
+
+%------------------------------------------------------------
+\section{RDDs: Spark's Core Abstraction}
+%------------------------------------------------------------
+
+\subsection{Definition}
+A \textbf{Resilient Distributed Dataset (RDD)} is an \textbf{immutable, partitioned collection of objects} that Spark distributes across the cluster. Each RDD is split into multiple partitions, and each partition can live on and be computed at a different node. RDDs can hold any Python/Java/Scala object, including user-defined classes.
+
+\subsection{Two Ways to Create RDDs}
+\begin{itemize}
+    \item \textbf{Load from external storage:} \texttt{lines = sc.textFile("myData.txt")}
+    \item \textbf{Parallelize a local collection:} \texttt{nums = sc.parallelize([1, 2, 3, 4])}
+\end{itemize}
+
+\subsection{Transformations vs.\ Actions}
+RDDs expose two kinds of operations --- and the distinction is critical:
+
+\begin{description}
+    \item[Transformations] construct a \emph{new} RDD from an existing one. They are \textbf{lazy}: no computation happens when you call them. Examples: \texttt{map()}, \texttt{filter()}, \texttt{flatMap()}, \texttt{distinct()}, \texttt{reduceByKey()}.
+    \item[Actions] compute a \emph{result} and either return it to the driver or write it to external storage. They \textbf{trigger} all pending transformations in the chain that produced them. Examples: \texttt{count()}, \texttt{first()}, \texttt{collect()}, \texttt{reduce()}, \texttt{countByKey()}.
+\end{description}
+
+\subsection{Lazy Evaluation}
+When you call a transformation, Spark records a \emph{recipe} for computing the resulting RDD rather than computing it on the spot. Nothing runs until an action is called. This matters because Spark can then inspect the whole transformation chain and execute only the parts actually needed.
+
+\textbf{Lecture's library analogy.} If a coworker asks you to ``go to the library and bring back the Wikipedia encyclopedia,'' a naive (eager) worker will haul all 1{,}000 volumes to the office. A lazy worker waits for the follow-up request --- ``actually, just the first page'' --- and then fetches only the first volume. Spark is the lazy worker, and the savings dominate when the dataset is billions of rows but the final answer touches only a handful.
+
+Consequences:
+\begin{itemize}
+    \item Spark can fuse adjacent transformations into a single physical pass over the data.
+    \item \texttt{sc.textFile()} does \emph{not} read the file immediately. \texttt{first()} will read only as many records as it needs.
+    \item By default, an RDD is recomputed each time an action is invoked on it. Use \texttt{RDD.persist()} to keep a reused intermediate in memory.
+\end{itemize}
+
+\subsection{Typical Spark Program Skeleton}
+\begin{enumerate}
+    \item Create input RDDs from external data.
+    \item Transform them with operations like \texttt{filter()} and \texttt{map()}.
+    \item Call \texttt{persist()} on any intermediate RDD you will reuse.
+    \item Launch actions like \texttt{count()} or \texttt{first()} to kick off parallel execution.
+\end{enumerate}
+
+
+%------------------------------------------------------------
+\section{Common Transformations and Actions}
+%------------------------------------------------------------
+
+\subsection{Element-Wise Transformations}
+\begin{description}
+    \item[\texttt{map(f)}] Apply \texttt{f} to each element; one input element $\to$ one output element.
+    \begin{verbatim}
+nums   = sc.parallelize([1, 2, 3, 4])
+squared = nums.map(lambda x: x * x).collect()   # [1, 4, 9, 16]
+    \end{verbatim}
+
+    \item[\texttt{filter(f)}] Keep only elements where \texttt{f} returns true.
+    \begin{verbatim}
+nums.filter(lambda x: x % 2 == 0).collect()     # [2, 4]
+    \end{verbatim}
+
+    \item[\texttt{flatMap(f)}] Apply \texttt{f} returning an iterator, then flatten. One input $\to$ zero or more outputs. Contrast with \texttt{map}, which preserves the list-of-lists structure.
+    \begin{verbatim}
+lines = sc.parallelize(["hello world", "hi"])
+words = lines.flatMap(lambda line: line.split(" "))   # ["hello","world","hi"]
+    \end{verbatim}
+
+    \item[\texttt{distinct()}] Drop duplicates.
+\end{description}
+
+\subsection{Actions}
+\begin{description}
+    \item[\texttt{reduce(f)}] Combine elements pairwise with a binary function. For \texttt{[1,2,3,3]} and \texttt{+}, the result is \texttt{9}.
+    \item[\texttt{collect()}] Pull every element back to the driver as a Python list. \textbf{Do not call this on a big RDD} --- the full dataset has to fit in the driver's RAM.
+    \item[\texttt{count()}] Return the number of elements.
+    \item[\texttt{first()}] Return the first element. Cheap under lazy evaluation because Spark only reads enough to produce one row.
+\end{description}
+
+
+%------------------------------------------------------------
+\section{Pair RDDs (Key/Value)}
+%------------------------------------------------------------
+
+When each element is a \texttt{(key, value)} tuple, Spark unlocks a richer API called a \textbf{pair RDD}. Pair RDDs are the workhorse for aggregation jobs.
+
+\subsection{Creating a Pair RDD}
+\begin{verbatim}
+pairs = lines.map(lambda x: (x.split(" ")[0], x))
+\end{verbatim}
+
+\subsection{Useful Pair-RDD Operations}
+\begin{description}
+    \item[\texttt{reduceByKey(f)}] Aggregate values that share a key. Output of \texttt{[(1,2),(3,4),(3,6)]} with \texttt{+}: \texttt{[(1,2),(3,10)]}.
+    \item[\texttt{mapValues(f)}] Apply \texttt{f} to each value, leaving keys untouched.
+    \item[\texttt{values()} / \texttt{keys()}] Project out one side of the pair.
+    \item[\texttt{countByKey()}] Return a dictionary of key $\to$ count, materialized to the driver.
+    \item[\texttt{join(other)}] Inner-join two pair RDDs on their keys.
+\end{description}
+
+\subsection{Canonical Example: Word Count}
+\begin{verbatim}
+rdd    = sc.textFile("myData.txt")
+words  = rdd.flatMap(lambda x: x.split(" "))
+result = words.map(lambda x: (x, 1)).reduceByKey(lambda a, b: a + b)
+\end{verbatim}
+
+\subsection{Per-Key Average (from the Spark slides)}
+\begin{verbatim}
+rdd.mapValues(lambda x: (x, 1)) \
+   .reduceByKey(lambda a, b: (a[0] + b[0], a[1] + b[1]))
+\end{verbatim}
+This produces \texttt{(key, (sum, count))} pairs from which the average is one more division.
+
+
+%------------------------------------------------------------
+\section{DataFrames in PySpark}
+%------------------------------------------------------------
+
+Spark exposes three data representations: RDD, DataFrame, and Dataset. PySpark uses only RDDs and DataFrames (the Dataset API is Scala/Java only).
+
+\textbf{Why DataFrames are preferred.} A DataFrame carries schema metadata --- column names, types, nullability --- which lets Spark's Catalyst optimizer plan queries intelligently. The result is substantially faster than equivalent RDD code, and the programming model looks familiar to anyone who has used pandas. DataFrames can be created from:
+
+\begin{itemize}
+    \item CSV, JSON, Parquet, XML files.
+    \item RDBMS tables (JDBC), Hive, Cassandra.
+    \item Existing RDDs, by attaching a schema.
+\end{itemize}
+
+\textbf{Key warning.} A PySpark DataFrame \emph{looks} like a pandas DataFrame but is not. A pandas DataFrame has to fit in a single machine's memory. A PySpark DataFrame can represent billions of rows distributed across a cluster, and its operations are lazy. Calling \texttt{.show(5)} triggers just enough work to print five rows; calling \texttt{.toPandas()} materializes everything and will crash the driver if the dataset is big.
+
+
+%------------------------------------------------------------
+\section{PySpark ALS for the Final Project}
+%------------------------------------------------------------
+
+\subsection{Environment Setup on Google Colab}
+The professor demonstrated running the PySpark recommender live in Google Colab:
+\begin{enumerate}
+    \item Open a new Colab notebook and attach a runtime.
+    \item Install PySpark in the notebook: \texttt{!pip install pyspark}.
+    \item Check the Java version --- PySpark requires a matching JVM. Some Spark versions pinned in the sample code do not work with the default Colab Java; installing a compatible JDK and restarting the runtime fixes the mismatch.
+    \item Upload \texttt{trainItem.data} and \texttt{testItem.data} (both provided on Canvas) to the Colab session.
+\end{enumerate}
+The lecture noted that environment debugging will almost certainly be necessary each semester as Colab's defaults drift --- students are encouraged to paste errors into Gemini or ChatGPT to resolve version mismatches rather than waiting for office hours.
+
+\subsection{Data Format}
+The training file does \emph{not} store a full rating matrix. Every row is a triple: \texttt{userID, itemID, rating}. Zero entries are simply absent. This sparse row-per-observation format is exactly what ALS needs --- it scans only the observed ratings rather than iterating across every cell of a dense matrix.
+
+\subsection{ALS Pipeline}
+The reference script distributed with this week's materials (\texttt{PySpark Recommendation Code for the Final Project.py}) is a complete end-to-end template. It pulls the following pieces from \texttt{pyspark.sql} and \texttt{pyspark.ml.recommendation}:
+\begin{verbatim}
+from pyspark.sql import SparkSession
+from pyspark.sql.types import IntegerType, FloatType
+from pyspark.ml.recommendation import ALS
+\end{verbatim}
+
+The workflow:
+\begin{enumerate}
+    \item \textbf{Start a SparkSession} with \texttt{SparkSession.builder.appName(...).getOrCreate()}. Needed to read CSVs into a DataFrame.
+    \item \textbf{Read \texttt{trainItem.data}} into a DataFrame with \texttt{spark.read.csv(..., header=False)}. The raw file has no header, so columns come in as \texttt{\_c0, \_c1, \_c2}.
+    \item \textbf{Rename columns} to \texttt{userID}, \texttt{itemID}, \texttt{rating} with chained \texttt{withColumnRenamed(...)} calls, and \textbf{cast} them with \texttt{withColumn(..., col.cast(IntegerType()))} / \texttt{FloatType()}. ALS will not consume untyped string columns.
+    \item \textbf{Sanity-check} with \texttt{training.show(5)}.
+    \item \textbf{Configure the ALS estimator}:
+\begin{verbatim}
+als = ALS(
+    maxIter=5,
+    rank=5,
+    regParam=0.01,
+    userCol="userID",
+    itemCol="itemID",
+    ratingCol="rating",
+    nonnegative=True,
+    implicitPrefs=False,
+    coldStartStrategy="drop"
+)
+\end{verbatim}
+    The knobs correspond directly to the math from Week 10:
+    \begin{itemize}
+        \item \texttt{rank=5} is $K$ --- the number of latent factors.
+        \item \texttt{maxIter=5} is the number of ALS sweeps.
+        \item \texttt{regParam=0.01} is the L2 coefficient $\lambda$ on $\lVert \mathbf{p}_u \rVert^{2} + \lVert \mathbf{q}_i \rVert^{2}$.
+        \item \texttt{nonnegative=True} clamps factors to $\geq 0$, which often makes them more interpretable and mimics NMF-style decomposition.
+        \item \texttt{implicitPrefs=False} says these are \emph{explicit} ratings (not click counts), so the loss is the standard squared error on observed entries.
+        \item \texttt{coldStartStrategy="drop"} tells the model to drop rows whose user or item was never seen in training, instead of emitting \texttt{NaN} predictions that would break downstream metrics.
+    \end{itemize}
+    \item \textbf{Fit the model}: \texttt{model = als.fit(training)}. Under the hood this runs alternating least squares in parallel across the cluster.
+    \item \textbf{Load \texttt{testItem.data}} the same way --- same column renames, same type casts.
+    \item \textbf{Score the test pairs}: \texttt{predictions = model.transform(testing)}. The result is the test DataFrame with an extra \texttt{prediction} column.
+    \item \textbf{Write predictions} two ways:
+    \begin{itemize}
+        \item \texttt{predictions.coalesce(1).write.csv("predictions", header=True)} --- the distributed-friendly path, which collapses all partitions into one output file inside a \texttt{predictions/} folder.
+        \item \texttt{predictions.toPandas().to\_csv("mypredictions.csv", index=False)} --- the convenience path that pulls the full result back to the driver as a pandas DataFrame. Safe here because the test set is small, but dangerous at true cluster scale.
+    \end{itemize}
+    \item \textbf{Shut down}: \texttt{spark.stop()}.
+\end{enumerate}
+
+\subsection{Why ALS, Not SGD}
+Week 10's lecture ended with the parallelization argument for ALS: holding $P$ fixed makes every $\mathbf{q}_i$ a standalone ridge-regression problem, and vice versa. That means ALS can update all of $Q$ (or all of $P$) in parallel across the cluster --- which is exactly why \texttt{pyspark.ml.recommendation.ALS} is ALS and not SGD. The engineering choice flows directly from the math.
+
+\subsection{Data Files Accompanying the Lecture}
+The \texttt{Data/} subfolder distributed with this week's materials contains:
+\begin{itemize}
+    \item \texttt{trainItem.data} --- the training triples $(u, i, r)$ from the Yahoo Music dataset.
+    \item \texttt{testItem.data} --- the test pairs the model must score.
+    \item \texttt{re\_trainData2.txt} and \texttt{re\_u.data} --- smaller reshaped variants for local experimentation.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Why This Matters for the Ensemble}
+%------------------------------------------------------------
+
+\subsection{Heuristic vs.\ Collaborative}
+The heuristic approach used in Homework 4 and the midterm was \emph{user-by-user}: to score Joe on a track, it looked only at Joe's own history. That has a hard failure mode --- \textbf{cold start}. If Joe has no history, there is nothing to look at and the method is blank.
+
+Matrix factorization is fundamentally different. Every factor in $P$ and $Q$ is learned from \emph{all} users and \emph{all} items at once. Joe's latent vector $\mathbf{p}_{\text{Joe}}$ is shaped by the entire cluster of people whose tastes align with his, and every track's vector $\mathbf{q}_i$ is informed by every user who touched it. There is no user-by-user silo --- the whole rating matrix participates in every prediction.
+
+\subsection{Diversity for Ensembling}
+The professor was explicit that the goal is \emph{not} necessarily better accuracy from MF alone. The goal is a prediction that disagrees with the heuristic in useful ways. Because the two approaches draw on completely different signal --- one is personal history, the other is global cross-user interaction --- their errors are weakly correlated, and averaging them tends to beat either one on its own. That is the setup for the end-of-semester \textbf{ensemble} lecture, where every Kaggle submission made during the course (good, bad, mediocre) gets thrown into a blend.
+
+\textbf{Practical advice that came with this:} do not delete your weak submissions. Keep every result, label them, and upload them. The ensemble lecture will use the full collection, and removing the ``bad'' ones removes information that would otherwise lift the final blended score.
+
+
+%------------------------------------------------------------
+\section{Key Reference}
+%------------------------------------------------------------
+
+\begin{description}
+    \item[HDFS:] Hadoop Distributed File System --- replicated, rack-aware, write-once block storage across commodity servers.
+    \item[MapReduce:] $(k_1, v_1) \xrightarrow{\text{map}} (k_2, v_2) \xrightarrow{\text{shuffle}} (k_2, \text{list}(v_2)) \xrightarrow{\text{reduce}} (k_3, v_3)$
+    \item[SparkContext:] The driver's connection to the cluster; pre-bound as \texttt{sc} in the shell.
+    \item[RDD:] Immutable, partitioned, fault-tolerant distributed collection.
+    \item[Transformation:] Lazy --- builds a new RDD (\texttt{map}, \texttt{filter}, \texttt{flatMap}, \texttt{reduceByKey}).
+    \item[Action:] Eager --- triggers execution (\texttt{count}, \texttt{first}, \texttt{collect}, \texttt{reduce}).
+    \item[Lazy evaluation:] No work runs until an action forces it; Spark fuses the transformation chain.
+    \item[DataFrame:] Schema-aware distributed table; preferred over raw RDDs in \texttt{pyspark.ml}.
+    \item[ALS:] Alternating Least Squares --- the matrix-factorization trainer exposed as \texttt{pyspark.ml.recommendation.ALS}.
+    \item[Rating prediction:] \( \hat{r}_{ui} = \mathbf{p}_u^{\top}\mathbf{q}_i \) with $\mathbf{p}_u, \mathbf{q}_i \in \mathbb{R}^{K}$, learned by ALS on the cluster.
+\end{description}
+
+
+\end{document}

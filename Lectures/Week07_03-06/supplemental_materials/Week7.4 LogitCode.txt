@@ -1,0 +1,94 @@
+
+library(aod)
+library(ggplot2)
+mydata <- read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
+
+
+
+head(mydata)
+summary(mydata)
+
+sapply(mydata, sd)
+mydata$rank <- factor(mydata$rank)
+mylogit <- glm(admit ~ gre + gpa + rank, data = mydata, family = "binomial")
+
+summary(mylogit)
+## 
+## Call:
+## glm(formula = admit ~ gre + gpa + rank, family = "binomial", 
+##     data = mydata)
+## 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -1.627  -0.866  -0.639   1.149   2.079  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -3.98998    1.13995   -3.50  0.00047 ***
+## gre          0.00226    0.00109    2.07  0.03847 *  
+## gpa          0.80404    0.33182    2.42  0.01539 *  
+## rank2       -0.67544    0.31649   -2.13  0.03283 *  
+## rank3       -1.34020    0.34531   -3.88  0.00010 ***
+## rank4       -1.55146    0.41783   -3.71  0.00020 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 499.98  on 399  degrees of freedom
+## Residual deviance: 458.52  on 394  degrees of freedom
+## AIC: 470.5
+## 
+## Number of Fisher Scoring iterations: 4
+In the output above, the first thing we see is the call, this is R reminding us what the model we ran was, what options we specified, etc.
+Next we see the deviance residuals, which are a measure of model fit. This part of output shows the distribution of the deviance residuals for individual cases used in the model. Below we discuss how to use summaries of the deviance statistic to assess model fit.
+The next part of the output shows the coefficients, their standard errors, the z-statistic (sometimes called a Wald z-statistic), and the associated p-values. Both gre and gpa are statistically significant, as are the three terms for rank. The logistic regression coefficients give the change in the log odds of the outcome for a one unit increase in the predictor variable.
+
+For every one unit change in gre, the log odds of admission (versus non-admission) increases by 0.002.
+
+For a one unit increase in gpa, the log odds of being admitted to graduate school increases by 0.804.
+
+The indicator variables for rank have a slightly different interpretation. For example, having attended an undergraduate institution with rank of 2, versus an institution with a rank of 1, changes the log odds of admission by -0.675.
+Below
+
+
+db = read.table("http://freakonometrics.free.fr/db.txt",header=TRUE,sep=";")
+attach(db)
+
+X3bis=rep(NA,length(X3))
+X3bis[X3%in%c("A","C","D")]="ACD"
+X3bis[X3%in%c("B","E")]="BE"
+db$X3bis=as.factor(X3bis)
+reg=glm(Y~X1+X2+X3bis,family=binomial,data=db)
+
+S=predict(reg,type="response")
+roc.curve=function(s,print=FALSE){
+ Ps=(S>s)*1
+ FP=sum((Ps==1)*(Y==0))/sum(Y==0)
+ TP=sum((Ps==1)*(Y==1))/sum(Y==1)
+ if(print==TRUE){
+ print(table(Observed=Y,Predicted=Ps))
+ }
+ vect=c(FP,TP)
+ names(vect)=c("FPR","TPR")
+ return(vect)
+ }
+ 
+ 
+ threshold = 0.5
+ roc.curve(threshold,print=TRUE)
+ 
+ ROC.curve=Vectorize(roc.curve)
+  I=(((S>threshold)&(Y==0))|((S<=threshold)&(Y==1)))
+plot(S,Y,col=c("red","blue")[I+1],pch=19,cex=.7,,xlab="",ylab="")
+ abline(v=seuil,col="gray")
+
+ M.ROC=ROC.curve(seq(0,1,by=.01))
+ plot(M.ROC[1,],M.ROC[2,],col="grey",lwd=2,type="l")
+
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,70 @@
+============================================================
+  EE627A Homework 8 - PART 2: Parameter Sweeps
+  Jude Eschete
+  Run started: 2026-04-15T19:17:28.204286
+============================================================
+  Data file: d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Data\re_u.data
+  Results log: d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Results\part2_run_20260415_191728.txt
+  Metrics CSV: d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Results\part2_metrics_20260415_191728.csv
+  Spark 4.1.1 ready
+  Loaded 100,000 rows from re_u.data
++------+------+------+
+|userID|itemID|rating|
++------+------+------+
+|   196|   242|   3.0|
+|   186|   302|   3.0|
+|    22|   377|   1.0|
+|   244|    51|   2.0|
+|   166|   346|   1.0|
++------+------+------+
+only showing top 5 rows
+
+============================================================
+  EXPERIMENT 1: rank sweep
+  Fixed maxIter=20
+  Varying rank in [5, 7, 10, 20]
+============================================================
+    rank=5   maxIter=20  size=100000  train=79901  holdout=20099  RMSE=0.9234   MSE=0.8527
+    rank=7   maxIter=20  size=100000  train=79901  holdout=20099  RMSE=0.9286   MSE=0.8624
+    rank=10  maxIter=20  size=100000  train=79901  holdout=20099  RMSE=0.9417   MSE=0.8867
+    rank=20  maxIter=20  size=100000  train=79901  holdout=20099  RMSE=0.9507   MSE=0.9038
+
+============================================================
+  EXPERIMENT 2: maxIter sweep
+  Fixed rank=20
+  Varying maxIter in [2, 5, 10, 20]
+============================================================
+    rank=20  maxIter=2   size=100000  train=79901  holdout=20099  RMSE=0.9728   MSE=0.9463
+    rank=20  maxIter=5   size=100000  train=79901  holdout=20099  RMSE=0.9379   MSE=0.8797
+    rank=20  maxIter=10  size=100000  train=79901  holdout=20099  RMSE=0.9458   MSE=0.8946
+    rank=20  maxIter=20  size=100000  train=79901  holdout=20099  RMSE=0.9507   MSE=0.9038
+
+============================================================
+  EXPERIMENT 3: data size sweep
+  Fixed rank=20, maxIter=20
+  Varying size in [2000, 5000, 10000, 20000, 50000, 100000]
+  (using sc.textFile.take(n) per the HW8 instructions)
+============================================================
+    rank=20  maxIter=20  size=2000    train=1591   holdout=409    RMSE=1.5395   MSE=2.3701
+    rank=20  maxIter=20  size=5000    train=4005   holdout=995    RMSE=1.2822   MSE=1.6440
+    rank=20  maxIter=20  size=10000   train=7996   holdout=2004   RMSE=1.1935   MSE=1.4244
+    rank=20  maxIter=20  size=20000   train=15965  holdout=4035   RMSE=1.1203   MSE=1.2550
+    rank=20  maxIter=20  size=50000   train=40104  holdout=9896   RMSE=1.0365   MSE=1.0743
+    rank=20  maxIter=20  size=100000  train=80037  holdout=19963  RMSE=0.9459   MSE=0.8946
+
+============================================================
+  SUMMARY: which factor moves MSE the most?
+============================================================
+  Exp 1 (rank sweep):     MSE range = 0.0512   [0.8527 .. 0.9038]
+  Exp 2 (maxIter sweep):  MSE range = 0.0666   [0.8797 .. 0.9463]
+  Exp 3 (data size):      MSE range = 1.4755   [0.8946 .. 2.3701]
+
+  Most impactful -> least impactful:
+    1. data size    delta_MSE = 1.4755
+    2. maxIter      delta_MSE = 0.0666
+    3. rank         delta_MSE = 0.0512
+
+  Run log:     d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Results\part2_run_20260415_191728.txt
+  Metrics CSV: d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Results\part2_metrics_20260415_191728.csv
+
+Done.

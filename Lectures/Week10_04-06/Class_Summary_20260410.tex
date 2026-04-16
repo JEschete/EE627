@@ -1,0 +1,313 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{\textbf{EE627 --- Class Summary}\\[0.4em]
+       \large April 10, 2026}
+\author{Prof.\ Rensheng Wang}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------
+\section{Recap and Course Philosophy}
+%------------------------------------------------------------
+
+\subsection{Why Revisit Recommendation}
+The Yahoo Music recommendation task (the same dataset used in Homework~4 and the midterm) will be revisited repeatedly, each time with a \emph{different target method}. The point is not the dataset but the practice of attacking the same business problem from multiple angles:
+
+\begin{itemize}
+    \item Homework~4 used very simple \textbf{heuristic scoring} (album / artist / genre aggregation).
+    \item The midterm extended that heuristic with feature engineering and cold-start fallbacks.
+    \item Homework~7 (this week) introduces \textbf{matrix factorization} as a principled alternative.
+    \item Subsequent weeks will replace the single-machine MATLAB implementation with \textbf{PySpark} so the same logic runs at scale.
+\end{itemize}
+
+\subsection{Why Recommendation Matters in Industry}
+The professor reiterated that recommendation systems are the most immediately profitable application of machine learning:
+
+\begin{itemize}
+    \item They convert one dollar of compute into roughly ten dollars of revenue --- a ratio that no physical-goods business can match.
+    \item They monetize \emph{instantly}: the recommendation is served, the click happens, and the revenue arrives within seconds. Unlike manufacturing, there is no months-long design-to-cash cycle.
+    \item Interviews at major tech and finance companies therefore stress \emph{design-level} recommender questions (``Given this data and this business goal, how would you approach it?'') rather than code-writing drills.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Two Families of Recommender Systems}
+%------------------------------------------------------------
+
+\subsection{Content-Based Filtering}
+\textbf{Idea:} Describe each item with an explicit attribute vector and recommend items whose attributes match the user's stated or inferred preferences.
+
+\textbf{Example attributes (movies):}
+\begin{itemize}
+    \item Genre: war, documentary, crime, fantasy, romance, \ldots
+    \item Cast and director.
+    \item Box-office popularity.
+    \item Release year, runtime, language, rating, \ldots
+\end{itemize}
+
+\textbf{Limitation:} Content-based filtering requires someone to \emph{manually curate} every item's attributes. This works for studio releases but fails for user-generated content (e.g., a YouTube upload) where no one has filled in the metadata.
+
+\subsection{Collaborative Filtering}
+\textbf{Idea:} Ignore item attributes entirely and learn \emph{only} from the user--item interaction matrix.
+
+\begin{itemize}
+    \item Fully data-driven --- no manual curation required.
+    \item Works uniformly across domains (movies, music tracks, shopping items, web pages, social posts).
+    \item Is the \textbf{mainstream} approach for industrial recommenders today.
+\end{itemize}
+
+Collaborative filtering itself splits into two sub-families, discussed next:
+\begin{enumerate}
+    \item \textbf{Neighborhood methods} (Section~\ref{sec:neighborhood})
+    \item \textbf{Latent factor methods} (Section~\ref{sec:latent})
+\end{enumerate}
+
+
+%------------------------------------------------------------
+\section{Neighborhood Methods}
+\label{sec:neighborhood}
+%------------------------------------------------------------
+
+\subsection{Core Idea}
+A user's ``neighborhood'' is \emph{not} geographic. It is the set of other users whose \textbf{historical ratings overlap} the target user's history. These users are treated as surrogate friends whose opinions can be aggregated.
+
+\subsection{Real-World Analogy}
+If Joe wants a movie recommendation, he asks his buddies what they watched and takes whichever title received the most votes. Neighborhood collaborative filtering automates this: the algorithm picks the buddies for Joe by looking at shared rating history.
+
+\subsection{Procedure for the Yahoo Music Project}
+Given a target (test) user Joe with 6 tracks to score and a training history of 10 tracks:
+
+\begin{enumerate}
+    \item For every other user $u$, count how many of Joe's 10 training tracks also appear in $u$'s history.
+    \item Rank users by overlap. The highest-overlap users (e.g., one with 9/10 matches and another with 5/10) become Joe's \textbf{neighborhood}.
+    \item For each of Joe's 6 test tracks, collect ratings of that track from the neighborhood users.
+    \item Average those ratings (weighting by overlap if desired) to produce Joe's predicted rating.
+\end{enumerate}
+
+\textbf{Interview takeaway:} This is the type of question asked in first-round technical screens. The interviewer does not want code --- they want a clear verbal explanation of how the neighborhood is formed and how its votes are aggregated into a prediction.
+
+
+%------------------------------------------------------------
+\section{Latent Factor Methods}
+\label{sec:latent}
+%------------------------------------------------------------
+
+\subsection{Core Idea}
+Rather than finding similar users, project \emph{every} user \emph{and} \emph{every} item into a common $K$-dimensional \textbf{latent space}. A user who sits near an item in that space is predicted to rate it highly.
+
+\subsection{What ``Latent'' Means}
+Each coordinate in the latent space is a \emph{factor} --- a number that summarizes one aspect of a user or item. In a realistic deployment the rank is typically $f = 20$ to $100$ factors. Some of these may correspond to obvious dimensions (comedy vs.\ drama, amount of action, orientation to children); others may be subtler (depth of character development, quirkiness); others are fully uninterpretable. Example interpretable factors from the lecture's 2-D illustration:
+\begin{itemize}
+    \item Gender orientation (male $\leftrightarrow$ female audience).
+    \item Tone (serious $\leftrightarrow$ escapist).
+\end{itemize}
+In practice most factors have \textbf{no explicit meaning} the algorithm can name; the model just learns whatever directions best explain the observed ratings. Hence the word ``latent.'' For a user $u$, each factor coordinate measures how much $u$ likes items that score high on the corresponding item factor, and the user--item dot product measures their overall compatibility.
+
+\subsection{Dot-Product Rating Rule}
+For user $u$ with latent vector $\mathbf{p}_u \in \mathbb{R}^K$ and item $i$ with latent vector $\mathbf{q}_i \in \mathbb{R}^K$, the predicted rating is
+\begin{equation}
+    \hat{r}_{ui} \;=\; \mathbf{p}_u^{\top} \mathbf{q}_i \;=\; \sum_{k=1}^{K} p_{uk}\, q_{ik}.
+\end{equation}
+
+\textbf{Intuition via a 2-D toy example:}
+\begin{center}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & $\mathbf{p}_u$ & $\mathbf{q}_i$ \\
+\midrule
+Aligned      & $(1,\ -1)$ & $(1,\ -1)$ \\
+Opposite     & $(1,\ -1)$ & $(-1,\ \phantom{-}1)$ \\
+Orthogonal   & $(1,\ -1)$ & $(1,\ \phantom{-}1)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The aligned pair yields $\mathbf{p}_u^\top \mathbf{q}_i = 2$ (strong recommendation); the opposite pair yields $-2$ (anti-recommendation); the orthogonal pair yields $0$ (neutral).
+
+\subsection{Geometric Picture}
+In a 2-D latent space, both users and items are plotted as points. To recommend for user \emph{Dave}, locate Dave's point and return the items nearest to him (largest dot product, i.e., shortest angular distance). A user near \emph{The Lion King} will be recommended \emph{The Lion King}, not \emph{The Princess Diaries}, because the first item's latent vector aligns with the user's and the second does not.
+
+
+%------------------------------------------------------------
+\section{From SVD to Matrix Factorization}
+%------------------------------------------------------------
+
+\subsection{Motivation: Rank-$K$ Approximation}
+A full ratings matrix $R \in \mathbb{R}^{M \times N}$ with $M =$ users and $N =$ items is enormous --- at industrial scale, $M \approx 10^{9}$ and $N \approx 10^{9}$. Storing or transmitting $R$ directly is infeasible.
+
+The SVD insight from 1990s image compression: any $M \times N$ matrix can be approximated by the product of two much smaller matrices,
+\begin{equation}
+    R_{M \times N} \;\approx\; P_{M \times K} \; Q_{K \times N},
+\end{equation}
+where $K \ll \min(M,N)$. The approximation has rank $K$, and increasing $K$ yields better fidelity at the cost of more storage.
+
+\subsection{Compression Example}
+For an $M = N = 1000$ image:
+\begin{itemize}
+    \item Full storage: $M \cdot N = 10^{6}$ entries.
+    \item Rank-2 approximation: $2M + 2N = 4000$ entries.
+    \item Compression ratio: $\approx 250\times$ smaller.
+\end{itemize}
+
+\subsection{Explicit vs.\ Implicit Feedback}
+Matrix factorization is flexible about the kind of interaction data it ingests:
+\begin{itemize}
+    \item \textbf{Explicit feedback} --- users directly state preferences (Netflix star ratings, TiVo thumbs up/down). The resulting $R$ is \textbf{sparse} because any single user rates only a tiny slice of the catalog.
+    \item \textbf{Implicit feedback} --- preferences are inferred from behavior (purchase history, browsing, search patterns, clicks, even mouse movements). Implicit matrices are usually \textbf{dense} because ``no action'' is itself a (weak) signal.
+\end{itemize}
+This homework and the Yahoo Music project use explicit ratings, so the focus is the sparse case.
+
+\subsection{Ratings Matrices Are Overwhelmingly Sparse}
+Unlike an image, the explicit-feedback ratings matrix $R$ is almost entirely \textbf{empty} --- a typical user has rated only a few dozen items out of millions. Zero entries in $R$ represent ``no observation,'' \emph{not} ``rated zero.''
+
+\textbf{Why conventional SVD fails here:} SVD is undefined for matrices with missing entries. Earlier systems tried to \emph{impute} the missing values to make $R$ dense, but imputation is expensive and inaccurate imputation distorts the factors. The modern answer is to \textbf{model only the observed entries directly} and control overfitting with regularization.
+
+\textbf{Consequence for matrix factorization:}
+\begin{itemize}
+    \item Only \emph{observed} (nonzero) entries enter the loss function.
+    \item The learned $P$ and $Q$ can then be multiplied to supply predictions for the missing entries --- which is exactly the recommendation output.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Matrix Factorization Algorithm (Homework 7)}
+%------------------------------------------------------------
+
+\subsection{Problem Statement}
+Given the observed ratings $R \in \mathbb{R}^{M \times N}$ and a chosen rank $K$, find
+\[
+    P \in \mathbb{R}^{M \times K}, \qquad Q \in \mathbb{R}^{K \times N}
+\]
+such that $P Q$ closely matches $R$ on the observed entries while remaining smooth elsewhere.
+
+\subsection{Regularized Loss Function}
+Let $\mathbf{p}_u$ denote row $u$ of $P$ and $\mathbf{q}_i$ denote column $i$ of $Q$. The loss summed over observed entries is
+\begin{equation}
+    \mathcal{L} \;=\; \sum_{(u,i)\,\in\,\text{obs}}
+        \Big( r_{ui} - \mathbf{p}_u^{\top}\mathbf{q}_i \Big)^{2}
+        \;+\; \frac{\beta}{2}\,\Big( \lVert \mathbf{p}_u \rVert^{2} + \lVert \mathbf{q}_i \rVert^{2} \Big).
+\end{equation}
+The first term penalizes reconstruction error; the second (regularization) term penalizes large factor magnitudes so that the model cannot overfit the observed entries.
+
+\subsection{Stochastic Gradient Descent Updates}
+For each observed entry, compute the error
+\begin{equation}
+    e_{ui} \;=\; r_{ui} - \mathbf{p}_u^{\top}\mathbf{q}_i
+\end{equation}
+and apply the coupled updates
+\begin{align}
+    p_{uk} &\leftarrow p_{uk} + \alpha\,\bigl(2\,e_{ui}\,q_{ik} - \beta\,p_{uk}\bigr),\\
+    q_{ik} &\leftarrow q_{ik} + \alpha\,\bigl(2\,e_{ui}\,p_{uk} - \beta\,q_{ik}\bigr),
+\end{align}
+where $\alpha$ is the learning rate and $\beta$ is the regularization strength.
+
+\subsection{Numerical Walk-Through from Lecture}
+Suppose $K = 2$, $\alpha = 0.01$, and we observe $r_{11} = 100$. With random initialization
+\[
+    \mathbf{p}_1 = (10,\ 9), \qquad \mathbf{q}_1 = (7,\ 8),
+\]
+the prediction is $10\cdot 7 + 9\cdot 8 = 142$, so the error is $e_{11} = 100 - 142 = -42$. The update for $\mathbf{q}_1$ is
+\[
+    \mathbf{q}_1 \;\leftarrow\; \mathbf{q}_1 + \alpha \cdot 2 e_{11}\cdot \mathbf{p}_1,
+\]
+which nudges $(7,8)$ in the direction that reduces the reconstruction error. The matching update runs simultaneously for $\mathbf{p}_1$. Repeating for every observed entry constitutes one epoch; the algorithm loops for \texttt{steps} epochs (or until the loss drops below a threshold).
+
+\subsection{Important Implementation Rule}
+\textbf{Zero entries are skipped} in both the loss and the updates. In MATLAB a rating of 0 is used as a sentinel for ``missing.'' Failing to skip zeros will bias the factors toward predicting low ratings everywhere.
+
+
+%------------------------------------------------------------
+\section{Alternative Learning Algorithm: Alternating Least Squares}
+%------------------------------------------------------------
+
+Equation (1) is \emph{not convex} in $P$ and $Q$ jointly, but if one of the two matrices is held fixed the remaining subproblem is a standard quadratic least-squares problem. \textbf{Alternating Least Squares (ALS)} exploits this:
+
+\begin{enumerate}
+    \item Fix $P$; solve for each column of $Q$ independently as a ridge regression.
+    \item Fix $Q$; solve for each row of $P$ independently as a ridge regression.
+    \item Repeat until convergence. Each step is guaranteed to decrease the loss.
+\end{enumerate}
+
+\subsection{When to Prefer ALS Over SGD}
+SGD is generally simpler and faster, but ALS wins in two cases:
+\begin{itemize}
+    \item \textbf{Parallelization.} Because each $\mathbf{q}_i$ (resp.\ $\mathbf{p}_u$) update is independent of the other items (resp.\ users), ALS parallelizes trivially across many machines. This is exactly why \textbf{PySpark's \texttt{mllib.recommendation.ALS}} --- the algorithm that will drive next week's lecture --- uses ALS rather than SGD.
+    \item \textbf{Implicit-feedback data.} Implicit matrices are dense, so SGD would have to loop over \emph{every} cell; ALS solves each user or item slice in closed form and handles the density efficiently.
+\end{itemize}
+
+
+%------------------------------------------------------------
+\section{Adding Biases}
+%------------------------------------------------------------
+
+\subsection{Why Plain Dot Products Are Not Enough}
+Much of the variation in observed ratings has nothing to do with user--item compatibility. Some users rate everything generously; others are critical. Some items are universally loved; others are universally disliked. These are \textbf{bias} effects, and attributing them to the latent factors wastes representational capacity.
+
+\subsection{Bias-Augmented Prediction}
+Introduce a global mean $\mu$, a per-user bias $b_u$, and a per-item bias $b_i$. The predicted rating becomes
+\begin{equation}
+    \hat{r}_{ui} \;=\; \mu \;+\; b_u \;+\; b_i \;+\; \mathbf{p}_u^{\top}\mathbf{q}_i.
+\end{equation}
+
+\textbf{Example from the slides.} Suppose the global average movie rating is $\mu = 3.7$ stars. \emph{Titanic} is half a star above average ($b_i = +0.5$). Joe is a critical user who rates 0.3 stars below average ($b_u = -0.3$). A first-order estimate of Joe's rating for \emph{Titanic} is
+\[
+    3.7 + 0.5 - 0.3 \;=\; 3.9 \text{ stars.}
+\]
+
+\subsection{Full Regularized Loss with Biases}
+The biased model is learned by minimizing
+\begin{equation}
+    \sum_{(u,i)\,\in\,\text{obs}} \bigl( r_{ui} - \mu - b_u - b_i - \mathbf{p}_u^{\top}\mathbf{q}_i \bigr)^{2}
+    \;+\; \lambda\,\bigl( \lVert \mathbf{p}_u \rVert^{2} + \lVert \mathbf{q}_i \rVert^{2} + b_u^{2} + b_i^{2} \bigr).
+\end{equation}
+The biases typically absorb a large share of the observed signal, so modelling them carefully is more important than adding more latent factors. The plain dot-product model in Homework 7 is a simplification --- it omits the bias terms so the algebra stays transparent.
+
+
+%------------------------------------------------------------
+\section{Homework 7 Deliverable}
+%------------------------------------------------------------
+
+The assignment is to implement a MATLAB function
+\begin{verbatim}
+[nP, nQ] = matrix_factorization(R, P, Q, K, steps, alpha, beta)
+\end{verbatim}
+that realizes the SGD procedure above, and to verify it on the sample rating matrices provided in \texttt{testMatrixFactor.m}.
+
+\subsection{Test Case 1 --- $5 \times 4$ Matrix, $K=2$}
+The primary test mirrors the instructions: a $5 \times 4$ rating matrix, rank $K = 2$, \texttt{steps = 5000}, $\alpha = 0.0002$, $\beta = 0.02$. A correct implementation reconstructs the observed entries to within a fraction of a rating unit (the slide deck shows a reference $\hat{R}$ with entries $5.0272,\ 2.8334,\ \ldots,\ 4.0341$, which agrees to about two decimals with the observed entries of $R$).
+
+\subsection{Test Case 2 --- $6 \times 5$ Matrix, $K=3$}
+The same script runs a second, larger stress test: a $6 \times 5$ matrix with rank $K = 3$ and \texttt{steps = 10000} (same $\alpha$ and $\beta$). The larger rank and longer run are needed because the higher-dimensional matrix has more structure to absorb. Passing both cases demonstrates that the implementation is generic and not tuned to a single input.
+
+Next week the same factorization logic will be re-implemented in \textbf{PySpark} --- specifically \texttt{pyspark.ml.recommendation.ALS} --- and used as the core algorithm for an updated Yahoo Music recommendation submission. The switch from SGD to ALS is driven by the parallelization argument in Section~7.
+
+
+%------------------------------------------------------------
+\section{Key Formulas Reference}
+%------------------------------------------------------------
+
+\begin{description}
+    \item[Predicted rating (plain):] \( \hat{r}_{ui} = \mathbf{p}_u^{\top}\mathbf{q}_i = \sum_{k=1}^{K} p_{uk}\, q_{ik} \)
+    \item[Predicted rating (biased):] \( \hat{r}_{ui} = \mu + b_u + b_i + \mathbf{p}_u^{\top}\mathbf{q}_i \)
+    \item[Observed error:] \( e_{ui} = r_{ui} - \mathbf{p}_u^{\top}\mathbf{q}_i \)
+    \item[Regularized loss:] \( \mathcal{L} = \sum_{(u,i)\in\text{obs}} e_{ui}^{2} + \tfrac{\beta}{2}\bigl(\lVert\mathbf{p}_u\rVert^{2} + \lVert\mathbf{q}_i\rVert^{2}\bigr) \)
+    \item[SGD update (user):] \( p_{uk} \leftarrow p_{uk} + \alpha\bigl(2 e_{ui} q_{ik} - \beta p_{uk}\bigr) \)
+    \item[SGD update (item):] \( q_{ik} \leftarrow q_{ik} + \alpha\bigl(2 e_{ui} p_{uk} - \beta q_{ik}\bigr) \)
+    \item[Rank-$K$ approximation:] \( R_{M\times N} \approx P_{M\times K}\,Q_{K\times N}, \quad K \ll \min(M,N) \)
+\end{description}
+
+
+\end{document}

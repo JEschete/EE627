@@ -1,0 +1,53 @@
+submission_hw8_pyspark_mf.csv
+Complete · now
+
+0.636
+
+submission_hw8_hybrid.csv
+Complete · 14s ago
+
+0.871
+
+submission_hw8_pyspark_mf.csv
+Error · 23s ago
+
+submission_hw8_pyspark_mf.csv
+
+Error · 37s ago
+
+Evaluation Exception: Submission must have 120000 rows
+
+Uploaded files
+
+submission_hw8_pyspark_mf.csv
+
+(1 MiB)
+
+submission_hw8_hybrid.csv
+Complete · 35s ago
+
+0.688
+
+Submission and Description
+
+Public Score
+
+Select
+
+    submission_hw8_hybrid.csv
+    Complete · now
+
+    0.875
+
+submission_hw8_hybrid.csv
+Complete · now
+
+0.875
+submission_hw8_hybrid_gated.csv
+Complete · 25s ago
+
+0.513
+submission_hw8_hybrid.csv
+Complete · 28m ago
+
+0.875

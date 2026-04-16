@@ -1,0 +1,223 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\lstset{
+	language=Matlab,
+	basicstyle=\ttfamily\footnotesize,
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	breaklines=true,
+	breakatwhitespace=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	showstringspaces=false,
+	tabsize=4,
+	captionpos=b,
+	keywordstyle=\color{blue!70},
+	stringstyle=\color{red!60},
+	commentstyle=\color{green!50!black}
+}
+
+\title{\textbf{EE627 Homework 7\\ Matrix Factorization}}
+\author{\textbf{Jude Eschete}}
+\date{\today}
+
+\begin{document}
+
+	\maketitle
+
+	\newpage
+	%======================================================================
+	\section*{Instruction Checklist}
+	%======================================================================
+
+	\begin{enumerate}
+		\item[\checkmark] Define a MATLAB function \texttt{matrix\_factorization(R,P,Q,K,steps,alpha,beta)} \dotfill Section~\ref{sec:function}
+		\item[\checkmark] Use the provided sample code to test whether the function works \dotfill Section~\ref{sec:test}
+		\item[\checkmark] Verify that $P\cdot Q$ reconstructs the observed entries of $R$ \dotfill Section~\ref{sec:results}
+	\end{enumerate}
+
+	\newpage
+	%======================================================================
+	\section{Introduction}
+	%======================================================================
+
+	The goal of this assignment is to implement a matrix factorization routine from scratch in MATLAB and verify that it can reconstruct a rating matrix $R$ through the product of two low-rank factor matrices $P$ and $Q$. Matrix factorization is a core technique in collaborative-filtering recommender systems: given a sparse user--item rating matrix with many missing entries (zeros in this formulation), we learn latent user and item factor vectors so that $R \approx P\,Q$ on the observed entries, and the same product supplies predictions for the unobserved entries.
+
+	\newpage
+	%======================================================================
+	\section{The \texttt{matrix\_factorization} Function}\label{sec:function}
+	%======================================================================
+
+	The function minimizes the regularized squared-error loss over the observed entries of $R$:
+	\begin{equation}
+		E \;=\; \sum_{(i,j)\,\in\,\text{obs}} \Big( R_{ij} - \mathbf{p}_i^{\top}\mathbf{q}_j \Big)^{2}
+		\;+\; \frac{\beta}{2}\,\Big( \lVert \mathbf{p}_i \rVert^{2} + \lVert \mathbf{q}_j \rVert^{2} \Big),
+	\end{equation}
+	where $\mathbf{p}_i$ is the $i$-th row of $P$ and $\mathbf{q}_j$ is the $j$-th column of $Q$. Missing entries (encoded as zeros in $R$) are skipped so they do not bias the fit.
+
+	For each observed entry the error is
+	\begin{equation}
+		e_{ij} \;=\; R_{ij} - \mathbf{p}_i^{\top}\mathbf{q}_j,
+	\end{equation}
+	and stochastic gradient descent applies the coupled updates
+	\begin{align}
+		P_{ik} &\leftarrow P_{ik} + \alpha\,\bigl(2\,e_{ij}\,Q_{kj} - \beta\,P_{ik}\bigr), \\
+		Q_{kj} &\leftarrow Q_{kj} + \alpha\,\bigl(2\,e_{ij}\,P_{ik} - \beta\,Q_{kj}\bigr).
+	\end{align}
+
+	After each full pass over the matrix, the total regularized error is recomputed; if it falls below $10^{-3}$ the loop terminates early, otherwise the routine runs for the full \texttt{steps} iterations.
+
+	\newpage
+	%======================================================================
+	\section{Test Setup}\label{sec:test}
+	%======================================================================
+
+	The sample driver from the instructions was used with only one modification: \texttt{rng(0)} was called before \texttt{rand} so the initialization is reproducible. The test rating matrix is
+	\begin{equation}
+		R \;=\;
+		\begin{bmatrix}
+			5 & 3 & 0 & 1 \\
+			4 & 0 & 0 & 1 \\
+			1 & 1 & 0 & 5 \\
+			1 & 0 & 0 & 4 \\
+			0 & 1 & 5 & 4
+		\end{bmatrix}
+	\end{equation}
+	where the zeros represent unobserved ratings. The hyperparameters were $K = 2$ (number of latent factors), $\text{steps} = 5000$, $\alpha = 0.0002$ (learning rate), and $\beta = 0.02$ (L2 regularization). The initial $P\in\mathbb{R}^{5\times 2}$ and $Q\in\mathbb{R}^{2\times 4}$ were drawn from $\mathrm{Uniform}(0,1)$.
+
+	\newpage
+	%======================================================================
+	\section{Results}\label{sec:results}
+	%======================================================================
+
+	After 5000 iterations the learned factors are
+	\begin{equation}
+		P \;\approx\;
+		\begin{bmatrix}
+			2.4251 & 0.4403 \\
+			1.9035 & 0.4324 \\
+			0.3632 & 2.0220 \\
+			0.3238 & 1.6193 \\
+			0.9410 & 1.6514
+		\end{bmatrix},
+		\qquad
+		Q \;\approx\;
+		\begin{bmatrix}
+			2.0339 & 1.1597 & 2.0675 & -0.0354 \\
+			0.1789 & 0.1559 & 1.7776 & \phantom{-}2.4615
+		\end{bmatrix}.
+	\end{equation}
+
+	Their product reconstructs the rating matrix as
+	\begin{equation}
+		\hat{R} \;=\; P\,Q \;\approx\;
+		\begin{bmatrix}
+			5.0112 & 2.8812 & 5.7966 & 0.9979 \\
+			3.9490 & 2.2750 & 4.7041 & 0.9969 \\
+			1.1005 & 0.7364 & 4.3451 & 4.9641 \\
+			0.9484 & 0.6280 & 3.5480 & 3.9745 \\
+			2.2093 & 1.3487 & 4.8810 & 4.0316
+		\end{bmatrix}.
+	\end{equation}
+
+	\begin{table}[H]
+		\centering
+		\caption{Observed entries of $R$ versus the reconstructed $\hat{R}$.}\label{tab:obs}
+		\begin{tabular}{cccc}
+			\toprule
+			$(i,j)$ & $R_{ij}$ & $\hat{R}_{ij}$ & $|R_{ij} - \hat{R}_{ij}|$ \\
+			\midrule
+			(1,1) & 5 & 5.0112 & 0.0112 \\
+			(1,2) & 3 & 2.8812 & 0.1188 \\
+			(1,4) & 1 & 0.9979 & 0.0021 \\
+			(2,1) & 4 & 3.9490 & 0.0510 \\
+			(2,4) & 1 & 0.9969 & 0.0031 \\
+			(3,1) & 1 & 1.1005 & 0.1005 \\
+			(3,2) & 1 & 0.7364 & 0.2636 \\
+			(3,4) & 5 & 4.9641 & 0.0359 \\
+			(4,1) & 1 & 0.9484 & 0.0516 \\
+			(4,4) & 4 & 3.9745 & 0.0255 \\
+			(5,2) & 1 & 1.3487 & 0.3487 \\
+			(5,3) & 5 & 4.8810 & 0.1190 \\
+			(5,4) & 4 & 4.0316 & 0.0316 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	The root-mean-square error on the 13 observed entries is
+	\begin{equation}
+		\text{RMSE} \;=\; \sqrt{\frac{1}{13}\sum_{(i,j)\,\in\,\text{obs}} \bigl( R_{ij} - \hat{R}_{ij} \bigr)^{2}} \;\approx\; 0.1353,
+	\end{equation}
+	confirming that the function successfully recovers the observed ratings to within a small fraction of a rating unit.
+
+	\subsection{Predictions for Missing Entries}
+
+	Because the factorization is dense, $\hat{R}$ also supplies predictions for the zero entries of $R$:
+
+	\begin{table}[H]
+		\centering
+		\caption{Predicted ratings for the missing (zero) entries of $R$.}\label{tab:miss}
+		\begin{tabular}{cc}
+			\toprule
+			$(i,j)$ & $\hat{R}_{ij}$ \\
+			\midrule
+			(5,1) & 2.2093 \\
+			(2,2) & 2.2750 \\
+			(4,2) & 0.6280 \\
+			(1,3) & 5.7966 \\
+			(2,3) & 4.7041 \\
+			(3,3) & 4.3451 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	These predictions are qualitatively reasonable. For example, users 1 and 2 rate items 1 and 4 almost identically (5/1 and 4/1), so the model predicts similar item-3 ratings for them ($\approx 5.80$ and $\approx 4.70$). Users 3, 4, and 5 show the opposite preference pattern (low on item 1, high on item 4), and the model predicts high item-3 scores for all three ($\approx 4.35$, $3.55$, and $4.88$), consistent with the clustering implied by the two latent factors.
+
+	\newpage
+	%======================================================================
+	\section{Conclusion}
+	%======================================================================
+
+	\begin{enumerate}
+		\item The user-defined \texttt{matrix\_factorization} function correctly implements the regularized SGD update rules and, using only $K = 2$ latent factors, reconstructs every observed entry of the test matrix with an RMSE of $0.135$.
+
+		\item The predictions for the missing entries are consistent with the latent structure of the data: users who rate observed items similarly receive similar predicted ratings for unobserved items.
+
+		\item This small example demonstrates the key appeal of matrix factorization for recommender systems: a rank-$K$ approximation simultaneously fits the observed ratings and supplies principled predictions for the missing ones, all without any explicit feature engineering.
+	\end{enumerate}
+
+	\newpage
+	%======================================================================
+	\section{Appendix: MATLAB Code}
+	%======================================================================
+
+	\lstinputlisting[caption={matrix\_factorization.m --- User-defined factorization routine},label={lst:mf}]{matrix_factorization.m}
+
+	\newpage
+	\vspace{1em}
+
+	\lstinputlisting[caption={EE627\_HW7\_Eschete.m --- Driver script},label={lst:driver}]{EE627_HW7_Eschete.m}
+
+	\newpage
+	%======================================================================
+	\section{Appendix: Console Output}
+	%======================================================================
+
+	\lstinputlisting[caption={Results.txt --- MATLAB console output},label={lst:results},language={},keywordstyle=\ttfamily,stringstyle=\ttfamily]{Results.txt}
+
+\end{document}

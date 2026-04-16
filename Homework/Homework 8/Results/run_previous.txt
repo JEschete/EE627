@@ -1,0 +1,67 @@
+============================================================
+  EE627A Homework 8 - PySpark Matrix Factorization
+  Jude Eschete
+============================================================
+[1/4] Loading training data ...
+       49,204 users, 12,403,575 ratings
+[2/4] Loading track metadata ...
+       224,041 tracks
+[3/4] Loading album metadata ...
+       52,829 albums
+[4/4] Loading test data ...
+       20,000 test users, 120,000 candidates
+
+============================================================
+  ENRICHING TRACKS
+============================================================
+  Album Enrichment: 8,134 artists filled, 62,060 tracks got new genres
+
+============================================================
+  VALIDATION & GRID SEARCH
+============================================================
+  Validation: 2,562 users, 15,372 candidates
+
+  v2 baseline val AUC: 0.6692
+
+============================================================
+  PYSPARK ALS TRAINING  (Week 11 sample code pattern)
+============================================================
+  rank=5  maxIter=5  regParam=0.01
+  Reading d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Data\trainItem.data
+  Reading d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Data\testItem.data
+  Spark 4.1.1 ready
+  Training rows: 12,403,575
+  Holdout RMSE = 36.2678   MSE = 1315.3549
+  Refitting on full training set ...
+  Testing rows: 120,000
+  Collecting ALS predictions ...
+  Training mean rating = 49.771
+  Test pairs: 120,000   ALS predictions: 119,974   cold-start filled with global mean: 26
+  Train predictions: 12,403,575
+  Writing pure-MF submission to d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\submission_hw8_pyspark_mf.csv
+    120,000 rows written (expected 120,000)
+
+  v2+MF tiebreaker val AUC: 0.6920  (v2 baseline: 0.6692)
+
+============================================================
+  GENERATING HYBRID SUBMISSION
+============================================================
+
+>>> Running v2 + MF tiebreaker (epsilon=0.001) ...
+    120,000 predictions (60,000 rec, 60,000 don't)
+    Saved -> d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\submission_hw8_hybrid.csv
+
+============================================================
+  RESULTS
+============================================================
+  v2 baseline val AUC:      0.6692
+  v2+MF tiebreaker val AUC: 0.6920
+  ALS holdout RMSE:         36.2678   MSE: 1315.3549
+
+  Files to upload for HW8 Part 1:
+    submission_hw8_pyspark_mf.csv  <-- pure PySpark MF (primary)
+    submission_hw8_hybrid.csv      <-- v2 + MF tiebreaker (bonus)
+
+  Full run log written to: d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Results.txt
+
+Done.

@@ -1,0 +1,326 @@
+Rensheng Wang
+Rensheng Wang
+typically, when you have an assignment, right, so you are expecting to, to make solution, make submission, then finish. But this is a very special, it's, you know, you will expect to have consistent, continuous, a series of
+or number of submissions, you know, we have a number of trials, and you even can try a lot of unintentional algorithms. You know, you can make a lot of unintentional trials, because we don't expect one single
+ultimately, solution. It's not like, you know, a lot of questions, you know the ground truth answer, you only have one answer, but for this, you have many. You can…
+Open your mind, you know, you can try whatever you want, because, you know, this is the…
+amazing about the data scientists, you know. You don't have to explain why, but if it works, is it getting better, then that's it. So that's why sometimes you don't have to be…
+theoretically think about too much. You just, keep trying, you know. So that's why we have the open cargo web page. You keep trying something. You can try as crazy as you can, you know.
+That will help you, because you may wonder, Professor, I tried something, it's very bad. That's great. Why?
+Because even the bad result, we were…
+utilize. We will make use of the bad results out, At the last, session.
+You will understand, you know. So, the problem is, it's not about, I… I only want to keep my best result. No, it's not like that. If you have some bad result.
+That's great, I want to keep it, because sooner or later, you know, at the end of semester, we were talking about what we call the ensemin Master. So that one, we're trying to…
+Incorporate all the good one, bad one, medium performance one, you know.
+And so that's very easy to get misunderstood. Because if you get them a bad one, you say, oh, professor, let me hide it. Don't, don't show it, right? I just deleted it. No, no, no, no. Keep trying, you know.
+And that's the very unique experience. I used to make a similar mistake before, you know. So, that's why you don't have to wait for professors' advice. You can keep trying to do a lot of things. Of course, I will gradually give you some guidance to do this.
+it's just like mining, you know, you keep refined. You don't have to wait for my direction, you know. For example, someone, you know, you have one submission, two submissions, they make a mixture, half from the
+You know, the first submission, half from the second submission in there.
+combine together and make a new submission, that's great! And, you know, you can do whatever you want.
+Because if finally you end with some good result, you know, then that's great. If it's not good, that's also good, you know.
+Because we were using it as everything. Doesn't matter how good, how bad. At the end of semester, we will tell you why we need so many diversified, approaches in this recommendation world.
+Okay.
+So, that's… I… I keep, you know, emphasizing, push everybody, try it. Doesn't matter how good, how bad, you know, you need to try something.
+And, does anyone have any specific question or doubt about the, cargo?
+website that…
+Great. Okay. We will move on, I think, let me… trying to… So…
+One second, you know, that's weird.
+Okay, let me first try to, share something.
+Okay, I just shared you with the whiteboard here. Let me try to explain what we have here, right? I think the last lecture, we talked about,
+We call the matrix fragmentation, right?
+So, this is a very revolutionary Insight for this recommendation.
+That's, like, you know, for users, user one.
+User 2, every call, every row is a different user. User 3?
+And so on and so forth.
+And user M, right? And that's the number of user. And also, you have a number of items.
+you have… Ayton.
+One… Item 2?
+I didn't N.
+I use an item, the reason is, I try to make this generalized.
+If you're talking about the music recommendation, the item would be the track.
+If you're talking about the video recommendation, you're talking about the movie. If you're talking about the web page browsing, maybe the item is the web page. And if you're talking about the commercial, e-commercial shopping, the item may be
+the shopping list, the item, right? Just like Amazon. So you can be generalized for any environments.
+And as I explained, right, this is the cash cow, you know, for most of the big tech companies. A lot of industry service people, they're consistently provided this by the stronger engine behind the recommendation.
+And, more or less, The physical world around you is driven by recommendation.
+That's what I emphasized. For example.
+I know you are… maybe your name is Alex. Do you know why you… you are Alex? Because the recommendation makes… make how Alex looks like.
+Because what you will listen, what you will browser, what you will know is based on what we provided in your cell phone.
+Right? The cell phone is driven by recommendation.
+In other words.
+you may have a lot of information overwhelming, but why you only say this instead of others? Because recommendation decided, that's what I want you only want to see. That's what I don't want you to see.
+Okay? So, for this recommendation, they gradually collecting users and items. You will have very smart inactions. This inaction I call the readings.
+But if you say, oh, what happens if I don't have reading? Because it's easy to understand that you have reading for music, for video. What happens? In some situations, maybe don't have these readings, right?
+That's fine, you know. If you have some situation, you don't have a specific reading, but you have inactions, right? Just like how many times you clicked, how much time you watched, right? How many, you know, online
+involvements, right? Those kind of things, it can be identically traded like what?
+Greetings.
+Because the basic logical behind it, if you are involving more, that means you… you lack it more. That's my, you know, very simple logic.
+So, you can think about the reading.
+to… qualitatively.
+describe it as some inactions, right? If you read more, you spend more time, you make more inactions, all you can think about is just, like, you have a higher rating.
+So, you will have a very sparse… just like I have 1 million items, I have 1 billion of users, so 1 billion by 1 million is a huge matrix, right? Nobody can store it. Everyone, you cannot browse, cannot experience all of them. You may have very sparse numbers.
+Just like if you have a shopping list, you may have 100 million items in Amazon, and of course, nobody can shop in every item, right? So you may only have very limited, okay?
+So, you may have maybe 10?
+Here.
+And another user maybe has 5 somewhere, right?
+Something like that. So you have very sparse midges. And these metric, you are trying to decompose to another, what we call the latent factor Michigan.
+So, you'll still have this M, number of users. You have K, we call the K, latent factors. Each user can be described by…
+K numbers.
+each user have K numbers. And the same thing for items, you also…
+You have each item described by our by CAFE…
+factors, right? You can delete in space factors. So, you also have N, It is.
+So you're not trying to approximate, of course, they're not equal.
+So, for example, I, for this user, I only have this 4, so what I want to do is, I want to tune this latent factor matrix here.
+I want you… You know?
+To make, for example, the first row.
+The first column, when they multiply together, should be… equals the first… Radiance scores here.
+And if I have the… First of all.
+Second column, so I'll repeat this one, right?
+So that would be the second score here.
+So I will do something like this, I will validate, right? So that's how you tune this.
+latent factor vectors from user, from items.
+You want to do this.
+So, trying to use orderly to release the square, right? For the last week, and we'll talk about that, you know.
+for, that's address, you know, you keep updating, keep updating, you should get this midges from, we call the QMichcus.
+We call the P. Michigan.
+Wines from user, wine is from item. The multiple together should be the red images are, the huge images.
+And in the last homework, right, because we conceptually explained this algorithm. We conceptually tell you how to do this kind of alternatively, these squares.
+And we ask you to implement this, use a very small sample in MetaLab or in Python, whatever, you know. We describe this kind of for,
+Procedures to implement.
+And this… Lecture, we are trying to explain, you know, in the industry.
+We have a big data platform. That means we are not interested in a few thousand, a few hundred, this kind of data set. We are interested about the millions, billions.
+But if you have millions and billions, you know, nobody will construct a matrix, like what we did in the homework, right? Because in the homework, we have some construction example data, or we have 5 at 4, 1…
+And a 2, 5, you know, this kind of a sample sparse matrix, right? Make a…
+Michigan. So, in other words, idea is okay, but engineering is not feasible.
+If you have millions of users, minutes of items, you cannot do this way.
+So, That's where we have this kind of full, we call the Hadoop.
+Cluster.
+And we have this kind of spark.
+Implementation.
+Hadoop… Hadoop is a big data platform. It's a… Dominated by…
+Google. Google, you have ocean of the search.
+information, right? Ocean of the, you know, data structure. So they are using the…
+Hadoop data friend… data file system to make… make sure you have almost infinite possibility to expand the data.
+storage space. And for sorting retrial.
+And the summary over this ocean of the data.
+Very efficient, the data file system. Based on Hadoop, you have another implementation level, you have Spark.
+Spark trying to make sure the implementation… make the native Hadoop implementation is, like, 100 times faster, you know. So in order to make the Spark.
+works well. You have many useful designs for Spark.
+you know, Smarties also have a specific,
+Language, program language, just like,
+Python, Java, this kind of language, right? But, you know.
+Because Spark, you can think about it, it's a pure language for big data processing.
+And not too many people have the chance to access bigger data. Not too many people are good at learning some new language, because we really have too many languages, right? Alphabets from A to Z, right? Almost every letter has a
+language. A, B, C, D, E, F, G, whatever, right? All have R language, right? We know C language, right? We know G language, right? We know R language, right? We know S language, right? There's so many languages. We even don't have enough
+lenders to…
+to name this kind of language. If I'm telling you, oh, you need to learn some Spark language, you know.
+Right?
+people were reluctant to learn a brand new language. So, in order to make a spark, it's more penetrated to regular people's working environment. They have some API, you know, you can think about, you know, you have some
+Specific version for implementations.
+So you have the Pi Spark.
+So that means the Python version spark.
+You have, you know, the… the Java version, Spark.
+You even have the metadata app version, Spark.
+So, here, because Python is the most popular version, right, for most of the people, you know, we were introduced to PySpark in this lecture.
+And, you don't have to be scaled by the PySpark, because you can think about it, you just provide some new API, new library on their Python environment, which can take advantage of the Spark data structure. In other words.
+In our lecture, we are trying to resolve from a conceptually
+major factorization to some engineering level, we are trying to scale by, let's say, 1 minute of time, bigger database.
+What happens, you know?
+So… We are trying to emphasize, a lot of implementation is really based on skill, right?
+When you change the scale, you change the story.
+Okay, so that's what we are trying to work on. We are trying to implement the
+Matrix of faggridation in a much large-scale implementation.
+So, you have… you don't have to worry about how to implement this, right? Because for the… from homework, you know how to implement it in a very small.
+matricus. You can use some for loop. You just scan all the rating scores, you just try this for loop, then you can, sooner or later, you'll get a very decent latent factors representation for all the users, all the items.
+But what we are trying to do in the following is really about the large scale for the industry-level implementation.
+So that's the general introduction.
+And then maybe you're trying to open Sin.
+Okay, so that's the…
+That's the… tutorial for us how to utilize this scandal for PySpark for our final project on Cargo.
+Okay, so what we were trying to do is, we can open this one, and
+Google, you know, account with the call app.
+Let me open my call app… one sec.
+Can you see my screen now?
+Great, okay. So, just like I said, you know, from here.
+you log in to your Google account, so that's how you get online, you know, virtual, cloud environments for, the SpacePark.
+You can open here, you know, you just generate a new, Notebook.
+Okay.
+And from here, you see, You want to connect the wrong time, because here, you have here connected here.
+Let's see, you can connect to the local… One second, let me see…
+Yeah, just connecting.
+And from…
+You generally, the first step, The first sale, you just, Run this.
+You know.
+And also, you need to install this one.
+Yeah, the first one is done, then the second one is
+Let me see what happens.
+C…
+So, let me see… yep.
+And one…
+Okay.
+Let me copy GTML…
+Okay? It advises you to first to check your Java version.
+Okay?
+Let me copy this one.
+Yeah, man.
+Let me stop it, yes.
+Let's go to this one directly here.
+Still has some trouble.
+Check it.
+Let me see, if I change the version, it goes to…
+Let me see… looks like a 3.5 doesn't work. Let me see… This requires…
+So, let's go to… here.
+Okay.
+I'll set up this one… Then we need the… Restart the runtime.
+Restart session.
+Good.
+Yeah, finally, success, right? So I need to delete the previous part, yeah.
+this one.
+Did it, did it.
+Yeah, so for these two, I successfully get this one. Now, that's how we initially, this kind of sparked
+Hi, Spark.
+environments, okay? From then, we can continue to upload the your data.
+Okay.
+Now you say, when you use this one, you can choose File.
+Choose the file system you have, you know.
+And, we can choose the… one second, you know, I can download this, file, and second.
+Let me… Copy this file to…
+Okay, now you can see, I just uploaded this file here.
+Yeah.
+So, this file, you can download it from
+cover web page, sorry, from Canvas web page, okay.
+We can create this for you.
+Because you have a few hundred megahertz, megabytes, so you will take a little bit of time to upload, because you are trying to ask the cloud virtual environment to make a calculation for you, so that will take a little bit of time, okay?
+So, that's the sample code we were trying to, share with you. The first one, after you loaded this file to, Colab.
+on cloud, so you will read the file to get the training, because you already have the, initially, the Spark session, and you are using the read CSV to get the training.
+Data frame. And, after you get the training data frame, you are trying to change the column names, because the data, when you read it, right, they don't have the header, so they don't know what the first column means the second column means, you know.
+And, today it will be very likely that you have some, some number, right? You have the 17825 blah, you know.
+Comma. This is what? This is that. The first column, actually, this is the user ID.
+You know.
+And then you may have 299… 5…
+203. And actually, this is what? This is the item ID.
+So you have data like this, and here you may have 100, you know.
+So that's the rating.
+Essentially, you have a file like this. So every row, you have the user ID, blah blah blah, ID, you have score. So you have some structure like this. Because this structure is more compact compared to the original data frame, right? You see? You have user ID,
+you have an item ID, right? But it's a huge image, right? Because I'm also, they're not empty. You only have a few, not empty here, they're there, right?
+So… this training item data make them very, very efficient storage. I only store…
+this non-zero, non-empty record, right? One specific user, one specific item, what's their score, right? So I don't have to remember one specific user, one specific item is empty, right? I don't look record, you know, for example, for this one, if this user only
+make reading with 2, I only have 2 records. All the others, empty. That's it.
+That's how you can make your data structure much more efficient. This is not the typical rating matrix anymore. Instead, you have some row vector like this.
+So that's how you can read it from the training.
+Okay.
+After this, you do something, you change the name, right? Because you get the first column, you call the column 0, the second column, you call the column 1, the third column 3, so you want to rename this as the user ID, item ID readings.
+Okay. And also, you want to convert the column to prop data types. Three days, when the spark, PySpark reads the data, they don't understand what's the meaning here, right?
+You want to make sure they understand, you know, this stuff, some integer.
+you know, anonymous ID for user, this anonymous index ID for item, this is the floating number for reading scores. So you want to do something like that, and this is the training data you want to show the first five, only a few.
+And all of them… it looks, like, very much like what you're familiar with, the data frame in…
+Pandas, something like this, right? But actually, this is different. Why? Because for Spark.
+You may have billions of trainings of records, so it's not like a conventional data frame you are familiar with, because for data framework, if you're familiar with, what do you have?
+You need to read all the data in a data structure. It's a matrix, right? It's an array. So you want to read everything in the array.
+That's typical non-big data framework, right? You read everything in the array. But for Spark, for Hadoop, that's the disaster, because you typically, you may have trainings
+of records, billions of Chinese records. If you want to find something, you cannot just read everything.
+So that's the very important concept for Hadoop or PageSpark.
+What they are trying to do is like this. They have, they call the lazy.
+Okay? They call the lazy process.
+So, lazy processing means, you know, if you're trying to say.
+You know, read this data, actually, Spark didn't do anything.
+Only when you say, what do you want? If you read the data, what do you want? You say, I want to say the first five. Then, they will do that. They will read the first trunk of data to fetch the first five.
+Because if you… maybe you're trying to say, I want to show the tail of the lust. So that means you don't have to read all of them, because I want to know what the… exactly what you want, right? So the lazy…
+Processing means, you know, before you tell me what's the operation.
+I will not make any action until you tell me what's operation.
+For example, this is the only you want to say, right, you want to say the first 5, then I know what I need to do. For this huge data volume, because in Spark environment, right, you may have a huge data volume.
+Then, if you're saying, oh, only show the first 5, then that's fine, you know, I just take the first
+possible excess unit, then that must contain the 5, right? Top of 5.
+So that's where I need to make action.
+So, I can use a very, you know.
+analog example. For example, if you are telling me, hey.
+Can you go to the library to bring me the Wikipedia dictionary? Let's say, assume the Wikipedia dictionary
+It's huge. You have 1 million pages, so that means you need to carry… you need to read the 1 million page and carry this 1 million pages to your office, right? And after you bring it here, then you say, I only want to read the first page. You see?
+So, the first command, you say, hey, I need to bring this… I need to borrow this Wikipedia dictionary, okay? If you immediately execute this action, what do you mean? You need to bring the whole Wikipedia dictionary to your office, right? It's very intensive. And after you bring it here, the second command is.
+Show me the first page, okay? Oh, let me see only the first page. You see? You make action too fast.
+If you realize I only need the first step, Page, then?
+you have to wait, right? When you say, I need a…
+borrow this kind of Wikipedia dictionary, you have to wait, don't take anything, any action. Then you say, I want to say the first page. Then, until here, you know your specific operations, now you need to go to the library, only bring the first volume, the first
+part of the Wikipedia. You don't have to bring everything.
+Because that's the first volume of this dictionary where contains the first page. Then you will make… you can save a lot of unnecessary efforts, right? So, in PySpark.
+the command is not strictly executed as you indicated. You have a lot of claims, operations, executions, so you have the lazy processing.
+Because they don't want to rush to get something, you know, unnecessary.
+Then the next one is really trying to say you are trying to configure the automated list square models. You just put these kind of parameters here. You want to make an iteration at the most of 5, you want to make a crankcase 5. What's 5? 5 is K, right?
+So that's the… Number of users, blah blah blah.
+And here, number of factors is K. K equals 5, okay? So that means every user, every item, you just use 5 numbers, 5 numerical numbers.
+to describe this, okay, so that's K, means.
+After you set up this one.
+then you can make a, you know, testing. You can make an auditory model fit in with the training, you get a model.
+Right? Your training data. This can be huge. So this part cannot be implemented by the conventional,
+Metric is fragradition.
+So you have to use the PySpark to do this metric feralization. So that means even you have billions of records, you can still do it. It's a very generalized big data processing platform.
+So you get the model, and then you want to read another CS byte, the test items. You get a test item, you want to change the column names, right? You change this user ID, item ID, and ratings.
+And you change the type, data type, and they show the testing data.
+And those testing data and training data are provided
+on Canvas, so you can download it there.
+Then, based on the model you have trended here, you apply it here.
+you want to make, you say your model, you already trained, right? Use all the skills from training, right? You get a model. Now you apply the model here. You transform the testing, get the predictions. So every testing user, every testing item, you should get the prediction scores. You want to show the scores.
+And with your prediction, right?
+you can write your result in the prediction CSV file, and you can put your CS file to Pandest array, or data frame, right?
+and then you stop. That's how you get it. So, the general idea is you just read, Training.
+And you just fade the model, right? You make a… fade this model. So once you get the model, you make a prediction.
+Make a prediction of testing data.
+Yeah, then that's resolved. So you would expect that you can add this, you can get your…
+you know, matrix categorization for your cargo web page data, again, you get a new result. This new result is based on matrix categorization.
+It's not the… what do you try it before, right? It's really about the metric fertilization.
+So that's the very totally different,
+Approach compared to what we did before, right?
+Any questions so far?
+And I want to make some extra comments about this method.
+Let's try and recall what we did, right?
+homework 4, midterm, we walked with Cargo, on the data, right? So, in that…
+framework, remember, we have some impression, right? If you ask me, hey, for Jeff, do you think Jeff will love this track or not? What you did? Typically, you would do… let's look at what Jeff did in history, right? Let's look at Jeff's historical records in the training data. So…
+If I know amenities.
+historic data, typically I don't care, you know, because you're asking the Jeff, right? I only care about Jeff's history. From Jeff's history, I try to make a good guess how likely he will like this track or not, right? That's my recommendation. So, in other words.
+For our heuristic.
+Recommendation, we only use the user by user, right? Individual user, user by user predictions. If I predict the user 1, I use the user 1's history. If I predict the user 2, I use user 2's prediction, history. I don't care about anyone else.
+Right? So that's the heuristic, user by user.
+There's no global view.
+Okay? So the drawback is what?
+What happens if I'm asking, hey, do you think Jeff will like this? I check Jeff's… but Jeff is a new user. It's called start. Nothing, nothing, right? If that happens, you know, I don't have any history for this user, and then I cannot make a prediction directly.
+So that's the drawback for the heuristic method we tried, right, in homework 4.
+Or part of the… the midterm.
+But now, when we use this kind of matriculation, that's a totally different story, because in this prediction method.
+This prediction is based on inaction over all users, all items, right? Let's try to recall what's the matrix of fragration. I have all the users, right?
+all the items, I need to carry that together, right? That's how you have that. All together matrix rating. Make a…
+this kind of matrix fragration. I need to do everything together. I cannot say, oh, for user 1, can I make a user once
+vector, item-wise vector. No, you cannot do that. You have to operate this decommission with all users, all items simultaneous.
+So that's the first time you have inactions Between all of them.
+That means in order to make sure what's Jeff's
+Latent factor. I need to think about all the users.
+Before I determine these specific items, latent factors, I need to look at all the items. Before I determine how the item and the user will be matched, I need to look at all the rating scores. Overall, together, I make this kind of matrix factory
+The conditions.
+So, that's why this message is very critical. It's not because this message is most accurate, it's because that's the totally different
+Prospect, to think about the recommendation.
+In the history, what we did is we trade individual user experience to make individual user prediction.
+In this framework, we make inaction with all users, all agents together.
+So this can greatly improve these interactions.
+I believe this method will be very different in terms of performance to
+Heuristic, just like what we tried in homework before.
+Of course, I'm not saying this one, you will get the better, higher, more accurate result compared to homework 4, but that's the very different
+approach, because the starting point, the motivation are very different. And based on that, you will expect that the result will be…
+Complementally helpful to heuristic measures.
+The point that we are going to introduce this message is
+We are trying to resolve the same datasets by very different…
+You know, motivations, very different approach, very different perspective.
+resolutions.
+So, this is critical, because when you're trying to resolve a specific statistical modeling project, you are trying to think about it in very diversified, you know, directions. So that's where maybe your solution
+Can take care many different, perspectives.
+So that's the catch. And to fully understand the powerful, you know, advantages, we need to wait until the end of the semester session. We will have the assembly method. This insemble message will tell you how those can diversify the considerations where
+offset it.
+They draw back each other to boost the overall performance.
+So that's the motivation here. We are trying to try something different. Otherwise, you know, we are sticking with… we are sticking with the heuristic. All the proposed methods are very similar, so you get a group of methods that are just like a…
+Clustering of the methods. So you are very easily end with some similarities.
+So, that's all for today. Any more pricing here?
+Great, so I will try to post this online, and just let me know, okay, if you have any questions.
+And also.
+Just like I showed you, right? If you are working with the online call lab, on Google, if you have any questions, you can search.
+with a Gemini, and they say any arrow fixed, you know, because I'm not sure which kind of walking environments you have. So that's why every semester, I would try this again, because
+you know, depends on the Java version, the current PySpot version, you know, you always have to chew on a little bit before you can directly run this scenario.
+Okay, that's all. So, next week, we don't have class, this Friday, we don't have class, so I will see you in 2 weeks.
+Okay. Thank you, everyone. Take care.
+Bye, thank you.

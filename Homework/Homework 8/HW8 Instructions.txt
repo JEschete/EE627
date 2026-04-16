@@ -1,0 +1,30 @@
+Part I:
+
+ 
+
+Use the pySpark sample code to implement the matrix factorization with your final project and upload your solution file. 
+
+Upload your Kaggle score screenshots and PySpark code on Canvas for grading. 
+ 
+
+Part II:
+
+1.   For the provided data file "re_u.data", fix the "maxIter=20" and use different "rank" size,  rank=5, 7, 10, 20 and test the MSE values. 
+
+2.   For the fixed "rank=20", and use different maxIter=2, 5,10, 20 and test the MSE values.
+
+3.   For the fixed "rank=20" and "maxIter=20",  take different size of data. i.e.,  2000, 5000, 10000, 20000, 50000, 100000
+
+For example, 
+
+data=sc.textFile("re_u.data")
+
+"data" contains 100000 lines.  
+
+"pData =data.take(2000)"  will only take the first 2000 records. 
+
+ 
+
+For the above 3 different scenarios, from your observation, how MSE is changed related to the parameters?   That is, which factor, the rank size, or the numIterations size,  or the data size will change the MSE value more significantly? 
+
+# You can refer to the sample code on Canvas with the final project

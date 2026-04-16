@@ -1,0 +1,36 @@
+============================================================
+  EE627A Homework 8 - PySpark Matrix Factorization
+  Jude Eschete
+============================================================
+[1/4] Loading training data ...
+       49,204 users, 12,403,575 ratings
+[2/4] Loading track metadata ...
+       224,041 tracks
+[3/4] Loading album metadata ...
+       52,829 albums
+[4/4] Loading test data ...
+       20,000 test users, 120,000 candidates
+[hier] Loading test-track hierarchy ...
+       120,000 test-track hierarchy entries
+
+============================================================
+  ENRICHING TRACKS
+============================================================
+  Album Enrichment: 8,134 artists filled, 62,060 tracks got new genres
+
+============================================================
+  VALIDATION & GRID SEARCH
+============================================================
+  Validation: 2,562 users, 15,372 candidates
+
+  v2 baseline val AUC:              0.6692
+  v2 baseline val AUC (+hierarchy): 0.6692
+
+============================================================
+  PYSPARK ALS TRAINING  (Week 11 sample code pattern)
+============================================================
+  rank=20  maxIter=20  regParam=0.05
+  Reading d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Data\trainItem.data
+  Reading d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 8\Data\testItem.data
+  Spark 4.1.1 ready
+  Training rows: 12,403,575
