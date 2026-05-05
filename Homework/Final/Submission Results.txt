@@ -1,0 +1,41 @@
+submission_final_v5_hybrid_gap10.csv
+Complete · now
+
+0.911
+submission_final_stacked.csv
+Complete · 29s ago
+
+0.918
+
+submission_final_stacked_v2.csv
+Complete · now
+
+0.919
+
+submission_final_stacked_v2_nnls.csv
+Complete · now
+
+0.916
+
+submission_final_stacked_v3_C_ndcg.csv
+Complete · now
+
+0.919
+submission_final_stacked_v3.csv
+Complete · 26s ago
+
+0.919
+
+submission_final_stacked_v4_iicf_only.csv
+Complete · now
+
+0.781
+submission_final_stacked_v4.csv
+Complete · 31s ago
+
+0.922
+
+submission_final_stacked_v5_real.csv
+Complete · 13s ago
+
+0.922

@@ -1,0 +1,774 @@
+
+=================================================================
+  EE627 FINAL PROJECT - Music Recommender
+=================================================================
+  Log file : d:\judee\Google Drive\School\Classes\EE627\Homework\Final\results_final.txt
+  Started  : 2026-05-04 21:13:04
+  Device   : cuda
+  GPU      : NVIDIA GeForce RTX 5080
+
+=================================================================
+  LOADING RAW DATA
+=================================================================
+Loading training data ...
+  49,204 users  |  12,403,575 ratings  [2.9s]
+Loading track metadata ...
+  224,041 tracks  [0.4s]
+Loading album metadata ...
+  52,829 albums  [0.1s]
+Loading test candidates ...
+  20,000 test users  |  120,000 candidates  [0.0s]
+
+=================================================================
+  ENRICHMENT & AUXILIARY STRUCTURES
+=================================================================
+Enriching tracks with album metadata ...
+  Artists filled: 8,134  |  genres added: 119,842  [0.3s]
+Building global item stats ...
+  295,799 items with global stats  [2.7s]
+Building track -> album/artist mappings ...
+  31,141 albums  |  12,291 artists  [0.0s]
+
+=================================================================
+  MATRIX FACTORIZATION (GPU)
+=================================================================
+
+Training MF embeddings (k=64) on cuda ...
+  Loading cached MF embeddings from mf_k64_e40.npz ...
+  Loaded.  User factors: (49204, 64)  |  Item factors: (295799, 64)  [0.1s]
+
+=================================================================
+  BUILDING TRAINING & VALIDATION DATA
+=================================================================
+  Train users: 44,283  |  Val users: 4,921
+
+  Loading cached features from features_g30_seed42_f32.npz ...
+  Train X: (705270, 6, 32)  |  Val X: (25910, 6, 32)  [0.4s]
+
+=================================================================
+  V2 HEURISTIC BASELINE
+=================================================================
+  v2 heuristic val AUC: 0.6675  (expected Kaggle ~0.871)
+
+=================================================================
+  TRAINING RANKING MODEL (BPR)
+=================================================================
+
+Training ranking model on cuda ...
+  Train: 705,270 groups  |  Val: 25,910 groups
+  Loading cached BPR model from bpr_h128-64-32_d0.3_seed42.pt ...
+  Loaded.  Cached val AUC: 0.7424
+
+=================================================================
+  GENERATING SUBMISSIONS
+=================================================================
+
+Predicting with v5 BPR Neural Net ...
+  120,000 predictions  (60,000 rec / 60,000 not rec)  [9.1s]
+  Saved -> submission_final_v5_nn.csv
+
+Generating v2 heuristic baseline ...
+  120,000 predictions  (60,000 rec)  [0.2s]
+  Saved -> submission_final_v2.csv
+
+Building v2 score lookup for stacking ...
+  120,000 (uid, tid) v2 scores  [0.1s]
+
+=================================================================
+  CONFIDENCE-GATED HYBRID SWEEP
+=================================================================
+  Thresh    v2 users    v5 users    v5 pct  File
+  ----------------------------------------------------------------------
+       0      15,468       4,532     22.7%  submission_final_v5_hybrid_gap0.csv
+       3      15,012       4,988     24.9%  submission_final_v5_hybrid_gap3.csv
+       5      14,762       5,238     26.2%  submission_final_v5_hybrid_gap5.csv
+       7      14,543       5,457     27.3%  submission_final_v5_hybrid_gap7.csv
+       8      13,081       6,919     34.6%  submission_final_v5_hybrid_gap8.csv
+      10      12,483       7,517     37.6%  submission_final_v5_hybrid_gap10.csv  <- production (0.911 on midterm)
+      12      12,365       7,635     38.2%  submission_final_v5_hybrid_gap12.csv
+      15      12,253       7,747     38.7%  submission_final_v5_hybrid_gap15.csv
+      20      11,712       8,288     41.4%  submission_final_v5_hybrid_gap20.csv
+
+=================================================================
+  PYSPARK ALS (rank=20)
+=================================================================
+  Pinning Spark workers to: C:\Users\judee\AppData\Local\Programs\Python\Python310\python.exe
+  Assembling rating tuples ...
+  Training rows: 12,403,575
+  Training ALS (rank=20, maxIter=20, regParam=0.05) ...
+  ALS trained  [1.3m]
+  Building score request set ...
+  Scoring 120,000 (uid, tid) pairs ...
+  Cold-start: 26 pairs backfilled with global mean (49.77)
+  ALS-only submission: 60,000 rec / 60,000 not rec  -> submission_final_als.csv
+  Cached ALS scores -> als_r20_i20.npz
+  ALS pipeline complete  [1.9m]
+
+=================================================================
+  STACKED META-LEARNER
+=================================================================
+  Loaded 6,000 labels  (3,000 positives)
+
+Loading HW9 probability matrix ...
+  120,000 rows x 7 models loaded [0.3s]
+  Models: lr, dt, rf, gbt, gbt_cv, rf_no_v2, extra
+
+Loading past predictions from past_predictions ...
+  Loaded 39 submissions  |  120,000 (uid, tid) pairs  [2.5s]
+  Score range:
+    0.914   hw9_blend_rank_0914.csv
+    0.914   hw9_blend_rf_heavy_0914.csv
+    0.914   hw9_rf_0914.csv
+    0.914   hw9_rf_no_v2_0914.csv
+    0.913   hw9_blend_three_0913.csv
+    0.911   v5b_hybrid_gap10_0911.csv
+    0.911   v5b_hybrid_gap12_0911.csv
+    0.911   v5b_hybrid_gap15_0911.csv
+    0.911   v5b_hybrid_gap20_0911.csv
+    0.910   v5b_hybrid_gap8_0910.csv
+    0.909   v5b_hybrid_gap7_0909.csv
+    0.908   v5b_hybrid_gap5_0908.csv
+    0.908   v5b_hybrid_gap6_0908.csv
+    0.907   v6_hybrid_gap10_0907.csv
+    0.907   v6_hybrid_gap15_0907.csv
+    0.907   v6_hybrid_gap20_0907.csv
+    0.907   v6_hybrid_gap8_0907.csv
+    0.903   v5b_hybrid_gap4_0903.csv
+    0.903   v6_hybrid_gap5_0903.csv
+    0.898   v5b_hybrid_gap3_0898.csv
+    0.896   v6_hybrid_gap3_0896.csv
+    0.893   v5b_hybrid_gap2_0893.csv
+    0.891   v6_hybrid_gap2_0891.csv
+    0.883   v5b_hybrid_gap1_0883.csv
+    0.882   v6_hybrid_gap1_0882.csv
+    0.878   v5b_hybrid_gap0_0878.csv
+    0.878   v5b_nn_0878.csv
+    0.871   p1_evidence_0871.csv
+    0.871   v3_additive_0871.csv
+    0.871   v3_confidence_0871.csv
+    0.871   v3_genre_both_0871.csv
+    0.871   v3_interact_0871.csv
+    0.870   v3_tuned_0870.csv
+    0.868   p1_weightedavg_0868.csv
+    0.852   v4_ridge_0852.csv
+    0.834   p1_maxgenre_0834.csv
+      ?     hw8_hybrid.csv
+      ?     hw8_hybrid_gated.csv
+      ?     hw8_pyspark_mf.csv
+
+  Stacking features (49 total): v5+v2 + 1 ALS + 7 HW9 + 39 past
+  Training matrix: (6000, 49)  (3,000 pos / 3,000 neg)
+
+  sklearn LogisticRegressionCV  (best C=0.0464, 5-fold CV AUC=0.9860)
+
+  Meta-learner weights (on standardized features):
+  Feature                  Weight
+  -------------------- ----------
+  hw9_blend_rank_0914     +0.9058
+  hw9_rf_no_v2_0914       +0.8677
+  hw9_rf_0914             +0.7730
+  v5b_nn_0878             +0.6661
+  hw9_blend_three_0913    -0.5007
+  v2_score                +0.4732
+  v5_score                +0.4506
+  hw9_blend_rf_heavy_0914    +0.2331
+  dt                      -0.1439
+  v4_ridge_0852           -0.1430
+  v6_hybrid_gap20_0907    +0.1331
+  v5b_hybrid_gap20_0911    +0.1053
+  v5b_hybrid_gap6_0908    +0.0958
+  v5b_hybrid_gap5_0908    +0.0885
+  v6_hybrid_gap3_0896     +0.0807
+  hw8_hybrid_gated        +0.0771
+  v3_tuned_0870           -0.0741
+  rf                      +0.0732
+  v5b_hybrid_gap8_0910    -0.0633
+  v6_hybrid_gap15_0907    +0.0618
+  v5b_hybrid_gap0_0878    +0.0612
+  hw8_hybrid              +0.0602
+  v5b_hybrid_gap1_0883    -0.0576
+  extra                   -0.0558
+  v6_hybrid_gap2_0891     +0.0545
+  v6_hybrid_gap1_0882     +0.0529
+  v6_hybrid_gap5_0903     +0.0523
+  v6_hybrid_gap8_0907     -0.0499
+  gbt_cv                  +0.0456
+  v5b_hybrid_gap7_0909    +0.0453
+  als_score               +0.0407
+  v5b_hybrid_gap12_0911    -0.0377
+  gbt                     +0.0324
+  p1_evidence_0871        -0.0282
+  v3_interact_0871        -0.0282
+  v3_confidence_0871      -0.0235
+  lr                      +0.0178
+  p1_weightedavg_0868     -0.0173
+  v5b_hybrid_gap2_0893    +0.0172
+  v5b_hybrid_gap3_0898    +0.0151
+  v6_hybrid_gap10_0907    +0.0136
+  v5b_hybrid_gap15_0911    +0.0129
+  p1_maxgenre_0834        -0.0081
+  v5b_hybrid_gap10_0911    +0.0075
+  v3_genre_both_0871      -0.0073
+  hw8_pyspark_mf          -0.0053
+  rf_no_v2                +0.0047
+  v3_additive_0871        +0.0038
+  v5b_hybrid_gap4_0903    +0.0004
+  (intercept)             +0.1449
+
+  Scoring all 120K test rows ...
+  120,000 predictions  (60,000 rec / 60,000 not rec)
+  Saved -> submission_final_stacked.csv
+
+=================================================================
+  STACKED META-LEARNER v2
+=================================================================
+  Loaded 6,000 labels  (3,000 positives)
+
+Loading HW9 probability matrix ...
+  120,000 rows x 7 models loaded [0.3s]
+  Models: lr, dt, rf, gbt, gbt_cv, rf_no_v2, extra
+
+Loading past predictions from past_predictions ...
+  Loaded 39 submissions  |  120,000 (uid, tid) pairs  [2.6s]
+  Score range:
+    0.914   hw9_blend_rank_0914.csv
+    0.914   hw9_blend_rf_heavy_0914.csv
+    0.914   hw9_rf_0914.csv
+    0.914   hw9_rf_no_v2_0914.csv
+    0.913   hw9_blend_three_0913.csv
+    0.911   v5b_hybrid_gap10_0911.csv
+    0.911   v5b_hybrid_gap12_0911.csv
+    0.911   v5b_hybrid_gap15_0911.csv
+    0.911   v5b_hybrid_gap20_0911.csv
+    0.910   v5b_hybrid_gap8_0910.csv
+    0.909   v5b_hybrid_gap7_0909.csv
+    0.908   v5b_hybrid_gap5_0908.csv
+    0.908   v5b_hybrid_gap6_0908.csv
+    0.907   v6_hybrid_gap10_0907.csv
+    0.907   v6_hybrid_gap15_0907.csv
+    0.907   v6_hybrid_gap20_0907.csv
+    0.907   v6_hybrid_gap8_0907.csv
+    0.903   v5b_hybrid_gap4_0903.csv
+    0.903   v6_hybrid_gap5_0903.csv
+    0.898   v5b_hybrid_gap3_0898.csv
+    0.896   v6_hybrid_gap3_0896.csv
+    0.893   v5b_hybrid_gap2_0893.csv
+    0.891   v6_hybrid_gap2_0891.csv
+    0.883   v5b_hybrid_gap1_0883.csv
+    0.882   v6_hybrid_gap1_0882.csv
+    0.878   v5b_hybrid_gap0_0878.csv
+    0.878   v5b_nn_0878.csv
+    0.871   p1_evidence_0871.csv
+    0.871   v3_additive_0871.csv
+    0.871   v3_confidence_0871.csv
+    0.871   v3_genre_both_0871.csv
+    0.871   v3_interact_0871.csv
+    0.870   v3_tuned_0870.csv
+    0.868   p1_weightedavg_0868.csv
+    0.852   v4_ridge_0852.csv
+    0.834   p1_maxgenre_0834.csv
+      ?     hw8_hybrid.csv
+      ?     hw8_hybrid_gated.csv
+      ?     hw8_pyspark_mf.csv
+
+  Computing per-user rank features ...
+  Collapsing past-submission families into consensus ...
+    v5b_hybrid_consensus     13 members
+    v6_hybrid_consensus       8 members
+    hw9_consensus             5 members
+    v3_consensus              5 members
+    p1_consensus              3 members
+    hw8_consensus             3 members
+    2 ungrouped past cols kept as-is
+
+  v2 feature set (21 cols):
+    rank features : 3
+    raw scores    : 3
+    HW9 probs     : 7
+    family cons.  : 6
+    leftover past : 2
+  Training matrix: (6000, 21)  (3,000 pos / 3,000 neg, 1,000 unique users)
+
+  GroupKFold(5) by user -- honest CV  (5 C values)
+    C= 0.001   AUC = 0.9788 +/- 0.0027
+    C= 0.010   AUC = 0.9849 +/- 0.0023
+    C= 0.100   AUC = 0.9859 +/- 0.0026
+    C= 1.000   AUC = 0.9855 +/- 0.0029
+    C=10.000   AUC = 0.9853 +/- 0.0029
+
+  Best C = 0.1  (grouped CV AUC = 0.9859)
+
+  NNLS baseline (16 core feats)  grouped CV AUC = 0.9838
+
+  v2 LR weights (top 20 by abs):
+  Feature                          Weight
+  ---------------------------- ----------
+  hw9_consensus                   +2.3067
+  v2_score                        +0.5972
+  v5b_nn_0878                     +0.5652
+  v5_score                        +0.3987
+  v6_hybrid_consensus             +0.3121
+  v5_rank                         +0.2959
+  dt                              -0.2503
+  v4_ridge_0852                   -0.2105
+  v5b_hybrid_consensus            +0.1978
+  lr                              -0.1665
+  v2_rank                         +0.1380
+  rf                              +0.1108
+  p1_consensus                    -0.1103
+  rf_no_v2                        +0.0751
+  v3_consensus                    -0.0685
+  hw8_consensus                   +0.0683
+  extra                           -0.0633
+  gbt                             +0.0486
+  als_score                       +0.0281
+  als_rank                        -0.0261
+  (intercept)                     +0.1572
+
+  NNLS weights (non-negative core):
+  Feature                          Weight
+  ---------------------------- ----------
+  v5_rank                         +0.0478
+  v2_rank                         +0.0000
+  als_rank                        +0.0021
+  lr                              +0.0000
+  dt                              +0.0000
+  rf                              +0.0006
+  gbt                             +0.0000
+  gbt_cv                          +0.0000
+  rf_no_v2                        +0.0000
+  extra                           +0.0000
+  v5b_hybrid_consensus            +0.0527
+  v6_hybrid_consensus             +0.0227
+  hw9_consensus                   +0.3568
+  v3_consensus                    +0.0000
+  p1_consensus                    +0.0000
+  hw8_consensus                   +0.0000
+  (intercept)                     +0.5000
+
+  Scoring all 120K test rows with v2 LR ...
+  120,000 predictions  (60,000 rec / 60,000 not rec)
+  Saved -> submission_final_stacked_v2.csv
+
+  Scoring all 120K test rows with NNLS core ...
+  120,000 predictions  (60,000 rec / 60,000 not rec)
+  Saved -> submission_final_stacked_v2_nnls.csv
+
+=================================================================
+  STACKED META-LEARNER v3 (LightGBM + Isotonic + NDCG@3)
+=================================================================
+  Loaded 6,000 labels  (3,000 positives)
+
+Loading HW9 probability matrix ...
+  120,000 rows x 7 models loaded [0.3s]
+  Models: lr, dt, rf, gbt, gbt_cv, rf_no_v2, extra
+
+Loading past predictions from past_predictions ...
+  Loaded 39 submissions  |  120,000 (uid, tid) pairs  [2.5s]
+  Score range:
+    0.914   hw9_blend_rank_0914.csv
+    0.914   hw9_blend_rf_heavy_0914.csv
+    0.914   hw9_rf_0914.csv
+    0.914   hw9_rf_no_v2_0914.csv
+    0.913   hw9_blend_three_0913.csv
+    0.911   v5b_hybrid_gap10_0911.csv
+    0.911   v5b_hybrid_gap12_0911.csv
+    0.911   v5b_hybrid_gap15_0911.csv
+    0.911   v5b_hybrid_gap20_0911.csv
+    0.910   v5b_hybrid_gap8_0910.csv
+    0.909   v5b_hybrid_gap7_0909.csv
+    0.908   v5b_hybrid_gap5_0908.csv
+    0.908   v5b_hybrid_gap6_0908.csv
+    0.907   v6_hybrid_gap10_0907.csv
+    0.907   v6_hybrid_gap15_0907.csv
+    0.907   v6_hybrid_gap20_0907.csv
+    0.907   v6_hybrid_gap8_0907.csv
+    0.903   v5b_hybrid_gap4_0903.csv
+    0.903   v6_hybrid_gap5_0903.csv
+    0.898   v5b_hybrid_gap3_0898.csv
+    0.896   v6_hybrid_gap3_0896.csv
+    0.893   v5b_hybrid_gap2_0893.csv
+    0.891   v6_hybrid_gap2_0891.csv
+    0.883   v5b_hybrid_gap1_0883.csv
+    0.882   v6_hybrid_gap1_0882.csv
+    0.878   v5b_hybrid_gap0_0878.csv
+    0.878   v5b_nn_0878.csv
+    0.871   p1_evidence_0871.csv
+    0.871   v3_additive_0871.csv
+    0.871   v3_confidence_0871.csv
+    0.871   v3_genre_both_0871.csv
+    0.871   v3_interact_0871.csv
+    0.870   v3_tuned_0870.csv
+    0.868   p1_weightedavg_0868.csv
+    0.852   v4_ridge_0852.csv
+    0.834   p1_maxgenre_0834.csv
+      ?     hw8_hybrid.csv
+      ?     hw8_hybrid_gated.csv
+      ?     hw8_pyspark_mf.csv
+
+  [A] Training LightGBM LambdaRank base model ...
+  Loading cached LightGBM ranker from lgbm_lambdarank.txt ...
+  [A] Scoring all 120K test rows + 6K labeled rows ...
+  [A] LightGBM scored 120,000 pairs  [5.2s]
+
+  [B] Building labeled subset for calibration fitting ...
+  [B] Calibration set: 6,000 of 6,000 labels usable
+  [B] Fit 7 HW9 isotonic calibrators + 1 v5 calibrator
+
+  ============ ABLATION ============
+  Each variant fits on 6K labels, GroupKFold(5) by user.
+  CV scores are HONEST (no user appears in both folds).
+
+  --- Variant V2 reference (AUC-tuned) (21 feats, CV metric = AUC) ---
+    Training matrix: (6000, 21)  (3,000 pos / 3,000 neg)
+    C= 0.001   AUC = 0.9788 +/- 0.0027
+    C= 0.010   AUC = 0.9849 +/- 0.0023
+    C= 0.100   AUC = 0.9859 +/- 0.0026
+    C= 1.000   AUC = 0.9855 +/- 0.0029
+    C=10.000   AUC = 0.9853 +/- 0.0029
+    Best C = 0.1  (AUC = 0.9859)
+    120,000 preds  (60,000 rec)  -> submission_final_stacked_v3_V2ref.csv
+
+  --- Variant A: V2 + LightGBM only (23 feats, CV metric = AUC) ---
+    Training matrix: (6000, 23)  (3,000 pos / 3,000 neg)
+    C= 0.001   AUC = 0.9785 +/- 0.0025
+    C= 0.010   AUC = 0.9848 +/- 0.0022
+    C= 0.100   AUC = 0.9858 +/- 0.0028
+    C= 1.000   AUC = 0.9853 +/- 0.0031
+    C=10.000   AUC = 0.9851 +/- 0.0031
+    Best C = 0.1  (AUC = 0.9858)
+    120,000 preds  (60,000 rec)  -> submission_final_stacked_v3_A_lgbm.csv
+
+  --- Variant B: V2 + Isotonic only (21 feats, CV metric = AUC) ---
+    Training matrix: (6000, 21)  (3,000 pos / 3,000 neg)
+    C= 0.001   AUC = 0.9791 +/- 0.0025
+    C= 0.010   AUC = 0.9850 +/- 0.0021
+    C= 0.100   AUC = 0.9861 +/- 0.0024
+    C= 1.000   AUC = 0.9858 +/- 0.0025
+    C=10.000   AUC = 0.9857 +/- 0.0024
+    Best C = 0.1  (AUC = 0.9861)
+    120,000 preds  (60,000 rec)  -> submission_final_stacked_v3_B_iso.csv
+
+  --- Variant C: V2 features + NDCG@3 tuning (21 feats, CV metric = NDCG) ---
+    Training matrix: (6000, 21)  (3,000 pos / 3,000 neg)
+    C= 0.001   NDCG = 0.9458 +/- 0.0057
+    C= 0.010   NDCG = 0.9568 +/- 0.0068
+    C= 0.100   NDCG = 0.9622 +/- 0.0054
+    C= 1.000   NDCG = 0.9634 +/- 0.0040
+    C=10.000   NDCG = 0.9631 +/- 0.0038
+    Best C = 1.0  (NDCG = 0.9634)
+    120,000 preds  (60,000 rec)  -> submission_final_stacked_v3_C_ndcg.csv
+
+  --- Variant ALL: LightGBM + Isotonic + NDCG@3 (23 feats, CV metric = NDCG) ---
+    Training matrix: (6000, 23)  (3,000 pos / 3,000 neg)
+    C= 0.001   NDCG = 0.9464 +/- 0.0065
+    C= 0.010   NDCG = 0.9568 +/- 0.0065
+    C= 0.100   NDCG = 0.9629 +/- 0.0048
+    C= 1.000   NDCG = 0.9636 +/- 0.0042
+    C=10.000   NDCG = 0.9630 +/- 0.0042
+    Best C = 1.0  (NDCG = 0.9636)
+    120,000 preds  (60,000 rec)  -> submission_final_stacked_v3.csv
+
+  ============ ABLATION SUMMARY ============
+  Variant                                     CV metric
+  ---------------------------------------- ------------
+  V2 reference (AUC-tuned)                       0.9859 AUC
+  A: + LightGBM only (AUC-tuned)                 0.9858 AUC
+  B: + Isotonic only (AUC-tuned)                 0.9861 AUC
+  C: V2 features + NDCG@3-tuned                  0.9634 NDCG@3
+  ALL: A+B+C combined                            0.9636 NDCG@3
+
+  NOTE: AUC and NDCG@3 are different scales;
+        compare (V2,A,B) against each other and (C,ALL)
+        against each other.
+
+=================================================================
+  ITEM-ITEM COLLABORATIVE FILTERING
+=================================================================
+  Loading cached item-item CF scores from iicf_k30_m5.npz ...
+  Loaded 120,000 iicf scores
+
+=================================================================
+  STACKED META-LEARNER v4 (item-item CF + v3 features)
+=================================================================
+  Loaded 6,000 labels  (3,000 positives)
+
+Loading HW9 probability matrix ...
+  120,000 rows x 7 models loaded [0.3s]
+  Models: lr, dt, rf, gbt, gbt_cv, rf_no_v2, extra
+
+Loading past predictions from past_predictions ...
+  Loaded 39 submissions  |  120,000 (uid, tid) pairs  [2.6s]
+  Score range:
+    0.914   hw9_blend_rank_0914.csv
+    0.914   hw9_blend_rf_heavy_0914.csv
+    0.914   hw9_rf_0914.csv
+    0.914   hw9_rf_no_v2_0914.csv
+    0.913   hw9_blend_three_0913.csv
+    0.911   v5b_hybrid_gap10_0911.csv
+    0.911   v5b_hybrid_gap12_0911.csv
+    0.911   v5b_hybrid_gap15_0911.csv
+    0.911   v5b_hybrid_gap20_0911.csv
+    0.910   v5b_hybrid_gap8_0910.csv
+    0.909   v5b_hybrid_gap7_0909.csv
+    0.908   v5b_hybrid_gap5_0908.csv
+    0.908   v5b_hybrid_gap6_0908.csv
+    0.907   v6_hybrid_gap10_0907.csv
+    0.907   v6_hybrid_gap15_0907.csv
+    0.907   v6_hybrid_gap20_0907.csv
+    0.907   v6_hybrid_gap8_0907.csv
+    0.903   v5b_hybrid_gap4_0903.csv
+    0.903   v6_hybrid_gap5_0903.csv
+    0.898   v5b_hybrid_gap3_0898.csv
+    0.896   v6_hybrid_gap3_0896.csv
+    0.893   v5b_hybrid_gap2_0893.csv
+    0.891   v6_hybrid_gap2_0891.csv
+    0.883   v5b_hybrid_gap1_0883.csv
+    0.882   v6_hybrid_gap1_0882.csv
+    0.878   v5b_hybrid_gap0_0878.csv
+    0.878   v5b_nn_0878.csv
+    0.871   p1_evidence_0871.csv
+    0.871   v3_additive_0871.csv
+    0.871   v3_confidence_0871.csv
+    0.871   v3_genre_both_0871.csv
+    0.871   v3_interact_0871.csv
+    0.870   v3_tuned_0870.csv
+    0.868   p1_weightedavg_0868.csv
+    0.852   v4_ridge_0852.csv
+    0.834   p1_maxgenre_0834.csv
+      ?     hw8_hybrid.csv
+      ?     hw8_hybrid_gated.csv
+      ?     hw8_pyspark_mf.csv
+
+  Fitting isotonic calibrators on labeled subset ...
+
+  v4 feature set (23 cols):
+    rank features : 4 (v5, v2, iicf, als)
+    raw scores    : 4
+    HW9 isotonic  : 7
+    family cons.  : 6
+    leftover past : 2
+  Training matrix: (6000, 23)  (3,000 pos / 3,000 neg, 1,000 unique users)
+
+  GroupKFold(5) by user -- NDCG@3 + AUC sweep
+         C     NDCG@3        AUC
+  --------   --------   --------
+     0.001     0.9484     0.9803
+     0.010     0.9588     0.9859
+     0.100     0.9624     0.9870
+     1.000     0.9613     0.9870
+    10.000     0.9613     0.9869
+
+  Best C = 0.1  (NDCG@3 = 0.9624, AUC = 0.9870)
+
+  v4 LR weights (top 20 by abs):
+  Feature                          Weight
+  ---------------------------- ----------
+  hw9_consensus                   +2.3164
+  v2_score                        +0.5654
+  v5b_nn_0878                     +0.4650
+  iicf_rank                       +0.4497
+  dt_iso                          -0.3260
+  iicf_score                      +0.2891
+  v5b_hybrid_consensus            +0.2297
+  v5_iso                          +0.2156
+  v6_hybrid_consensus             +0.2117
+  gbt_iso                         +0.2047
+  lr_iso                          -0.1999
+  v4_ridge_0852                   -0.1732
+  p1_consensus                    -0.1724
+  hw8_consensus                   +0.1597
+  v5_rank                         +0.1360
+  gbt_cv_iso                      +0.1110
+  rf_iso                          +0.1089
+  extra_iso                       -0.1058
+  rf_no_v2_iso                    +0.0928
+  als_rank                        -0.0718
+  (intercept)                     +0.1172
+
+  Scoring all 120K test rows ...
+  120,000 predictions  (60,000 rec / 60,000 not rec)
+  Saved -> submission_final_stacked_v4.csv
+  iicf-only submission: 60,000 rec / 60,000 not rec  -> submission_final_stacked_v4_iicf_only.csv
+
+=================================================================
+  ITEM-ITEM CF TUNING VARIANTS (for v5)
+=================================================================
+  Building shared item index once for all variants ...
+  295,799 items indexed  [5.2s]
+
+  Variant iicf_a: topk=30, min_co=5
+  Loading cached item-item CF scores from iicf_k30_m5.npz ...
+  Loaded 120,000 iicf scores
+
+  Variant iicf_b: topk=50, min_co=3
+  Scoring item-item CF (top-50 history, min_co=3) ...
+    iicf scored 2,000/20,000 users  (rate 184 u/s, eta 98s)
+    iicf scored 4,000/20,000 users  (rate 185 u/s, eta 86s)
+    iicf scored 6,000/20,000 users  (rate 187 u/s, eta 75s)
+    iicf scored 8,000/20,000 users  (rate 185 u/s, eta 65s)
+    iicf scored 10,000/20,000 users  (rate 182 u/s, eta 55s)
+    iicf scored 12,000/20,000 users  (rate 181 u/s, eta 44s)
+    iicf scored 14,000/20,000 users  (rate 180 u/s, eta 33s)
+    iicf scored 16,000/20,000 users  (rate 178 u/s, eta 22s)
+    iicf scored 18,000/20,000 users  (rate 177 u/s, eta 11s)
+    iicf scored 20,000/20,000 users  (rate 177 u/s, eta 0s)
+  iicf scored 120,000 pairs  [1.9m]
+  Cached -> iicf_k50_m3.npz
+
+  Variant iicf_c: topk=20, min_co=10
+  Scoring item-item CF (top-20 history, min_co=10) ...
+    iicf scored 2,000/20,000 users  (rate 373 u/s, eta 48s)
+    iicf scored 4,000/20,000 users  (rate 365 u/s, eta 44s)
+    iicf scored 6,000/20,000 users  (rate 371 u/s, eta 38s)
+    iicf scored 8,000/20,000 users  (rate 383 u/s, eta 31s)
+    iicf scored 10,000/20,000 users  (rate 386 u/s, eta 26s)
+    iicf scored 12,000/20,000 users  (rate 390 u/s, eta 20s)
+    iicf scored 14,000/20,000 users  (rate 394 u/s, eta 15s)
+    iicf scored 16,000/20,000 users  (rate 395 u/s, eta 10s)
+    iicf scored 18,000/20,000 users  (rate 390 u/s, eta 5s)
+    iicf scored 20,000/20,000 users  (rate 390 u/s, eta 0s)
+  iicf scored 120,000 pairs  [51.3s]
+  Cached -> iicf_k20_m10.npz
+
+=================================================================
+  STACKED META-LEARNER v5 (iicf variants, no ALS)
+=================================================================
+  Loaded 6,000 labels  (3,000 positives)
+
+Loading HW9 probability matrix ...
+  120,000 rows x 7 models loaded [0.4s]
+  Models: lr, dt, rf, gbt, gbt_cv, rf_no_v2, extra
+
+Loading past predictions from past_predictions ...
+  Loaded 39 submissions  |  120,000 (uid, tid) pairs  [3.0s]
+  Score range:
+    0.914   hw9_blend_rank_0914.csv
+    0.914   hw9_blend_rf_heavy_0914.csv
+    0.914   hw9_rf_0914.csv
+    0.914   hw9_rf_no_v2_0914.csv
+    0.913   hw9_blend_three_0913.csv
+    0.911   v5b_hybrid_gap10_0911.csv
+    0.911   v5b_hybrid_gap12_0911.csv
+    0.911   v5b_hybrid_gap15_0911.csv
+    0.911   v5b_hybrid_gap20_0911.csv
+    0.910   v5b_hybrid_gap8_0910.csv
+    0.909   v5b_hybrid_gap7_0909.csv
+    0.908   v5b_hybrid_gap5_0908.csv
+    0.908   v5b_hybrid_gap6_0908.csv
+    0.907   v6_hybrid_gap10_0907.csv
+    0.907   v6_hybrid_gap15_0907.csv
+    0.907   v6_hybrid_gap20_0907.csv
+    0.907   v6_hybrid_gap8_0907.csv
+    0.903   v5b_hybrid_gap4_0903.csv
+    0.903   v6_hybrid_gap5_0903.csv
+    0.898   v5b_hybrid_gap3_0898.csv
+    0.896   v6_hybrid_gap3_0896.csv
+    0.893   v5b_hybrid_gap2_0893.csv
+    0.891   v6_hybrid_gap2_0891.csv
+    0.883   v5b_hybrid_gap1_0883.csv
+    0.882   v6_hybrid_gap1_0882.csv
+    0.878   v5b_hybrid_gap0_0878.csv
+    0.878   v5b_nn_0878.csv
+    0.871   p1_evidence_0871.csv
+    0.871   v3_additive_0871.csv
+    0.871   v3_confidence_0871.csv
+    0.871   v3_genre_both_0871.csv
+    0.871   v3_interact_0871.csv
+    0.870   v3_tuned_0870.csv
+    0.868   p1_weightedavg_0868.csv
+    0.852   v4_ridge_0852.csv
+    0.834   p1_maxgenre_0834.csv
+      ?     hw8_hybrid.csv
+      ?     hw8_hybrid_gated.csv
+      ?     hw8_pyspark_mf.csv
+  iicf variants: iicf_a, iicf_b, iicf_c
+
+  Fitting isotonic calibrators on labeled subset ...
+
+  v5 feature set (25 cols):
+    rank features : 5 (v5, v2, 3 x iicf)
+    raw scores    : 5
+    HW9 isotonic  : 7
+    family cons.  : 6
+    leftover past : 2
+    ALS           : DROPPED (was -0.151/-0.117 at rank=80)
+  Training matrix: (6000, 25)  (3,000 pos / 3,000 neg, 1,000 unique users)
+
+  GroupKFold(5) by user -- NDCG@3 + AUC sweep
+         C     NDCG@3        AUC
+  --------   --------   --------
+     0.001     0.9496     0.9803
+     0.010     0.9606     0.9862
+     0.100     0.9632     0.9879
+     1.000     0.9624     0.9879
+    10.000     0.9624     0.9878
+
+  Best C = 0.1  (NDCG@3 = 0.9632, AUC = 0.9879)
+
+  v5 LR weights (top 25 by abs):
+  Feature                          Weight
+  ---------------------------- ----------
+  hw9_consensus                   +2.2996
+  iicf_b_rank                     +0.8192
+  v2_score                        +0.5962
+  v5b_nn_0878                     +0.4545
+  iicf_c_rank                     -0.3593
+  dt_iso                          -0.3459
+  v5b_hybrid_consensus            +0.2535
+  iicf_b_score                    +0.2395
+  v6_hybrid_consensus             +0.2173
+  lr_iso                          -0.2033
+  p1_consensus                    -0.2012
+  v4_ridge_0852                   -0.1859
+  v5_iso                          +0.1855
+  gbt_iso                         +0.1788
+  iicf_a_score                    +0.1412
+  gbt_cv_iso                      +0.1213
+  hw8_consensus                   +0.1117
+  iicf_c_score                    -0.1106
+  v5_rank                         +0.1065
+  iicf_a_rank                     +0.0977
+  extra_iso                       -0.0967
+  rf_no_v2_iso                    +0.0929
+  rf_iso                          +0.0853
+  v2_rank                         +0.0691
+  v3_consensus                    -0.0120
+  (intercept)                     +0.1133
+
+  Scoring all 120K test rows ...
+  120,000 predictions  (60,000 rec / 60,000 not rec)
+  Saved -> submission_final_stacked_v5_real.csv
+
+=================================================================
+  FINAL SUMMARY
+=================================================================
+  v2 heuristic val AUC : 0.6675  (Kaggle baseline 0.871)
+  v5 BPR-NN  val AUC   : 0.7424
+  Delta                : +0.0749
+
+  Submissions written:
+    submission_final_v2.csv                  v2 heuristic alone
+    submission_final_v5_nn.csv               pure neural net
+    submission_final_v5_hybrid_gap{N}.csv    hybrid sweep
+    submission_final_stacked.csv             stacked meta-learner v1 (0.918)
+    submission_final_stacked_v2.csv          stacked v2 (rank+consensus+GroupKFold)
+    submission_final_stacked_v2_nnls.csv     NNLS sanity baseline
+    submission_final_stacked_v3.csv          stacked v3 (LightGBM+Isotonic+NDCG@3)
+    submission_final_stacked_v3_A_lgbm.csv   ablation: +LightGBM only
+    submission_final_stacked_v3_B_iso.csv    ablation: +Isotonic only
+    submission_final_stacked_v3_C_ndcg.csv   ablation: +NDCG@3 tuning only
+    submission_final_stacked_v3_V2ref.csv    ablation: V2 reference re-fit
+    submission_final_stacked_v4.csv          stacked v4 (item-item CF + v3) -- 0.922
+    submission_final_stacked_v4_iicf_only.csv  pure item-item CF top-3 -- 0.781
+    submission_final_stacked_v5_real.csv     stacked v5 (3 iicf variants, no ALS)
+
+  Recommended Kaggle submissions:
+    submission_final_v5_hybrid_gap10.csv     (scored 0.911 on midterm Kaggle)
+    submission_final_stacked.csv            (v1 meta-learner -- scored 0.918)
+    submission_final_stacked_v2.csv         (v2 meta-learner -- scored 0.919)
+    submission_final_stacked_v3.csv         (v3 meta-learner -- LightGBM+Isotonic+NDCG@3)
+    submission_final_stacked_v4.csv         (v4 meta-learner -- scored 0.922)
+    submission_final_stacked_v5_real.csv    (v5 meta-learner -- 3 iicf variants, no ALS)
+
+  Total wall time : 7.0m

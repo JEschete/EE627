@@ -1,0 +1,22 @@
+
+HW 9
+
+    Due Friday by 11:59pm Points 100 Submitting a text entry box or a file upload Available May 1 at 12am - May 10 at 11:59pm
+
+1. Download the new test2_new.txt data, which contains the ground-truth of the track ID recommendations. 
+
+2. Use the userID in test2_new.txt to fetch the related rating scores in the training data for the same users. 
+
+3. For the fetched rating score matrix, use the "1" and "0" recommendations in test2 to train your classifier.  You need to use 
+
+from pyspark.ml.classification import ******
+
+You need to try 4 different classifiers in PySpark.ML library, as shown in the lecture notes, to train your models.  
+
+4. Then apply the trained models to the ratings you fetched from the final project test data and make predictions.  Submit your new results at Kaggle. 
+
+ 
+
+Show the screenshot of your Kaggle score on Canvas.
+
+Attach your Python code file to Canvas. 

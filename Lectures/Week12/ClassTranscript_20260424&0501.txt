@@ -1,0 +1,1708 @@
+Rensheng Wang
+Rensheng Wang
+I think I just mentioned, you know, 6 to 8, we will have this final project, yeah, this week at work.
+leave this, for preparing for 6 to 8.
+And not really, I'm traveling, you know, so I will make some, you know.
+Preksha Shah
+Preksha Shah
+00:22
+Idea.
+Rensheng Wang
+Rensheng Wang
+00:23
+Social conflict, I'm really sorry for my family reason, yeah, so that's why. But for 6 to 7, you know, I will…
+You know, have this makeup session for whatever reason, you know, so…
+Preksha Shah
+Preksha Shah
+00:38
+Yeah, so you put the final project for the individual, 6 to 8.
+Rensheng Wang
+Rensheng Wang
+00:44
+Right.
+Preksha Shah
+Preksha Shah
+00:45
+Is it due on the 13th May?
+Rensheng Wang
+Rensheng Wang
+00:48
+Yes, that's why I prefer to give you more time, you know, but I understand, you know, for some students, you know, if you need some… the reason it's individual project, right? For individual project, you may have very specific individual
+questions, concerns, so I would prefer to have some,
+a few separate online sessions. That means, you know, the student can ask for some, you know, personal interests, personal, you know, project goals.
+just like, you know, I'm interested in one topic, maybe the whole class, nobody else, interesting, right?
+Preksha Shah
+Preksha Shah
+01:35
+Yeah, I don't.
+Rensheng Wang
+Rensheng Wang
+01:36
+I were…
+Preksha Shah
+Preksha Shah
+01:38
+I'm just looking some topics, and I'm just confused about it, but I just clear about my mindset, then I wanna talk to you, so I just take for the 2-3 days, and then I email you.
+Then we discussed, you know?
+Rensheng Wang
+Rensheng Wang
+01:54
+Sure, sure. My place, I will try to make,
+you know, the next two weeks, flexible. When I say flexible, that means, you know, number one, I were…
+provide a few, like, two, two more, you know, one-hour sessions during the weekdays, you know, so you can choose any one.
+for some additional… that's the… besides this kind of regular Friday meetings, I will have two, separate one-hour sessions to… hopefully someone can join.
+You are flexible to ask for any time slot.
+Preksha Shah
+Preksha Shah
+02:33
+So, just like…
+Rensheng Wang
+Rensheng Wang
+02:34
+You know, you don't have to…
+if you cannot join my session, you say, okay, I only have Tuesday, let's say, noontime, or I have Thursday, you know, afternoon time, or whatever morning time, that's fine, you know, you send me email, provide the multiple, time slots. I will try to choose one to…
+to… according to your availability, you know. So that's why I mentioned it. Flex… flexible, you know. In other words.
+if I'm saying that's only time, maybe most time, most students, they don't have the availability, you know, even I am, I'm okay, but maybe most of them you cannot, so…
+That's why I encourage you the opposite way, right? So you propose sometimes we have this one-on-one session. So that's why I typically have this kind of, sessions, individually. I prefer that's more effective, you know. Number one, when you are one-on-one, you're more, you know,
+encourage you to say anything you want, right? You don't want to say anything in front of the class. Number two, you know, you are concentrated to me, you know, just one-on-one, so you don't have to think about anything else, so that's why…
+It's more effective. Typically, I feel this is, yeah.
+Even during the weekend, you know, if I'm available, I have no problem, you know, so you can say, oh, that's Saturday, I happen to ask a question, I really need help, that's fine, you know, you're sending me email, so I will try to reply you in, let's say, typically a few hours, you know, we can decide if we need a necessary to have a meet.
+Yeah. Go ahead, yeah.
+Can you still hearing me?
+Kaylyn Sullivan
+Kaylyn Sullivan
+04:31
+Yes, I can hear you.
+Rensheng Wang
+Rensheng Wang
+04:33
+Great, okay.
+So, as usual, you know, before I start this session, did anyone have anything you wanted me to address?
+We can try to wait for, mostly to join.
+Kaylyn Sullivan
+Kaylyn Sullivan
+04:55
+For the homework that's due on Sunday.
+Is the homework… the homework's based on the same Kaggle that we've been using, right?
+Rensheng Wang
+Rensheng Wang
+05:04
+Yes, that's true, yeah.
+That's why I think I will add a few comments at the beginning of the class, you know.
+I think that's a very interesting project, because I emphasized, right, it somehow is against your intuition for the conventional project.
+Because typically, for example, you have homework 2 or 3, whatever, homework, right? If you finish it, typically you will never go back to do it again, right? You will never say, oh, I have a better way to do it, I will do that again. Typically, you will not do something like that, because it's already done.
+Another way, you know In the conventional, you know, for example, if you tried one approach.
+for the cargo project that you gather, say, you get a score.
+Oh, very impressive, right? Really good. You're so happy. Now, if I'm saying, oh, can you try another approach? Let's say, do something like a 1, 2, 3, 4. Okay, you…
+implement another approach, too. Now you end with .85. Oh, come on! I used to have 0.9 as the result, now I get a 0.85. It's worse! If worse.
+what's the point I keep this one, right? I will delete this one, I will not present this to my professor, you know, because I have a better result.
+That's very natural, that's true. But in this project, no? Doesn't matter. Keep it.
+And you are encouraged to try a lot of more
+approach, they may all worse than what you have achieved in the past. Say, you already get a .9, right? You tried many, many results, you get a .6, 0.7, 0.65.72.
+0.8, they're all worse, much worse than 0.9 approach. That's great!
+When I say great, it means what? Because you have so many worse results, and combined with the best result, 0.9, I will teach you something when you have a magic in sampling, you will get a .92, you see? You have… let's say you have
+That could be a dumb number. Is that 5?
+solutions. You get a 0.9 as the best one, you have 0.6, 0.7, 0.8, 0.72, blah blah blah. And when you combine together, you get 0.92. That's better than any
+Best of you have achieved.
+Right?
+That's… that's the match…
+Only because you have some bad result, you combine with good result, you get even better result.
+After you get to 0.92, think about this again. You can do this insemony again.
+So, the catch is, you keep trying multiple
+approach. You keep trying various results. You don't have to care about, is it always gets better, better? No, no, no, not necessary.
+So that's why I emphasize, don't worry about you get a worse result. Don't try to delete this bad result. Don't try to hide this worse result.
+Keep everything.
+The catch is, I need more…
+opinions. I need more diversified evaluations.
+I need them more, you know.
+Different angles to think about these questions.
+You, at end of the semester, you will face someone on stage, you know. I prefer I have more, instead I have the best.
+So that's why, when I say, how many you have, I care about how many. I don't care about the individual one, I care about how many you have. If you have more, you will have more chance to get even improved results.
+So that's the catch.
+So I encourage you to try, because that's the interesting thing for…
+data science-related project. You don't have to explain why.
+just do it. If something gets better, always, you know, if it works, like, at least, it doesn't hurt, right, to try something.
+So… The bottom line is, it doesn't hurt, why not keep trying?
+when I say you were so perfect, how can I try it? I think you need to be more, you know, bold.
+You need to open your mind. Try to think about, you know, how to change the way you
+manipulate the solution. Just like we do a lot of heuristic, right? You try different ways to combine, right? You keep trying a lot, you know? And you can do a lot of fancy, crazy manipulations. You don't have to get some theoretical
+evaluations. You just keep trying some random things. If all… because that's where you get more.
+Right? You get more results, you get more approach… And the final…
+stage, you will have more space to combine everything to enhance your overall.
+That's exactly how a lot of…
+Big technology company trying to evaluate the recommendations.
+Think about, if I'm Amazon, if I'm Facebook, I'm trying to… Improve the recommendation for you.
+I keep trying, I keep tuning this.
+If I get a better result, I don't have to explain why, because that's how you can make money, right? Nobody will ask you why, but at least it works.
+So… This kind of empirical
+trials sometimes is more important, you know. At least this can extend your potentials, just, like, extend your potentials.
+So this is why, in the following, we are trying to enhance this result in our cargo. We keep doing this again, again, at least, you know, you are familiar with this,
+data load, you are familiar with the data structure, you are familiar with the targets we are looking for. So you only need to do some necessary tuning, right?
+You just, adjust something, you know, let's say you adjust how you evaluate this, you adjust how you expand the new features.
+And,
+if you ask me, Professor, I think I already tried everything. So, that's exactly… we are keep talking about this, right? How to expand
+The space, you can try more.
+One way we are talking about here is about the principal component analysis, piece A. So this is trying to say we are trying to expand more features.
+Just like it. Okay, I have to…
+for user, I have the testing user Urban Score.
+Audius score, and the statistical journal scores have some of… features, right?
+One way is you can make a…
+Feature engineering, so that means you can expand more features, or you can make feature engineering, you're reducing, you're making feature selections, you're trying to get less, right?
+And here, we are trying to talk about another typical
+engineering tool we call the Principal Component Analysis.
+That's typically called data transformations.
+You already did a lot, right? Just like I have… urban score, artist score.
+general score. What I did in the past, I like this, right? How I do data transformation, I do something like this. 0.5 times
+urban score, plus 0.3… RD score. Plus, average.
+Journal score, 0.2. I get the new feature, right?
+That's got the new data transformation, right?
+This kind of 0.5, 0.3, 0.2, a little bit arbitrary, right? It's based on your very basic intuition, you're thinking about it this way. Typically, the urban preference
+It's more directly related to the track preference, right? And artist is relatively further.
+And the general is even further, right? Just like I said, right? If you…
+Asked me, do you think the guy will like this track?
+Poker face.
+If someone say he loves this urban fame, then I will have very high confidence
+The guy will love this song.
+But if you say, I don't know if he loved this album, but I know he loved this…
+artist, Lady Gaga, okay? I also get confidence, but this confidence compelled to use urban should be less.
+And if you don't have this artist's preference, you know he loves this kind of category in genre, like, music, dancing.
+or pop.
+then you also get some impression, but this will be less confident. So that's why I put the weights on RBIN 0.5, obviously 0.3, down to 0.2. You can tune this as long as you have this kind of decreasing.
+order for weights. That's fine, you know. So that's why you should have many different… I don't know which way should be best, right? It's 0.5, 0.6, 0.7, put on the urban, it's the best way, or I put a 0.3, or 0.5, you know? You can try a lot of numbers.
+If you're really wondering how you can precisely tune this widths, right? That's the way, next week, we can talk about, you know.
+This is relevant to supervised learning, because if you want to quantitatively, you want to precisely see what's the best weight you put on the urban, what's the best number put on
+Artists, those kind of questions.
+You need to do this kind of supervised learning, because you need to tell the model
+How these kind of different ways changing will impact the output performance.
+But in our project, right, you have a cargo, so you have this kind of instant… instantly feedback, right? You tune different numbers, you can always get the instantly return to tell you, okay, that's 0.7, oh, this is 0.8, this is 0.9, right? You get the performance.
+So this kind of data transformation
+just tells you how you can utilize the existing evaluations you combine together, you get a new one, right? So, how to make a combine? The simplest way to make a linear combined.
+And, data transformation, you may have many others.
+For example, in some situations, The featured range.
+It's not desired.
+So, that means you need to do some necessary modification. For example, the range is too big or too small, right? You need to do some standardization, just like, originally, maybe you have some measurement that can be…
+as small as 0.1 can be as large as 1 million. Oh, that's the huge dynamic range. So you want to normalize between 0 and 1, so you can do some standardization. You subtract the minimum, and divide it by the maximum to minimum range, then your
+rescale everything within the 0 to 1. That's one way to do data transformation. Another situation, you may do some log scale. What do you mean, log scale? For example, you measure something like this, right? How many evaluations you have for this user?
+you may have some user to have, for this truck, you have, let's say, 100 evaluations. That means 100 people love this.
+You may have another truck, people only have one people love this. So, so on and so forth, right? Every truck, you may have… how many people love it, right? You have this kind of…
+The count.
+to indicate
+How many people love it? So, if you look at this kind of column, you have this frequency column, but this frequency column, you know, typically larger means what?
+It's more likely this is popular, right? Just to indicate the popularities.
+But, you may have some extreme situation, like, for whatever reason, you have one truck, it's so popular. You get 1 million of the people
+You know, voted as lobbyed.
+And then some other typical unit 1 or 2, you know, much smaller. So this kind of imbalance the range, right?
+If that situation, you want to make some log scale, so that means you take log of the frequency, then you will still keep this kind of monotoly. What do you mean, monotoly? That means
+Before I take a log, right? 1000…
+is larger than 1. Yeah, larger is always better. When you take log, log of 1000, log of 1, log 1000 is still greater than log 1, so that means after log…
+transformation, everything still keeps the center of monotonically ordering. Higher value, take a look, still higher than
+Small value, log.
+But you will have a better distribution of this kind of log skills that will be more reasonable for your predictions.
+So that's called one possible data transformation, okay?
+the same thing for, our cargo, right? If you have something…
+if you want to take a look, then you get some new features, right? And if you ask me which one I need to take a look, okay? My suggestion, you can try everything. Because it doesn't matter, right? It doesn't hurt you. You try more, you know? So…
+In data science world, you know.
+You keep trying something, then you make some observation, and find some dirty solution, you may find some good solution, then you make…
+extra assessments, evaluations, you can refine, you can try different directions. You came in this, you know, engineering world.
+The same thing for most of the Gen AI, as long as you don't know someone…
+rough directions. You keep trying, keep, you know, refining, you know.
+You have this kind of quantitatively improvements.
+You don't have to worry about… to prove something first. No, no, no, just by empirical. Try something first, make some observation, and then say where is it possible to refund.
+So that's why I emphasize, you trying to enforce some data transformations, you'll get some new features. From the new features, hopefully you will have a better chance to improve, right? Because you change the feature, you will change the possible
+You know, cargo… Performance scores.
+The bottom line is, you try more, you should get a better chance for the future in Sembony. So that's why
+Before I encourage you to try more, I need to tell you how to make some more data transformations.
+And, here, we talk about one possible situation is, sometimes data transformation is trying to avoid this kind of outliner. Just like I said, for log skills, if you have some people, let's say.
+a sum track associated with one meaningful, right? This one is much, much larger than the regular truck's frequency. If you directly utilize this score for
+your features. You can treat this just like an omni, you know. They cannot make some meaningful predictions. So, the best way to take a log scale, you can reschedule this to make everything in the reasonable range.
+And… Here, he's talking about the formula, how to make some nomination.
+Okay, or standard addition. You know, you're trying to make some score is…
+located in some fixed range. This kind of fixed range is better for you to make some, better
+You know, predictions.
+So far, any questions here?
+So let me check the chart window in case someone sends me something.
+
+Rensheng Wang
+Rensheng Wang
+Okay, so that's the one background I emphasize, you know. We needed transformations to help us to build the new features. Those new features give you… give us the new potentials to get the new predictions.
+That's one example to show how possible when you change the scale, when you have the transformations that will resolve this kind of outer layers, because you may have some data samples, it's out of the range to make it way more large, or way more
+You know, overwhelming impact other Samples.
+Now, we have another direction to talk about. You may have some unnecessary data reduction and feature extraction.
+Okay? Because in the past, when we are trying to improve the performance Or perform this,
+feature engineering, right? We try to add in more. Just like, the midterm, we ask you to
+Recalculate this kind of statistical measurements over the general evaluations, right?
+So, after you're adding more, You will have a better chance to expand your data model space.
+But during that one, you may also have another direction. Not trying to add more, you're trying to make a reduction.
+The simplest way is to do some selection, just like you have 5 features. 1, 2, 3, 4, 5, you only want to keep the one
+Feature 1, Feature 2, and the feature 4, you just threw away Feature 3 and the feature 5.
+they will have a few possible reasons. You may even ask me why. The reason is, sometimes you may have
+we call the noise feature. What do you mean, noise feature? So that means these measurements really have no informative
+Information to contribute our predictions.
+The extreme situation, just like I indicated, right? If you are the one trying to make the student enrollment for Ivy College.
+you… Valued your performance.
+just like, academic performance, your leadership performance, blah blah blah, right?
+But you'd really have no interest about your personal… like, food.
+flavors.
+Oh, I like hamburger. I like hot dog. I really have no use. This should have no impact to our final decision. So if we happen to have some feature
+which collects Some information about the individuals, food preference.
+You can treat this feature, it's called, noise.
+But other academic, some leadership, teamwork, those are meaningful.
+features. So those kind of noise features, you prefer to just delete, remove it, because this can greatly
+increase the… variants. Greatly degraded.
+Those kind of performance.
+So that's typically removed.
+Another way you want to do it is not by directly mixing action removed. Instead, we will make this kind of a principal component analysis. That means you are trying to combine existing features to new representations. What do you mean, new representation?
+let's say… In the past, right, we have this kind of,
+RB score, early score, general related score, right? If you make linear combinations, that's how you get the new
+component.
+That's called the new components. Those new components can be used to replace existing.
+In other words, I don't want to keep this kind of urban score, RD score, general score. Instead, I have this kind of synthetic combined scores. For example, 0.5 times urban score, plus 0.3 times RD score, plus 0.2 times
+Average journal scores. That's the new.
+feature. Those new features can be used to replace all the rest, something like that.
+If you ask me why, the reason is, this new combined score, it's more meaningful, it's more effective to help you
+To evaluate this kind of fall.
+information to help us make predictions. So that's kind of for…
+Components, as people call the principal components. You are making linear combinations to construct the new features.
+The new feature, you can think about, is a new representation, because I know this is the weighted average, right?
+Different weight, it should have different meaning.
+So, the next question is, How we can think about this kind of principles and components.
+Or what's the motivation to use the principal components?
+The key point behind this is, if you have many, many original measurements, right?
+if you only use your eyes, if you only just plot it on the scat plot, if you only use some correlation to evaluate them, it's very hard for people to identify how many
+How many features are redundant?
+Let me say it this way.
+I know it's easy to find some redundant features with some obvious observations. For example, you have some feature like this. You have a value 1, 2, 3. You have another feature you call the 246.
+Even they are different, right? But…
+You're smarter, you realize, oh, the second feature is just the linear of the first feature, right? Just scaled by 2.
+Then, that's the redundant. This does make sense, right? I already have 1, 2, 3. Now you have another column called 246. That column… this feature is definitely redundant.
+But, in reality, it's… the data is so complicated. You don't have some, you know… Directity… skilled.
+redundant features. You may have more complicated, like this, some feature is redundant. From the appearance, it's hard to see why it's… I didn't see any linear-scaled relationship.
+But, you may have a more complicated like this. You have one feature, okay? This one feature exactly is perfectly…
+it perfectly equals some linear combination of other features, just like, you know, you have one feature exactly replaced by combined feature A plus feature B plus feature C. And…
+If you only use your eyes, look at… that's very different, but when you make an inner combination, this feature can be
+Replaced, linearly combine something together.
+Just like you have feature A, feature B. If you plus feature A and feature B as the new feature C, now this feature C is redundant, because this information is purely coming from A and B.
+There's no reason to kill this one. But this kind of relationship is not possible.
+to implement that by… just by randomly use your eyes to do that. So we need some…
+systematic way to scan all the features, make linear combinations, to say how many of them are redundant. In other words, how many features can be
+Nein any combined from others, then this feature is removed.
+Or you can think about it in opposite direction, okay? I don't want to keep the original representations, just like, oh, urban school, artist school.
+average journal scores. I want to combine linear combined together. I want to find the best linear combines to
+Most effectively to collect in all the…
+assessment scores together as the new features. So that's the motivation for principal component analysis.
+And pricing here?
+So far, it's good.
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:09:24
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:10:22
+Sorry, can you hear me again?
+Preksha Shah
+Preksha Shah
+00:10:26
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:10:28
+Can you see my screen?
+Preksha Shah
+Preksha Shah
+00:10:30
+Yes, I see your screen.
+Rensheng Wang
+Rensheng Wang
+00:10:35
+That's weird.
+Preksha Shah
+Preksha Shah
+00:10:36
+Data reduction and a factor.
+Rensheng Wang
+Rensheng Wang
+00:10:40
+Yeah.
+Preksha Shah
+Preksha Shah
+00:10:41
+Future expression, something.
+Rensheng Wang
+Rensheng Wang
+00:10:44
+Right, let me…
+Because when they're trying to check the chart window, I think they pop up something, you know.
+To get some trouble.
+Preksha Shah
+Preksha Shah
+00:12:09
+Where is Professor?
+Hey, Dejis?
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:12:20
+Yeah, I'm… even I'm not seeing it.
+I guess he has some internet issues.
+Preksha Shah
+Preksha Shah
+00:12:26
+Yeah.
+Rensheng Wang
+Rensheng Wang
+00:13:03
+Okay, can you hear me again, everyone?
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:13:11
+Professor, we can hear you.
+Rensheng Wang
+Rensheng Wang
+00:13:14
+Yeah, I can say there's one student in the waiting room, you know.
+Let me try to add it in here.
+Okay, let's continue, yeah.
+So that's the motivation for principal component. You can think about it this way. You have a lot of measurements, right? I would call the law.
+Measurements.
+But the principal component of the analysis is trying to say, can we… Make…
+combination of all the measurements together, just like I said, right? I construct a new synthetic scores.
+like, 0.5 times urban plus 0.3 times Artist plus 0.2 times average journal, right? Those are called synthetic scores, because this is the linear combination of some existing urban artist general.
+This new, new one, it's the… we call the new components.
+So, the idea like this, you already have some feature, or sometimes people call it a predictor. You have predictor 1, predictor 2, predictor P. Each one, you multiply with some coefficients, A1, A2, AP. That's how you get a new component, right? We call it a new feature, or new component.
+Okay.
+So… You can imagine, when you put different weights, A1, A2, AP, you will get different,
+component, new component. But how to get the best
+How to make synaption over this?
+The general idea is, you're trying to choose
+A1, A2, AP, when you multiply with the weighted average, right, you get the new component. You want to make the new…
+Component with the highest variance.
+That's the target. When you make selection over A1, A2, AP.
+But maybe you're wondering why higher's the variance? Because when I talk about the…
+Variance, what does that mean? Dynamic range, right? For example, when you…
+take a picture, right? When you… when you take iPhone, take a picture, and sometimes you feel your image, and it's not that bright, or not that,
+clear, a little bit blurred. You can make some Photoshop, right? So you can make some adjustment. So typically, one adjustment is what? You will change the contrast. What do you mean, contrast? You are trying to make what? You are trying to make it the higher…
+pixel get even brighter. You are making lower pixel, you get even darker, right? So that's why you are…
+enlarge the contrast, then you will feel, whoa, this pivot is much more clear.
+It's more bright!
+And it looks much better than the original image. That's how people make some unnecessary At adjustment over…
+digital imaging.
+in iPhone.
+You can think about a very similar sense here. You are trying to increase dynamic ranges, that's called variance, or you think about
+on the opposite direction, let's say I have some colon without a variance. You have zero variance, what do you mean? If you have zero variance, that means you have some colon which you have some
+One single constant, that means you have everywhere with the same constant C. Just like I have one calling, it's called everyone. Everybody's one. If everybody's 1111, this doesn't make sense, right? I have no information. This information does say nothing.
+If I'm human, if I'm… Can your elbow these 1?
+Can you help me identify who is… should be enrolled by the Ivy College?
+That's nothing. It's constant. There's no information. Only say someone 1 with 1, someone with 0, then I say, do you want to choose one with people with 1 or people with 0, right? So always, if you have some quantum with no variance, that means this…
+you need to remove, because no information here. If you have higher variance, you should have higher dynamic. Higher dynamic can help you identify the possible space
+to facilitate it.
+your predictions. So that's why the target is trying to…
+Maximize the variance. That's how you choose A1, A2, AP.
+And, now you need to understand that for this kind of principal component of construction, you are looking for the highest…
+Various, right?
+I'm not… in this situation, you're not using the predictor variables associated with the response variables. So, in other words, I only care about how
+Maximize the variance range.
+I'm not directly linked this kind of predictive measurement to the outcome.
+Because that's a very different,
+So that's… you can think about it, is the…
+somehow is a weakness of this method, because what you're trying to do is trying to maximize the information dynamic, because I don't care about if this information is relevant to our…
+Outcome, response or not.
+Okay.
+how does…
+PCA principle component… opponent… component analysis works. For example, if I present some data like this, right? Look at the image below, you know.
+You have two measurements.
+there are X and Y. If you only look at the numerical numbers, they are different.
+looks like both X and Y are meaningful measurements. If you plot it, that's also good.
+But principal component analysis just showed me, you know, looks like they're redundant. Why? Because X and Y, you have this kind of linear relationship. So that means maybe Y can be linearly represented by X, or X can be linearly represented by Y.
+Okay? If that's the case, one of them should be redundant, right? But, like I said, right? It's impossible by manually evaluating this, but the PCA can automatically scan all the data to tell you how many columns are redundant, how many columns are less informative than others.
+So, for this orange unit data here, X and Y,
+Principal component analysis is trying to help you understand. Some of them are redundant. How to do that? They make rotations.
+For example, after rotation, right, you get something like this. Now, it's clear, right? In this new space, after rotation, you're not using X and Y as the variable. You're using principal component 1, principle component 2.
+Okay, original X and Y replaced by PC1, PC2. You get these two columns, right? From these two columns, you get the new representation, you get the new numbers, and you've obviously found this kind of for
+PC1.
+PC2, you found that PC2, you get a much smaller quantity, just like a PC2, all close to zero, right?
+Because…
+align this kind of full red, you know, PC1, you get the negative E, positive E, you get a big dynamic range. But for PC2, looks like either 0 or close to 0, right?
+And that's a very good signal, right? PCA quickly help you identify that you have two measurements, X and Y, but actually one of them should be redundant. How do you know redundant? They make rotations. You get a PC1 and a PC2.
+And after you get piece 1, piece of 2, they tell you piece 1 is necessary, piece 2 is tiny. What do you mean, tiny? You get the smallest variance, right? You get the most value close to zero, you only have a little bit close to non-zero.
+So that means you want to keep PC1 instead, PC2. You can remove this one. Now, you used to have 2, after PCA, they tell you only keep 1 is good enough, because another one is really redundant, not that much informative.
+Any pricing here?
+Or is clear.
+So, PCA is trying to make a transform from original measurement to some linear combined new space we call the principal component space.
+For the new principal component space, you just make a comparison by each component.
+What's the variance?
+Component 1, you get a variance 1. Component 2, you get variance 2. You just make sorting, ranking, and trying to find… keep only for those components
+Which have the largest, or relatively large, variance. And for those with the small variance, you just delete it, remove it.
+So that's the way how piece A works.
+Any doubt here?
+Any promise?
+So, in the following, we are trying to talk about mathematically, how these rotations is performed, because from here, it's very clear, right? From original data to the principal component of the data, it's really just, like, how you make a rotation of the coordinator.
+X as Y, right? That's how you get a PC1, PC2. You just make a rotation of the coordinate.
+excess.
+Now I'll make another example to show you what happens here. Let's look at the…
+the part A and the part B, okay? The part A is the arrangement data. You have 25 randomly chosen images. You have 64 by 64 pixels images, right?
+And, PCA is trying to help you to use it in this scenario. For example, I used to store 25 images. If I'm telling you.
+We don't have space to store all 25. You only have one space. You can only store one image. What I can do?
+You were… if I'm saying only take one, I need to delete all the rest, 24.
+or I only have one space to store one image, not 25 images. What you can do? You can do something like this, I can choose one over this 25, right?
+And, you can use whatever criterion.
+I'm not sure what you want to choose. You will use some criterion to choose one single image out of these 25.
+But…
+The point is, it's not a fail, right? I have 25, you said I only keep 1, you just deleted all the 24. That's not a fail.
+If it's not fail, maybe you'll say, okay, how about this?
+Because I want to make this a fair list for every… 25 images. Let's take average.
+If you take average, it looks like it fail, right? Because you keep all the information partially from every individual once.
+you store it.
+still is not good. Why? The reason is because you are trying to say you have 25 images, and every single image are equally important.
+But that's not true. Some imaging…
+are more informative. Some images are very similar. If they are similar, then if you keep the same weight, then it's also redundant, right? So this is why we have the technology
+Some imaging is more informative.
+Then others, you should have some different weights over them.
+So that's why PCA trying to tell you, if you can find the best weights over 25 to get some synthetic combined imaging.
+component. Then, that's the principal component image.
+The first one, the first principal component image means you make different selection over weights over these 25 images. Combined together, you get the sensitive men face, who is most typically represent all the 25 sample data?
+Okay? So that's the best way, that's how you get the first principal component.
+That's the first phase you will have. This face is like a synthetic face, but this synthetic face is most typical, most representative over this data set, 25 images.
+So what happens? The PC2? The PC2 means beyond the PC1, you won't use the rest information to reconstruct the second synthetic phase. The second synthetic phase, you don't want to repeat.
+Hello, can you hear me?
+Preksha Shah
+Preksha Shah
+00:27:55
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:27:57
+What happened? I saw you just get discontinued, right?
+Preksha Shah
+Preksha Shah
+00:28:04
+Yeah, I think network problem, I don't know.
+Rensheng Wang
+Rensheng Wang
+00:28:11
+So, before you dropped… you can still hear my voice, right? And just suddenly get, discontinued.
+Preksha Shah
+Preksha Shah
+00:28:21
+Actually, it's… I think I disconnected now, so I rejoined the meeting, so that's why.
+Rensheng Wang
+Rensheng Wang
+00:28:28
+Oh.
+Okay, thank you.
+Preksha Shah
+Preksha Shah
+00:28:31
+Thank you.
+Rensheng Wang
+Rensheng Wang
+00:28:37
+I just explained here, right? Let's say you have some storage issues. You have 25 images, and you say, I cannot allow you to use storage, it's 25. I only have one space.
+So, just like an e-spring, right?
+You can either design some criterion to make selection. Take one image out of 25.
+But it's not a fail.
+why you take this one in others, right? You still lose… that means you lose a lot of information from the rest images.
+So that's not a good one. Another way is, if you really make these failures, take average, that means I don't care about who is beautiful, who is handsome, I just average all 25.
+Again, you're just trying to eliminate this kind of difference over the dataset, because every imaging, you may have very different, you know, information.
+That's also not good. So the mean, the average is also not good. And otherwise, you want to make the weighted average. Some… some imaging, you want to put a higher weight. Some imaging, you want to put less weight. Some images, you want to make the positive weight. Some imaging, you want to add some negative weight, something like that.
+So that's called the principal component imaging.
+Those principal component imaging, you can think about, is called the typical representative imaging over the data set.
+Okay?
+And the first one with the highest variance, called the PC1, Principal Component 1 imaging.
+And the start from zero, you can construct the second one. The second one is, you want to reconstruct another weighted average. This weighted average should be…
+Not the content and information you already extracted in the PC1.
+Because piece 1 is already the synthetic.
+phase, right? So you want the synthetic… get a weighted average to count synthetic, and not the human face. The human face should be awarded this kind of information you already extract in the PC1. That's how you get the PC2. How do you know
+they're not…
+you know, overlapped, or they're not redundant. So PC2 and the PC1 should be orthogonal, so that means all the information contained in the PC1 should be not included in the PC2. You are trying to make PC2 and the PC1, they are orthogonal.
+So this kind of idea can help you keep constructing PC1, PC2, PC3, so on and so forth. Each component is a synthetic combination of a whole data set. And between the PC1, PC2, or PC3, each one, they should be
+Orthogonal. So that means you don't have this kind of… Coordinated information resource.
+Does this make sense?
+Any pricing here? Because that's the…
+rough, higher-level understanding about the PCA.
+So, mathematically, you will have something like this. If you have this kind of, K-dimensional…
+random variables, R1, RK, right? You want to add weights to get some new variable, Y, you just combine R1, R2, R3 together, you get Y. You know, keep changing different ways, you get different principal components.
+Those whole process actually can be performed by the eigen evaluations.
+Okay.
+So, for this kind of eigen decompositions, you just have the original data, you have the function called PCA that automatically to do this kind of linear combination for you. And here, I'm using one example, just like, say, if you have stock markets,
+Evaluations. You have multiple evaluations from different companies in the stock market.
+And then you want to make an inner combination to help you, analyze this kind of time series. So you can use piece A. So you are trying to find weights over all the stock market time series.
+Okay.
+So, those processes can be implemented by eigenvalue and eigenvector processing. So, that means if you have
+R vectors, right? You calculate this covariance matrix. What do you mean, covariance matrix? Covariance matrix is just trying to say, let's say I have 3…
+Stock market measurements, times 3 is 1, times 3 is 2,
+if you take a covariance, it means I'm trying to measure the variance of correct… the stock market, you know, time series 1, and the variance of the…
+Stock market… times raised 2. And…
+Between 1 and 2, what's the… Coronation.
+Cause… Variance.
+How 1 and 2 coordinate each other?
+That's the measurement. So not only for individual one variants, also.
+calculate the interactions between every single one. That's how you get a covariance matrix, right?
+sigma here. From sigma, you just make eigenvalue eigenvector combinations. That's very standardized,
+linear algebra, so… because I assume you know this, and also, this is already integrated to the function, so I will skip this math part, you know, because in the realities, you just call the function, they will return you this. They were telling you
+What's the most quantitatively, effectively combined components?
+So, and also, they were automatically solving to tell you which component is the highest variance, which
+Component is the second highest.
+variance, so that's called a lambda.
+Okay.
+Cool.
+Still have some, connection issue?
+Preksha shah
+Preksha shah
+00:35:43
+No.
+Rensheng Wang
+Rensheng Wang
+00:35:48
+Okay, thank you.
+And move on, okay?
+So, just like I said, those can be implemented by the…
+In algebra, use the eigenvalue and eigenvector decompositions, so this can be very quickly decomposed, okay? That's how you get the components 1, component 2, component K.
+So… Let's say this example here.
+Look at that, 1, 2, 3, 4, right? You have 5 times 3, so that's how you get 5 vectors.
+Each one is the stock monthly returns. Just like the stock price, you get the higher, you get the stock gain, right? You will get the lower, you get the loss, so you get a positive and negative percentage over 5 different companies over the timestamp.
+And based on this one, you have this kind of return vectors.
+from IBM, HP inter… JP Morgan, Bank of America. So you have the sample
+Vector mean, and the covariance matrix.
+And you can utilize the eigenomidation eigenvectors. You will get the degradation for principal components.
+And the first row, look at this table, the first row is trying to tell you what's the eigenvalues. This eigenvalue is indicative of the variance.
+For example, 284, that means the highest
+Principal component, the variance, is 284, so that's the largest eigencomponent. That's the principal component of 1.
+And, this 284 is… Contribute, like, 53.5% over the whole variants in the dataset.
+That's .535 means. You have another one called the accumulate, okay? Because that's the first one, so the first one is also the accumulator, 0.535. If you look at the second component, 112,
+It's… Occupied 21.3% overall.
+And at this 21% plus 54, right, in total, you will save this portion
+Freedom, but let me see…
+So, that's how you get a proportional percentage, you have the cumulative percentage, and you have eigenvectors. So, the first column, look at the first column, you get the eigenvector 0.33, 0.483, 0.581.448.347.
+So can you say the eigenvector here?
+Can you see?
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:39:09
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:39:11
+Okay, let me explain this. Great. The meanings… eigenvector meanings…
+I have this 5 individual time series, right? But I'm trying to say the best way to understand this total 5 time series is use the .333 times IBM, plus 0.483 times HP, plus .581 times Inter.
+plus .448 times JP Morgan, plus .347 times Bank of America. Then you should get a new times 3. That's the weighted average of all the 5. That's called the principal component of 1.
+Those principles of component 1 is from the eigenvector 1 vectors, and so on and so forth, you have the second, the third, the fourth, fifth, right? You should get 5 synthetic.
+Time series.
+Each one is the linear combination of the currently 5 times 3s.
+Now, you say, the first one, if you're using the
+Linear combination, you should get a…
+Number 1, 284, that means that's the variance of the synthetic combination of these five.
+The second one, number 2, you get the 112, so that means you get a much smaller.
+variance, right? The highest variance just indicated the higher range variations, right?
+more…
+dynamic. Large range means you have more informative, just like I explained, right? Very similar like the image, right? If you have a higher contrast range, you obvious, you feel the image get much clearer.
+You see more details, something like that, right?
+And the… Mathematically, you know how to do it, right? You just multiply 0.33 plus
+0.48 times plus 0.58 times blah blah blah, right? That's how you get the first component of E1. But what's the meaning here? If you look at the E1, you will say…
+you have 5 times 3. Each one you multiply with some,
+positive number, right? Even they're not the same, like, 0.33, 0.48, but roughly, they are trying to say.
+you know, it's the positive weighted. It's more like, you know, the market… general movement.
+So, you can think about the general momentum. That's how you explain the pre-C1, principal component 1. It's really about the…
+general momentum from the market. If you look at the PC2, you will feel the first three, you get a 0.14, 0.28, 0.48, which are associated with what?
+which are associated with IBM, HP, Inter. They are technology companies, right?
+The rest of the two, you get the minus .55, minus .61. They are associated with JP Morgan and the Bank of America. Well, now you know the difference, right? The first three are relevant to
+technology sector.
+The rest, too, are relevant to financial sector.
+for the… technology sector, you get a positive weight. In the financial sector, you get a negative.
+ways, right? So the second component is really represent the difference between two industry sectors.
+You get a positive over technology, you get a negative over…
+financial sectors. So this can think about it in this industry component. The first one, you can treat it like a marketing component. So this kind of synthetic,
+Principal components can give you some information how you can decompose information over the whole data sets.
+So, that's the meaning about the principal component. If you think about from… you can stop here. For example, you say, I even have 5 stock price, but I don't have to…
+look at the individual one. I only look at the first component, the PC1, the second component, the PC2, which are already good enough to help me understand the marketing movements. Because the first one is telling you the portfolio over this averaged
+market momentum. The second one just tells you that
+The technology industry should be positive.
+And financial sector should be negative. So that's the general industry difference. If you count your overall portfolio.
+stock price return. You will say technology should get a higher than average Market momentum.
+Financial get the average lower than the market.
+average return, right? That's the meaning.
+If you think about the whole momentum, that means you have the marketing component, you have the industry component. The industry component is based on the first PC1, marketing component, make some necessary industry-level adjustment.
+Does this make sense?
+Preksha shah
+Preksha shah
+00:44:47
+Yes, Professor.
+Rensheng Wang
+Rensheng Wang
+00:44:49
+Great, thank you. You know, so those two market-level industries already expanded.
+3 fourths of the variance… 3 fourths of variance means what?
+75% dynamic stock price movement up and down can be explained by market, can be explained by industry. If you still have someone saying, out of range, only 25% variation, right, is something else.
+Okay? Those two already experienced the majority of the movement, because for the stock market, what's the…
+what's the interest? You care about how the stock price is moving up and down, right? If the stock price is never… there's no variance, just like straight line, from morning to evening, the stock price is a flat line, right? It's a fixed price, then what's the meaning?
+There's no meaning for the stock price, right? The stock price, you always care about dynamic range, right? How you jump and down.
+So, overall, this kind of data reduction and feature extraction is trying to say, when you have data.
+Of course, if you're lazy, you say, oh, I use the data, use the feature to run the model, that's fine. Now, if you want to be the higher level, you can think about it this way, I can do your fusion. Number one.
+I can make selection, okay? I'm not satisfied with the existing one. I just say, I have 100 features, I only keep 10.
+our limit is 90. That's what we did in the past, right?
+That's one way to do it. Number two, I have 100…
+features, and I'm saying, I'm not satisfied. I want to get more.
+And I can do some derivatives over the 100. For example, just like we did, right? You are using the yesterday divided by today's, or today divided by yesterday, assumption 1, right? You get some variations. That's how you get the new features. And you can make a new features selection again, right?
+So, that's the two. The third one is, instead of look at the individual one, which one I need to keep it, which one I need to edit, I will do some…
+Overall, systematically synthetic, I want to make an inner combination of all of them, just like what you did in our cargo project. You have multiple individual measurements, urban, artists, general, blah blah blah.
+And you can make selections, you can make some new features. And also, you can make some synthetic combinations, right? How to combine these together? That's piece A.
+Okay? So that's the way you think about in a higher level.
+If you have data, You have the information.
+from information, you want to make some transformation. This transformation means you want to have the data have the new representation.
+New representation can be anything. Fourier transform is also new representation. It's trying to reorganize the information to help you find the right
+information components, because not all the information are useful. Not all the information are relevant to your targets, right? Then how do you reorganize the information? How to extract the information to benefit you? That's the catch for feature engineering.
+So that's the… what you will learn in this data processing for the final project.
+Any questions here?
+I encourage you to ask any question to…
+Preksha shah
+Preksha shah
+00:48:31
+That's why I spent processing.
+Rensheng Wang
+Rensheng Wang
+00:48:34
+Sure.
+For example, how do you think about your final project at Cargo, you know?
+how to utilize this to benefit you at least, right? You can think about, now, one…
+problem for the current stage, because we always take this kind of heuristic, right? Just like I randomly assign it by some rough assumptions.
+But we never do something very precisely quantitatively. That's why they said next week, we're talking about
+how do you make a supervised learning? So that means you need some ground to choose. That means you need to know, specifically, specifically, some users, some tracks, you know which 3 are 1, which 3 are 0s. Those kind of training data can help you
+Quantitatively identify what weights you should put on.
+So I encourage you to try more, and to test more, and get some opinion about which feature is more important.
+And that's exactly how a lot of machine learning engineering are trying to push the envelope, to squeeze
+Because every small edge A little bit of tiny 1% improvement can be… means a lot, really a lot.
+So that's why… think about the Facebook, they…
+They don't have any physical productions.
+But they really generated a huge revenue in terms of social media advertisements, you know, this kind of…
+You know, mobile internet service.
+Why? Because the… 40…
+understand this kind of recommendation behind this kind of business. Those kind of things require you to find what's the most efficient way to squeeze
+The precise prediction of the user's, you know, interest.
+And in the following, I'm still here if anyone has any specific questions about the past homework and the calendar assignment, or the…
+whatever, in the, in the, in the coming weeks, so I'll be glad to discuss more.
+So, how's your, finals, how many courses are you taking, everyone?
+Preksha shah
+Preksha shah
+00:51:45
+I took three… three subjects.
+Rensheng Wang
+Rensheng Wang
+00:51:48
+Oh, okay. So…
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:51:50
+Even me, subjects.
+Rensheng Wang
+Rensheng Wang
+00:51:52
+Oh, okay, great. I think I put the deadline is May 13, right? Because I cannot push it further. The reason is, May is the end of semester, you have a lot of people who need this commencement, right? They want to get some grades as soon as possible for graduation.
+Yeah, so that's why, you know, even I can give you extra time, but that's impossible, you know, because I have to give you degrees, right? So that's why,
+I'm expecting in the next 2 or 3 weeks, you know, I will have some of this kind of,
+Flexible, you know, sessions to help you guys,
+Because I'm not sure how many people can attend this kind of weekly sessions on Friday.
+But, if you need some, you know, some urgent help for your project, because you may have a very tight schedule, and,
+If you need any very, you know, individual help.
+then just ping me, then we can have this kind of one-on-one session. That may be the more efficient way to quickly fix your concerns in the project.
+Because in our… 627, we don't have it.
+conventional final exam anymore.
+that's how I can… strategically, I want to turn this to something different. Because we used to have this kind of regular question and answer problems, but as AI,
+AD, you know, so let's get the last…
+Important or less effective to reflect your study.
+Because if I'm asking, okay, given this a fair number, how do you get the best result?
+Those kind of sense, you ask AI, can quickly give you an answer. So, from my side, there's no way to help me identify how… what do you learn, right? Because this kind of sense used to be…
+individual evaluated, but now it all comes with AI. You don't have to do this on your own.
+So, instead, I want to make some real data, because that will get more challenging, because that's how you can evolve.
+To show me what you tried.
+what do you met, and what's the trouble you face, right? What do you… what's the implementation you directly applied from what we discussed in class?
+So, I want to say something like that. So, I want to help you identify this. And also, that's the new direction for…
+The industry interview.
+So, I was trying to… incorporate more…
+Concrete industry examples in our teaching to help you identify
+what's the new direction in this industry? Because…
+More and more people, they are trying to
+move on to this kind of machine learning engineering field, because the pure soft engineering role.
+Demanding get a little bit diminished.
+we used to have some job roles, just like I said, you know.
+tell me how to implement this, or just deploy some, you know, UI phase.
+interface.
+But this can job get less and less challenging, because they get more and more standardized. They more care about how you systematically think about from data, from model, to overall outcome.
+So that requires you to have this kind of higher-level philosophies. You know what you're looking for. In other words, show me what you're looking for. Instead of saying, okay, I have data A, I know how to run the model to get this. That's not enough.
+Because you have to be more in…
+You know, creative to make interactions with agents.
+Right? You cannot say, very sturbing, just say, oh, I have input, I just call this function get output.
+That's not enough.
+You have to very, very, you know, excited, how do you say the result to…
+Interact with the age and the netizen to adjust.
+I just… that's why I emphasize, right? If I'm telling you I need more features, I need to remove some feature, I need to make some new construction, new transformations, then that's how you can direct the AI to do this for you, and feedback your result. You review results, you can feedback again to agent.
+So that's where you learned to make a feature engineering. So I hope this can help you, you know, to build up some confidence in the future career.
+So, that's all for today, but just like I said, right, we can continue the discussion, either by one-on-one or by our makeup one-hour session in the following weeks. I know you are… you guys end with the…
+the final…
+project weeks, you know, you will be busy with the here or there. So, I hope you will still have time, you know, to work on this final project, and if you need a more effective way or efficient way to do it, you can always pin me, okay?
+So, that's all for today. I hope everyone has a great weekend again.
+See you next week. Thank you.
+Brandon McFarlane
+Brandon McFarlane
+00:57:22
+That's true.
+Rensheng Wang
+Rensheng Wang
+00:57:24
+Sure.
+Tejas Kishor Nidhankar
+Tejas Kishor Nidhankar
+00:57:25
+Hi, Professor.
+Rensheng Wang
+Rensheng Wang
+00:57:25
+Sure, take care.
+Brandon McFarlane
+Brandon McFarlane
+00:57:28
+Question?
+Rensheng Wang
+Rensheng Wang
+00:57:29
+Sure, yeah, I'm still here. Great.
+Brandon McFarlane
+Brandon McFarlane
+00:57:31
+Yeah, never got back to me on, per our last meeting.
+Oh, about the… assignment?
+Rensheng Wang
+Rensheng Wang
+00:57:41
+Okay. So, I didn't reply to you, right? Let me check it. I may miss your message, I'm really sorry, okay? Or I may reply that… to the spam. Let me double-check it, maybe it's my fault, okay? So, for your assignment that you… you have… what's your…
+A question for you.
+Brandon McFarlane
+Brandon McFarlane
+00:58:02
+Earning for the midterm?
+Oh, we had… I think we met, like, 2 weeks ago, maybe?
+You were telling me about the different classes and the sections, because I forgot to put the section, the class, section in our…
+Email addresses.
+Rensheng Wang
+Rensheng Wang
+00:58:20
+Oh, Brandon, Brandon, okay. Oh… Okay?
+So, you… I think if we talk about the…
+your interim, right? So, did you… did you give me… reduce the score for you?
+Brandon McFarlane
+Brandon McFarlane
+00:58:33
+No, I don't think anything was updated.
+Rensheng Wang
+Rensheng Wang
+00:58:36
+So, you're talking about the which cause?
+is a… 6 to…
+Brandon McFarlane
+Brandon McFarlane
+00:58:42
+This one.
+Rensheng Wang
+Rensheng Wang
+00:58:42
+Stop.
+627, right?
+Brandon McFarlane
+Brandon McFarlane
+00:58:46
+Sure.
+Rensheng Wang
+Rensheng Wang
+00:58:53
+So it's the same one, 627, right?
+Brandon McFarlane
+Brandon McFarlane
+00:58:56
+Yes, sir, 627.
+Rensheng Wang
+Rensheng Wang
+00:58:57
+Okay, so… how about this? This weekend, I will back to you, okay? I'm sure, yeah. I will pick up this, okay? Okay. I… I distracted by something else, must, yeah, okay? Sorry for that, yeah.
+Brandon McFarlane
+Brandon McFarlane
+00:59:09
+Okay, no problem. Thank you.
+Rensheng Wang
+Rensheng Wang
+00:59:11
+No problem, okay? Have a nice weekend. Take care.
+Brandon McFarlane
+Brandon McFarlane
+00:59:14
+Thank you.
+Rensheng Wang
+Rensheng Wang
+00:59:15
+Right.
+Preksha shah
+Preksha shah
+00:59:16
+Hey, Professor!
+Rensheng Wang
+Rensheng Wang
+00:59:18
+Sure, I'm still here.
+Preksha shah
+Preksha shah
+00:59:20
+Yeah, so, I have a question, so I received the midterm, points, so I got to the 100 after 50 after 100, so, like, I see the submissions were back, and you give the…
+your incompletion has some issues, so I ask you what type of, like, the issues and the… it's not completed.
+So…
+Rensheng Wang
+Rensheng Wang
+00:59:45
+Oh, so you want me to re-evaluate the mid-term, right?
+Preksha shah
+Preksha shah
+00:59:51
+I did it. I give, some of my, so, like, music,
+files and everything, I put the Kegel, and I put my Kegel score and everything.
+Rensheng Wang
+Rensheng Wang
+01:00:03
+Right.
+Preksha shah
+Preksha shah
+01:00:04
+Yeah, so you give the feedback for your incompletation has some issues, so I'm just curious what type of the issues, so can I…
+We are… I do something, like, You know?
+Rensheng Wang
+Rensheng Wang
+01:00:20
+Okay. So you wanted, you wanted me to re-evaluate the score for the midterm?
+Preksha shah
+Preksha shah
+01:00:30
+No, actually, I asked you, because I don't know, it's something like, what type of the incompletions? I did… I submit everything, but you see, it's incompletion, something like that.
+Rensheng Wang
+Rensheng Wang
+01:00:40
+Oh!
+Preksha shah
+Preksha shah
+01:00:41
+So that's…
+Rensheng Wang
+Rensheng Wang
+01:00:41
+Yeah, for the mid-term, I think we have two, right? For… did you finish the code start evaluation, everything?
+Preksha shah
+Preksha shah
+01:00:51
+I did…
+Rensheng Wang
+Rensheng Wang
+01:00:52
+Typical?
+Preksha shah
+Preksha shah
+01:00:52
+and I did everything. No, no, I just… No, no, no, I'm saying…
+Rensheng Wang
+Rensheng Wang
+01:00:56
+for the meeting, we have two parts, right? One part is trying to,
+to try this heuristic for all the generated statistics, right? The second one is for the cold start, right? For the people who has almost a little history, right? What you can do, right? That's for the second part, right? Did you try the second part also?
+In the meter.
+Preksha shah
+Preksha shah
+01:01:23
+I try everything once I can, Kathy.
+Yeah, I try everything, Professor, for the everything to start.
+Rensheng Wang
+Rensheng Wang
+01:01:33
+everything? Yeah, yeah.
+Okay, now I collected information, so, I will reply you in 24 hours, okay? I will definitely reply you in 24 hours, okay? Let me see what happens with your…
+Preksha shah
+Preksha shah
+01:01:45
+So, otherwise, I signed two emails, you know, we met him for today night around something, so it's…
+Yeah, because I'm very curious about, because this is my last semester, and the graduation's coming nearly, so I don't want to fail, so that's why I just…
+Rensheng Wang
+Rensheng Wang
+01:02:08
+Sure, sure, sure. You know, trust me, okay, I would never intended to make you failed. So, I will always try to boost your score, so that's why… so don't doubt this, okay? So, that's why, I will try to help you, okay? So, name it this way, I will try to help you, okay?
+Preksha shah
+Preksha shah
+01:02:27
+Yeah, so I… I send my midterm in your email address and everything, so it's a… maybe, you know, you check it out, everything, you know? It's a…
+Rensheng Wang
+Rensheng Wang
+01:02:38
+Okay, yeah, yeah, I'm glad you pro… to remind me again, okay? So maybe I didn't reply you, effectively, okay? So let me do this again, and definitely I will reply you in 24 hours, okay? I will… look at this.
+Preksha shah
+Preksha shah
+01:02:52
+I appreciate it, Professor.
+Rensheng Wang
+Rensheng Wang
+01:02:54
+He's in my job, okay.
+you know, I'm not perfect. Let me see it this way. Even, you know, I… because sometimes, you know, I will get a mess up, so that's why.
+Preksha shah
+Preksha shah
+01:03:05
+I am distracted.
+Rensheng Wang
+Rensheng Wang
+01:03:06
+Yeah.
+Preksha shah
+Preksha shah
+01:03:08
+You have luck.
+Rensheng Wang
+Rensheng Wang
+01:03:08
+Sure, I won't.
+Preksha shah
+Preksha shah
+01:03:09
+of the subject and, like, of the taking of the lectures and everything, so it's… sometimes it happens, I understand that.
+Bush.
+Rensheng Wang
+Rensheng Wang
+01:03:21
+Great. So, by the way, how do you feel? Did you learn something from my schedule? Do you have any suggestions or comments, you know? Because,
+because we don't have much face-to-face, right, in action, so I was… Due to my team.
+Preksha shah
+Preksha shah
+01:03:37
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:03:38
+Most of the time, it's very quiet, so in two cases, either you're too bad that nobody cares about it, or they don't understand what I'm talking about, or they're single, it's okay, they don't want to say much. So that's why I always hesitate, you know, to move on, that's why, you know…
+Preksha shah
+Preksha shah
+01:03:51
+No, no, it's everything going good. We learned everything, we learned something new, you know? And then, is it 6 to 7, this subject is very new for the… we use the Kegel, it's the first time I've used it, but sometimes I… I don't have any idea, like, you know, how to submit and everything.
+So, sometimes it's different, but we learn something new, so that's good, you know?
+Rensheng Wang
+Rensheng Wang
+01:04:14
+Yeah, yeah, yeah, I'm so glad you hear it, you see that, you know.
+Preksha shah
+Preksha shah
+01:04:16
+Yeah.
+Rensheng Wang
+Rensheng Wang
+01:04:17
+Sure, okay. I'll take a look at this now, okay? So, after this meeting, I will take a look at your case again, okay?
+Preksha shah
+Preksha shah
+01:04:23
+Alright, no problem. Thank you.
+Rensheng Wang
+Rensheng Wang
+01:04:25
+Have a nice sweeping, okay.
+Preksha shah
+Preksha shah
+01:04:27
+You too, bye-bye.
+Rensheng Wang
+Rensheng Wang
+01:04:29
+Bye-bye. Yeah
+
+Rensheng Wang
+Rensheng Wang
+00:00
+Do you have any questions or anything you want me to address before we start the session?
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:06
+No, I don't have any questions right now.
+Actually, wait, I do have one question. But this is not related to this class, I just don't want to forget.
+Rensheng Wang
+Rensheng Wang
+00:16
+Mmm.
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:17
+Do you know when… I think there was a homework from, like, 2 or 3 weeks ago from, 6-28?
+Do you know when that's gonna be graded? Because I know you don't do the grades for that class. I know that you have, like, a TA do the grades for that class, but for 628, because
+I, like, all the grades for… pretty much all the grades for 627 have been put in, which I appreciate, but, like, other classes, I feel like I'm still waiting on grades in there.
+Rensheng Wang
+Rensheng Wang
+00:46
+Oh, you are asking for 6… let me take a quick check, you know. 6 to 8, right?
+Kaylyn Sullivan
+Kaylyn Sullivan
+00:53
+Yeah.
+Rensheng Wang
+Rensheng Wang
+00:55
+6 to 8, which… which grade? Which homework?
+Kaylyn Sullivan
+Kaylyn Sullivan
+01:00
+Let me look, but I think it's one from, like, 2 weeks ago.
+I don't remember… hold on, I'm looking at Canvas right now.
+Rensheng Wang
+Rensheng Wang
+01:08
+I can't even see. I think,
+Oh, I think homework 5 shouldn't be posted.
+Kaylyn Sullivan
+Kaylyn Sullivan
+01:19
+Yeah, it's not posted yet. Yeah, I'm just looking at it now.
+Rensheng Wang
+Rensheng Wang
+01:22
+Not a post yet, okay, yeah, yeah, okay. Now I pull it.
+Kaylyn Sullivan
+Kaylyn Sullivan
+01:25
+Thank you.
+Rensheng Wang
+Rensheng Wang
+01:26
+It's already graded sometime before.
+Can you see it now? I think it's already posted there.
+Let me see.
+Yeah.
+It's already… sorry, I think it's not, released yet.
+it's because the setting defaulted by the previous grader, you know, so I just graded this setup with the
+not released, so this way. I just released it.
+Yep.
+That's homework 5, I think AI, right?
+Kaylyn Sullivan
+Kaylyn Sullivan
+02:07
+Yeah, that's homework 5.
+Rensheng Wang
+Rensheng Wang
+02:09
+That's only senias.
+Okay.
+Any sales?
+Kaylyn Sullivan
+Kaylyn Sullivan
+02:30
+I don't have any other questions. Yeah, thank you.
+Rensheng Wang
+Rensheng Wang
+02:33
+Sure
+Oh, I see.
+Because this is the… just like I said, right, this is graded by the greater, you know, the greater…
+I, I should've… I should follow up with the grader's,
+Kaylyn Sullivan
+Kaylyn Sullivan
+03:01
+Yeah, no, no, no, I know, I know that for…
+Rensheng Wang
+Rensheng Wang
+03:03
+2018.
+Kaylyn Sullivan
+Kaylyn Sullivan
+03:04
+I know that you don't put in grades for that class, but yeah, I just wanted to let you know.
+Rensheng Wang
+Rensheng Wang
+03:10
+No, no worries, okay? Thank you, thank you for reminding me, you know, so at least I already saw it, you know, I just released it for you. Oh, I see. I make further, I realized, you know, looks like the greater
+has finished most of them, but still have a few remaining. So that's why they didn't release.
+Kaylyn Sullivan
+Kaylyn Sullivan
+03:30
+Okay.
+Rensheng Wang
+Rensheng Wang
+03:31
+So, typically, like this, the same thing, the question for the midterm, you know, the grader finished, let's say, I think we have 20 or 30 students, they finished 25, 5 students still not finished yet, so…
+They didn't… just because it's 5, you know, they didn't release all the 20… 25, you know. So even already finished, and they took much longer, looks like, you know,
+They were typically taken more than…
+2 or 3 weeks, that's my estimate, though. But anyway, I will try to remind the grader to release that in time, okay? Then you can see it.
+This is why I… sometimes I can say it, but for whatever reason, it's not released yet, but… Okay.
+Thank you for letting me know, okay? So I will check out, because it's almost end of the semester, you know.
+Kaylyn Sullivan
+Kaylyn Sullivan
+04:20
+Yeah, that's why I'm asking that.
+Rensheng Wang
+Rensheng Wang
+04:21
+What?
+Okay, I fully understand, yeah. So, I will send another email for students, okay? So, that's good. Thank you.
+Kaylyn Sullivan
+Kaylyn Sullivan
+04:30
+Yeah.
+Rensheng Wang
+Rensheng Wang
+04:31
+It's a good time to wrap up to get a clear picture about.
+Kaylyn Sullivan
+Kaylyn Sullivan
+04:35
+Yeah, exactly. That's why I was asking, because, like, it's the end of the semester, and I know that we submitted
+There's one homework from the two weeks ago, which I asked about, which is homework 5, that… and then there's the other homework that we… that was due on Sunday, this past Sunday. So, yeah, like, normally I wouldn't, like… but it's just because it's the end of the semester.
+You know.
+Rensheng Wang
+Rensheng Wang
+04:58
+Yeah.
+Wow, I apologize, you know, because recently I have been very busy, you know, so that's why maybe I didn't follow up in time, but I realized that it's end of the semester, yeah, so…
+I will definitely have tried to sync up, you know, especially for some student who is graduating this semester, who wants to get the final grade as soon as possible, you know, before the commencements, for the graduation ceremony, you know, so on. I will have some special, you know,
+Process for people who are… who…
+Eager to get the final score, earlier, you know.
+So, our… Processing.
+those students, for example, someone wants to graduate this month, you know, they want to get the degree, they want to get the final grades, you know, so I can make some, speed up processing to post the overall grade sooner, you know.
+But, you know, the condition is you make sure everybody has a…
+submit your… all solutions, you know. If you submit the early solution, then I will make a grading early, you know, so I will make it as soon as possible, something like that, yeah.
+Kaylyn Sullivan
+Kaylyn Sullivan
+06:16
+Okay.
+Rensheng Wang
+Rensheng Wang
+06:17
+Yeah.
+Kaylyn Sullivan
+Kaylyn Sullivan
+06:21
+Thank you.
+Rensheng Wang
+Rensheng Wang
+06:22
+No problem, okay.
+Let me see… Anything else?
+It's a…
+Kaylyn Sullivan
+Kaylyn Sullivan
+06:30
+No, no, I don't think I have any more questions.
+Rensheng Wang
+Rensheng Wang
+06:32
+Okay, actually, even it's the end of semester, we are ending the most important stuff now.
+you know, I don't understand, you know, typically at the beginning of the semester, the students were…
+Have more attendance.
+Rather than the end of semester.
+One reason is that typically at the end of semester, students will be frustrated with multiple assignments, multiple classes, you know, though it's difficult to coordinate this kind of efforts.
+But for this course, you know, typically, the most important thing is the last few sessions, because we are trying to release the final goal, why we are focused on multiple different approaches for the same recommendations.
+Because of this, I emphasize, right, this is a little bit against the Indians. For most numerical, projects.
+when you are working on the solution, you're always trying to find the optimized, the best, right? If you can find a better one, you always do it.
+Regardless to something, you know, inferior, or something worse, right? So just like, you know, if today I get the result is
+90% accuracy.
+Yesterday, I get that result, 80% accuracy. I never forget about yesterday. I only used 30 days, right? That's very natural, yeah, that's true.
+But for this class, I keep, you know, mentioning, you know.
+Don't ignore any bad results. You keep everything.
+The better result is also important.
+So, Today and, next week, we were trying to release the, reasons why, okay?
+So… Hey, Brandon?
+Brandon McFarlane
+Brandon McFarlane
+08:31
+Yes.
+Rensheng Wang
+Rensheng Wang
+08:32
+Hey, can you hear me?
+Brandon McFarlane
+Brandon McFarlane
+08:34
+Yes, I can hear you.
+Rensheng Wang
+Rensheng Wang
+08:35
+Great, okay. So we just started this session, as usual. Do you have anything
+Any questions or anything you want me to address before we start the, class?
+Brandon McFarlane
+Brandon McFarlane
+08:48
+Not at the moment.
+Rensheng Wang
+Rensheng Wang
+08:50
+Actually, Brenda, I have some questions for you, you know. I'm not sure, after the online session, can you stay for a while, you know?
+Brandon McFarlane
+Brandon McFarlane
+09:00
+Yes, absolutely.
+Rensheng Wang
+Rensheng Wang
+09:02
+Yeah, so… because it's almost end of semester, you know, I, I think you, you have summer,
+Some sub… solution, grades, you know.
+I'd just like to help you to figure out, you know, how something maybe is not synchronized with you, then I will try to, you know, catch up with you, okay? Okay. I know you have some submissions. I will try to edit these scores.
+Because yours is a little bit special, so I will make sure you…
+sync up with me, and if I missed anything, then try to remind me, okay? Because you have some, later submissions to try to help me to sync up, okay?
+Brandon McFarlane
+Brandon McFarlane
+09:50
+Okay, and I've just seen your message, for… Enquels.
+Rensheng Wang
+Rensheng Wang
+09:56
+Yeah, so…
+I sent you a few messages last week, right? I'm not sure it looks like you didn't reply either, so that's why,
+But, I hope we still have time, you know, to catch up. It's, did you receive it, or you don't have time to reply me yet?
+Brandon McFarlane
+Brandon McFarlane
+10:15
+I didn't have time, I've just seen it, just now, actually, for the Homework 7.
+Rensheng Wang
+Rensheng Wang
+10:21
+Huh.
+Okay, then… Then?
+Brandon McFarlane
+Brandon McFarlane
+10:25
+We have everything.
+Rensheng Wang
+Rensheng Wang
+10:27
+then you can take your time, okay? You make a… if you can make a submission in the next few days, I will try to, you know…
+to sync up with you, okay? Because it's almost end of the semester, I'm just trying to help you to see if you can catch up, or what are you missing or not, okay?
+Brandon McFarlane
+Brandon McFarlane
+10:45
+Okay.
+Rensheng Wang
+Rensheng Wang
+10:46
+Okay, sure.
+So… let's continue this, you know, let's try to first review what we have done, right? And,
+the cargo recommendation project.
+You know, we have tried a lot of heuristic, approach.
+So these are purely based on, for every user, for every…
+track, right? Every track. Track 1, Truck 2, you know.
+you had a lot of scores from Arvin score, artists for…
+And some are statistical for Jungle score, right?
+Because for general, you have a sequential of scores, so you'll not have individual general scores, you have some statistics.
+just like, what's the maximum, what's the minimum variance, right? What's the total number of the general scores, or whatever, right? These kind of things. Based on this kind of measurements.
+You can design any… Heuristic rules, right?
+just like they, I make an average, and I select the maximum over this whatever, or I take a weighted average, right? So those kind of things.
+It's heuristic.
+And this kind of things, you know, it's validated by what? You make a submission, if you're getting better, great. If you're not getting worse, okay, you know where you need to make an adjustment, right? Something like that. But the question here is, it looks like, you know, when you're talking about, I need to make weights.
+weighted average of those scores, but how to put some precise or optimized weights, right? How do I know what's the weight I need to put on the RBIN score? What's the weight I need to put on the RT score, right? So on and so forth.
+What's the best score, weights I need to put on the scores?
+But typically, you cannot do it. You can never get the optimal. Really, this is the heuristic, right? This is the unsupervised.
+In other words, if you want to know what's the best optimized ways for urban artists, these kind of things, you need to have some ground to choose, right? So this is our motivation for today. Today, we are trying to talk about this supervised.
+Oh, by the way, we also have another, unsupervised, approach.
+And I think the homework was 7, right?
+It's a use of matrix fragradation, right?
+UMH goes fragration.
+And heuristic, you know, I think in total, maybe you already get around from a few to dozens, okay? Depends how many tries you have. But all belongs to this kind of unsupervised.
+Today, we are trying to say, since I already have something, right, I have this kind of urban artist, blah blah blah, is it possible to have some supervised learning, right? So that's our…
+You know, motivation for today.
+For example, let me… Share another file with you.
+Let's look at here.
+Okay, Sate?
+Kaylyn Sullivan
+Kaylyn Sullivan
+14:51
+Yes, I can see it.
+Rensheng Wang
+Rensheng Wang
+14:53
+Okay.
+You see?
+They said that… It's a… it's not real.
+result, okay? It's… it's some dumb result, trying to show it, okay? For example, forgiven user ID, right?
+you may have 6 different track IDs. For the given 6 track ID, you are trying to find the urban score for this track, right? You have the RD score for this track, right? You have the number of journal ratings for this track, right? You have the maximum general score, minimum journal score, mean score, mean…
+score for the general variance, median, these kind of measurements, right? So, for every single track.
+associated with this user, you have this num… this… a number of
+measurements, right? This is relevant to the specific track. You have urban, artists, some statistical for journals, something like this.
+And,
+what we did in heuristic is, I want to put some weights for urban, I put some weights on the artist, I put some weights on the following scores, right? Whatever. And combined together, I get a score, I make a sorting, I make a recommendation, right?
+But now, I'm trying to say, okay, let's say I give you the ground truth.
+for this kind of a table. That means, for this first rate, I get 111. For the next three, get a 00. 0 means not recommended, 1 means recommended. So, in other words, given this kind of measurements, I know the ground truth is 1 or 0.
+Then, based on… This predictor matricus
+response vector, right? You know the ground truth, you know the predictive measurements, then you can apply any…
+predictive modeling, right? To make some,
+Optimize width, because if you know this is the 111000, and based on these numbers, of course, they will tell you what's the optimized width for each measurement.
+Okay? Or you can expand it to generalize the machine learning, right? You have some predictive matrix. You mentioned a lot of sense. You know the ground truth. Then, based on this, you have the model, right? This model will take this input to generate the prediction output 11100, right?
+then you get this model, right? Once you have this model, you can apply this model to our final project, right?
+In the cargo. Because now it's a supervised learner. You know exactly
+The numerical measurements, you have the ground truth.
+So the only thing you never tried it before, because you never know, you don't have the ground truth, right? So that's why you always use a heuristic, you just make a guess, right? Oh, maybe I need to make a 40% urban, plus 30% artist, plus whatever, right? That's what you did it before.
+So, starting today, we will give you some ground truths.
+you know 100, you know, 110, this kind of… for the tracks, and you still have this sense, right? You are utilizing this in your previous heuristic, in your mid-term, in your,
+Homework 4, blah blah blah, right? For those kind of assignments, you already have this, right?
+And then now I give you the ground truth, 11100. Then you can apply
+Different methods to make different machine learning predictors.
+So… so that's what I explained. Is this clear?
+That's your homework night, it's today's homework, you know.
+Pricing here?
+Because what we obtained here, right, is what you did in your… the midterm, right? In the mid-term, I already required you to… for every track, every user, you need to have the RV score, RD score, the statistical general scores, right? So that's what you have, right?
+pricing here?
+If no question, just say, No question, that's okay, I'll move on.
+Brandon McFarlane
+Brandon McFarlane
+19:42
+And… Oh, listen.
+Rensheng Wang
+Rensheng Wang
+19:51
+So, it's back to…
+Our next is nice, let's see…
+Now let's go back here, you know.
+Machine learning with PySpark.
+So, we know, right, from Spark, we have the PySpark. That means, you know, we are trying to use Python to work on the big data sets. The only difference is, you may be aware, right? You may say, oh, Professor, I learned… I already know how to make a logistic regression.
+Right? Yeah, perfect, because Python has provided these things.
+What we are trying to say here is.
+What happens if the logistics regression data set is huge.
+It's not about the… how you use…
+regression is about what happens if the dataset is huge. That's exactly relevant to your recommendation. Typically, when you have a recommendation, you will handle millions, billions of records.
+So that's how… very easy to boost this question to… Different scope.
+So that's the catch.
+From the regular machine learning to bigger data processing.
+the scale matters. So that means even you know how to deal logic regression, but if I change the scale.
+Then, the conventional logistic regression doesn't work. The conventional machine learning method doesn't work.
+Because you are changing the scale too much.
+So that's why we use PySpark. PySpark is very similar to our ordinary
+the Python machine learning package, but it's based on Spark.
+you know.
+So this is why you may have two logistics regression. One logistic regression is for the ordinary data science. One is another, we call the PySpark logic regression. That works on huge
+dimensional.
+Data sets.
+Not only for logistic regression, for all the conventional
+Machine learning methods, we are trying to upgrade from regular data science to tremendous industry level data size.
+So that's why we have the Pi Spark.
+To work on the conventional machine learning methods.
+So, for example, We use the logistics regression, right, in the Python.
+But if you're trying to use the huge datasets with logistics regression, we are using PySpark. Then in PySpark, you'll use this command to do. For example, you know.
+You first, you are imported Spark Sessions. Use Spark Sessions, you get a handle, we call Spark. Use Spark to read the data. So, for example, this data is what I post on Canvas, so you can play with, you just use this file, okay?
+This… what's different from here to what you have learned before for the regular Python is this file can be huge, can be…
+hundreds of gigabytes, that's fine. Can be billions of records, that's fine, you know. But if you use the conventional Python request regression, that would be big trouble, because they are not supposed to take that many records.
+So… What I'm trying to use here is trying to give you some industry-level PiSpark
+Processing for this conventional machine learning methods.
+So, for example, if this file is huge, if you have 100 gigabytes.
+If you use the regular Python.
+read CSV and use conventional logic regression to your processing, you'll get a failed, okay?
+And because this is the PySpark, right? The PySpark, you'll have very mimic, you know, conventional Python version, you know, just read the CSV, you get a data frame, and this data frame is different from the conventional Python data frame.
+Because the conventional Python data frame is trying to say you read everything in the data frame. But for PySpark.
+the data frame can be huge. It's like an ocean of data, so they are not trying to load everything. They were…
+output, they were processing, they were executed, this… Only based on… Proportion you're working on.
+For example, this one is trying to show the schema. If that's the case, they're not trying to touch to load the whole data sets, because that's data… DF can be huge. Depends on the file size.
+So, use this one, you get some sketch.
+Okay? You, you, you know what happens in the data, what's the,
+the attributes in the data columns. For example, are they integer, streams, categoric, or whatever, you know, you will get the information like this. So that's indicated in the past bucket, how to browse the huge data volume.
+And, look at the input variables in this,
+Input of 5, okay, you have different, fields, right?
+And, you can… Print out the columns in the data frame.
+And also, you can take some sample by using this command.
+Okay? You're trying to take the first few.
+And the trendy display to see what happens, right?
+make transpose is because just by… it's easier for you to make a display. If you not use transpose, you will get a much, much, much wider
+much, much wider table, right? You use transpose, then you will make much deeper instead of too wide, you know.
+Right? So that's the point. And also, you can use it at the PySpark to explore this data.
+Those commands are a little bit different from the conventional Python.
+Oh.
+the structure.
+You can still make a group buy and a count to show, right?
+for this data frame, you know, from the bank without the CSV, you know, you know how many deposits, yes or no, right? You know the count of the currencies.
+You can summarize the statistical for the numerical variables.
+We separated these numerical variables, Okay?
+And… You also have this kind of individual Non-numerical result.
+Okay?
+For this numerical result, you can plot the coordinations and say the higher coordinate, right? This just gives you some very general impression about the data.
+Overall, overview.
+Okay? For example, you will say, do you have… do you think you have some alarming or not, right? If some data in the scat plot is far away
+it's well imbalanced, right? Then you will get some impression, how this is relevant to each other. So that's the sketch, you know, overview to help you understand this, how the data quality is
+And, you can also clean the features.
+Okay?
+Based on the attributes, right, the number of columns, you turned out you want to remove something and only keep something relevant, useful, right?
+You see?
+You keep this kind of integers and strings after cleaning.
+And then, you want to prepare for machine learning.
+The reason it's… Other than… Numerical columns, you have some streams, which is, categorical, or some few streams.
+So, for example, you have job, martial, education, right? Those kind of things, they're not numerical, so you have to utilize this categorical index.
+This is why you don't have to do it on your own. You can call the function, they will automatically take this one hot encoding for your,
+variables.
+for these kind of streams, they will automatically do it for you.
+After, you say, you just browse, take a for loop for all the categorical columns in this list.
+They each, one by one, to make this, this kind of one hot rating.
+Cody, you know, 3 days.
+The pie spark, you want to scan every individual column, trying to say how many categorical variables
+And how many categories within?
+Right? For example, if you have yes or no, you only have binary, only two.
+if you have some education with, like, college, high school, postgraduate PhD, if you get a 4 or 5, then you may have, you know.
+Five different, one hot coating.
+Collins.
+So they will do it for you. In other words, you don't have to do it on your own, you just…
+Call the function, they will make a process for you.
+So, you assemble all these kind of one-hot coding together.
+And you can print it out and take a view of what you have.
+Okay.
+So that's the specific show like this.
+You can look, you see? Look at the first one, the feature. You get a lot for 10 and 0, right? What do you mean 10 and 0? That means we used to have
+this kind of education, you have the default, you have the yes or no, this kind of corners, right? They're all removed. All the string, all the categorical variables has been replaced by a long sequence, 100100, this thing is, right? By this one hard coding. So, in other words.
+that's the… typically the head deck, right? If you have a predictive matrix, you have a lot of categorical variables. You cannot directly apply them
+to most machine learning methods, because machine learning, typically, it's designed to process a numerical input result. If you have categorical streams.
+this PICE department, they will process this to you. They will automatically convert it to this non-zero, 0101 sequence, right? Because I'm saying this.
+So you will have the numerical, you also have the features.
+And then you can call the pipeline, you know.
+You will split the training part, the testing part.
+For the data frame.
+from the…
+training and testing separate, you will call this regist regression model. Now, this is the difference, you see? This logistic regression is not conventional Python.
+Logistics Regression is a PySpark machine learning library, Logistic regression, classification method.
+So this… the difference, if you call this one, this can be used to call some…
+Huge volume of the… input it.
+Data.
+In case you have this kind of for recommendation data, you may have hundreds of them, hundreds of thousands, minutes, even close to billions of them, you can still utilize this kind of just regression to
+Processing.
+Okay.
+And this is trying to show, you know, by utilizing the logistic regression.
+number of different variable selections, how you get is, you know, the beta coefficients.
+And also, you can plot the RCAUC.
+You see, for the given input, all the input.
+has been converted to this kind of for one hot coding, right? Plus, numerical, right? Overall, they will automatically run this logistic regression and give you the result. You get the performance here.
+And based on this one, you can make a prediction.
+Okay.
+And you will have this RC, 0.88.
+So that's how you can use the logistic regression.
+Model.
+And the point here is, you have data, you know the ground truth, right? You know the response vectors, then you can call the machine learning library. But this machine learning library is not conventional Python.
+Machinery Library. It's the PySpark machine learning library. So, the ladder can be used to handle
+ocean of the data sets, you know, think about it this way, you know.
+So, you already applied one, right? So, what we can learn from here, the reason is, in your…
+mid-term, right? You already have this kind of user ID, Truck ID…
+And from each track, right, you have the RBIN score, RD score, some statistical general score, right? You've got something like this, right? And based on this one, you make whatever heuristic, right?
+you add everything together, you take average, you take a weighted average, right? That's how you make a prediction, right? But now.
+In this homework, I will give you the brown juice. I will give you this 10111… I give you…
+this kind of ground truth. So, that means you can use supervised learning now. You can utilize the data here, this to predict the metric.
+That's the response vector.
+once we have response vector, and then you can call this kind of machine learning method, right? The first one we call this the…
+you know… Logistics regression.
+Right? So, for this logistic regression, then you can…
+You generate this predictor response, you gather
+predict the model. Use the predicted model, you can apply it to all your users, all the track ID, right? So you should have a prediction. Those predictions, you can submit to the cargo. You get the real feedback for your scores.
+So, just like I said, right, once you have this kind of predictive matricus, once you have the response vector, if this is given, you're not only used logistic regression, right, you can do whatever you want, right? You have some numerical
+input, you have this kind of predictor output, right? You can call any machine learning methods, right, to link this kind of numerical result to your prediction result, right?
+So this slide, after logistic regression, We are trying to run…
+The second one, decision tree. Again, this decision tree classifier is also from High Spark, not the conventional Pisa.
+So, you can call the PySpark decision tree classifier, okay?
+You still have the predictive matrix here, you have the response vector that it's given in the homework 9, and you just call this
+decision tree classifier, okay? You link this predictive metric to the response, right? Based on this decision tree classifier, this can help you to make a prediction which
+track, you should recommend it. Which track? You're not recommended, right? That's how you make a score for cargo web page.
+So, now we can switch from logistic regression to decision tree classifier.
+We still have the same data, the training data, testing data, but we are trying to fit with different model now. We are using decision tree model here.
+Okay.
+You get a prediction result, like this.
+and you can invent it, you get some RSA,
+it's less, right? It's less than…
+logistic regression. Logistic… logistic regression, you get the .88.
+For decision tree classified, you get a .78.
+Now you get some impression that Because in our… data sets.
+Decision tray classifier is typically used for some nonlinear decisions. That's the best, you know. If you have some nonlinear mapping relationship, decision tree typically is better. Logistic regression is more like a weighted
+Average, then you take a larger transform, right?
+So… you can… Make comparisons, and see which one is better based on your Attributes in your datasets.
+So that's the second method you tried.
+Now you can switch to another one.
+Random Forest, you are calling the PySpark machine learning library, you loaded this kind of random forest. You still use the training, but you are switching to the model Random Forest.
+And you apply this to make a new prediction.
+You get the new ROC.
+Right?
+The last one, you can switch to gradient boost tree classifier, okay?
+And you say you still have the training data, but you have GPT, you know, the gradient boosts the tree.
+Of course, you will get another…
+This one looks like compel to all four of them, this is the highest one, you get a .89, you know.
+So, this can be applied to, what, to exactly our,
+cargo web page, okay. The only thing, because in the…
+the midterm test, you already have all the numerical measurements, right? Like, urban score, artist score, statistical journal score, or whatever score you have measured.
+Now, if I add, I give you the…
+ground truth. Then, you should have this, you know, you can definitely can run this kind of machine learning methods, right, from the PySpark. You can try the four different, you know.
+machine learning methods, you should get four different classifiers. From the four different classifiers you apply to your training or testing
+user testing checks.
+You should get a predictor results.
+Then you make submission to Kako to get scores. So you should return to me, you get four different performance scores from CACO. You just make screenshot, so how the score looks like.
+So that's the homework, you know, for this week.
+Any pricing here?
+Brandon McFarlane
+Brandon McFarlane
+40:52
+No questions.
+Rensheng Wang
+Rensheng Wang
+40:55
+Okay, thank you, yeah. Let me make one extra comment, you know.
+just like I said, right? I think if you refer to
+Your mid-turn, you know, you have all the users
+all the tracks, right? You have this urban score, artist score, statistical general score, blah blah blah, right?
+And, I will give you the…
+ground truth, that means I gave you the response vector 1010, but I only give you a small portion of them. For example, in your cargo.
+I don't know, yes.
+300K records, for example, right? Then I only maybe gave it
+5K, or something like that. I give you only 10K or 5K, I only give a small portion of ground truth 1010, something like this, okay? The reason is, if I give you all of them, then you just copy this one as the solution, right? You get 100 score. You don't need to do anything, right?
+Because… so… so this is why I only give you a very small portion of ground juice, so that means
+You only need to use this portion data to train your model.
+For this portion of your testing data, you know that orange juice.
+That's how you get the classifier, right? You make a training, you get the machine learning classifier, then you apply the classifier to the whole data set, right?
+After you get the whole data set, you should get a prediction output.
+For the whole prediction output.
+Then, for this screen, whole data sets prediction, right? Then you can submit it to the conquer.
+Okay?
+That means, you know, you only use a portion over there, right? Like, the red, a circle of this portion data, you train your model. After you train the model, apply the model to the whole data set. You make a prediction to get the…
+The green prediction result.
+Because you keep switching from different classifiers, right?
+Logistics regression, decision tree, Random Forest?
+And the gradient boosts the trade, all right? You should have 4, at least. Of course, you can try even more, you know, but here, I only require you have 4. Then you should have 4 different prediction results from cargo.
+After this, you should have, like, you should have more than a dozen of
+solutions, submissions, right? That's exactly what some students did, you know, some students even submitted close to 100.
+You know, different approaches. Get 100 different results.
+That's exactly what we are looking for. We want more.
+We're gonna more diversify the results, then we should get a better candidate for our following in sampling.
+So… Any pricing here?
+Because that's relevant to the homework.
+If no question, I can switch to, assign the… Let me see…
+Kaylyn Sullivan
+Kaylyn Sullivan
+44:41
+I don't have any questions right now.
+Rensheng Wang
+Rensheng Wang
+44:46
+I'm sorry, what did you say? You have a question or not?
+Kaylyn Sullivan
+Kaylyn Sullivan
+44:49
+No, I don't.
+Rensheng Wang
+Rensheng Wang
+44:51
+Okay, thank you. Let me make sure I have this for you guys.
+Cheers.
+Okay, just look at here. So that's the homework.
+Okay. So, for example, you have this file already post, on Canvas, okay?
+the week 12, you should have found this file. This file will give you, for one specific track ID, you know, what's the wrong choice. You get 1 or 0. So that's exactly what I showed, right? In…
+In your mid-turn, you have truck ID,
+user ID, track ID, right? You have six track for each user. You have this kind of multiple measurements, right? Just like orbit score, artist score, statistical, general score, blah blah, right? You get something like this.
+So, for those 6 tracks, I will give you the score out of ground truth 101100, something like this, right?
+And I only give you a portion of them. So in this file, test new, test2New, this text file, I only give you a portion of them. You have this kind of 1010 bronchos.
+But use this portion of them, right, from here to here, you can run this kind of for four different PySpark classifiers, right? So once you get the four different classifiers, you apply this for the whole data sets.
+Okay? You apply to the whole data sets, For the whole datasets.
+use the… the model, you should get what? The whole data sets.
+predictions, right? Something like that. So that's… blue one is what do you need to make submission on cargo, okay?
+And make sure
+make a submission, you make a screenshot to show the score you have, you know, and also attach your Python code.
+So far, it's good.
+No questions?
+But, Nassine, this way.
+If, let's say, if you found that you need the necessary clarification, or you need extra help, always send me an email. So, I will try to make some, one-on-one session as soon as possible, because it's already end of semester, you know, so we were trying to make a
+Quick response as possible, you know?
+Kaylyn Sullivan
+Kaylyn Sullivan
+47:54
+So just to clarify, this is…
+Like, I know it says it, but, like, this is just using the same Kaggle that we've used before, and then using the new test data.
+Or…
+Rensheng Wang
+Rensheng Wang
+48:06
+Right. Let's just use Congo, yes, exactly, yeah.
+Kaylyn Sullivan
+Kaylyn Sullivan
+48:10
+Okay. But this time… wait, sorry. Also, this time, you want us to attach the Python code file, like, not just screenshots, you want us to actually attach the Python file to the assignment?
+Rensheng Wang
+Rensheng Wang
+48:22
+Yeah, I need both the screenshot of your cargo and also your Python code, yeah.
+Kaylyn Sullivan
+Kaylyn Sullivan
+48:28
+Okay.
+Brandon McFarlane
+Brandon McFarlane
+48:29
+Yeah, Professor, was that was… that was what you were saying to us in the implementation? Is that what you meant by that?
+Rensheng Wang
+Rensheng Wang
+48:38
+Yeah, so this Python code is what I showed in the actual slides, right? I already gave you the Python code, right?
+Brandon McFarlane
+Brandon McFarlane
+48:47
+Yes.
+Rensheng Wang
+Rensheng Wang
+48:48
+So, you just mimic what they did in the next, you know, in the Python code. You're using this one to your, cargo data.
+Brandon McFarlane
+Brandon McFarlane
+48:58
+Okay.
+Rensheng Wang
+Rensheng Wang
+48:59
+The only thing is you just replace the data, right? Replace data to your, the couple project data. That's the data you have tried in your, in your mid-term, right?
+Brandon McFarlane
+Brandon McFarlane
+49:13
+Correct.
+Rensheng Wang
+Rensheng Wang
+49:15
+Yeah.
+So, the Python code for 4 different classified code already showed in the slides, right? So you just copy the slides, because there are four different classifiers.
+But the data part, you should copy from your mid-term, right? You just use the data, what you have in the mid-term.
+Now, let me finally… T… Clarify the motivation here.
+why we keep trying the same thing again and again, you know, because the student at the beginning, right, didn't be aware. Oh, looks like I already make a…
+solution for the cargo. Why are you gonna ask me to do this again, right?
+The point is, we try many different approaches
+every single approach, you have different score. That's exactly what you submit, right? Make one submission, you get a score. You make another submission, you get another score. You make it higher, you get it lower, or you make it a similar, you know.
+The point is, The catch is, you know, you may have some… approach.
+You're saying? You may have some… approach… One, you get the…
+the score, like, 0.9. You get another one, you get a .8.
+So, in the conventional way, because this one is better than this one, so maybe you say, oh, I mean.
+I will ignore this one. I only make a submission of this one, right? But…
+Here, we are trying to introduce this kind of ensembling method. The philosophy is, you have one good one, one bad one. If I combine these two information together, I should get another one. The result should get something negative.
+You know, I don't use anything, I just… you only use it as what you have tried in method 1, method 2. I combine these two.
+solution together, I should get a new solution.
+It's 0.92. It's higher than any one of them.
+So, now…
+This point is, if you don't have the second method, that's impossible, right? You only have this one, how can you improve that?
+the track is… the catch is, because I have a good one, bad one, the bad one can help me to boost
+The best one, to even better.
+So you can imagine, if you have tried many, many different approaches in history.
+You get a good one, bad one, good one, bad one, whatever.
+Then, I combine all the historic submissions together, I make a synthetic new submission. This new submission should be higher than any individual submission.
+Should it be higher than the highest one?
+Now, the catch is, you already get the .92, right? You have 0.9, 0.8. Now you say, oh man, I have 3 messes now. You get one…
+29?
+2.8.
+3?
+0.92.
+You say you have already 3, right? Now I combine these 3 together, I should've got another one!
+You may get a .925.
+You see?
+So, that's what ensembley means. Insembly means you have good one, bad one. The bad one can also help you get the benefit to boost overall. So that's why I keep asking you to try different approaches.
+We are trying to diversify this scope.
+Those can help you to boost That's the very…
+Important idea for people to work on the In sampling for recommendations.
+So, we will take this week to finish the, Homework 9. Next week, we are trying to ask you to make assembly.
+to… Combined to make a fusion of all your historical submissions.
+whoever Have this… most submissions will benefit more.
+If you have… if you have tried many, many different aspects over this kind of recommendation, you should have… you can take the edge to get better performance improvements. But if you didn't try much, let's say I only tried very minimal.
+approach the professor asked, then you will get some very… Tiny performance improvements, because
+you didn't train much, you know? We…
+Prefer to have many, many diversified
+approaches. That's where we get the benefit.
+Okay, I think that's all for today. Any more questions here?
+No? No more pricing here?
+Brandon McFarlane
+Brandon McFarlane
+55:14
+No questions.
+Rensheng Wang
+Rensheng Wang
+55:17
+Okay, great.
+

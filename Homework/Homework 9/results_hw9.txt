@@ -1,0 +1,554 @@
+
+=================================================================
+  EE627 HOMEWORK 9 - PySpark Music Recommender
+=================================================================
+  Log file: d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 9\results_hw9.txt
+  Started : 2026-05-04 09:48:10
+
+=================================================================
+  LOADING RAW DATA
+=================================================================
+Loading training data ...
+  49,204 users  |  12,403,575 ratings  [3.1s]
+  Ratings per user : min=17  median=61  max=107936
+  Rating values    : min=0  mean=49.77  max=100
+Loading track metadata ...
+  224,041 tracks  [0.3s]
+  Missing album : 18,509  |  missing artist: 26,896
+  Genres per track: min=0  mean=2.4  max=21
+Loading album metadata ...
+  52,829 albums  [0.1s]
+Loading test candidates ...
+  20,000 test users  |  120,000 total candidates  [0.0s]
+  Candidates per user: min=6  max=6  (expected 6 each)
+Loading ground-truth labels ...
+  6,000 rows  |  1,000 users  [0.0s]
+  Label balance: 3,000 positives (50.0%)  |  3,000 negatives (50.0%)
+
+=================================================================
+  ENRICHMENT & AUXILIARY STRUCTURES
+=================================================================
+Enriching tracks with album metadata ...
+  Artists filled via album : 8,134
+  Genres added via album   : 119,842
+  Tracks still missing artist after enrichment: 18,762  [0.3s]
+  Global item stats: 295,799 items  [2.8s]
+  Raters per item  : min=1  median=10  max=23364
+  Global avg rating: min=0.0  mean=44.06  max=100.0
+  Album->tracks  : 31,141 albums  (avg 6.6 tracks/album)
+  Artist->tracks : 12,291 artists  (avg 16.7 tracks/artist)
+
+=================================================================
+  BUILDING FEATURE CSVs
+=================================================================
+  Labeled CSV already exists, skipping rebuild.
+  (Delete d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 9\features_labeled.csv to force rebuild)
+  Test CSV already exists, skipping rebuild.
+  (Delete d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 9\features_test.csv to force rebuild)
+
+=================================================================
+  LOADING & PREPARING DATA IN SPARK
+=================================================================
+  Labeled rows : 6,000  (3,000 pos = 50.0%  |  3,000 neg = 50.0%)
+  Full labeled : 6,000  (used to refit final models)
+  Train (70%)  : 4,260 rows  (used for CV & tuning)
+  Validation   : 1,740 rows  (858 pos = 49.3%)
+  Kaggle test  : 120,000 rows
+
+=================================================================
+  [1/7] LOGISTIC REGRESSION (elastic-net CV)
+=================================================================
+  Grid size: 9 combos x 3 folds = 27 fits
+
+  [LR] Validation metrics:
+    AUC-ROC   : 0.9376
+    Accuracy  : 0.8707
+    Precision : 0.8718
+    Recall    : 0.8707
+    F1        : 0.8705
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       794      88   (spec=0.900)
+      Actual 1       137     721   (sens=0.840)
+
+  [LR-CV] Best hyperparameters:
+    regParam        = 0.01
+    elasticNetParam = 0.5
+
+  [LR] Top-10 coefficients (|beta|):
+  Rank  Feature                    Coefficient
+  ----- ------------------------- ------------
+  1     has_album                 +     1.2034
+  2     has_artist                +     1.0638
+  3     cf_count_log              +     0.3895
+  4     user_n_log                    -0.3822
+  5     art_nrat_log                  -0.1855
+  6     artist_score              +     0.0107
+  7     genre_above_mean          +     0.0107
+  8     album_score               +     0.0090
+  9     cf_score                  +     0.0087
+  10    genre_nrat_log                -0.0082
+
+  [LR] Refitting on full 6,000 rows with best params...
+  LR-CV training time: 23.9s
+
+=================================================================
+  [2/7] DECISION TREE CLASSIFIER
+=================================================================
+
+  [DT] Validation metrics:
+    AUC-ROC   : 0.7899
+    Accuracy  : 0.8707
+    Precision : 0.8725
+    Recall    : 0.8707
+    F1        : 0.8705
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       801      81   (spec=0.908)
+      Actual 1       144     714   (sens=0.832)
+
+  [DT] Feature importances (all 25 features):
+  Rank  Feature                     Importance  Bar
+  ----- ------------------------- ------------  --------------------
+  1     v2_score                      0.791961  ####################
+  2     cf_score                      0.060152  #
+  3     alb_global_avg                0.056703  #
+  4     has_album                     0.030360  
+  5     artist_score                  0.012654  
+  6     user_n_log                    0.012541  
+  7     art_nrat_log                  0.012454  
+  8     genre_above_mean              0.008980  
+  9     genre_mean                    0.005721  
+  10    user_mean                     0.003798    <- low signal
+  11    alb_nrat_log                  0.002805    <- low signal
+  12    user_std                      0.001105    <- low signal
+  13    album_score                   0.000767    <- low signal
+  14    has_artist                    0.000000    <- low signal
+  15    genre_count                   0.000000    <- low signal
+  16    genre_max                     0.000000    <- low signal
+  17    genre_min                     0.000000    <- low signal
+  18    genre_var                     0.000000    <- low signal
+  19    album_artist_int              0.000000    <- low signal
+  20    album_above_mean              0.000000    <- low signal
+  21    artist_above_mean             0.000000    <- low signal
+  22    art_global_avg                0.000000    <- low signal
+  23    genre_global_avg              0.000000    <- low signal
+  24    genre_nrat_log                0.000000    <- low signal
+  25    cf_count_log                  0.000000    <- low signal
+
+  DT depth used : 5  |  nodes: 41
+  DT training time: 1.8s
+
+=================================================================
+  [3/7] RANDOM FOREST CLASSIFIER (Big CV-tuned)
+=================================================================
+  Grid size: 12 combos x 5 folds = 60 fits
+
+  [RF] Validation metrics:
+    AUC-ROC   : 0.9468
+    Accuracy  : 0.8799
+    Precision : 0.8800
+    Recall    : 0.8799
+    F1        : 0.8799
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       786      96   (spec=0.891)
+      Actual 1       113     745   (sens=0.868)
+
+  [RF-CV] Best hyperparameters:
+    numTrees             = 200
+    maxDepth             = 10
+    featureSubsetStrategy= sqrt
+
+  [GBT-CV] Per-parameter-combination average AUC (12 combinations):
+    Combo  1: 0.9411
+    Combo  2: 0.9411
+    Combo  3: 0.9401
+    Combo  4: 0.9401
+    Combo  5: 0.9386
+    Combo  6: 0.9386
+    Combo  7: 0.9400
+    Combo  8: 0.9400
+    Combo  9: 0.9395
+    Combo 10: 0.9395
+    Combo 11: 0.9381
+    Combo 12: 0.9381
+  Best combination index: 1  (AUC = 0.9411)
+
+  [RF-CV best] Feature importances (all 25 features):
+  Rank  Feature                     Importance  Bar
+  ----- ------------------------- ------------  --------------------
+  1     v2_score                      0.185702  ####################
+  2     artist_score                  0.151731  ################
+  3     artist_above_mean             0.092136  #########
+  4     has_artist                    0.076347  ########
+  5     has_album                     0.056338  ######
+  6     cf_score                      0.050034  #####
+  7     album_artist_int              0.046900  #####
+  8     album_score                   0.038368  ####
+  9     cf_count_log                  0.036002  ###
+  10    album_above_mean              0.029379  ###
+  11    user_n_log                    0.027984  ###
+  12    art_nrat_log                  0.027707  ##
+  13    alb_nrat_log                  0.023582  ##
+  14    alb_global_avg                0.023078  ##
+  15    art_global_avg                0.020566  ##
+  16    user_std                      0.018233  #
+  17    genre_global_avg              0.017614  #
+  18    genre_nrat_log                0.015341  #
+  19    user_mean                     0.015305  #
+  20    genre_above_mean              0.014625  #
+  21    genre_min                     0.009100  
+  22    genre_mean                    0.007673  
+  23    genre_max                     0.007015  
+  24    genre_count                   0.005276  
+  25    genre_var                     0.003964    <- low signal
+
+  [RF] Refitting on full 6,000 rows with best params...
+  RF-CV+refit training time: 10.4m
+
+=================================================================
+  [4/7] GRADIENT-BOOSTED TREE (base)
+=================================================================
+
+  [GBT] Validation metrics:
+    AUC-ROC   : 0.9377
+    Accuracy  : 0.8747
+    Precision : 0.8754
+    Recall    : 0.8747
+    F1        : 0.8746
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       793      89   (spec=0.899)
+      Actual 1       129     729   (sens=0.850)
+
+  [GBT] Feature importances (all 25 features):
+  Rank  Feature                     Importance  Bar
+  ----- ------------------------- ------------  --------------------
+  1     v2_score                      0.479098  ####################
+  2     user_n_log                    0.068544  ##
+  3     has_album                     0.045867  #
+  4     cf_count_log                  0.044018  #
+  5     art_nrat_log                  0.036587  #
+  6     genre_above_mean              0.035736  #
+  7     user_mean                     0.032099  #
+  8     user_std                      0.031707  #
+  9     alb_global_avg                0.030680  #
+  10    has_artist                    0.026640  #
+  11    art_global_avg                0.025452  #
+  12    cf_score                      0.025382  #
+  13    genre_global_avg              0.020018  
+  14    genre_nrat_log                0.019047  
+  15    alb_nrat_log                  0.013404  
+  16    genre_mean                    0.011914  
+  17    genre_var                     0.011432  
+  18    artist_above_mean             0.011192  
+  19    artist_score                  0.008228  
+  20    genre_min                     0.007413  
+  21    genre_count                   0.007403  
+  22    album_score                   0.003497    <- low signal
+  23    album_artist_int              0.001715    <- low signal
+  24    album_above_mean              0.001680    <- low signal
+  25    genre_max                     0.001246    <- low signal
+  GBT training time: 3.3s
+
+=================================================================
+  [5/7] GBT + BIG CROSS-VALIDATION TUNING
+=================================================================
+  Grid size: 24 combos x 5 folds = 120 fits
+
+  [GBT-CV] Validation metrics:
+    AUC-ROC   : 0.9454
+    Accuracy  : 0.8828
+    Precision : 0.8828
+    Recall    : 0.8828
+    F1        : 0.8827
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       787      95   (spec=0.892)
+      Actual 1       109     749   (sens=0.873)
+
+  [GBT-CV] Best hyperparameters:
+    maxDepth        = 3
+    maxIter         = 200
+    stepSize        = 0.05
+    subsamplingRate = 0.7
+
+  [GBT-CV] Per-parameter-combination average AUC (24 combinations):
+    Combo  1: 0.9382
+    Combo  2: 0.9373
+    Combo  3: 0.9391
+    Combo  4: 0.9390
+    Combo  5: 0.9398
+    Combo  6: 0.9391
+    Combo  7: 0.9395
+    Combo  8: 0.9404
+    Combo  9: 0.9405
+    Combo 10: 0.9403
+    Combo 11: 0.9386
+    Combo 12: 0.9395
+    Combo 13: 0.9369
+    Combo 14: 0.9361
+    Combo 15: 0.9347
+    Combo 16: 0.9369
+    Combo 17: 0.9370
+    Combo 18: 0.9358
+    Combo 19: 0.9336
+    Combo 20: 0.9356
+    Combo 21: 0.9351
+    Combo 22: 0.9341
+    Combo 23: 0.9313
+    Combo 24: 0.9328
+  Best combination index: 9  (AUC = 0.9405)
+
+  [GBT-CV best] Feature importances (all 25 features):
+  Rank  Feature                     Importance  Bar
+  ----- ------------------------- ------------  --------------------
+  1     v2_score                      0.193430  ####################
+  2     user_n_log                    0.119379  ############
+  3     has_album                     0.086732  ########
+  4     art_nrat_log                  0.069368  #######
+  5     genre_above_mean              0.052425  #####
+  6     cf_count_log                  0.046808  ####
+  7     genre_global_avg              0.041737  ####
+  8     art_global_avg                0.041353  ####
+  9     alb_nrat_log                  0.037824  ###
+  10    alb_global_avg                0.035564  ###
+  11    genre_nrat_log                0.031668  ###
+  12    user_mean                     0.030985  ###
+  13    user_std                      0.028620  ##
+  14    album_score                   0.028467  ##
+  15    artist_above_mean             0.024919  ##
+  16    artist_score                  0.024022  ##
+  17    cf_score                      0.020175  ##
+  18    has_artist                    0.018920  #
+  19    genre_count                   0.013530  #
+  20    album_above_mean              0.012456  #
+  21    genre_min                     0.011324  #
+  22    genre_var                     0.009637  
+  23    album_artist_int              0.009451  
+  24    genre_mean                    0.006765  
+  25    genre_max                     0.004441    <- low signal
+
+  [GBT-CV] Refitting on full 6,000 rows with best params...
+  GBT-CV+refit training time: 24.5m
+
+=================================================================
+  [6/7] RF WITHOUT v2_score (raw-feature variant)
+=================================================================
+  Features used: 24 (dropped v2_score)
+
+  [RF-no-v2] Validation metrics:
+    AUC-ROC   : 0.9472
+    Accuracy  : 0.8874
+    Precision : 0.8874
+    Recall    : 0.8874
+    F1        : 0.8873
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       787      95   (spec=0.892)
+      Actual 1       101     757   (sens=0.882)
+
+  [RF-no-v2] Feature importances (all 24 features):
+  Rank  Feature                     Importance  Bar
+  ----- ------------------------- ------------  --------------------
+  1     artist_score                  0.202663  ####################
+  2     artist_above_mean             0.129859  ############
+  3     has_artist                    0.108696  ##########
+  4     has_album                     0.066939  ######
+  5     album_artist_int              0.057955  #####
+  6     album_score                   0.056707  #####
+  7     cf_score                      0.051324  #####
+  8     cf_count_log                  0.043127  ####
+  9     album_above_mean              0.039105  ###
+  10    user_n_log                    0.030229  ##
+  11    art_nrat_log                  0.028340  ##
+  12    alb_nrat_log                  0.024064  ##
+  13    art_global_avg                0.023561  ##
+  14    user_std                      0.018128  #
+  15    alb_global_avg                0.017612  #
+  16    user_mean                     0.016359  #
+  17    genre_global_avg              0.016177  #
+  18    genre_nrat_log                0.015266  #
+  19    genre_above_mean              0.013326  #
+  20    genre_min                     0.011152  #
+  21    genre_mean                    0.010193  #
+  22    genre_max                     0.010073  
+  23    genre_count                   0.005764  
+  24    genre_var                     0.003380    <- low signal
+  RF-no-v2 training time: 9.5s
+
+=================================================================
+  [7/7] EXTRA TREES (RF, more randomness)
+=================================================================
+
+  [ExtraT] Validation metrics:
+    AUC-ROC   : 0.9450
+    Accuracy  : 0.8764
+    Precision : 0.8765
+    Recall    : 0.8764
+    F1        : 0.8764
+    Confusion matrix (val set):
+      Predicted ->     0       1
+      Actual 0       780     102   (spec=0.884)
+      Actual 1       113     745   (sens=0.868)
+
+  [ExtraT] Feature importances (all 25 features):
+  Rank  Feature                     Importance  Bar
+  ----- ------------------------- ------------  --------------------
+  1     v2_score                      0.217076  ####################
+  2     artist_score                  0.123139  ###########
+  3     has_artist                    0.089826  ########
+  4     artist_above_mean             0.076723  #######
+  5     user_n_log                    0.045489  ####
+  6     cf_score                      0.036741  ###
+  7     art_nrat_log                  0.035619  ###
+  8     user_std                      0.035016  ###
+  9     alb_nrat_log                  0.034923  ###
+  10    alb_global_avg                0.032829  ###
+  11    genre_global_avg              0.032064  ##
+  12    user_mean                     0.031802  ##
+  13    genre_nrat_log                0.030905  ##
+  14    art_global_avg                0.030572  ##
+  15    has_album                     0.028665  ##
+  16    cf_count_log                  0.025519  ##
+  17    album_score                   0.022395  ##
+  18    genre_above_mean              0.019096  #
+  19    album_above_mean              0.013543  #
+  20    album_artist_int              0.010252  
+  21    genre_count                   0.007036  
+  22    genre_min                     0.006202  
+  23    genre_max                     0.006010  
+  24    genre_mean                    0.005132  
+  25    genre_var                     0.003425    <- low signal
+  ExtraT training time: 1.1m
+
+=================================================================
+  VALIDATION AUC SUMMARY
+=================================================================
+  Classifier                   Val AUC   vs best
+  -------------------------- ---------  --------
+  RF without v2_score           0.9472   +0.0000  <- BEST
+  Random Forest (Big CV)        0.9468   -0.0004
+  GBT (Big CV)                  0.9454   -0.0018
+  Extra Trees                   0.9450   -0.0022
+  GBT (base)                    0.9377   -0.0095
+  Logistic Regression CV        0.9376   -0.0096
+  Decision Tree                 0.7899   -0.1573
+
+=================================================================
+  WRITING PER-CLASSIFIER KAGGLE SUBMISSIONS
+=================================================================
+  lr                     (AUC=0.9376)  60,000 rec / 60,000 not rec  -> submission_hw9_lr.csv
+  dt                     (AUC=0.7899)  60,000 rec / 60,000 not rec  -> submission_hw9_dt.csv
+  rf                     (AUC=0.9468)  60,000 rec / 60,000 not rec  -> submission_hw9_rf.csv
+  gbt                    (AUC=0.9377)  60,000 rec / 60,000 not rec  -> submission_hw9_gbt.csv
+  gbt_cv                 (AUC=0.9454)  60,000 rec / 60,000 not rec  -> submission_hw9_gbt_cv.csv
+  rf_no_v2               (AUC=0.9472)  60,000 rec / 60,000 not rec  -> submission_hw9_rf_no_v2.csv
+  extra                  (AUC=0.9450)  60,000 rec / 60,000 not rec  -> submission_hw9_extra.csv
+
+=================================================================
+  ENSEMBLE BLENDS
+=================================================================
+
+  Building rf_gbt_blend (RF 0.5 + GBT-CV 0.5)...
+  blend_rf_gbt           (RF + GBT-CV equal)  60,000 rec / 60,000 not rec  -> submission_hw9_blend_rf_gbt.csv
+  Building rf_heavy_blend (RF 2 + GBT-CV 1)...
+  blend_rf_heavy         (RF 2 + GBT-CV 1)  60,000 rec / 60,000 not rec  -> submission_hw9_blend_rf_heavy.csv
+  Building three_model_blend (RF + GBT-CV + LR equal)...
+  blend_three            (RF + GBT-CV + LR)  60,000 rec / 60,000 not rec  -> submission_hw9_blend_three.csv
+  Building tree_ensemble (RF + GBT-CV + Extra + RF-no-v2)...
+  blend_trees            (4-tree ensemble)  60,000 rec / 60,000 not rec  -> submission_hw9_blend_trees.csv
+  Building mega_blend (all 7 classifiers, AUC-weighted)...
+  blend_mega             (ALL, AUC-weighted)  60,000 rec / 60,000 not rec  -> submission_hw9_blend_mega.csv
+  Building rank_blend (rank-averaged across models)...
+  blend_rank             (rank-avg of 4 trees)  60,000 rec / 60,000 not rec  -> submission_hw9_blend_rank.csv
+
+=================================================================
+  SAVING PROBABILITY MATRIX (OOF) FOR FINAL PROJECT
+=================================================================
+
+  [lr] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [lr] OOF complete: 6,000 rows  [11.0s]
+
+  [dt] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [dt] OOF complete: 6,000 rows  [4.0s]
+
+  [rf] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [rf] OOF complete: 6,000 rows  [19.4s]
+
+  [gbt] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [gbt] OOF complete: 6,000 rows  [8.4s]
+
+  [gbt_cv] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [gbt_cv] OOF complete: 6,000 rows  [1.6m]
+
+  [rf_no_v2] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [rf_no_v2] OOF complete: 6,000 rows  [19.4s]
+
+  [extra] Computing 5-fold OOF predictions ...
+    fold 1/5: trained on 4,758, predicted 1,242 held-out rows
+    fold 2/5: trained on 4,766, predicted 1,234 held-out rows
+    fold 3/5: trained on 4,810, predicted 1,190 held-out rows
+    fold 4/5: trained on 4,817, predicted 1,183 held-out rows
+    fold 5/5: trained on 4,849, predicted 1,151 held-out rows
+  [extra] OOF complete: 6,000 rows  [1.6m]
+
+  Merging OOF (labeled) + full-fit (Kaggle test) predictions ...
+  Wrote 120,000 rows x 7 models -> hw9_probabilities.csv
+    6,000 labeled rows  (OOF predictions)
+    114,000 Kaggle test rows  (full-fit predictions)
+  This file is the un-leaked input matrix for the Final project meta-learner.
+
+=================================================================
+  IMPROVEMENT OPPORTUNITIES
+=================================================================
+  After this run, the natural next steps are:
+  1. Submit blend_rank, blend_trees, blend_rf_heavy first --
+     these are the highest-EV blends (diverse signal sources).
+  2. Compare blend Kaggle scores to the best single model --
+     if mega_blend > rf alone, ensembling is paying off.
+  3. If RF-no-v2 scored well, it means v2_score was redundant --
+     try regenerating features without it for the final.
+  4. The RF-CV best (numTrees, maxDepth) tells you whether the
+     grid was at a corner: if it picked the max value of a param,
+     extend the grid in that direction next run.
+  5. hw9_probabilities.csv is now ready as input to the Final.
+
+  Total PySpark time: 41.3m
+
+=================================================================
+  COMPLETE
+=================================================================
+  Total wall time : 41.5m
+  Full log saved  : d:\judee\Google Drive\School\Classes\EE627\Homework\Homework 9\results_hw9.txt
