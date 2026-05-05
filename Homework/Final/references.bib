@@ -1,0 +1,167 @@
+% =====================================================================
+% References for EE627 Final Project Report
+% Jude Eschete -- 2026
+%
+% External (non-coursework) methods used in the v3 and v4 stackers.
+% Mirrors SOURCES.md.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% LightGBM LambdaRank (LambdaMART)
+% ---------------------------------------------------------------------
+
+@techreport{burges2010lambdamart,
+    title  = {From {RankNet} to {LambdaRank} to {LambdaMART}: An Overview},
+    author = {Burges, Christopher J. C.},
+    year   = {2010},
+    number = {MSR-TR-2010-82},
+    institution = {Microsoft Research},
+    url    = {https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/}
+}
+
+@inproceedings{ke2017lightgbm,
+    title     = {{LightGBM}: A Highly Efficient Gradient Boosting Decision Tree},
+    author    = {Ke, Guolin and Meng, Qi and Finley, Thomas and Wang, Taifeng
+                  and Chen, Wei and Ma, Weidong and Ye, Qiwei and Liu, Tie-Yan},
+    booktitle = {Advances in Neural Information Processing Systems 30
+                  (NeurIPS 2017)},
+    pages     = {3146--3154},
+    year      = {2017},
+    url       = {https://papers.nips.cc/paper/6907-lightgbm-a-highly-efficient-gradient-boosting-decision-tree}
+}
+
+@inproceedings{chapelle2011yahoo,
+    title     = {Yahoo! Learning to Rank Challenge Overview},
+    author    = {Chapelle, Olivier and Chang, Yi},
+    booktitle = {Proceedings of the {Yahoo!} Learning to Rank Challenge,
+                  JMLR Workshop and Conference Proceedings},
+    volume    = {14},
+    pages     = {1--24},
+    year      = {2011},
+    url       = {http://proceedings.mlr.press/v14/chapelle11a/chapelle11a.pdf}
+}
+
+% ---------------------------------------------------------------------
+% Isotonic Regression for probability calibration
+% ---------------------------------------------------------------------
+
+@inproceedings{zadrozny2002calibration,
+    title     = {Transforming Classifier Scores into Accurate Multiclass
+                  Probability Estimates},
+    author    = {Zadrozny, Bianca and Elkan, Charles},
+    booktitle = {Proceedings of the 8th {ACM} {SIGKDD} International
+                  Conference on Knowledge Discovery and Data Mining
+                  ({KDD} '02)},
+    pages     = {694--699},
+    year      = {2002},
+    doi       = {10.1145/775047.775151}
+}
+
+@inproceedings{niculescu2005calibration,
+    title     = {Predicting Good Probabilities with Supervised Learning},
+    author    = {Niculescu-Mizil, Alexandru and Caruana, Rich},
+    booktitle = {Proceedings of the 22nd International Conference on
+                  Machine Learning ({ICML} '05)},
+    pages     = {625--632},
+    year      = {2005},
+    url       = {https://www.cs.cornell.edu/~alexn/papers/calibration.icml05.crc.rev3.pdf}
+}
+
+@book{barlow1972isotonic,
+    title     = {Statistical Inference Under Order Restrictions: The
+                  Theory and Application of Isotonic Regression},
+    author    = {Barlow, Richard E. and Bartholomew, D. J. and Bremner, J. M.
+                  and Brunk, H. D.},
+    publisher = {John Wiley \& Sons},
+    year      = {1972}
+}
+
+% ---------------------------------------------------------------------
+% Item-item collaborative filtering
+% ---------------------------------------------------------------------
+
+@inproceedings{sarwar2001itemitem,
+    title     = {Item-Based Collaborative Filtering Recommendation
+                  Algorithms},
+    author    = {Sarwar, Badrul and Karypis, George and Konstan, Joseph
+                  and Riedl, John},
+    booktitle = {Proceedings of the 10th International Conference on
+                  World Wide Web ({WWW} '01)},
+    pages     = {285--295},
+    year      = {2001},
+    doi       = {10.1145/371920.372071}
+}
+
+@article{linden2003amazon,
+    title   = {Amazon.com Recommendations: Item-to-Item Collaborative
+                Filtering},
+    author  = {Linden, Greg and Smith, Brent and York, Jeremy},
+    journal = {{IEEE} Internet Computing},
+    volume  = {7},
+    number  = {1},
+    pages   = {76--80},
+    year    = {2003},
+    doi     = {10.1109/MIC.2003.1167344}
+}
+
+@article{deshpande2004topn,
+    title   = {Item-Based Top-N Recommendation Algorithms},
+    author  = {Deshpande, Mukund and Karypis, George},
+    journal = {{ACM} Transactions on Information Systems ({TOIS})},
+    volume  = {22},
+    number  = {1},
+    pages   = {143--177},
+    year    = {2004},
+    doi     = {10.1145/963770.963776}
+}
+
+% ---------------------------------------------------------------------
+% NDCG@K and ranking-quality evaluation
+% ---------------------------------------------------------------------
+
+@article{jarvelin2002ndcg,
+    title   = {Cumulated Gain-based Evaluation of {IR} Techniques},
+    author  = {J{\"a}rvelin, Kalervo and Kek{\"a}l{\"a}inen, Jaana},
+    journal = {{ACM} Transactions on Information Systems ({TOIS})},
+    volume  = {20},
+    number  = {4},
+    pages   = {422--446},
+    year    = {2002},
+    doi     = {10.1145/582415.582418}
+}
+
+@inproceedings{wang2013ndcg,
+    title     = {A Theoretical Analysis of {NDCG} Type Ranking Measures},
+    author    = {Wang, Yining and Wang, Liwei and Li, Yuanzhi and He, Di
+                  and Chen, Wei and Liu, Tie-Yan},
+    booktitle = {Proceedings of the 26th Annual Conference on Learning
+                  Theory ({COLT} 2013)},
+    pages     = {25--54},
+    year      = {2013},
+    url       = {http://proceedings.mlr.press/v30/Wang13.html}
+}
+
+% ---------------------------------------------------------------------
+% Ensemble-selection theory
+% ---------------------------------------------------------------------
+
+@inproceedings{caruana2004ensemble,
+    title     = {Ensemble Selection from Libraries of Models},
+    author    = {Caruana, Rich and Niculescu-Mizil, Alexandru and Crew,
+                  Geoff and Ksikes, Alex},
+    booktitle = {Proceedings of the 21st International Conference on
+                  Machine Learning ({ICML} '04)},
+    year      = {2004},
+    doi       = {10.1145/1015330.1015432}
+}
+
+@inproceedings{wolpert1992stacking,
+    title   = {Stacked Generalization},
+    author  = {Wolpert, David H.},
+    journal = {Neural Networks},
+    volume  = {5},
+    number  = {2},
+    pages   = {241--259},
+    year    = {1992},
+    doi     = {10.1016/S0893-6080(05)80023-1}
+}

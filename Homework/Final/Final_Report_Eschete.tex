@@ -12,6 +12,7 @@
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage[numbers,sort&compress]{natbib}
 \geometry{margin=1in}
 \setstretch{1.15}
 
@@ -37,7 +38,9 @@
 }
 
 \title{\textbf{EE627 Final Project\\ Stacked Ensemble Music Recommender}}
-\author{\textbf{Jude Eschete}}
+\author{\textbf{Jude Eschete}\\[0.5em]
+	\normalfont\normalsize Source code, all submission CSVs, and run logs:\\
+	\normalfont\normalsize \url{https://github.com/JEschete/EE627}}
 \date{\today}
 
 \begin{document}
@@ -49,7 +52,7 @@
 	\section*{Executive Summary}
 	%======================================================================
 
-	The final project's stacked ensemble reached a Kaggle public score of $\mathbf{0.922}$, an improvement of $+0.011$ over the midterm production submission ($0.911$) and $+0.008$ over the strongest individual base model from Homework~9 ($0.914$). The final submission is a logistic-regression meta-learner trained on the $6{,}000$ \texttt{test2\_new.txt} labels, fed by twenty-three feature columns drawn from every prior assignment in the semester: Project~1's evidence/genre heuristics, Homeworks~3--7's tuned linear baselines, Homework~8's PySpark MF, Homework~9's seven PySpark classifiers, the midterm's BPR neural ranker, and one new orthogonal base model (item-item collaborative filtering) added in this final.
+	The final project's stacked ensemble~\citep{wolpert1992stacking} reached a Kaggle public score of $\mathbf{0.922}$, an improvement of $+0.011$ over the midterm production submission ($0.911$) and $+0.008$ over the strongest individual base model from Homework~9 ($0.914$). The final submission is a logistic-regression meta-learner trained on the $6{,}000$ \texttt{test2\_new.txt} labels, fed by twenty-three feature columns drawn from every prior assignment in the semester: Project~1's evidence/genre heuristics, Homeworks~3--7's tuned linear baselines, Homework~8's PySpark MF, Homework~9's seven PySpark classifiers, the midterm's BPR neural ranker, and one new orthogonal base model (item-item collaborative filtering) added in this final.
 
 	Five iterations of the meta-learner were built and submitted. The most important finding is empirical: between v1 and v3 the Kaggle score moved $0.918 \rightarrow 0.919 \rightarrow 0.919$ despite three rounds of meta-learner refinements (regularization tuning, calibration, NDCG@3 cross-validation). The plateau was broken in v4 by adding an item-item collaborative filtering signal that operates on the raw rating-co-occurrence matrix instead of on the same 32-feature representation every other model used. v4 jumped to $0.922$. v5 confirmed v4 by tying it with a tuned multi-variant iicf stack, which validates that the item-item CF signal was the binding constraint, not meta-learner sophistication.
 
@@ -105,7 +108,7 @@
 	\newpage
 	\subsection{Beyond the Class}\label{sec:beyondclass}
 
-	Four techniques used in the final were not introduced in lectures and are properly cited in \texttt{SOURCES.md}: LightGBM LambdaRank (Burges 2010, Ke et al.\ 2017), isotonic regression calibration (Zadrozny~\&~Elkan 2002, Niculescu-Mizil~\&~Caruana 2005), item-item collaborative filtering with cosine similarity (Sarwar et al.\ 2001, Linden et al.\ 2003), and NDCG@K with grouped cross-validation (J{\"a}rvelin~\&~Kek{\"a}l{\"a}inen 2002). Of those, only item-item CF moved the Kaggle score; the other three contributed within fold-noise. The role each technique played in the iteration history is detailed in Section~\ref{sec:iterations}.
+	Four techniques used in the final were not introduced in lectures: LightGBM LambdaRank~\citep{burges2010lambdamart,ke2017lightgbm}, isotonic regression calibration~\citep{zadrozny2002calibration,niculescu2005calibration}, item-item collaborative filtering with cosine similarity~\citep{sarwar2001itemitem,linden2003amazon}, and NDCG@K with grouped cross-validation~\citep{jarvelin2002ndcg}. Of those, only item-item CF moved the Kaggle score; the other three contributed within fold-noise. The role each technique played in the iteration history is detailed in Section~\ref{sec:iterations}. Full bibliographic entries appear in the References section; \texttt{SOURCES.md} (Appendix~\ref{sec:sources}) provides extended commentary and DOIs.
 
 	\newpage
 	%======================================================================
@@ -147,7 +150,7 @@
 		\item Eleven midterm hybrid submissions whose binary outputs encode the v5$+$v2 confidence gate at different thresholds.
 	\end{itemize}
 
-	The meta-learner's top weights in v1 were \texttt{hw9\_blend\_rank} ($+0.91$), \texttt{hw9\_rf\_no\_v2} ($+0.87$), \texttt{hw9\_rf} ($+0.77$), \texttt{v5b\_nn\_0878} ($+0.67$), \texttt{v2\_score} ($+0.47$), and \texttt{v5\_score} ($+0.45$). The $+0.004$ improvement over the best individual HW9 model is the value of having the BPR neural ranker, the v2/v5 raw scores, and the eleven midterm hybrids voting alongside the trees.
+	{\sloppy The meta-learner's top weights in v1 were \texttt{hw9\_blend\_rank} ($+0.91$), \texttt{hw9\_rf\_no\_v2} ($+0.87$), \texttt{hw9\_rf} ($+0.77$), \texttt{v5b\_nn\_0878} ($+0.67$), \texttt{v2\_score} ($+0.47$), and \texttt{v5\_score} ($+0.45$). The $+0.004$ improvement over the best individual HW9 model is the value of having the BPR neural ranker, the v2/v5 raw scores, and the eleven midterm hybrids voting alongside the trees.\par}
 
 	The early-warning flag in v1 was the gap between the cross-validated AUC ($0.9860$) and the Kaggle score ($0.918$). That $0.07$ gap is much larger than blend stackers usually see. v2 fixed it.
 
@@ -160,16 +163,17 @@
 
 	\begin{table}[H]
 		\centering
+		\small
 		\caption{Stacker versions, feature counts, the dominant change at each step, and the resulting Kaggle public score. The CV column reports honest GroupKFold-by-user $5$-fold mean; v1 was random fold and is shown for comparison.}\label{tab:iterations}
-		\begin{tabular}{lcclc}
+		\begin{tabular}{@{}cc p{0.45\textwidth} cc@{}}
 			\toprule
 			Version & \# feats & Dominant change & CV AUC & Kaggle \\
 			\midrule
-			v1     & 49 & all-in LR over $39$ binary subs $+$ raw scores & $0.9860^*$ & $0.918$ \\
-			v2     & 21 & per-user ranks; family consensus; GroupKFold & $0.9859$  & $0.919$ \\
-			v3     & 23 & $+$ LightGBM LambdaRank, isotonic cal., NDCG@3 & $0.9858$  & $0.919$ \\
-			v4     & 23 & $+$ item-item CF (replaces LightGBM)            & $\mathbf{0.9873}$  & $\mathbf{0.922}$ \\
-			v5     & 25 & $3$ tuned iicf variants; ALS dropped            & $0.9879$  & $0.922$ \\
+			v1 & 49 & all-in LR over $39$ binary subs $+$ raw scores & $0.9860^*$ & $0.918$ \\
+			v2 & 21 & per-user ranks; family consensus; GroupKFold & $0.9859$ & $0.919$ \\
+			v3 & 23 & $+$ LightGBM, isotonic calibration, NDCG@3 & $0.9858$ & $0.919$ \\
+			v4 & 23 & $+$ item-item CF (replaces LightGBM) & $\mathbf{0.9873}$ & $\mathbf{0.922}$ \\
+			v5 & 25 & 3 tuned iicf variants; ALS dropped & $0.9879$ & $0.922$ \\
 			\bottomrule
 		\end{tabular}\\
 		\smallskip
@@ -194,12 +198,12 @@
 	\newpage
 	\subsection{v3 --- LightGBM LambdaRank, Isotonic Calibration, NDCG@3 Tuning}
 
-	v3 introduced three external methods (cited in \texttt{SOURCES.md}) and ablated each so the contribution could be isolated. Ablation submissions were generated for each method individually plus the combined ``ALL'' variant.
+	v3 introduced three external methods and ablated each so the contribution could be isolated. Ablation submissions were generated for each method individually plus the combined ``ALL'' variant.
 
 	\begin{enumerate}
-		\item \textbf{LightGBM LambdaRank.} Trained on the same $32$ hand-engineered features the BPR neural net uses, with the natural per-user group-of-$6$ structure. Relevance grades $[5,4,3,2,1,0]$ assigned by within-group rating rank. Hypothesis: a tree-based ranker would learn ranking patterns the neural net missed.
-		\item \textbf{Isotonic regression calibration.} Cross-fitted (5-fold GroupKFold) isotonic calibrators on the v5 BPR continuous score and each of the seven HW9 probability columns. The calibrators re-map raw model outputs onto a common probability scale before stacking.
-		\item \textbf{NDCG@3 grouped CV.} Replace the LR's AUC-based regularization tuning with NDCG@3 evaluated under GroupKFold-by-user. NDCG@3 is the closest analog of the Kaggle scoring rule (top-3-of-6 within user).
+		\item \textbf{LightGBM LambdaRank}~\citep{burges2010lambdamart,ke2017lightgbm}. Trained on the same $32$ hand-engineered features the BPR neural net uses, with the natural per-user group-of-$6$ structure. Relevance grades $[5,4,3,2,1,0]$ assigned by within-group rating rank. Hypothesis: a tree-based ranker would learn ranking patterns the neural net missed.
+		\item \textbf{Isotonic regression calibration}~\citep{zadrozny2002calibration,niculescu2005calibration}. Cross-fitted (5-fold GroupKFold) isotonic calibrators on the v5 BPR continuous score and each of the seven HW9 probability columns. The calibrators re-map raw model outputs onto a common probability scale before stacking.
+		\item \textbf{NDCG@3 grouped CV}~\citep{jarvelin2002ndcg}. Replace the LR's AUC-based regularization tuning with NDCG@3 evaluated under GroupKFold-by-user. NDCG@3 is the closest analog of the Kaggle scoring rule (top-3-of-6 within user).
 	\end{enumerate}
 
 	\paragraph{Result.} All five v3 ablation variants scored Kaggle $0.919$. The honest CV AUC barely moved (v2 $0.9859$ to v3-ALL $0.9858$). The most informative observation is what the LightGBM ranker did during training:
@@ -214,12 +218,12 @@
 
 	Method B (isotonic calibration) moved CV AUC by $+0.0002$. Method C (NDCG@3 tuning) selected a different best-$C$ ($1.0$ instead of $0.1$), but the change in Kaggle was zero. Methods B and C together are clean engineering improvements that did not move the Kaggle score.
 
-	\paragraph{Lesson.} A new model on existing features cannot add information; only a new model on \emph{new features} can. This is the textbook ensemble-diversity result (Caruana et al.\ 2004) demonstrated empirically. Three rounds of meta-learner refinement (v1$\rightarrow$v2$\rightarrow$v3) produced $+0.001$ total Kaggle lift, which was the meta-learner ceiling for this base-model set.
+	\paragraph{Lesson.} A new model on existing features cannot add information; only a new model on \emph{new features} can. This is the textbook ensemble-diversity result~\citep{caruana2004ensemble} demonstrated empirically. Three rounds of meta-learner refinement (v1$\rightarrow$v2$\rightarrow$v3) produced $+0.001$ total Kaggle lift, which was the meta-learner ceiling for this base-model set.
 
 	\newpage
 	\subsection{v4 --- The Item-Item CF Breakthrough}
 
-	v4 added one new base model: item-item collaborative filtering with cosine similarity over the raw rating-co-occurrence matrix. For each test pair $(uid, tid)$, the score is computed as
+	v4 added one new base model: item-item collaborative filtering with cosine similarity over the raw rating-co-occurrence matrix~\citep{sarwar2001itemitem,linden2003amazon}. For each test pair $(uid, tid)$, the score is computed as
 
 	\[
 		\text{iicf}(uid, tid) = \sum_{j \in \text{Top-30}(uid)} \cos(tid, j) \cdot r_{uid, j},
@@ -315,12 +319,13 @@
 
 	\begin{table}[H]
 		\centering
+		\small
 		\caption{The clearest single comparison in the project: same idea (``add a new base model''), opposite outcomes.}\label{tab:lgbm-vs-iicf}
-		\begin{tabular}{lll}
+		\begin{tabular}{@{}l p{0.30\textwidth} p{0.40\textwidth}@{}}
 			\toprule
 			Method & Trained on & Kaggle effect \\
 			\midrule
-			LightGBM (v3) & Same 32 features as BPR-NN & 0.000 (saturated, early-stopped at iter 1) \\
+			LightGBM (v3) & Same 32 features as BPR-NN & $0.000$ (saturated, early-stopped at iter 1) \\
 			Item-item CF (v4) & Raw 295K-item co-rating matrix & $+0.003$ (broke 3-version plateau) \\
 			\bottomrule
 		\end{tabular}
@@ -353,21 +358,22 @@
 
 	\begin{table}[H]
 		\centering
-		\caption{Chronological Kaggle public scores for the five meta-learner iterations and key supporting submissions.}\label{tab:kaggle-log}
-		\begin{tabular}{lcl}
+		\footnotesize
+		\caption{Chronological Kaggle public scores for the five meta-learner iterations and key supporting submissions. All filenames are prefixed \texttt{submission\_final\_}.}\label{tab:kaggle-log}
+		\begin{tabular}{@{}lcl@{}}
 			\toprule
 			Submission file & Kaggle & Note \\
 			\midrule
-			\texttt{submission\_final\_v5\_hybrid\_gap10.csv}      & $0.911$ & Midterm production (carryover) \\
-			\texttt{submission\_final\_als.csv} (rank $20$)        & $0.621$ & ALS-only sanity \\
-			\texttt{submission\_final\_stacked.csv} (v1)           & $0.918$ & All-in LR, $49$ features \\
-			\texttt{submission\_final\_stacked\_v2.csv}            & $0.919$ & Ranks $+$ family consensus $+$ GroupKFold \\
-			\texttt{submission\_final\_stacked\_v2\_nnls.csv}      & $0.916$ & NNLS sanity baseline \\
-			\texttt{submission\_final\_stacked\_v3.csv}            & $0.919$ & $+$ LightGBM $+$ Isotonic $+$ NDCG@3 \\
-			\texttt{submission\_final\_stacked\_v3\_C\_ndcg.csv}   & $0.919$ & NDCG@3-tuned only ablation \\
-			\texttt{submission\_final\_stacked\_v4.csv}            & $\mathbf{0.922}$ & $+$ item-item CF; plateau broken \\
-			\texttt{submission\_final\_stacked\_v4\_iicf\_only.csv}& $0.781$ & iicf-only sanity \\
-			\texttt{submission\_final\_stacked\_v5\_real.csv}      & $\mathbf{0.922}$ & $3$ iicf variants, ALS dropped \\
+			\texttt{v5\_hybrid\_gap10.csv}      & $0.911$ & Midterm production (carryover) \\
+			\texttt{als.csv} (rank $20$)        & $0.621$ & ALS-only sanity \\
+			\texttt{stacked.csv} (v1)           & $0.918$ & All-in LR, $49$ features \\
+			\texttt{stacked\_v2.csv}            & $0.919$ & Ranks $+$ consensus $+$ GroupKFold \\
+			\texttt{stacked\_v2\_nnls.csv}      & $0.916$ & NNLS sanity baseline \\
+			\texttt{stacked\_v3.csv}            & $0.919$ & $+$ LightGBM, Isotonic, NDCG@3 \\
+			\texttt{stacked\_v3\_C\_ndcg.csv}   & $0.919$ & NDCG@3-tuned only ablation \\
+			\texttt{stacked\_v4.csv}            & $\mathbf{0.922}$ & $+$ item-item CF; plateau broken \\
+			\texttt{stacked\_v4\_iicf\_only.csv}& $0.781$ & iicf-only sanity \\
+			\texttt{stacked\_v5\_real.csv}      & $\mathbf{0.922}$ & 3 iicf variants, ALS dropped \\
 			\bottomrule
 		\end{tabular}
 	\end{table}
@@ -386,6 +392,15 @@
 		\item Three external methods were attempted from the literature: LightGBM LambdaRank, isotonic regression calibration, and NDCG@3 grouped CV. Of those, only isotonic calibration earned a sustained place in the production stack (and its contribution was within fold-noise). The most informative of the three was LightGBM, which early-stopped at iteration~1 because the $32$-feature representation it shared with the BPR neural net had been fully saturated---confirming experimentally that algorithmic novelty is not a substitute for representational diversity.
 		\item The final's strongest features come from prior coursework. The largest weight in every meta-learner version is \texttt{hw9\_consensus}, the average of the five $0.913$--$0.914$ HW9 blend submissions. Project~1's heuristic, the midterm BPR neural net, and the eleven midterm $v5\!+\!v2$ confidence-gated hybrids all contribute non-trivially. The semester-long practice of keeping every Kaggle submission---not discarding low-scoring ones---is what made the meta-learner viable.
 	\end{enumerate}
+
+	\newpage
+	%======================================================================
+	% References (auto-generated from references.bib via natbib)
+	%======================================================================
+
+	\nocite{chapelle2011yahoo,barlow1972isotonic,deshpande2004topn,wang2013ndcg}
+	\bibliographystyle{plainnat}
+	\bibliography{references}
 
 	\newpage
 	%======================================================================
