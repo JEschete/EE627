@@ -61,6 +61,8 @@
 	\section{Process and Techniques}\label{sec:process}
 	%======================================================================
 
+	\paragraph{Hardware note.} The pipeline runs on a single workstation; CUDA is used opportunistically. Production runs were timed on an NVIDIA RTX~5080 (16~GB, CUDA~12.x), with the GPU accelerating only two stages: the rank-$64$ matrix-factorization training (HW7-style SGD, $\sim\!20\,\text{s}$ on the 5080) and the BPR neural ranker training ($\sim\!90\,\text{s}$). Both modules check \texttt{torch.cuda.is\_available()} at startup and fall back to CPU automatically; the rest of the stack (PySpark ALS, the HW9 classifiers, item-item CF, and every meta-learner) is CPU-only by design. The total wall time for a full end-to-end run with all caches present is under one minute on CPU and under four minutes including GPU training from scratch. Anyone re-running this code on a smaller card or no GPU at all will see longer MF/BPR training times but will reach the same Kaggle score; all randomness is seeded.
+
 	\subsection{Course Techniques Applied}
 
 	The final's pipeline reuses every recommender technique introduced in the semester:
@@ -108,7 +110,7 @@
 	\newpage
 	\subsection{Beyond the Class}\label{sec:beyondclass}
 
-	Four techniques used in the final were not introduced in lectures: LightGBM LambdaRank~\citep{burges2010lambdamart,ke2017lightgbm}, isotonic regression calibration~\citep{zadrozny2002calibration,niculescu2005calibration}, item-item collaborative filtering with cosine similarity~\citep{sarwar2001itemitem,linden2003amazon}, and NDCG@K with grouped cross-validation~\citep{jarvelin2002ndcg}. Of those, only item-item CF moved the Kaggle score; the other three contributed within fold-noise. The role each technique played in the iteration history is detailed in Section~\ref{sec:iterations}. Full bibliographic entries appear in the References section; \texttt{SOURCES.md} (Appendix~\ref{sec:sources}) provides extended commentary and DOIs.
+	Four techniques used in the final were not introduced in lectures: LightGBM LambdaRank~\citep{burges2010lambdamart,ke2017lightgbm}, isotonic regression calibration~\citep{zadrozny2002calibration,niculescu2005calibration}, item-item collaborative filtering with cosine similarity~\citep{sarwar2001itemitem,linden2003amazon}, and NDCG@K with grouped cross-validation~\citep{jarvelin2002ndcg}. Of those, only item-item CF moved the Kaggle score; the other three contributed within fold-noise. The role each technique played in the iteration history is detailed in Section~\ref{sec:iterations}; full bibliographic entries appear in the References section.
 
 	\newpage
 	%======================================================================
@@ -378,7 +380,11 @@
 		\end{tabular}
 	\end{table}
 
-	\paragraph{Recommended final submission.} Either \texttt{submission\_final\_stacked\_v4.csv} or \\ \texttt{submission\_final\_stacked\_v5\_real.csv}; both score $0.922$ on Kaggle public. v4 is the simpler model and is preferred for the final due to fewer moving parts.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\textwidth]{kaggle_screenshot.png}
+		\caption{Kaggle public-leaderboard screenshot showing the final-project submissions. Best score: $\mathbf{0.922}$ (\texttt{submission\_final\_stacked\_v4.csv} and \texttt{submission\_final\_stacked\_v5\_real.csv}, tied).}\label{fig:kaggle}
+	\end{figure}
 
 	\newpage
 	%======================================================================
@@ -404,30 +410,9 @@
 
 	\newpage
 	%======================================================================
-	\section{Appendix: Findings Document}\label{sec:findings}
-	%======================================================================
-
-	\lstinputlisting[caption={\texttt{FINDINGS.md} --- iteration-by-iteration post-mortem with weight tables and CV-to-Kaggle correlation analysis.},label={lst:findings},language={},keywordstyle=\ttfamily,stringstyle=\ttfamily,basicstyle=\ttfamily\scriptsize]{FINDINGS.md}
-
-	\newpage
-	%======================================================================
-	\section{Appendix: Sources}\label{sec:sources}
-	%======================================================================
-
-	\lstinputlisting[caption={\texttt{SOURCES.md} --- citations for external (non-coursework) methods used in the v3 and v4 stackers.},label={lst:sources},language={},keywordstyle=\ttfamily,stringstyle=\ttfamily,basicstyle=\ttfamily\scriptsize]{SOURCES.md}
-
-	\newpage
-	%======================================================================
 	\section{Appendix: Python Code}\label{sec:code}
 	%======================================================================
 
 	\lstinputlisting[caption={\texttt{EE627\_Final\_Eschete.py} --- full pipeline: MF, BPR neural ranker, ALS, item-item CF, and the v1--v5 stackers.},label={lst:code},basicstyle=\ttfamily\tiny]{EE627_Final_Eschete.py}
-
-	\newpage
-	%======================================================================
-	\section{Appendix: Run Log}\label{sec:runlog}
-	%======================================================================
-
-	\lstinputlisting[caption={\texttt{results\_final.txt} --- single end-to-end run producing every submission listed in Table~\ref{tab:kaggle-log}.},label={lst:runlog},language={},keywordstyle=\ttfamily,stringstyle=\ttfamily,basicstyle=\ttfamily\scriptsize]{results_final.txt}
 
 \end{document}
