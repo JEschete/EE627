@@ -1,0 +1,13 @@
+
+=================================================================
+  EE627 FINAL PROJECT - Music Recommender
+=================================================================
+  Log file : d:\judee\Google Drive\School\Classes\EE627\Homework\Final\Past Versions\results_final.txt
+  Started  : 2026-05-08 17:03:26
+  Device   : cuda
+  GPU      : NVIDIA GeForce RTX 5080
+
+=================================================================
+  LOADING RAW DATA
+=================================================================
+Loading training data ...

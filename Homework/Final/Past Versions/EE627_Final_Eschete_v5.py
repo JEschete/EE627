@@ -79,16 +79,6 @@ def ensemble_output_path(ts=None):
         ts = time.strftime("%Y%m%d_%H%M%S")
     return ENSEMBLE_OUTPUT_TEMPLATE.format(ts=ts)
 
-
-MAJORITY_OUTPUT_TEMPLATE = os.path.join(
-    SCRIPT_DIR, "submission_final_majority_Eschete_{ts}.csv")
-
-
-def majority_output_path(ts=None):
-    if ts is None:
-        ts = time.strftime("%Y%m%d_%H%M%S")
-    return MAJORITY_OUTPUT_TEMPLATE.format(ts=ts)
-
 # Model hyperparameters
 MF_FACTORS      = 64
 MF_EPOCHS       = 80                 # was 40 -- give SGD time to converge
@@ -3077,275 +3067,6 @@ def generate_stacked_submission_v5(test_users, v5_raw, v2_raw,
     return out_path
 
 
-def compute_user_meta_features(user_ratings, track_meta):
-    """Per-user descriptive features for routed stacking.
-
-    Returns {uid: np.array([log1p(n), mean, std, log1p(n_artists)])}.
-    These let a single global LR learn different ensemble weights for
-    different user types (sparse / active / consistent / varied).
-    """
-    out = {}
-    for uid, ratings in user_ratings.items():
-        n = len(ratings)
-        if n == 0:
-            out[uid] = np.array([0.0, 0.0, 0.0, 0.0], dtype=np.float64)
-            continue
-        vals = np.fromiter(ratings.values(), dtype=np.float64, count=n)
-        artists = set()
-        for tid in ratings:
-            art = track_meta.get(tid, (None, None, []))[1]
-            if art is not None:
-                artists.add(art)
-        out[uid] = np.array([
-            math.log1p(n),
-            float(vals.mean()),
-            float(vals.std() if n > 1 else 0.0),
-            math.log1p(len(artists)),
-        ], dtype=np.float64)
-    return out
-
-
-def generate_stacked_submission_v6_routed(
-        test_users, v5_raw, v2_raw, iicf_variants, ubcf_scores,
-        user_ratings, track_meta,
-        label_path, hw9_probs_path, past_preds_dir, out_path):
-    """v6 stacker: v5 columns + per-user features for implicit routing.
-
-    Identical inputs to v5 plus track_meta and user_ratings.  Adds 4
-    user-meta columns (log_n_rated, mean_rating, std_rating,
-    log_n_artists).  The LR can then learn ensemble weights that depend
-    on user activity / consistency / breadth -- a soft mixture-of-experts
-    in one global model rather than separate per-bucket fits on a small
-    labeled set.
-    """
-    section("STACKED META-LEARNER v6 (per-user routing)")
-
-    if not os.path.exists(label_path):
-        print(f"  test2_new.txt not found -- skipping")
-        return None
-
-    labels = load_test2_labels(label_path)
-    print(f"  Loaded {len(labels):,} labels  "
-          f"({sum(labels.values()):,} positives)")
-
-    hw9 = load_hw9_probabilities(hw9_probs_path)
-    if hw9 is not None:
-        hw9_probs, hw9_models = hw9
-    else:
-        hw9_probs, hw9_models = None, []
-
-    past_preds, past_cols = load_past_predictions(past_preds_dir)
-    if past_preds is None:
-        past_preds, past_cols = {}, []
-
-    iicf_names = list(iicf_variants.keys())
-    has_ubcf = ubcf_scores is not None and len(ubcf_scores) > 0
-
-    print(f"\n  Computing per-user meta features ...")
-    t_um = time.time()
-    user_meta = compute_user_meta_features(user_ratings, track_meta)
-    print(f"  {len(user_meta):,} user-meta vectors  [{elapsed(t_um)}]")
-    user_meta_dim = 4
-    user_meta_cols = ["um_log_n", "um_mean", "um_std", "um_log_artists"]
-
-    # Per-user ranks (same as v5)
-    v5_rank = _rank_normalize_per_user(v5_raw, test_users)
-    v2_rank = _rank_normalize_per_user(v2_raw, test_users)
-    iicf_ranks = {n: _rank_normalize_per_user(d, test_users)
-                  for n, d in iicf_variants.items()}
-    ubcf_rank = (_rank_normalize_per_user(ubcf_scores, test_users)
-                 if has_ubcf else {})
-
-    # Family consensus (same as v5)
-    families = {
-        "v5b_hybrid": "v5b_hybrid_consensus",
-        "v6_hybrid":  "v6_hybrid_consensus",
-        "hw9":        "hw9_consensus",
-        "v3":         "v3_consensus",
-        "p1":         "p1_consensus",
-        "hw8":        "hw8_consensus",
-    }
-    consensus_feats = {}
-    consensus_cols  = []
-    used_past_cols  = set()
-    for prefix, col_name in families.items():
-        cdict, members = _consensus_from_past(past_preds, past_cols, prefix)
-        if cdict is None:
-            continue
-        consensus_feats[col_name] = cdict
-        consensus_cols.append(col_name)
-        used_past_cols.update(members)
-    leftover_cols = [c for c in past_cols if c not in used_past_cols]
-
-    # Isotonic calibration (same as v5)
-    print("\n  Fitting isotonic calibrators on labeled subset ...")
-    label_keys = list(labels.keys())
-    label_groups = np.array([uid for uid, _ in label_keys])
-    label_y      = np.array([labels[k] for k in label_keys],
-                              dtype=np.float64)
-    keep_mask = np.array([
-        (k in v5_raw) and (k in v2_raw)
-        and (hw9_probs is None or k in hw9_probs)
-        for k in label_keys])
-    keep_keys   = [k for k, m in zip(label_keys, keep_mask) if m]
-    keep_groups = label_groups[keep_mask]
-    keep_y      = label_y[keep_mask]
-
-    v5_arr = np.array([v5_raw[k] for k in keep_keys], dtype=np.float64)
-    _, iso_v5 = isotonic_calibrate_oof(v5_arr, keep_y, keep_groups)
-    hw9_isos = {}
-    if hw9_probs is not None:
-        for m in hw9_models:
-            arr = np.array([hw9_probs[k][m] for k in keep_keys],
-                            dtype=np.float64)
-            _, iso = isotonic_calibrate_oof(arr, keep_y, keep_groups)
-            hw9_isos[m] = iso
-
-    def calibrated_v5(uid, tid):
-        return float(iso_v5.predict([v5_raw.get((uid, tid), 0.0)])[0])
-
-    def calibrated_hw9(uid, tid, m):
-        if hw9_probs is None:
-            return 0.5
-        row = hw9_probs.get((uid, tid))
-        if row is None:
-            return 0.5
-        return float(hw9_isos[m].predict([row[m]])[0])
-
-    # ---- Feature columns ----
-    rank_cols  = ["v5_rank", "v2_rank"] + [f"{n}_rank" for n in iicf_names]
-    score_cols = (["v5_iso", "v2_score"]
-                  + [f"{n}_score" for n in iicf_names])
-    if has_ubcf:
-        rank_cols.append("ubcf_rank")
-        score_cols.append("ubcf_score")
-    feature_cols = (
-        rank_cols
-        + score_cols
-        + [f"{m}_iso" for m in hw9_models]
-        + consensus_cols
-        + leftover_cols
-        + user_meta_cols
-    )
-    print(f"\n  v6 feature set ({len(feature_cols)} cols):")
-    print(f"    rank features : {len(rank_cols)}")
-    print(f"    raw scores    : {len(score_cols)}")
-    print(f"    HW9 isotonic  : {len(hw9_models)}")
-    print(f"    family cons.  : {len(consensus_cols)}")
-    print(f"    leftover past : {len(leftover_cols)}")
-    print(f"    user-meta     : {len(user_meta_cols)}  (NEW)")
-
-    zero_um = np.zeros(user_meta_dim, dtype=np.float64)
-
-    def build_row(uid, tid):
-        row = [v5_rank.get((uid, tid), 0.5),
-               v2_rank.get((uid, tid), 0.5)]
-        for n in iicf_names:
-            row.append(iicf_ranks[n].get((uid, tid), 0.5))
-        if has_ubcf:
-            row.append(ubcf_rank.get((uid, tid), 0.5))
-        row += [calibrated_v5(uid, tid),
-                v2_raw.get((uid, tid), 0.0)]
-        for n in iicf_names:
-            row.append(iicf_variants[n].get((uid, tid), 0.0))
-        if has_ubcf:
-            row.append(ubcf_scores.get((uid, tid), 0.0))
-        for m in hw9_models:
-            row.append(calibrated_hw9(uid, tid, m))
-        for c in consensus_cols:
-            row.append(consensus_feats[c].get((uid, tid), 0.5))
-        votes = past_preds.get((uid, tid), {})
-        for c in leftover_cols:
-            row.append(float(votes.get(c, 0)))
-        # User meta features (NEW)
-        um = user_meta.get(uid, zero_um)
-        row.extend(um.tolist())
-        return row
-
-    # Training matrix
-    X_rows, y_rows, group_rows, missing = [], [], [], 0
-    for (uid, tid), y in labels.items():
-        if (uid, tid) not in v5_raw or (uid, tid) not in v2_raw:
-            missing += 1
-            continue
-        if hw9_probs is not None and (uid, tid) not in hw9_probs:
-            missing += 1
-            continue
-        X_rows.append(build_row(uid, tid))
-        y_rows.append(y)
-        group_rows.append(uid)
-    if missing:
-        print(f"\n  Skipped {missing:,} labeled rows (missing scores)")
-
-    X = np.array(X_rows, dtype=np.float64)
-    y = np.array(y_rows, dtype=np.float64)
-    groups = np.array(group_rows)
-    print(f"  Training matrix: {X.shape}  "
-          f"({int(y.sum()):,} pos / {int(len(y)-y.sum()):,} neg, "
-          f"{len(np.unique(groups)):,} unique users)")
-
-    feat_mean = X.mean(axis=0)
-    feat_std  = X.std(axis=0)
-    feat_std[feat_std < 1e-8] = 1.0
-    Xn = (X - feat_mean) / feat_std
-
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.model_selection import GroupKFold
-    from sklearn.metrics import roc_auc_score
-    Cs = [0.001, 0.01, 0.1, 1.0, 10.0]
-    gkf = GroupKFold(n_splits=5)
-
-    print(f"\n  GroupKFold(5) by user -- NDCG@3 + AUC sweep")
-    print(f"  {'C':>8}   {'NDCG@3':>8}   {'AUC':>8}")
-    print(f"  {'-'*8}   {'-'*8}   {'-'*8}")
-    sweep = []
-    for C in Cs:
-        ndcgs, aucs = [], []
-        for tr, va in gkf.split(Xn, y, groups=groups):
-            clf = LogisticRegression(C=C, max_iter=2000, random_state=SEED)
-            clf.fit(Xn[tr], y[tr])
-            p = clf.predict_proba(Xn[va])[:, 1]
-            aucs.append(roc_auc_score(y[va], p))
-            ndcgs.append(ndcg_at_k_grouped(y[va], p, groups[va], k=3))
-        m_ndcg = float(np.mean(ndcgs))
-        m_auc  = float(np.mean(aucs))
-        sweep.append((C, m_ndcg, m_auc))
-        print(f"  {C:>8.3f}   {m_ndcg:>8.4f}   {m_auc:>8.4f}")
-    best_C, best_ndcg, best_auc = max(sweep, key=lambda r: r[1])
-    print(f"\n  Best C = {best_C}  "
-          f"(NDCG@3 = {best_ndcg:.4f}, AUC = {best_auc:.4f})")
-
-    clf = LogisticRegression(C=best_C, max_iter=2000, random_state=SEED)
-    clf.fit(Xn, y)
-    weights = clf.coef_[0]
-    bias    = float(clf.intercept_[0])
-
-    print(f"\n  v6 LR weights (top 20 by abs):")
-    print(f"  {'Feature':<28} {'Weight':>10}")
-    print(f"  {'-'*28} {'-'*10}")
-    for idx, w_val in sorted(enumerate(weights), key=lambda x: abs(x[1]),
-                              reverse=True)[:20]:
-        marker = "  <- user" if feature_cols[idx].startswith("um_") else ""
-        print(f"  {feature_cols[idx]:<28} {w_val:>+10.4f}{marker}")
-    print(f"  {'(intercept)':<28} {bias:>+10.4f}")
-
-    # Score test rows
-    print(f"\n  Scoring all 120K test rows ...")
-    by_user = defaultdict(list)
-    for uid, candidates in test_users:
-        for tid in candidates:
-            row = (np.array(build_row(uid, tid)) - feat_mean) / feat_std
-            score = float(row @ weights + bias)
-            by_user[uid].append((tid, score))
-
-    n_ones, n_total = _write_topk_submission(by_user, out_path)
-    print(f"  {n_total:,} predictions  ({n_ones:,} rec / "
-          f"{n_total-n_ones:,} not rec)")
-    print(f"  Saved -> {os.path.basename(out_path)}")
-
-    return out_path
-
-
 def generate_stacked_submission(test_users, v5_raw, v2_raw,
                                  label_path, hw9_probs_path,
                                  past_preds_dir, out_path,
@@ -3606,12 +3327,9 @@ def load_submission_matrix(folder, score_map, exclude_self_ensemble=True):
     matched = []   # (filename, score, score_key_used)
     skipped = []
     self_excluded = []
-    self_prefixes = (
-        "submission_final_ensemble_Eschete_",
-        "submission_final_majority_Eschete_",
-    )
     for fname in files:
-        if exclude_self_ensemble and fname.startswith(self_prefixes):
+        if exclude_self_ensemble and fname.startswith(
+                "submission_final_ensemble_Eschete_"):
             self_excluded.append(fname)
             continue
         for key in _candidate_score_keys(fname):
@@ -3750,88 +3468,6 @@ def run_ls_ensemble(ensemble_dir=None, results_path=None, out_path=None):
     return out_path
 
 
-def run_majority_vote(ensemble_dir=None, results_path=None, out_path=None):
-    """Per-cell vote across all known-scored LS-ensemble files in
-    past_predict_ensemble/, then per user (block of 6) keep top-3 by
-    vote count.  Ties resolved by score-weighted vote.
-
-    Useful when the LS solver oscillates between basins on ~5% of users:
-    the basin with more files in it carries the vote.
-    """
-    ensemble_dir = ensemble_dir or ENSEMBLE_DIR
-    results_path = results_path or SUBMISSION_RESULTS
-    out_path     = out_path     or majority_output_path()
-
-    section("MAJORITY VOTE OVER LS ENSEMBLES")
-    if not os.path.isdir(ensemble_dir):
-        print(f"  Skipping: directory not found -> {ensemble_dir}")
-        return None
-    if not os.path.exists(results_path):
-        print(f"  Skipping: results file not found -> {results_path}")
-        return None
-
-    t0 = time.time()
-    score_map = parse_submission_scores(results_path)
-
-    ls_files = [
-        f for f in sorted(os.listdir(ensemble_dir))
-        if f.startswith("submission_final_ensemble_Eschete_")
-        and f.endswith(".csv") and f in score_map
-    ]
-    if len(ls_files) < 3:
-        print(f"  Need at least 3 LS-ensemble inputs to vote; "
-              f"found {len(ls_files)}. Skipping.")
-        return None
-
-    print(f"  Voting across {len(ls_files)} LS ensembles:")
-    for f in ls_files:
-        print(f"    {score_map[f]:.3f}  {f}")
-
-    # Reference TrackID order from first file.
-    ref_ids, _ = _read_submission_csv(
-        os.path.join(ensemble_dir, ls_files[0]))
-    sort_idx = np.argsort(np.asarray(ref_ids), kind="stable")
-    track_ids = np.asarray(ref_ids)[sort_idx]
-    N = len(track_ids)
-
-    # Per-cell: integer count + score-weighted tiebreaker.
-    votes        = np.zeros(N, dtype=np.int32)
-    weighted_sum = np.zeros(N, dtype=np.float64)
-    for fname in ls_files:
-        ids, preds = _read_submission_csv(
-            os.path.join(ensemble_dir, fname))
-        idx = np.argsort(np.asarray(ids), kind="stable")
-        if not np.array_equal(np.asarray(ids)[idx], track_ids):
-            raise RuntimeError(f"TrackID mismatch in {fname}")
-        p = np.asarray(preds, dtype=np.int32)[idx]
-        votes        += p
-        weighted_sum += p * float(score_map[fname])
-
-    # Combined score: integer votes dominate, weighted_sum breaks ties.
-    combined = votes.astype(np.float64) * 10.0 + weighted_sum
-
-    # Per-user top-3.
-    uids = np.array([t.split("_", 1)[0] for t in track_ids])
-    out_pred = np.zeros(N, dtype=np.int8)
-    order = np.argsort(uids, kind="stable")
-    uids_sorted = uids[order]
-    boundaries = np.where(uids_sorted[1:] != uids_sorted[:-1])[0] + 1
-    groups = np.split(order, boundaries)
-    for g in groups:
-        top_idx = g[np.argsort(-combined[g], kind="stable")[:3]]
-        out_pred[top_idx] = 1
-
-    with open(out_path, "w", encoding="utf-8", newline="") as f:
-        f.write("TrackID,Predictor\n")
-        for tid, p in zip(track_ids, out_pred):
-            f.write(f"{tid},{int(p)}\n")
-
-    print(f"\n  Users: {N // 6:,}   ones: {int(out_pred.sum()):,}   "
-          f"zeros: {int((out_pred == 0).sum()):,}")
-    print(f"  Wrote -> {os.path.basename(out_path)}  [{elapsed(t0)}]")
-    return out_path
-
-
 # =====================================================================
 # 14. Main
 # =====================================================================
@@ -3843,10 +3479,6 @@ def main():
         "--ensemble-only", action="store_true",
         help="Skip training; only run closed-form LS ensemble over "
              "past_predict_ensemble/ using Submission Results.txt")
-    parser.add_argument(
-        "--majority-vote", action="store_true",
-        help="Skip training; per-cell majority vote across all LS "
-             "ensemble files in past_predict_ensemble/")
     args = parser.parse_args()
 
     tee = Tee(RESULTS_FILE)
@@ -3862,15 +3494,6 @@ def main():
         print(f"  Log file : {RESULTS_FILE}")
         print(f"  Started  : {time.strftime('%Y-%m-%d %H:%M:%S')}")
         run_ls_ensemble()
-        print(f"\n  Total wall time : {elapsed(t_total)}")
-        tee.close()
-        return
-
-    if args.majority_vote:
-        section("EE627 FINAL PROJECT - Majority Vote Only")
-        print(f"  Log file : {RESULTS_FILE}")
-        print(f"  Started  : {time.strftime('%Y-%m-%d %H:%M:%S')}")
-        run_majority_vote()
         print(f"\n  Total wall time : {elapsed(t_total)}")
         tee.close()
         return
@@ -4084,14 +3707,6 @@ def main():
         LABEL_FILE, HW9_PROBS_FILE, PAST_PREDS_DIR,
         os.path.join(OUTPUT_DIR, "submission_final_stacked_v5_real.csv"),
         ubcf_scores=ubcf_scores)
-
-    # 11b. Stacked meta-learner v6 -- v5 + per-user routing features.
-    stacked_v6_path = generate_stacked_submission_v6_routed(
-        test_users, v5_raw_scores, v2_raw_scores,
-        iicf_variants_dict, ubcf_scores,
-        user_ratings, enriched,
-        LABEL_FILE, HW9_PROBS_FILE, PAST_PREDS_DIR,
-        os.path.join(OUTPUT_DIR, "submission_final_stacked_v6_routed.csv"))
 
     # 12. Closed-form LS ensemble of every scored past submission.
     ensemble_path = run_ls_ensemble()

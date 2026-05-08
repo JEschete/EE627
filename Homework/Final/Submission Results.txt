@@ -1,41 +1,76 @@
-submission_final_v5_hybrid_gap10.csv
-Complete · now
+Score  Filename
+=====  ==========================================
+# 1:1 mapping with past_predict_ensemble/  (34 entries)
+#
+# Score source rules:
+#   - Filenames with embedded "_0NNN" suffix: that suffix is the score
+#     (e.g. v5b_hybrid_gap10_0911.csv -> 0.911).
+#   - hw8_hybrid.csv has no suffix and appeared at multiple scores in
+#     prior logs; using 0.875 (best run).
+#
+# Excluded from this file (no known Kaggle score, 6 files):
+#   submission_final_stacked__V4.csv
+#   submission_final_stacked_v2__V4.csv
+#   submission_final_stacked_v2_nnls__V4.csv
+#   submission_final_stacked_v3__V4.csv
+#   submission_final_stacked_v3_C_ndcg__V4.csv
+#   submission_final_stacked_v4__V5.csv
 
-0.911
-submission_final_stacked.csv
-Complete · 29s ago
+--- LS ensemble ---
+0.926  submission_final_ensemble_Eschete_20260508_181442.csv
+0.925  submission_final_ensemble_Eschete_20260508_162024.csv
+0.925  submission_final_majority_Eschete_20260508_180043.csv
+0.923  submission_final_ensemble_Eschete_20260508_162951.csv
+0.924  submission_final_ensemble_Eschete_20260508_171818.csv
+0.923  submission_final_ensemble_Eschete_20260508_172227.csv
+0.923  submission_final_ensemble_Eschete_20260508_172940.csv
+0.924  submission_final_ensemble_Eschete_20260508_174114.csv
 
-0.918
+--- Final stacked ---
+0.922  submission_final_stacked_v5_real.csv
+0.922  submission_final_stacked_v4.csv
+0.921  submission_final_stacked_v6_routed_20260508_181442.csv
+0.920  submission_final_stacked_v3_C_ndcg_20260508_181442.csv
+0.920  submission_final_stacked_v4_20260508_180000.csv
+0.919  submission_final_stacked_v3.csv
+0.919  submission_final_stacked_v3_C_ndcg.csv
+0.919  submission_final_stacked_v2.csv
+0.918  submission_final_stacked.csv
+0.916  submission_final_stacked_v2_nnls.csv
+0.781  submission_final_stacked_v4_iicf_only.csv
+0.621  submission_final_als.csv
 
-submission_final_stacked_v2.csv
-Complete · now
+--- HW9 ---
+0.914  hw9_blend_rank_0914.csv
+0.914  hw9_blend_rf_heavy_0914.csv
+0.914  hw9_rf_0914.csv
+0.914  hw9_rf_no_v2_0914.csv
+0.913  hw9_blend_three_0913.csv
 
-0.919
+--- HW8 ---
+0.875  hw8_hybrid.csv
+0.636  hw8_pyspark_mf.csv
+0.513  hw8_hybrid_gated.csv
 
-submission_final_stacked_v2_nnls.csv
-Complete · now
+--- v5b / v6 hybrid sweeps ---
+0.911  v5b_hybrid_gap10_0911.csv
+0.911  v5b_hybrid_gap15_0911.csv
+0.911  v5b_hybrid_gap20_0911.csv
+0.909  v5b_hybrid_gap7_0909.csv
+0.907  v6_hybrid_gap10_0907.csv
+0.907  v6_hybrid_gap15_0907.csv
+0.907  v6_hybrid_gap8_0907.csv
+0.903  v6_hybrid_gap5_0903.csv
+0.898  v5b_hybrid_gap3_0898.csv
+0.896  v6_hybrid_gap3_0896.csv
+0.908  submission_final_v5_hybrid_gap10_20260508_181442.csv
+0.878  v5b_nn_0878.csv
+0.868  submission_final_v5_nn.csv
 
-0.916
-
-submission_final_stacked_v3_C_ndcg.csv
-Complete · now
-
-0.919
-submission_final_stacked_v3.csv
-Complete · 26s ago
-
-0.919
-
-submission_final_stacked_v4_iicf_only.csv
-Complete · now
-
-0.781
-submission_final_stacked_v4.csv
-Complete · 31s ago
-
-0.922
-
-submission_final_stacked_v5_real.csv
-Complete · 13s ago
-
-0.922
+--- v3 / v4 models ---
+0.871  v3_additive_0871.csv
+0.871  v3_confidence_0871.csv
+0.871  v3_genre_both_0871.csv
+0.871  v3_interact_0871.csv
+0.870  v3_tuned_0870.csv
+0.852  v4_ridge_0852.csv
